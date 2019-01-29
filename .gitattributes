@@ -1,0 +1,6 @@
+* text eol=lf
+*.R text
+*.py text
+*.Rmd text
+*.md text
+
