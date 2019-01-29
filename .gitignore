@@ -1,3 +1,4 @@
 *.feather
 *.csv
 fig_3/doc/
+.Rproj.user

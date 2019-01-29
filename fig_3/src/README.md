@@ -8,12 +8,13 @@ Figure 3: Improvements in water temperatures predictions (as estimated by Root M
 # File descriptions
 
 Jared's scripts:
-* takeme.sh is just shorthand for setting up the conda environment on my MSI account with all the necessary libraries for pytorch/numpy/pandas and also takes you to the current working directory. 
+* takeme.sh - sets up the conda environment on Jared's MSI account with all the necessary libraries for pytorch/numpy/pandas and also takes you to the right working directory
 * https://github.com/jdwillard19/lake_modeling/blob/jared/src/data/preprocess_manylakes.py - used for preprocessing
 * https://github.com/jdwillard19/lake_modeling/blob/jared/src/data/rw_data.py - obsolete and no longer used
 * https://github.com/jdwillard19/lake_modeling/blob/jared/src/data/pytorch_data_operations.py - helper functions and data setup mostly
 * https://github.com/jdwillard19/lake_modeling/blob/jared/src/models/pytorch_model_operations.py - helper functions and data setup mostly
-* https://github.com/jdwillard19/lake_modeling/blob/jared/src/scripts/manylakes/experiment_correlation_check.py - this is the most recent version, and experiment_correlation_check_small_batch.py was used for just one lake (13393533) that needed a smaller batch size because it had less data.
+* https://github.com/jdwillard19/lake_modeling/blob/jared/src/scripts/manylakes/experiment_correlation_check.py - the main script for running PGDL for a single lake
+* https://github.com/jdwillard19/lake_modeling/blob/jared/src/scripts/manylakes/experiment_correlation_check_small_batch.py - used for just one lake (13393533) that needed a smaller batch size (500 instead of 600) because it had less data
 * https://github.com/jdwillard19/lake_modeling/blob/jared/src/scripts/manylakes/jobcreate.py - creates the set of job scripts and writes qsub_script.sh
 * https://github.com/jdwillard19/lake_modeling/blob/jared/src/scripts/manylakes/job_2385496.sh and similar - lake-specific job scripts
 * https://github.com/jdwillard19/lake_modeling/blob/jared/src/scripts/manylakes/qsub_script.sh - script to run all lake-specific job scripts on cluster
