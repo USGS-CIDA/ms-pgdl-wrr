@@ -1,4 +1,6 @@
 *.feather
 *.csv
-fig_3/doc/
+*.tsv
+*.npy
+*.png
 .Rproj.user
