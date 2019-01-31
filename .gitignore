@@ -4,3 +4,5 @@
 *.npy
 *.png
 .Rproj.user
+.spyproject
+*__pycache__
