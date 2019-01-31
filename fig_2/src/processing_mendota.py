@@ -8,8 +8,8 @@ Created on Thu Dec  6 10:45:53 2018
 import pandas as pd
 import numpy as np
 
-feat = pd.read_feather('../data/mendota_meteo.feather')
-glm = pd.read_feather('../data/Mendota_temperatures.feather')
+feat = pd.read_feather('fig_2/in/jordan/mendota_meteo.feather')
+glm = pd.read_feather('fig_2/in/jordan/Mendota_temperatures.feather')
 
 feat.columns
 feat.values
@@ -17,12 +17,12 @@ feat.values.shape
 
 
 # import previous data
-x_full_o = np.load('../../../../2017-2018/TF_test/TGDS/processed_features.npy')
-x_raw_full_o = np.load('../../../../2017-2018/TF_test/TGDS/features.npy')
-diag_full_o = np.load('../../../../2017-2018/TF_test/TGDS/diag.npy')
-obs_o = np.load('../../../../2017-2018/TF_test/TGDS/Obs_temp.npy')
-label_o = np.load('../../../../2017-2018/TF_test/TGDS/labels.npy')
-dates_o = np.load('../../../../2017-2018/TF_test/TGDS/dates.npy') # 10592
+x_full_o = np.load('fig_2/in/xiaowei/processed_features.npy')
+x_raw_full_o = np.load('fig_2/in/xiaowei/features.npy')
+diag_full_o = np.load('fig_2/in/xiaowei/diag.npy')
+obs_o = np.load('fig_2/in/xiaowei/Obs_temp.npy')
+label_o = np.load('fig_2/in/xiaowei/labels.npy')
+dates_o = np.load('fig_2/in/xiaowei/dates.npy') # 10592
 
 ## SKIP THIS ------------ match with previous data
 #new_date = feat.values[:,0]
@@ -36,10 +36,10 @@ dates_o = np.load('../../../../2017-2018/TF_test/TGDS/dates.npy') # 10592
 
 
 
-# create x_full, x_raw_full, diag_full, label(glm) 
+# create x_full, x_raw_full, diag_full, label(glm)
 x_raw_full = feat.values[1:,1:]  # start from the second day
 new_dates = feat.values[1:,0]
-np.save('dates_mendota.npy',new_dates)
+np.save('fig_2/in/xiaowei/dates_mendota.npy',new_dates)
 
 
 n_steps = x_raw_full.shape[0]
@@ -52,9 +52,9 @@ for i in range(n_steps):
     dt = datetime.datetime.strptime(str(new_dates[i]), format)
     tt = dt.timetuple()
     doy[i,0] = tt.tm_yday
-    
-  
-n_depths = 50    
+
+
+n_depths = 50
 x_raw_full = np.concatenate([doy,np.zeros([n_steps,1]),x_raw_full],axis=1)
 x_raw_full = np.tile(x_raw_full,[n_depths,1,1])
 
@@ -66,18 +66,18 @@ for i in range(x_raw_full.shape[0]):
     for j in range(x_raw_full.shape[1]):
         for k in range(x_raw_full.shape[2]):
             x_raw_full_new[i,j,k] = x_raw_full[i,j,k]
-            
-np.save('features_mendota.npy',x_raw_full_new)
-x_raw_full = np.load('features_mendota.npy')
+
+np.save('fig_2/in/xiaowei/features_mendota.npy',x_raw_full_new)
+x_raw_full = np.load('fig_2/in/xiaowei/features_mendota.npy')
 
 # standardize features
 from sklearn import preprocessing
 x_full = preprocessing.scale(np.reshape(x_raw_full,[n_depths*n_steps,x_raw_full.shape[-1]]))
 x_full = np.reshape(x_full,[n_depths,n_steps,x_full.shape[-1]])
-np.save('processed_features_mendota.npy',x_full)
+np.save('fig_2/in/xiaowei/processed_features_mendota.npy',x_full)
 
 
-# label_glm 
+# label_glm
 glm_new = glm.values[:,1:n_depths+1]
 glm_new = np.transpose(glm_new)
 
@@ -86,7 +86,7 @@ for i in range(n_depths):
     for j in range(n_steps):
         labels[i,j] = glm_new[i,j]
 
-np.save('labels_mendota.npy',labels)
+np.save('fig_2/in/xiaowei/labels_mendota.npy',labels)
 
 
 # phy files ------------------------------------------------------------
@@ -104,7 +104,7 @@ diag_sel = np.zeros([n_depths,n_steps,3])
 for i in range(n_depths):
     for j in range(3):
         diag_sel[i,:,j] = ice
-        
+
 
 
 diag = np.zeros([n_depths, n_steps, 3], dtype=np.float64)
@@ -112,7 +112,7 @@ diag = np.zeros([n_depths, n_steps, 3], dtype=np.float64)
 for i in range(n_depths):
     for j in range(n_steps):
         diag[i,j,:] = diag_sel[i,j,:]
-np.save('diag_mendota.npy',diag)
+np.save('fig_2/in/xiaowei/diag_mendota.npy',diag)
 
 
 
@@ -126,7 +126,7 @@ np.save('diag_mendota.npy',diag)
 #
 ## debugging -----------------------
 #
-#import matplotlib.pyplot as plt  
+#import matplotlib.pyplot as plt
 #olen= 1800
 #d_sel = 20
 #x = range(olen)
@@ -190,7 +190,7 @@ np.save('diag_mendota.npy',diag)
 #
 #
 #
-#    
+#
 #test_data = pd.read_feather('../experiment_01/mendota_test_experiment_01.feather')
 #test_data.columns
 #
