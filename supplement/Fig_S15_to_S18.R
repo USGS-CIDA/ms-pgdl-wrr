@@ -41,35 +41,35 @@ get_timeseries <- function(lake, type, exp){
  #model in c('PGRNN','RNN'))
 
   # get PGRNN (PGDL) output
-  pgdl_dat <- RcppCNPy::npyLoad(sprintf('D:/R Projects/lake-temp-supplement/outputs_new/outputs_new/PGRNN_%s_%s_exp%s.npy', type, lake, exp)) %>%
+  pgdl_dat <- RcppCNPy::npyLoad(sprintf('/Users/jread/Downloads/outputs_new/PGRNN_%s_%s_exp%s.npy', type, lake, exp)) %>%
     t() %>%
     as.data.frame() %>% setNames(paste0('temp_',seq(0, length.out = ifelse(lake == "mendota", 50, 37), by = 0.5))) %>% #length.out = 50 for Mendota
     mutate(DateTime = seq(as.Date("2009-04-02"), length.out = 3185, by = 'days')) %>%
     gather(depth_code, temp, -DateTime) %>%
     mutate(Depth = as.numeric(substring(depth_code, 6))) %>%
     select(DateTime, Depth, temp) %>%
-    prep_pred_obs(sprintf('D:/R Projects/lake-temp-supplement/%s_%s_test.feather', lake, type), .) %>%
+    prep_pred_obs(sprintf('/Users/jread/Downloads/%s_%s_test.feather', lake, type), .) %>%
     rename(pgdl_pred = pred) %>%
     distinct()
 
   # get RNN (DL) output
-  dl_dat <- RcppCNPy::npyLoad(sprintf('D:/R Projects/lake-temp-supplement/outputs_new/outputs_new/RNN_%s_%s_exp%s.npy', type, lake, exp)) %>%
+  dl_dat <- RcppCNPy::npyLoad(sprintf('/Users/jread/Downloads/outputs/RNN_%s_%s_exp%s.npy', type, lake, exp)) %>%
     t() %>%
     as.data.frame() %>% setNames(paste0('temp_',seq(0, length.out = ifelse(lake == "mendota", 50, 37), by = 0.5))) %>% #length.out = 50 for Mendota
     mutate(DateTime = seq(as.Date("2009-04-02"), length.out = 3185, by = 'days')) %>%
     gather(depth_code, temp, -DateTime) %>%
     mutate(Depth = as.numeric(substring(depth_code, 6))) %>%
     select(DateTime, Depth, temp) %>%
-    prep_pred_obs(sprintf('D:/R Projects/lake-temp-supplement/%s_%s_test.feather', lake, type), .) %>%
+    prep_pred_obs(sprintf('/Users/jread/Downloads/%s_%s_test.feather', lake, type), .) %>%
     rename(dl_pred = pred) %>%
     distinct()
 
-  glm_preds <- feather::read_feather(sprintf('D:/R Projects/lake-temp-supplement/%s_temperatures.feather', lake)) %>%
+  glm_preds <- feather::read_feather(sprintf('../lake_modeling/data_imports/out/%s_%s_calibrated_experiment_0%s.feather', lake, type, exp)) %>%
     mutate(DateTime = as.Date(DateTime)) %>%
     gather(depth_code, temp, -DateTime) %>%
     mutate(Depth = as.numeric(substring(depth_code, 6))) %>%
     select(DateTime, Depth, temp) %>%
-    prep_pred_obs(sprintf('D:/R Projects/lake-temp-supplement/%s_%s_test.feather', lake, type), .) %>%
+    prep_pred_obs(sprintf('~/Downloads/%s_%s_test.feather', lake, type), .) %>%
     rename(glm_pred = pred) %>%
     distinct()
 
@@ -100,12 +100,12 @@ plot_timeseries <- function(lake, type, exp) {
     filter(!is.na(depth_bin)) %>%  # exclude Mendota depths that are >depth_max (20m)
     group_by(DateTime, depth_bin) %>%
     summarize(`Observed` = median(obs, na.rm = TRUE),
-              `GLM bias` = median(glm_bias, na.rm = TRUE),
+              `PB bias` = median(glm_bias, na.rm = TRUE),
               `PGDL bias` = median(pgdl_bias, na.rm = TRUE),
               `DL bias` = median(dl_bias, na.rm = TRUE))
 
 
-  ts_dat_long <- gather(ts_dat_bias, key = 'variable', value = 'value', `Observed`, `GLM bias`, `PGDL bias`, `DL bias`) %>%
+  ts_dat_long <- gather(ts_dat_bias, key = 'variable', value = 'value', `Observed`, `PB bias`, `PGDL bias`, `DL bias`) %>%
     mutate(year = lubridate::year(DateTime),
            doy = lubridate::yday(DateTime))
 
@@ -121,7 +121,7 @@ plot_timeseries <- function(lake, type, exp) {
   # add dummy obs to get scales the same
   dummy_dat <- data.frame(DateTime = NA,
                           depth_bin = factor('[0,2]', levels = levels(ts_dat_long$depth_bin)),
-                          variable = rep(c('GLM bias', 'DL bias', 'PGDL bias'), 2),
+                          variable = rep(c('PB bias', 'DL bias', 'PGDL bias'), 2),
                           value = c(rep(bias_low, 3), rep(bias_high, 3)),
                           year = 2012,
                           doy = NA)
@@ -129,7 +129,7 @@ plot_timeseries <- function(lake, type, exp) {
   # add in dummy dat
   ts_dat_long <- bind_rows(ts_dat_long, dummy_dat)
 
-  ts_dat_long$variable <- factor(ts_dat_long$variable, levels = c('Observed', 'GLM bias', 'DL bias', 'PGDL bias'))
+  ts_dat_long$variable <- factor(ts_dat_long$variable, levels = c('Observed', 'PB bias', 'DL bias', 'PGDL bias'))
   #  filter(lubridate::year(DateTime) == 2016)
 
   # create depth bins
@@ -159,12 +159,13 @@ plot_timeseries <- function(lake, type, exp) {
     date_labels <- c('July', 'Aug', 'Sep')
     date_breaks <- c(182, 213, 244)
   }
+
   p <- ggplot(ts_dat_long, aes(x = doy, y = value)) +
     geom_line(aes(group = depth_bin, color = depth_bin), alpha = 0.7) +
     geom_point(aes(group = depth_bin, color = depth_bin),
                alpha = 0.7, size = 1, fill = 'white') +
     geom_hline(data = dummy_hline, aes(yintercept = int), linetype = 2) +
-    scale_color_brewer(type = div, palette = 'RdYlBu') +
+    viridis::scale_color_viridis(discrete = TRUE, direction = -1) + #, palette = 'RdYlBu'
     #scale_shape_manual(values = c(21, 22, 23)) +
     scale_x_continuous(breaks = date_breaks,
                        labels = date_labels)+
@@ -185,13 +186,13 @@ plot_timeseries <- function(lake, type, exp) {
     guides(color = guide_legend(title = 'Depth (m)', title.position = 'top', ncol = 1,
                                 label.position = 'left'))
 
-  ggsave(filename = sprintf('D:/R Projects/lake-temp-supplement/supp_fig_timeseries_%s_%s.png', lake, type),
+  ggsave(filename = sprintf('../lake_modeling/data_imports/figures/supp_fig_timeseries_%s_%s.png', lake, type),
          plot = p, height = 190, width = 230, units = 'mm')
 
 }
-
-plot_timeseries(lake = 'sparkling', type = 'year', exp = 1)
-plot_timeseries(lake = 'sparkling', type = 'season', exp = 1)
-
-plot_timeseries(lake = 'mendota', type = 'year', exp = 1)
-plot_timeseries(lake = 'mendota', type = 'season', exp = 1)
+#
+# plot_timeseries(lake = 'sparkling', type = 'year', exp = 1)
+# plot_timeseries(lake = 'sparkling', type = 'season', exp = 1)
+#
+# plot_timeseries(lake = 'mendota', type = 'year', exp = 1)
+# plot_timeseries(lake = 'mendota', type = 'season', exp = 1)
