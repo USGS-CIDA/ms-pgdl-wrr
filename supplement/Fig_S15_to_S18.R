@@ -109,9 +109,9 @@ plot_timeseries <- function(lake, type, exp) {
     mutate(year = lubridate::year(DateTime),
            doy = lubridate::yday(DateTime))
 
-  if (type == 'season') {
-    ts_dat_long <- filter(ts_dat_long, year %in% c(2012, 2016, 2017))
-  }
+  # if (type == 'season') {
+  #   ts_dat_long <- filter(ts_dat_long, year %in% c(2012, 2016, 2017))
+  # }
   # find min and max for bias scales
   bias_scales <- filter(ts_dat_long, variable != 'Observed')
   bias_range <- range(bias_scales$value, na.rm = TRUE)
@@ -147,23 +147,26 @@ plot_timeseries <- function(lake, type, exp) {
   # hack for getting scales of bias figs the same
 
 
-  # dummy for hlines
-  dummy_hline <- data.frame(variable = rep(unique(ts_dat_long$variable), 3),
-                            year = rep(c(2012, 2016, 2017), 4),
-                            int = rep(c(NA, 0, 0, 0), 3))
-
   if (type == 'year') {
-    date_labels <- c('Jan', '', 'Mar', '', 'May', '', 'July', '', 'Sep', '', 'Nov', '')
+    date_labels <- c('J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D')
     date_breaks <- c(1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335)
+    # dummy for hlines
+    dummy_hline <- data.frame(variable = rep(unique(ts_dat_long$variable), 3),
+                              year = rep(c(2012, 2016, 2017), 4),
+                              int = rep(c(NA, 0, 0, 0), 3))
   } else {
     date_labels <- c('July', 'Aug', 'Sep')
     date_breaks <- c(182, 213, 244)
+    # dummy for hlines
+    dummy_hline <- data.frame(variable = rep(unique(ts_dat_long$variable), 3),
+                              year = rep(2009:2017, 4),
+                              int = rep(c(NA, 0, 0, 0), 3))
   }
 
   p <- ggplot(ts_dat_long, aes(x = doy, y = value)) +
     geom_line(aes(group = depth_bin, color = depth_bin), alpha = 0.7) +
     geom_point(aes(group = depth_bin, color = depth_bin),
-               alpha = 0.7, size = 1, fill = 'white') +
+               alpha = 0.7, size = 0.3, fill = 'white') +
     geom_hline(data = dummy_hline, aes(yintercept = int), linetype = 2) +
     viridis::scale_color_viridis(discrete = TRUE, direction = -1) + #, palette = 'RdYlBu'
     #scale_shape_manual(values = c(21, 22, 23)) +
@@ -175,7 +178,8 @@ plot_timeseries <- function(lake, type, exp) {
     theme(#strip.text = element_blank(),
       strip.background = element_blank(),
       #legend.position = c(0.15, 0.85),
-      legend.position = 'right',
+      legend.position = 'bottom',
+      legend.direction="horizontal",
       #legend.margin = element_text(margin = margin(0,0,0,0)),
       #axis.title.x = element_blank(),
       panel.grid = element_blank(),
@@ -183,16 +187,16 @@ plot_timeseries <- function(lake, type, exp) {
       legend.text = element_text(margin = margin(t = 0))
       ) +
     labs( y = 'Temperature or Bias (deg C)', x = '') +
-    guides(color = guide_legend(title = 'Depth (m)', title.position = 'top', ncol = 1,
-                                label.position = 'left'))
+    guides(color = guide_legend(title = 'Depth (m)', title.position = 'left', ncol = 10,
+                                label.position = 'left', direction = "horizontal"))
 
   ggsave(filename = sprintf('../lake_modeling/data_imports/figures/supp_fig_timeseries_%s_%s.png', lake, type),
-         plot = p, height = 190, width = 230, units = 'mm')
+         plot = p, height = 7, width = 9, units = 'in')
 
 }
-#
-# plot_timeseries(lake = 'sparkling', type = 'year', exp = 1)
-# plot_timeseries(lake = 'sparkling', type = 'season', exp = 1)
-#
-# plot_timeseries(lake = 'mendota', type = 'year', exp = 1)
-# plot_timeseries(lake = 'mendota', type = 'season', exp = 1)
+
+plot_timeseries(lake = 'sparkling', type = 'year', exp = 1)
+plot_timeseries(lake = 'sparkling', type = 'season', exp = 1)
+
+plot_timeseries(lake = 'mendota', type = 'year', exp = 1)
+plot_timeseries(lake = 'mendota', type = 'season', exp = 1)
