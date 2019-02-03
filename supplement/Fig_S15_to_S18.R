@@ -73,8 +73,8 @@ get_timeseries <- function(lake, type, exp){
     rename(glm_pred = pred) %>%
     distinct()
 
-  all_dat <- left_join(pgdl_dat, dl_dat) %>%
-    left_join(glm_preds) %>%
+  all_dat <- left_join(pgdl_dat, dl_dat, by = c("DateTime", "Depth", "obs")) %>%
+    left_join(glm_preds, by = c("DateTime", "Depth", "obs")) %>%
     filter(!is.na(obs)) %>% filter(!is.na(dl_pred), !is.na(pgdl_pred))
 
   return(all_dat)
@@ -102,16 +102,21 @@ plot_timeseries <- function(lake, type, exp) {
     summarize(`Observed` = median(obs, na.rm = TRUE),
               `PB bias` = median(glm_bias, na.rm = TRUE),
               `PGDL bias` = median(pgdl_bias, na.rm = TRUE),
-              `DL bias` = median(dl_bias, na.rm = TRUE))
+              `DL bias` = median(dl_bias, na.rm = TRUE),
+              `n_in_bin` = sum(!is.na(obs)))
 
+  message('lake:',lake, '\ntype:', type, '\niteration:', exp)
+  min_obs_bin <- ts_dat_bias %>% group_by(depth_bin) %>% summarize(n = sum(n_in_bin)) %>% arrange(n) %>% head(1)
+  max_obs_bin <- ts_dat_bias %>% group_by(depth_bin) %>% summarize(n = sum(n_in_bin)) %>% arrange(n) %>% tail(1)
+  message(min_obs_bin[1,1] %>% pull(depth_bin) %>% as.character.factor(),": ", min_obs_bin[1,2])
+  message(max_obs_bin[1,1] %>% pull(depth_bin) %>% as.character.factor(),": ", max_obs_bin[1,2])
+
+  ts_dat_bias <- ts_dat_bias %>% select(-n_in_bin)
 
   ts_dat_long <- gather(ts_dat_bias, key = 'variable', value = 'value', `Observed`, `PB bias`, `PGDL bias`, `DL bias`) %>%
     mutate(year = lubridate::year(DateTime),
            doy = lubridate::yday(DateTime))
 
-  # if (type == 'season') {
-  #   ts_dat_long <- filter(ts_dat_long, year %in% c(2012, 2016, 2017))
-  # }
   # find min and max for bias scales
   bias_scales <- filter(ts_dat_long, variable != 'Observed')
   bias_range <- range(bias_scales$value, na.rm = TRUE)
@@ -177,26 +182,26 @@ plot_timeseries <- function(lake, type, exp) {
     theme_bw()+
     theme(#strip.text = element_blank(),
       strip.background = element_blank(),
-      #legend.position = c(0.15, 0.85),
       legend.position = 'bottom',
       legend.direction="horizontal",
-      #legend.margin = element_text(margin = margin(0,0,0,0)),
-      #axis.title.x = element_blank(),
       panel.grid = element_blank(),
       #legend.background = element_rect(fill = 'white', color = 'black')
-      legend.text = element_text(margin = margin(t = 0))
+      legend.text = element_text(margin = margin(t = 0, b = 0))
       ) +
     labs( y = 'Temperature or Bias (deg C)', x = '') +
     guides(color = guide_legend(title = 'Depth (m)', title.position = 'left', ncol = 10,
                                 label.position = 'left', direction = "horizontal"))
 
   ggsave(filename = sprintf('../lake_modeling/data_imports/figures/supp_fig_timeseries_%s_%s.png', lake, type),
-         plot = p, height = 7, width = 9, units = 'in')
+         plot = p, height = 7, width = 10, units = 'in')
 
 }
 
+plot_timeseries(lake = 'mendota', type = 'year', exp = 1)
 plot_timeseries(lake = 'sparkling', type = 'year', exp = 1)
+
+plot_timeseries(lake = 'mendota', type = 'season', exp = 1)
 plot_timeseries(lake = 'sparkling', type = 'season', exp = 1)
 
-plot_timeseries(lake = 'mendota', type = 'year', exp = 1)
-plot_timeseries(lake = 'mendota', type = 'season', exp = 1)
+
+
