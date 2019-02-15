@@ -7,7 +7,7 @@ library(googledrive)
 # Experiment 3 supp fig
 ##############################
 # get RMSE data from Table S2
-summary68 <- read.csv('D:/R Projects/lake-temp-supplement/temp_obs_summary.csv',check.names = FALSE)
+summary68 <- read.csv('~/Downloads/temp_obs_summary_upload - temp_obs_summary.csv.csv', check.names = FALSE)
 
 rmse_order <- mutate(summary68, rmse_diff = `GLM (calibrated)` - `PGDL`) %>%
   arrange(rmse_diff)
@@ -34,11 +34,11 @@ p <- ggplot(rmse_long, aes(x = lake_name, y = RMSE)) +
   labs(x = '') +
   scale_y_reverse()
 
-ggsave('D:/R Projects/lake-temp-supplement/WRR_sup_S19_all_lakes_PB_PGDL.png', p,
+ggsave('../lake_modeling/data_imports/figures/WRR_sup_S19_all_lakes_PB_PGDL.png', p,
        height = 100, width = 230, units = 'mm', scale = 0.9)
 
 #drive_upload(media = 'D:/R Projects/lake-temp-supplement/WRR_sup_S19_all_lakes_PB_PGDL.png',
 #             path = as_id('https://drive.google.com/drive/u/1/folders/1E2c9VnqEW6oKyDctb1O-hnUKODpXo6Jh/'))
 
 drive_update(file = as_id('https://drive.google.com/drive/u/1/folders/1E2c9VnqEW6oKyDctb1O-hnUKODpXo6Jh'),
-             media = 'D:/R Projects/lake-temp-supplement/WRR_sup_S17_all_lakes_PB_PGDL.png')
+             media = '../lake_modeling/data_imports/figures/WRR_sup_S19_all_lakes_PB_PGDL.png')
