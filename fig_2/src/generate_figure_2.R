@@ -1,7 +1,7 @@
 plot_seasons_years_sparsity <- function(){
   library(dplyr)
 
-  data <- readr::read_csv('fig_2/in/Figure 2 seasonal_yearly results - Sheet1.csv')
+  data <- readr::read_csv('~/Downloads/Figure 2 seasonal_yearly results - Sheet1.csv')#'fig_2/in/Figure 2 seasonal_yearly results - Sheet1.csv')
 
 
   png(filename = 'figures/figure_2_wrr.png', width = 8, height = 4.5, units = 'in', res = 200)
@@ -54,6 +54,12 @@ plot_seasons_years_sparsity <- function(){
     points(PGRNN_x+me_bmp, ME_mean, pch = 23, lwd = 1.5, cex = 3.2, bg = 'white', col = '#7570b3')
     text(PGRNN_x+me_bmp, ME_mean, "M", font = 2)
 
+    ME_mean <- filter(plot_data, lake == "mendota", Model == 'PGRNN_trainonly') %>% pull(`Test RMSE`) %>% mean
+    lines(c(PGRNN_x+me_bmp-0.05, PGRNN_x+me_bmp-0.05), c(filter(plot_data, lake == "mendota", Model == 'PGRNN_trainonly') %>% pull(`Test RMSE`) %>% max(),
+                                               filter(plot_data, lake == "mendota", Model == 'PGRNN_trainonly') %>% pull(`Test RMSE`) %>% min()), lwd = 1.5, col = '#FF007f')
+    points(PGRNN_x+me_bmp-0.05, ME_mean, pch = 23, lwd = 1.5, cex = 3.2, bg = 'white', col = '#FF007f')
+    text(PGRNN_x+me_bmp-0.05, ME_mean, "M", font = 2)
+
 
 
     ME_mean <- filter(plot_data, lake == "mendota", Model == 'GLM') %>% pull(`Test RMSE`) %>% mean
@@ -74,6 +80,11 @@ plot_seasons_years_sparsity <- function(){
                                                filter(plot_data, lake == "sparkling", Model == 'PGRNN') %>% pull(`Test RMSE`) %>% min()), lwd = 1.5, col = '#7570b3')
     points(PGRNN_x+sp_bmp, SP_mean, pch = 23, lwd = 1.5, cex = 3.2, bg = 'white', col = '#7570b3')
     text(PGRNN_x+sp_bmp, SP_mean, "S", font = 2)
+    SP_mean <- filter(plot_data, lake == "sparkling", Model == 'PGRNN_trainonly') %>% pull(`Test RMSE`) %>% mean
+    lines(c(PGRNN_x+sp_bmp-0.05, PGRNN_x+sp_bmp-0.05), c(filter(plot_data, lake == "sparkling", Model == 'PGRNN_trainonly') %>% pull(`Test RMSE`) %>% max(),
+                                                         filter(plot_data, lake == "sparkling", Model == 'PGRNN_trainonly') %>% pull(`Test RMSE`) %>% min()), lwd = 1.5, col = '#FF007f')
+    points(PGRNN_x+sp_bmp-0.05, SP_mean, pch = 23, lwd = 1.5, cex = 3.2, bg = 'white', col = '#FF007f')
+    text(PGRNN_x+sp_bmp-0.05, SP_mean, "S", font = 2)
 
     SP_mean <- filter(plot_data, lake == "sparkling", Model == 'GLM') %>% pull(`Test RMSE`) %>% mean(na.rm = T)
     lines(c(GLM_x+sp_bmp, GLM_x+sp_bmp), c(filter(plot_data, lake == "sparkling", Model == 'GLM') %>% pull(`Test RMSE`) %>% max(na.rm = T),

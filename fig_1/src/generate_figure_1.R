@@ -1,7 +1,7 @@
 
 plot_data_sparsity <- function(){
   library(dplyr)
-  data <- readr::read_csv('fig_1/in/Sparse training results.csv')
+  data <- readr::read_csv('~/Downloads/Sparse training results (2_prof_GLM-uncal) - Sheet1.csv')#'fig_1/in/Sparse training results.csv')
 
 
   png(filename = 'figures/figure_1_wrr.png', width = 8, height = 10, units = 'in', res = 200)
@@ -17,6 +17,7 @@ plot_data_sparsity <- function(){
   rnn_offsets <- -pgrnn_offsets
 
   pg_mean <- list(x = c(), y = c(), train = c())
+  pgto_mean <- list(x = c(), y = c(), train = c())
   rnn_mean <- list(x = c(), y = c(), train = c())
   glm_mean <- list(x = c(), y = c(), train = c())
 
@@ -46,6 +47,15 @@ plot_data_sparsity <- function(){
     pg_mean$x <- c(pg_mean$x, x+pgrnn_offsets[1])
     lines(c(x+pgrnn_offsets[1], x+pgrnn_offsets[1]), c(filter(data, n_profiles == x, Model == "PGRNN") %>% pull(`Test RMSE`) %>% max(),
                                                        filter(data, n_profiles == x, Model == "PGRNN") %>% pull(`Test RMSE`) %>% min()), col = '#7570b3', lwd = 2.5)
+
+    this_mean <- filter(data, n_profiles == x, Model == "PGRNN_trainonly") %>% pull(`Test RMSE`) %>% mean
+    this_train <- filter(data, n_profiles == x, Model == "PGRNN_trainonly") %>% pull(`Train RMSE`) %>% mean
+    pgto_mean$train <- c(pgto_mean$train, this_train)
+    pgto_mean$y <- c(pgto_mean$y, this_mean)
+    pgto_mean$x <- c(pgto_mean$x, x)
+    lines(c(x, x), c(filter(data, n_profiles == x, Model == "PGRNN_trainonly") %>% pull(`Test RMSE`) %>% max(),
+                                                       filter(data, n_profiles == x, Model == "PGRNN_trainonly") %>% pull(`Test RMSE`) %>% min()), col = '#FF007f', lwd = 2.5)
+
     rnn_offsets <- tail(rnn_offsets, -1L)
     pgrnn_offsets <- tail(pgrnn_offsets, -1L)
   }
@@ -56,9 +66,10 @@ plot_data_sparsity <- function(){
   points(rnn_mean$x, rnn_mean$y, col = '#d95f02', pch = 22, bg = 'white', lwd = 2.5, cex = 1.5)
   lines(pg_mean$x, pg_mean$y, col = '#7570b3', lty = 'dashed')
   points(pg_mean$x, pg_mean$y, col = '#7570b3', pch = 23, bg = 'white', lwd = 2.5, cex = 1.5)
-
+  lines(pgto_mean$x, pgto_mean$y, col = '#FF007f', lty = 'dashed')
+  points(pgto_mean$x, pgto_mean$y, col = '#FF007f', pch = 23, bg = 'white', lwd = 2.5, cex = 1.5, lty = 'dashed')
   points(glm_mean$x[1], glm_mean$y[1], col = '#1b9e77', pch = 8, lwd = 2.5, cex = 0.6)
-
+browser()
   message('PRGNN:', tail(pg_mean$y,1), "\nRNN:", tail(rnn_mean$y,1),'\nGLM:', tail(glm_mean$y, 1))
   message('PRGNN:', tail(pg_mean$train,1), "\nRNN:", tail(rnn_mean$train,1),'\nGLM:', tail(glm_mean$train, 1))
 
