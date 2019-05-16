@@ -26,45 +26,42 @@ plot_calibrated_figure_3 <- function(){
 
   png(filename = 'figures/figure_3_wrr.png', width = 9.5, height = 12, units = 'in', res = 200)
 
-  par(omi = c(0.5,0,0.1,0.8), mai = c(0.2,0.8,0,0), las = 1, mgp = c(2.2,0.8,0))
+  par(omi = c(0.5,0,0.1,0.1), mai = c(0.2,0.8,0,0), las = 1, mgp = c(2.2,0.8,0))
 
-  ylim <- c(5.1, 0.65)
+  ylim <- c(5.6, 0)
+  xlim <- c(0.5, 4.5)
 
-  plot(NA, NA, xlim = c(0.9, 4.1), ylim = ylim,
+  plot(NA, NA, xlim = xlim, ylim = ylim,
        ylab = 'Test RMSE (°C)', axes = FALSE, xaxs = 'i', yaxs = 'i', cex.lab = 1.5)
-
+  library(beanplot)
   # TEMPORARY UNTIL MODELS ARE RUN!!
   plot_data$rnn <- plot_data$calibrated + rnorm(n = n_sims, sd = 0.1, mean = -0.2)
+  plot_data <- select(plot_data, GLM, calibrated, rnn, PGDL)
 
-  diffs <- data.frame(cal = plot_data$GLM - plot_data$PGDL)
+  beanplot(plot_data$GLM, plot_data$calibrated, plot_data$rnn, plot_data$PGDL, maxwidth = 0.95, what=c(0,1,0,0), log = "", add = TRUE,
+           axes = F, border = NA)#col = list(c('#1b9e7799','#7570b399'), c('#7570b399', '#1b9e7799')), lwd = 3,
 
-  min_dif <- diffs$cal %>% min %>% round(1)
-  max_dif <- diffs$cal %>% max %>% round(1)
+  med_w <- 0.3
+  ind_w <- 0.04
+  for (x_bin in 1:ncol(plot_data)){
+    mod_name <- names(plot_data)[x_bin]
+    segments(x0 = x_bin-ind_w/2, x1 = x_bin+ind_w/2, y0 = plot_data[[mod_name]], col = 'white')
+    segments(x0 = x_bin-med_w/2, x1 = x_bin+med_w/2, y0 = median(plot_data[[mod_name]]), col = 'white', lwd = 2)
+  }
 
+  diffs <- plot_data$GLM - plot_data$PGDL
+  highlight_num <- 5
 
-  bins <- seq(min_dif, to = max_dif, by = 0.1)
-  col_df <- data.frame(bin = as.character(bins),
-                       col = c(colorRampPalette(c('#d73027','#fc8d59','#fee08b','#e5e5ab','#d9ef8b','#91cf60','#1a9850'))(length(bins)))) %>%
-    mutate(col = paste0(col, ''))
+  highlight_max <- which(diffs >= (sort(diffs) %>% tail(highlight_num) %>% head(1)))
+  highlight_min <- which(diffs <= (sort(diffs, decreasing = TRUE) %>% tail(highlight_num) %>% head(1)))
 
-  browser()
+  for (x_bin in 1:(ncol(plot_data) - 1)){
+    from_mod_name <- names(plot_data)[x_bin]
+    to_mod_name <- names(plot_data)[x_bin + 1]
+    segments(x0 = x_bin+ind_w/2, x1 = x_bin + 1 - ind_w/2, y0 = plot_data[[from_mod_name]][highlight_min], y1 = plot_data[[to_mod_name]][highlight_min], col = 'red')
+    segments(x0 = x_bin+ind_w/2, x1 = x_bin + 1 - ind_w/2, y0 = plot_data[[from_mod_name]][highlight_max], y1 = plot_data[[to_mod_name]][highlight_max], col = 'green')
 
-  seg <- data.frame(bin = as.character(round(diffs$cal, 1))) %>% left_join(col_df)
-  segments(x0 = rep(1, n_sims), x1 = rep(2, n_sims), y0 = plot_data$GLM, y1 = plot_data$calibrated, col = seg$col,
-           lwd = 3)#approx(x = c(0, max(abs(min_dif), max_dif)), y = c(0.2, 6), xout = abs(diffs$cal))$y)
-  segments(x0 = rep(2, n_sims), x1 = rep(3, n_sims), y0 = plot_data$calibrated, y1 = plot_data$rnn, col = seg$col,
-           lwd = 3)#approx(x = c(0, max(abs(min_dif), max_dif)), y = c(0.1, 6), xout = abs(diffs$ml))$y)
-  segments(x0 = rep(3, n_sims), x1 = rep(4, n_sims), y0 = plot_data$rnn, y1 = plot_data$PGDL, col = seg$col,
-           lwd = 3)#approx(x = c(0, max(abs(min_dif), max_dif)), y = c(0.1, 6), xout = abs(diffs$pg))$y)
-
-
-  points(rep(1, n_sims), plot_data$GLM, col = 'black', pch = 16, cex = 0.8, lwd = 1.5)
-  points(rep(2, n_sims), plot_data$calibrated, col = 'black', pch = 16, cex = 0.8, lwd = 1.5)
-  points(rep(2, n_sims), plot_data$calibrated, col = 'black', pch = 16, cex = 0.8, lwd = 1.5)
-  points(rep(3, n_sims), plot_data$rnn, col = 'black', pch = 16, cex = 0.8, lwd = 1.5)
-  points(rep(4, n_sims), plot_data$PGDL, col = 'black', pch = 16, cex = 0.8, lwd = 1.5)
-
-
+  }
 
 
   axis(2, at = seq(0,10), las = 1, tck = -0.01, cex.axis = 1.5, lwd = 1.5)
@@ -73,5 +70,6 @@ plot_calibrated_figure_3 <- function(){
   par(mai = c(0.2,0,0,0), mgp = c(2,2.3,0))
   axis(1, at = c(-100, 1, 2, 3, 4, 1e10), labels = c("", expression("Based"['uncal']), expression("Based"['calibrated']), "Learning","Deep Learning", ""), tck = NA, cex.axis = 1.5, lwd = NA)
 
+  text(3, 1.8, labels = '?', col = 'white', pos = 1, cex = 6)
   dev.off()
 }
