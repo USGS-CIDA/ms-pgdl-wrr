@@ -36,29 +36,24 @@ plot_calibrated_figure_3 <- function(){
   # TEMPORARY UNTIL MODELS ARE RUN!!
   plot_data$rnn <- plot_data$calibrated + rnorm(n = n_sims, sd = 0.1, mean = -0.2)
 
-  diffs <- data.frame(cal = plot_data$GLM - plot_data$calibrated,
-                      ml = plot_data$calibrated - plot_data$rnn,
-                      pg = plot_data$rnn - plot_data$PGDL)
+  diffs <- data.frame(cal = plot_data$GLM - plot_data$PGDL)
 
-  min_dif <- sapply(names(diffs), function(x) min(diffs[[x]]), USE.NAMES = FALSE) %>% min %>% round(1)
-  max_dif <- sapply(names(diffs), function(x) max(diffs[[x]]), USE.NAMES = FALSE) %>% max %>% round(1)
+  min_dif <- diffs$cal %>% min %>% round(1)
+  max_dif <- diffs$cal %>% max %>% round(1)
 
 
-  neg_bins <- seq(min_dif, to = 0, by = 0.1)
-  pos_bins <- seq(0.1, to = max_dif, by = 0.1)
-  col_df <- data.frame(bin = as.character(c(neg_bins, pos_bins)),
-                       col = c(colorRampPalette(c('#d73027','#fc8d59','#fee08b','#e5e5ab'))(length(neg_bins)), tail(colorRampPalette(c('#e5e5ab','#d9ef8b','#91cf60','#1a9850'))(length(pos_bins)+1), -1L))) %>%
+  bins <- seq(min_dif, to = max_dif, by = 0.1)
+  col_df <- data.frame(bin = as.character(bins),
+                       col = c(colorRampPalette(c('#d73027','#fc8d59','#fee08b','#e5e5ab','#d9ef8b','#91cf60','#1a9850'))(length(bins)))) %>%
     mutate(col = paste0(col, ''))
 
-
+  browser()
 
   seg <- data.frame(bin = as.character(round(diffs$cal, 1))) %>% left_join(col_df)
   segments(x0 = rep(1, n_sims), x1 = rep(2, n_sims), y0 = plot_data$GLM, y1 = plot_data$calibrated, col = seg$col,
            lwd = 3)#approx(x = c(0, max(abs(min_dif), max_dif)), y = c(0.2, 6), xout = abs(diffs$cal))$y)
-  seg <- data.frame(bin = as.character(round(diffs$ml, 1))) %>% left_join(col_df)
   segments(x0 = rep(2, n_sims), x1 = rep(3, n_sims), y0 = plot_data$calibrated, y1 = plot_data$rnn, col = seg$col,
            lwd = 3)#approx(x = c(0, max(abs(min_dif), max_dif)), y = c(0.1, 6), xout = abs(diffs$ml))$y)
-  seg <- data.frame(bin = as.character(round(diffs$pg, 1))) %>% left_join(col_df)
   segments(x0 = rep(3, n_sims), x1 = rep(4, n_sims), y0 = plot_data$rnn, y1 = plot_data$PGDL, col = seg$col,
            lwd = 3)#approx(x = c(0, max(abs(min_dif), max_dif)), y = c(0.1, 6), xout = abs(diffs$pg))$y)
 
