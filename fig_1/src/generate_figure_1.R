@@ -69,7 +69,7 @@ plot_data_sparsity <- function(){
   lines(pgto_mean$x, pgto_mean$y, col = '#FF007f', lty = 'dashed')
   points(pgto_mean$x, pgto_mean$y, col = '#FF007f', pch = 23, bg = 'white', lwd = 2.5, cex = 1.5, lty = 'dashed')
   points(glm_mean$x[1], glm_mean$y[1], col = '#1b9e77', pch = 8, lwd = 2.5, cex = 0.6)
-browser()
+
   message('PRGNN:', tail(pg_mean$y,1), "\nRNN:", tail(rnn_mean$y,1),'\nGLM:', tail(glm_mean$y, 1))
   message('PRGNN:', tail(pg_mean$train,1), "\nRNN:", tail(rnn_mean$train,1),'\nGLM:', tail(glm_mean$train, 1))
 
