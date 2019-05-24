@@ -1,0 +1,67 @@
+packages:
+  - mda.lakes
+  - glmtools
+  - lakeattributes
+  - readr
+  - feather
+  - dplyr
+  - scipiper
+
+
+target_default: multilake_files
+
+sources:
+  - fig_3/src/multilake_train_split.R
+  - fig_3/src/multilake_data_utils.R
+  - fig_3/src/multilake_model_utils.R
+  - fig_3/src/multilake_task_utils.R
+
+
+targets:
+  multilake_files:
+    depends:
+      - multilake_data_tasks.yml
+
+
+# read in all obs temp data
+# file downloaded from: https://drive.google.com/drive/u/1/folders/1pbhIjfYUPZ4lEICm5zwJFjIjGYEz1qwi
+  daily_obs:
+    command: read_feather('~/Downloads/merged_temp_data_daily.feather')
+
+  num_train_dates:
+    command: I(100)
+
+  skip_lakes:
+    command: c(I("nhd_1101642"), I("nhd_1101734"), I("nhd_120052238")) # these weren't in the orig models?
+
+  refined_obs:
+    command: filter_temperature_obs(daily_obs, min_dates = I(200), min_per_date = I(5), strat_threshold = I(0.7), min_date = I('1980-04-01'))
+
+  lakes_to_model:
+    command: filter_model_lakes(refined_obs, skip_lakes)
+
+  multilake_data_task_plan:
+    command: create_multilake_data_plan(lakes_to_model,
+      start = I("1979-04-01"), stop = I("2018-12-20"), n_profiles_train = I(10))
+
+  multilake_model_task_plan:
+    command: create_multilake_model_plan(lakes_to_model,
+      start = I("1979-04-01"), stop = I("2018-12-20"))
+
+  multilake_data_tasks.yml:
+    command: create_task_makefile(
+      task_plan = multilake_data_task_plan,
+      makefile = target_name,
+      include = I("figure_3_data_remake.yml"),
+      final_targets = I("fig_3/out/figure3_pretraining_masks.feather"),
+      finalize_funs = I('create_masks_feather'))
+
+  fig_3/out/figure3_pretraining_masks.feather:
+    command: scmake(remake_file = 'multilake_data_tasks.yml')
+  multilake_model_tasks.yml:
+    command: create_task_makefile(
+      task_plan = multilake_model_task_plan,
+      makefile = target_name,
+      include = 'multilake_data_tasks.yml',
+      final_targets = I("fig_3/out/??"),
+      finalize_funs = I('???'))
