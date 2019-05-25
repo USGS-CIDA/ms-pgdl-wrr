@@ -9,10 +9,13 @@ run_optim_glm <- function(driver_file, nml_file, train_file, test_file){
   return(results_df)
 }
 
-post_results_sheet <- function(optim_results, sheets_id){
+post_results_sheet <- function(target_name, results_df, sheets_id){
   n_existing_rows <- gs_read(sheets_id) %>% nrow
-  gs_anchor <-  sprintf("A%s", (n_existing_rows+1))
-  gs_edit_cells(sheets_id, ws = 1, input = optim_results, anchor = gs_anchor,
+  gs_anchor <-  sprintf("A%s", (n_existing_rows+2))
+  experiment_name <- target_name %>% strsplit('[_]') %>% .[[1]] %>% tail(-4L) %>% paste(collapse = '_')
+  results_df <- results_df %>% mutate(experiment_name = experiment_name, time = Sys.time()) %>%
+    select(nhd_id, experiment_name, everything(), time)
+  gs_edit_cells(sheets_id, ws = 1, input = as.vector(results_df), anchor = gs_anchor,
                 byrow = TRUE, col_names = FALSE)
 }
 
