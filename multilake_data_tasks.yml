@@ -36,19 +36,19 @@ targets:
   fig_3/VM_shared_cache/nhd_10596466_geometry.csv:
     command: export_geometry(target_name, I('nhd_10596466'))
 
-  fig_3/VM_shared_cache/nhd_10596466_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_10596466_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_10596466_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_10596466_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_10596466_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_10596466_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_10596466_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_10596466_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_10596466_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_10596466_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_10596466_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_10596466_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_10596466_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_10596466_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_10596466_pretraining_mask)
 
   nhd_10596466_pretraining_mask:
@@ -73,19 +73,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1097324_geometry.csv:
     command: export_geometry(target_name, I('nhd_1097324'))
 
-  fig_3/VM_shared_cache/nhd_1097324_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1097324_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1097324_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1097324_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1097324_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1097324_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1097324_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1097324_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1097324_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1097324_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1097324_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1097324_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1097324_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1097324_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1097324_pretraining_mask)
 
   nhd_1097324_pretraining_mask:
@@ -110,19 +110,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1099052_geometry.csv:
     command: export_geometry(target_name, I('nhd_1099052'))
 
-  fig_3/VM_shared_cache/nhd_1099052_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1099052_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099052_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099052_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1099052_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099052_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099052_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1099052_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099052_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099052_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1099052_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1099052_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099052_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1099052_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1099052_pretraining_mask)
 
   nhd_1099052_pretraining_mask:
@@ -147,19 +147,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1099136_geometry.csv:
     command: export_geometry(target_name, I('nhd_1099136'))
 
-  fig_3/VM_shared_cache/nhd_1099136_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1099136_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099136_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099136_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1099136_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099136_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099136_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1099136_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099136_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099136_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1099136_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1099136_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099136_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1099136_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1099136_pretraining_mask)
 
   nhd_1099136_pretraining_mask:
@@ -184,19 +184,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1099172_geometry.csv:
     command: export_geometry(target_name, I('nhd_1099172'))
 
-  fig_3/VM_shared_cache/nhd_1099172_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1099172_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099172_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099172_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1099172_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099172_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099172_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1099172_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099172_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099172_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1099172_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1099172_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099172_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1099172_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1099172_pretraining_mask)
 
   nhd_1099172_pretraining_mask:
@@ -221,19 +221,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1099240_geometry.csv:
     command: export_geometry(target_name, I('nhd_1099240'))
 
-  fig_3/VM_shared_cache/nhd_1099240_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1099240_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099240_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099240_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1099240_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099240_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099240_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1099240_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099240_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099240_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1099240_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1099240_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099240_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1099240_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1099240_pretraining_mask)
 
   nhd_1099240_pretraining_mask:
@@ -258,19 +258,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1099282_geometry.csv:
     command: export_geometry(target_name, I('nhd_1099282'))
 
-  fig_3/VM_shared_cache/nhd_1099282_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1099282_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099282_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099282_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1099282_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099282_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099282_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1099282_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099282_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099282_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1099282_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1099282_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099282_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1099282_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1099282_pretraining_mask)
 
   nhd_1099282_pretraining_mask:
@@ -295,19 +295,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1099420_geometry.csv:
     command: export_geometry(target_name, I('nhd_1099420'))
 
-  fig_3/VM_shared_cache/nhd_1099420_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1099420_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099420_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099420_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1099420_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099420_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099420_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1099420_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099420_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099420_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1099420_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1099420_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099420_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1099420_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1099420_pretraining_mask)
 
   nhd_1099420_pretraining_mask:
@@ -332,19 +332,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1099430_geometry.csv:
     command: export_geometry(target_name, I('nhd_1099430'))
 
-  fig_3/VM_shared_cache/nhd_1099430_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1099430_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099430_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099430_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1099430_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099430_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099430_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1099430_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099430_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099430_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1099430_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1099430_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099430_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1099430_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1099430_pretraining_mask)
 
   nhd_1099430_pretraining_mask:
@@ -369,19 +369,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1099432_geometry.csv:
     command: export_geometry(target_name, I('nhd_1099432'))
 
-  fig_3/VM_shared_cache/nhd_1099432_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1099432_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099432_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099432_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1099432_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099432_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099432_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1099432_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099432_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099432_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1099432_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1099432_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099432_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1099432_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1099432_pretraining_mask)
 
   nhd_1099432_pretraining_mask:
@@ -406,19 +406,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1099450_geometry.csv:
     command: export_geometry(target_name, I('nhd_1099450'))
 
-  fig_3/VM_shared_cache/nhd_1099450_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1099450_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099450_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099450_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1099450_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099450_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099450_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1099450_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099450_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099450_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1099450_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1099450_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099450_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1099450_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1099450_pretraining_mask)
 
   nhd_1099450_pretraining_mask:
@@ -443,19 +443,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1099476_geometry.csv:
     command: export_geometry(target_name, I('nhd_1099476'))
 
-  fig_3/VM_shared_cache/nhd_1099476_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1099476_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099476_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099476_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1099476_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099476_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099476_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1099476_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099476_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099476_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1099476_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1099476_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099476_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1099476_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1099476_pretraining_mask)
 
   nhd_1099476_pretraining_mask:
@@ -480,19 +480,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1099526_geometry.csv:
     command: export_geometry(target_name, I('nhd_1099526'))
 
-  fig_3/VM_shared_cache/nhd_1099526_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1099526_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099526_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099526_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1099526_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099526_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099526_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1099526_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099526_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099526_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1099526_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1099526_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099526_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1099526_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1099526_pretraining_mask)
 
   nhd_1099526_pretraining_mask:
@@ -517,19 +517,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1100962_geometry.csv:
     command: export_geometry(target_name, I('nhd_1100962'))
 
-  fig_3/VM_shared_cache/nhd_1100962_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1100962_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1100962_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1100962_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1100962_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1100962_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1100962_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1100962_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1100962_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1100962_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1100962_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1100962_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1100962_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1100962_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1100962_pretraining_mask)
 
   nhd_1100962_pretraining_mask:
@@ -554,19 +554,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1101504_geometry.csv:
     command: export_geometry(target_name, I('nhd_1101504'))
 
-  fig_3/VM_shared_cache/nhd_1101504_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1101504_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101504_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101504_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1101504_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101504_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101504_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1101504_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101504_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101504_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1101504_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1101504_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101504_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1101504_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1101504_pretraining_mask)
 
   nhd_1101504_pretraining_mask:
@@ -591,19 +591,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1101506_geometry.csv:
     command: export_geometry(target_name, I('nhd_1101506'))
 
-  fig_3/VM_shared_cache/nhd_1101506_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1101506_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101506_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101506_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1101506_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101506_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101506_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1101506_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101506_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101506_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1101506_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1101506_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101506_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1101506_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1101506_pretraining_mask)
 
   nhd_1101506_pretraining_mask:
@@ -628,19 +628,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1101544_geometry.csv:
     command: export_geometry(target_name, I('nhd_1101544'))
 
-  fig_3/VM_shared_cache/nhd_1101544_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1101544_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101544_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101544_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1101544_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101544_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101544_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1101544_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101544_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101544_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1101544_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1101544_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101544_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1101544_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1101544_pretraining_mask)
 
   nhd_1101544_pretraining_mask:
@@ -665,19 +665,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1101590_geometry.csv:
     command: export_geometry(target_name, I('nhd_1101590'))
 
-  fig_3/VM_shared_cache/nhd_1101590_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1101590_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101590_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101590_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1101590_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101590_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101590_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1101590_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101590_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101590_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1101590_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1101590_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101590_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1101590_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1101590_pretraining_mask)
 
   nhd_1101590_pretraining_mask:
@@ -702,19 +702,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1101616_geometry.csv:
     command: export_geometry(target_name, I('nhd_1101616'))
 
-  fig_3/VM_shared_cache/nhd_1101616_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1101616_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101616_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101616_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1101616_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101616_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101616_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1101616_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101616_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101616_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1101616_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1101616_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101616_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1101616_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1101616_pretraining_mask)
 
   nhd_1101616_pretraining_mask:
@@ -739,19 +739,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1101636_geometry.csv:
     command: export_geometry(target_name, I('nhd_1101636'))
 
-  fig_3/VM_shared_cache/nhd_1101636_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1101636_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101636_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101636_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1101636_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101636_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101636_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1101636_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101636_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101636_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1101636_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1101636_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101636_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1101636_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1101636_pretraining_mask)
 
   nhd_1101636_pretraining_mask:
@@ -776,19 +776,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1101684_geometry.csv:
     command: export_geometry(target_name, I('nhd_1101684'))
 
-  fig_3/VM_shared_cache/nhd_1101684_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1101684_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101684_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101684_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1101684_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101684_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101684_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1101684_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101684_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101684_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1101684_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1101684_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101684_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1101684_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1101684_pretraining_mask)
 
   nhd_1101684_pretraining_mask:
@@ -813,19 +813,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1101754_geometry.csv:
     command: export_geometry(target_name, I('nhd_1101754'))
 
-  fig_3/VM_shared_cache/nhd_1101754_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1101754_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101754_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101754_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1101754_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101754_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101754_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1101754_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101754_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101754_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1101754_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1101754_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101754_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1101754_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1101754_pretraining_mask)
 
   nhd_1101754_pretraining_mask:
@@ -850,19 +850,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1101778_geometry.csv:
     command: export_geometry(target_name, I('nhd_1101778'))
 
-  fig_3/VM_shared_cache/nhd_1101778_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1101778_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101778_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101778_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1101778_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101778_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101778_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1101778_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101778_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101778_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1101778_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1101778_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101778_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1101778_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1101778_pretraining_mask)
 
   nhd_1101778_pretraining_mask:
@@ -887,19 +887,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1101812_geometry.csv:
     command: export_geometry(target_name, I('nhd_1101812'))
 
-  fig_3/VM_shared_cache/nhd_1101812_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1101812_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101812_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101812_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1101812_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101812_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101812_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1101812_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101812_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101812_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1101812_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1101812_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101812_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1101812_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1101812_pretraining_mask)
 
   nhd_1101812_pretraining_mask:
@@ -924,19 +924,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1101864_geometry.csv:
     command: export_geometry(target_name, I('nhd_1101864'))
 
-  fig_3/VM_shared_cache/nhd_1101864_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1101864_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101864_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101864_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1101864_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101864_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101864_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1101864_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101864_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101864_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1101864_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1101864_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101864_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1101864_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1101864_pretraining_mask)
 
   nhd_1101864_pretraining_mask:
@@ -961,19 +961,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1101938_geometry.csv:
     command: export_geometry(target_name, I('nhd_1101938'))
 
-  fig_3/VM_shared_cache/nhd_1101938_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1101938_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101938_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101938_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1101938_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101938_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101938_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1101938_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101938_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101938_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1101938_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1101938_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101938_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1101938_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1101938_pretraining_mask)
 
   nhd_1101938_pretraining_mask:
@@ -998,19 +998,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1101942_geometry.csv:
     command: export_geometry(target_name, I('nhd_1101942'))
 
-  fig_3/VM_shared_cache/nhd_1101942_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1101942_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101942_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101942_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1101942_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101942_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101942_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1101942_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101942_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101942_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1101942_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1101942_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101942_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1101942_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1101942_pretraining_mask)
 
   nhd_1101942_pretraining_mask:
@@ -1035,19 +1035,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1102086_geometry.csv:
     command: export_geometry(target_name, I('nhd_1102086'))
 
-  fig_3/VM_shared_cache/nhd_1102086_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1102086_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1102086_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102086_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1102086_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1102086_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102086_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1102086_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1102086_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102086_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1102086_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1102086_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102086_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1102086_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1102086_pretraining_mask)
 
   nhd_1102086_pretraining_mask:
@@ -1072,19 +1072,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1102088_geometry.csv:
     command: export_geometry(target_name, I('nhd_1102088'))
 
-  fig_3/VM_shared_cache/nhd_1102088_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1102088_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1102088_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102088_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1102088_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1102088_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102088_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1102088_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1102088_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102088_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1102088_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1102088_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102088_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1102088_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1102088_pretraining_mask)
 
   nhd_1102088_pretraining_mask:
@@ -1109,19 +1109,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1102284_geometry.csv:
     command: export_geometry(target_name, I('nhd_1102284'))
 
-  fig_3/VM_shared_cache/nhd_1102284_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1102284_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1102284_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102284_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1102284_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1102284_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102284_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1102284_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1102284_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102284_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1102284_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1102284_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102284_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1102284_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1102284_pretraining_mask)
 
   nhd_1102284_pretraining_mask:
@@ -1146,19 +1146,19 @@ targets:
   fig_3/VM_shared_cache/nhd_1102366_geometry.csv:
     command: export_geometry(target_name, I('nhd_1102366'))
 
-  fig_3/VM_shared_cache/nhd_1102366_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_1102366_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1102366_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102366_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_1102366_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1102366_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102366_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_1102366_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1102366_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102366_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1102366_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1102366_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102366_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_1102366_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1102366_pretraining_mask)
 
   nhd_1102366_pretraining_mask:
@@ -1183,19 +1183,19 @@ targets:
   fig_3/VM_shared_cache/nhd_120051922_geometry.csv:
     command: export_geometry(target_name, I('nhd_120051922'))
 
-  fig_3/VM_shared_cache/nhd_120051922_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_120051922_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120051922_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120051922_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_120051922_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120051922_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120051922_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_120051922_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120051922_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120051922_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_120051922_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_120051922_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120051922_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_120051922_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_120051922_pretraining_mask)
 
   nhd_120051922_pretraining_mask:
@@ -1220,19 +1220,19 @@ targets:
   fig_3/VM_shared_cache/nhd_120052022_geometry.csv:
     command: export_geometry(target_name, I('nhd_120052022'))
 
-  fig_3/VM_shared_cache/nhd_120052022_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_120052022_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120052022_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052022_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_120052022_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120052022_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052022_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_120052022_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120052022_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052022_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_120052022_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_120052022_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052022_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_120052022_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_120052022_pretraining_mask)
 
   nhd_120052022_pretraining_mask:
@@ -1257,19 +1257,19 @@ targets:
   fig_3/VM_shared_cache/nhd_120052233_geometry.csv:
     command: export_geometry(target_name, I('nhd_120052233'))
 
-  fig_3/VM_shared_cache/nhd_120052233_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_120052233_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120052233_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052233_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_120052233_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120052233_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052233_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_120052233_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120052233_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052233_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_120052233_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_120052233_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052233_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_120052233_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_120052233_pretraining_mask)
 
   nhd_120052233_pretraining_mask:
@@ -1294,19 +1294,19 @@ targets:
   fig_3/VM_shared_cache/nhd_120052351_geometry.csv:
     command: export_geometry(target_name, I('nhd_120052351'))
 
-  fig_3/VM_shared_cache/nhd_120052351_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_120052351_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120052351_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052351_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_120052351_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120052351_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052351_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_120052351_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120052351_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052351_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_120052351_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_120052351_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052351_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_120052351_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_120052351_pretraining_mask)
 
   nhd_120052351_pretraining_mask:
@@ -1331,19 +1331,19 @@ targets:
   fig_3/VM_shared_cache/nhd_120052587_geometry.csv:
     command: export_geometry(target_name, I('nhd_120052587'))
 
-  fig_3/VM_shared_cache/nhd_120052587_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_120052587_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120052587_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052587_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_120052587_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120052587_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052587_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_120052587_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120052587_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052587_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_120052587_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_120052587_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052587_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_120052587_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_120052587_pretraining_mask)
 
   nhd_120052587_pretraining_mask:
@@ -1368,19 +1368,19 @@ targets:
   fig_3/VM_shared_cache/nhd_120053694_geometry.csv:
     command: export_geometry(target_name, I('nhd_120053694'))
 
-  fig_3/VM_shared_cache/nhd_120053694_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_120053694_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120053694_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120053694_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_120053694_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120053694_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120053694_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_120053694_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120053694_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120053694_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_120053694_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_120053694_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120053694_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_120053694_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_120053694_pretraining_mask)
 
   nhd_120053694_pretraining_mask:
@@ -1405,19 +1405,19 @@ targets:
   fig_3/VM_shared_cache/nhd_12160852_geometry.csv:
     command: export_geometry(target_name, I('nhd_12160852'))
 
-  fig_3/VM_shared_cache/nhd_12160852_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_12160852_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_12160852_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_12160852_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_12160852_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_12160852_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_12160852_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_12160852_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_12160852_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_12160852_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_12160852_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_12160852_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_12160852_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_12160852_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_12160852_pretraining_mask)
 
   nhd_12160852_pretraining_mask:
@@ -1442,19 +1442,19 @@ targets:
   fig_3/VM_shared_cache/nhd_12162854_geometry.csv:
     command: export_geometry(target_name, I('nhd_12162854'))
 
-  fig_3/VM_shared_cache/nhd_12162854_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_12162854_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_12162854_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_12162854_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_12162854_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_12162854_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_12162854_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_12162854_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_12162854_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_12162854_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_12162854_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_12162854_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_12162854_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_12162854_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_12162854_pretraining_mask)
 
   nhd_12162854_pretraining_mask:
@@ -1479,19 +1479,19 @@ targets:
   fig_3/VM_shared_cache/nhd_13290898_geometry.csv:
     command: export_geometry(target_name, I('nhd_13290898'))
 
-  fig_3/VM_shared_cache/nhd_13290898_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_13290898_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13290898_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13290898_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_13290898_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13290898_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13290898_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_13290898_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13290898_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13290898_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_13290898_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_13290898_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13290898_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_13290898_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_13290898_pretraining_mask)
 
   nhd_13290898_pretraining_mask:
@@ -1516,19 +1516,19 @@ targets:
   fig_3/VM_shared_cache/nhd_13293262_geometry.csv:
     command: export_geometry(target_name, I('nhd_13293262'))
 
-  fig_3/VM_shared_cache/nhd_13293262_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_13293262_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13293262_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13293262_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_13293262_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13293262_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13293262_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_13293262_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13293262_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13293262_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_13293262_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_13293262_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13293262_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_13293262_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_13293262_pretraining_mask)
 
   nhd_13293262_pretraining_mask:
@@ -1553,19 +1553,19 @@ targets:
   fig_3/VM_shared_cache/nhd_13294464_geometry.csv:
     command: export_geometry(target_name, I('nhd_13294464'))
 
-  fig_3/VM_shared_cache/nhd_13294464_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_13294464_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13294464_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13294464_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_13294464_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13294464_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13294464_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_13294464_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13294464_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13294464_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_13294464_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_13294464_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13294464_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_13294464_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_13294464_pretraining_mask)
 
   nhd_13294464_pretraining_mask:
@@ -1590,19 +1590,19 @@ targets:
   fig_3/VM_shared_cache/nhd_13294928_geometry.csv:
     command: export_geometry(target_name, I('nhd_13294928'))
 
-  fig_3/VM_shared_cache/nhd_13294928_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_13294928_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13294928_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13294928_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_13294928_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13294928_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13294928_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_13294928_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13294928_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13294928_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_13294928_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_13294928_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13294928_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_13294928_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_13294928_pretraining_mask)
 
   nhd_13294928_pretraining_mask:
@@ -1627,19 +1627,19 @@ targets:
   fig_3/VM_shared_cache/nhd_13343906_geometry.csv:
     command: export_geometry(target_name, I('nhd_13343906'))
 
-  fig_3/VM_shared_cache/nhd_13343906_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_13343906_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13343906_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13343906_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_13343906_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13343906_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13343906_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_13343906_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13343906_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13343906_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_13343906_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_13343906_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13343906_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_13343906_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_13343906_pretraining_mask)
 
   nhd_13343906_pretraining_mask:
@@ -1664,19 +1664,19 @@ targets:
   fig_3/VM_shared_cache/nhd_13344056_geometry.csv:
     command: export_geometry(target_name, I('nhd_13344056'))
 
-  fig_3/VM_shared_cache/nhd_13344056_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_13344056_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13344056_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344056_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_13344056_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13344056_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344056_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_13344056_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13344056_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344056_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_13344056_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_13344056_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344056_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_13344056_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_13344056_pretraining_mask)
 
   nhd_13344056_pretraining_mask:
@@ -1701,19 +1701,19 @@ targets:
   fig_3/VM_shared_cache/nhd_13344170_geometry.csv:
     command: export_geometry(target_name, I('nhd_13344170'))
 
-  fig_3/VM_shared_cache/nhd_13344170_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_13344170_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13344170_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344170_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_13344170_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13344170_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344170_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_13344170_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13344170_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344170_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_13344170_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_13344170_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344170_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_13344170_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_13344170_pretraining_mask)
 
   nhd_13344170_pretraining_mask:
@@ -1738,19 +1738,19 @@ targets:
   fig_3/VM_shared_cache/nhd_13344210_geometry.csv:
     command: export_geometry(target_name, I('nhd_13344210'))
 
-  fig_3/VM_shared_cache/nhd_13344210_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_13344210_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13344210_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344210_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_13344210_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13344210_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344210_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_13344210_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13344210_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344210_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_13344210_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_13344210_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344210_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_13344210_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_13344210_pretraining_mask)
 
   nhd_13344210_pretraining_mask:
@@ -1775,19 +1775,19 @@ targets:
   fig_3/VM_shared_cache/nhd_13344284_geometry.csv:
     command: export_geometry(target_name, I('nhd_13344284'))
 
-  fig_3/VM_shared_cache/nhd_13344284_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_13344284_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13344284_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344284_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_13344284_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13344284_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344284_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_13344284_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13344284_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344284_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_13344284_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_13344284_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344284_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_13344284_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_13344284_pretraining_mask)
 
   nhd_13344284_pretraining_mask:
@@ -1812,19 +1812,19 @@ targets:
   fig_3/VM_shared_cache/nhd_13393533_geometry.csv:
     command: export_geometry(target_name, I('nhd_13393533'))
 
-  fig_3/VM_shared_cache/nhd_13393533_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_13393533_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13393533_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13393533_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_13393533_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13393533_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13393533_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_13393533_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13393533_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13393533_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_13393533_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_13393533_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13393533_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_13393533_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_13393533_pretraining_mask)
 
   nhd_13393533_pretraining_mask:
@@ -1849,19 +1849,19 @@ targets:
   fig_3/VM_shared_cache/nhd_13393567_geometry.csv:
     command: export_geometry(target_name, I('nhd_13393567'))
 
-  fig_3/VM_shared_cache/nhd_13393567_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_13393567_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13393567_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13393567_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_13393567_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13393567_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13393567_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_13393567_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13393567_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13393567_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_13393567_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_13393567_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13393567_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_13393567_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_13393567_pretraining_mask)
 
   nhd_13393567_pretraining_mask:
@@ -1886,19 +1886,19 @@ targets:
   fig_3/VM_shared_cache/nhd_13631637_geometry.csv:
     command: export_geometry(target_name, I('nhd_13631637'))
 
-  fig_3/VM_shared_cache/nhd_13631637_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_13631637_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13631637_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13631637_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_13631637_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13631637_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13631637_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_13631637_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13631637_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13631637_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_13631637_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_13631637_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13631637_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_13631637_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_13631637_pretraining_mask)
 
   nhd_13631637_pretraining_mask:
@@ -1923,19 +1923,19 @@ targets:
   fig_3/VM_shared_cache/nhd_14783883_geometry.csv:
     command: export_geometry(target_name, I('nhd_14783883'))
 
-  fig_3/VM_shared_cache/nhd_14783883_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_14783883_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_14783883_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_14783883_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_14783883_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_14783883_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_14783883_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_14783883_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_14783883_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_14783883_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_14783883_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_14783883_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_14783883_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_14783883_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_14783883_pretraining_mask)
 
   nhd_14783883_pretraining_mask:
@@ -1960,19 +1960,19 @@ targets:
   fig_3/VM_shared_cache/nhd_2349188_geometry.csv:
     command: export_geometry(target_name, I('nhd_2349188'))
 
-  fig_3/VM_shared_cache/nhd_2349188_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_2349188_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2349188_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2349188_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_2349188_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2349188_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2349188_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_2349188_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2349188_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2349188_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_2349188_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_2349188_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2349188_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_2349188_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_2349188_pretraining_mask)
 
   nhd_2349188_pretraining_mask:
@@ -1997,19 +1997,19 @@ targets:
   fig_3/VM_shared_cache/nhd_2349198_geometry.csv:
     command: export_geometry(target_name, I('nhd_2349198'))
 
-  fig_3/VM_shared_cache/nhd_2349198_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_2349198_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2349198_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2349198_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_2349198_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2349198_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2349198_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_2349198_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2349198_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2349198_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_2349198_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_2349198_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2349198_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_2349198_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_2349198_pretraining_mask)
 
   nhd_2349198_pretraining_mask:
@@ -2034,19 +2034,19 @@ targets:
   fig_3/VM_shared_cache/nhd_2353946_geometry.csv:
     command: export_geometry(target_name, I('nhd_2353946'))
 
-  fig_3/VM_shared_cache/nhd_2353946_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_2353946_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2353946_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2353946_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_2353946_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2353946_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2353946_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_2353946_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2353946_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2353946_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_2353946_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_2353946_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2353946_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_2353946_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_2353946_pretraining_mask)
 
   nhd_2353946_pretraining_mask:
@@ -2071,19 +2071,19 @@ targets:
   fig_3/VM_shared_cache/nhd_2384584_geometry.csv:
     command: export_geometry(target_name, I('nhd_2384584'))
 
-  fig_3/VM_shared_cache/nhd_2384584_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_2384584_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2384584_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2384584_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_2384584_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2384584_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2384584_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_2384584_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2384584_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2384584_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_2384584_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_2384584_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2384584_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_2384584_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_2384584_pretraining_mask)
 
   nhd_2384584_pretraining_mask:
@@ -2108,19 +2108,19 @@ targets:
   fig_3/VM_shared_cache/nhd_2384766_geometry.csv:
     command: export_geometry(target_name, I('nhd_2384766'))
 
-  fig_3/VM_shared_cache/nhd_2384766_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_2384766_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2384766_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2384766_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_2384766_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2384766_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2384766_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_2384766_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2384766_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2384766_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_2384766_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_2384766_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2384766_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_2384766_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_2384766_pretraining_mask)
 
   nhd_2384766_pretraining_mask:
@@ -2145,19 +2145,19 @@ targets:
   fig_3/VM_shared_cache/nhd_2385444_geometry.csv:
     command: export_geometry(target_name, I('nhd_2385444'))
 
-  fig_3/VM_shared_cache/nhd_2385444_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_2385444_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2385444_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2385444_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_2385444_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2385444_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2385444_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_2385444_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2385444_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2385444_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_2385444_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_2385444_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2385444_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_2385444_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_2385444_pretraining_mask)
 
   nhd_2385444_pretraining_mask:
@@ -2182,19 +2182,19 @@ targets:
   fig_3/VM_shared_cache/nhd_2385496_geometry.csv:
     command: export_geometry(target_name, I('nhd_2385496'))
 
-  fig_3/VM_shared_cache/nhd_2385496_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_2385496_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2385496_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2385496_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_2385496_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2385496_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2385496_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_2385496_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2385496_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2385496_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_2385496_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_2385496_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2385496_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_2385496_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_2385496_pretraining_mask)
 
   nhd_2385496_pretraining_mask:
@@ -2219,19 +2219,19 @@ targets:
   fig_3/VM_shared_cache/nhd_2385648_geometry.csv:
     command: export_geometry(target_name, I('nhd_2385648'))
 
-  fig_3/VM_shared_cache/nhd_2385648_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_2385648_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2385648_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2385648_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_2385648_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2385648_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2385648_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_2385648_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2385648_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2385648_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_2385648_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_2385648_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2385648_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_2385648_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_2385648_pretraining_mask)
 
   nhd_2385648_pretraining_mask:
@@ -2256,19 +2256,19 @@ targets:
   fig_3/VM_shared_cache/nhd_2647582_geometry.csv:
     command: export_geometry(target_name, I('nhd_2647582'))
 
-  fig_3/VM_shared_cache/nhd_2647582_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_2647582_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2647582_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2647582_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_2647582_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2647582_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2647582_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_2647582_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2647582_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2647582_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_2647582_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_2647582_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2647582_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_2647582_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_2647582_pretraining_mask)
 
   nhd_2647582_pretraining_mask:
@@ -2293,19 +2293,19 @@ targets:
   fig_3/VM_shared_cache/nhd_2648034_geometry.csv:
     command: export_geometry(target_name, I('nhd_2648034'))
 
-  fig_3/VM_shared_cache/nhd_2648034_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_2648034_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2648034_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2648034_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_2648034_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2648034_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2648034_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_2648034_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2648034_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2648034_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_2648034_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_2648034_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2648034_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_2648034_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_2648034_pretraining_mask)
 
   nhd_2648034_pretraining_mask:
@@ -2330,19 +2330,19 @@ targets:
   fig_3/VM_shared_cache/nhd_2723765_geometry.csv:
     command: export_geometry(target_name, I('nhd_2723765'))
 
-  fig_3/VM_shared_cache/nhd_2723765_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_2723765_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2723765_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2723765_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_2723765_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2723765_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2723765_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_2723765_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2723765_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2723765_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_2723765_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_2723765_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2723765_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_2723765_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_2723765_pretraining_mask)
 
   nhd_2723765_pretraining_mask:
@@ -2367,19 +2367,19 @@ targets:
   fig_3/VM_shared_cache/nhd_2723803_geometry.csv:
     command: export_geometry(target_name, I('nhd_2723803'))
 
-  fig_3/VM_shared_cache/nhd_2723803_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_2723803_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2723803_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2723803_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_2723803_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2723803_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2723803_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_2723803_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2723803_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2723803_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_2723803_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_2723803_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2723803_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_2723803_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_2723803_pretraining_mask)
 
   nhd_2723803_pretraining_mask:
@@ -2404,19 +2404,19 @@ targets:
   fig_3/VM_shared_cache/nhd_2723871_geometry.csv:
     command: export_geometry(target_name, I('nhd_2723871'))
 
-  fig_3/VM_shared_cache/nhd_2723871_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_2723871_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2723871_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2723871_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_2723871_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2723871_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2723871_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_2723871_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2723871_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2723871_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_2723871_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_2723871_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2723871_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_2723871_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_2723871_pretraining_mask)
 
   nhd_2723871_pretraining_mask:
@@ -2441,19 +2441,19 @@ targets:
   fig_3/VM_shared_cache/nhd_4250586_geometry.csv:
     command: export_geometry(target_name, I('nhd_4250586'))
 
-  fig_3/VM_shared_cache/nhd_4250586_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_4250586_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_4250586_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_4250586_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_4250586_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_4250586_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_4250586_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_4250586_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_4250586_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_4250586_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_4250586_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_4250586_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_4250586_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_4250586_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_4250586_pretraining_mask)
 
   nhd_4250586_pretraining_mask:
@@ -2478,19 +2478,19 @@ targets:
   fig_3/VM_shared_cache/nhd_4250588_geometry.csv:
     command: export_geometry(target_name, I('nhd_4250588'))
 
-  fig_3/VM_shared_cache/nhd_4250588_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_4250588_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_4250588_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_4250588_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_4250588_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_4250588_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_4250588_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_4250588_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_4250588_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_4250588_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_4250588_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_4250588_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_4250588_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_4250588_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_4250588_pretraining_mask)
 
   nhd_4250588_pretraining_mask:
@@ -2515,19 +2515,19 @@ targets:
   fig_3/VM_shared_cache/nhd_9022741_geometry.csv:
     command: export_geometry(target_name, I('nhd_9022741'))
 
-  fig_3/VM_shared_cache/nhd_9022741_train_010_profiles_experiment_01.feather:
+  fig_3/VM_shared_cache/nhd_9022741_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_9022741_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_9022741_train_010_profiles_experiment_02.feather:
+  fig_3/VM_shared_cache/nhd_9022741_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_9022741_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_9022741_train_010_profiles_experiment_03.feather:
+  fig_3/VM_shared_cache/nhd_9022741_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_9022741_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_9022741_train_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_9022741_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_9022741_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_9022741_test_all_profiles.feather:
+  fig_3/VM_shared_cache/nhd_9022741_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_9022741_pretraining_mask)
 
   nhd_9022741_pretraining_mask:
