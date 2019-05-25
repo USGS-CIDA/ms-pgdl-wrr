@@ -105,6 +105,8 @@ create_multilake_model_plan <- function(nhd_ids, experiment = "random_01", n_pro
 
   step1_name <- sprintf('optim_glm_subset_%s', experiment)
 
+  step2_name <- sprintf('optim_posted_subset_%s', experiment)
+
   step1 <- create_task_step(
     step_name = step1_name,
     target_name = function(task_name, step_name, ...) {
@@ -117,11 +119,23 @@ create_multilake_model_plan <- function(nhd_ids, experiment = "random_01", n_pro
       test_file <- sprintf('/media/sf_VM_shared_cache/%s_test_all_profiles.csv', task_name)
       nml_file <- sprintf('/media/sf_VM_shared_cache/%s_nml.nml', task_name)
       driver_file <- sprintf('/media/sf_VM_shared_cache/%s_meteo.csv', task_name)
-      sprintf("run_optim_glm(driver_file = '%s',\n      nml_file = '%s',\n      train_file = '%s',\n      test_file = '%s',\n      sheets_id = %s)",
+      sprintf("run_optim_glm(driver_file = '%s',\n      nml_file = '%s',\n      train_file = '%s',\n      test_file = '%s')",
               driver_file, nml_file, train_file, test_file, sheets_id)
     }
   )
-  task_plan <- create_task_plan(task_names = nhd_ids, list(step1),
-                                final_steps = step1_name, add_complete = FALSE)
+
+  step2 <- create_task_step(
+    step_name = step2_name,
+    target_name = function(task_name, step_name, ...) {
+      sprintf('%s_%s', task_name, step_name)
+    },
+    command = function(target_name, task_name, step_name, ...) {
+      sprintf("post_results_sheet(optim_results = '%s',\n      sheets_id = %s)",
+              sprintf('%s_%s', task_name, step2_name), sheets_id)
+    }
+  )
+
+  task_plan <- create_task_plan(task_names = nhd_ids, list(step1, step2),
+                                final_steps = step2_name, add_complete = FALSE)
   return(task_plan)
 }
