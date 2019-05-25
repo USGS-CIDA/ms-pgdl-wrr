@@ -34,7 +34,7 @@ create_multilake_data_plan <- function(nhd_ids, start, stop, n_profiles_train){
     target_name = function(task_name, step_name, ...) {
       exp_n <- strsplit(step_name, '[_]') %>% .[[1]] %>% tail(1)
       prof_n <- stringr::str_pad(n_profiles_train, width = 3, pad = "0")
-      sprintf('fig_3/VM_shared_cache/%s_train_%s_profiles_experiment_%s.feather', task_name, prof_n, exp_n) #nhd_4250588_train_010_profiles_experiment_01.feather
+      sprintf('fig_3/VM_shared_cache/%s_train_%s_profiles_experiment_%s.csv', task_name, prof_n, exp_n) #nhd_4250588_train_010_profiles_experiment_01.csv
     },
     command = function(target_name, task_name, ...) {
       sprintf("subset_training_random(target_name, refined_obs, %s_pretraining_mask)", task_name)
@@ -46,7 +46,7 @@ create_multilake_data_plan <- function(nhd_ids, start, stop, n_profiles_train){
     target_name = function(task_name, step_name, ...) {
       exp_n <- strsplit(step_name, '[_]') %>% .[[1]] %>% tail(1)
       prof_n <- stringr::str_pad(n_profiles_train, width = 3, pad = "0")
-      sprintf('fig_3/VM_shared_cache/%s_train_%s_profiles_experiment_%s.feather', task_name, prof_n, exp_n) #nhd_4250588_train_010_profiles_experiment_01.feather
+      sprintf('fig_3/VM_shared_cache/%s_train_%s_profiles_experiment_%s.csv', task_name, prof_n, exp_n) #nhd_4250588_train_010_profiles_experiment_01.csv
     },
     command = function(target_name, task_name, ...) {
       sprintf("subset_training_random(target_name, refined_obs, %s_pretraining_mask)", task_name)
@@ -58,7 +58,7 @@ create_multilake_data_plan <- function(nhd_ids, start, stop, n_profiles_train){
     target_name = function(task_name, step_name, ...) {
       exp_n <- strsplit(step_name, '[_]') %>% .[[1]] %>% tail(1)
       prof_n <- stringr::str_pad(n_profiles_train, width = 3, pad = "0")
-      sprintf('fig_3/VM_shared_cache/%s_train_%s_profiles_experiment_%s.feather', task_name, prof_n, exp_n) #nhd_4250588_train_010_profiles_experiment_01.feather
+      sprintf('fig_3/VM_shared_cache/%s_train_%s_profiles_experiment_%s.csv', task_name, prof_n, exp_n) #nhd_4250588_train_010_profiles_experiment_01.csv
     },
     command = function(target_name, task_name, ...) {
       sprintf("subset_training_random(target_name, refined_obs, %s_pretraining_mask)", task_name)
@@ -68,7 +68,7 @@ create_multilake_data_plan <- function(nhd_ids, start, stop, n_profiles_train){
   step7 <- create_task_step(
     step_name = 'subset_training',
     target_name = function(task_name, step_name, ...) {
-      sprintf('fig_3/VM_shared_cache/%s_train_all_profiles.feather', task_name)
+      sprintf('fig_3/VM_shared_cache/%s_train_all_profiles.csv', task_name)
     },
     command = function(target_name, task_name, ...) {
       sprintf("subset_training(target_name, refined_obs, %s_pretraining_mask)", task_name)
@@ -78,7 +78,7 @@ create_multilake_data_plan <- function(nhd_ids, start, stop, n_profiles_train){
   step8 <- create_task_step(
     step_name = 'subset_testing',
     target_name = function(task_name, step_name, ...) {
-      sprintf('fig_3/VM_shared_cache/%s_test_all_profiles.feather', task_name)
+      sprintf('fig_3/VM_shared_cache/%s_test_all_profiles.csv', task_name)
     },
     command = function(target_name, task_name, ...) {
       sprintf("subset_testing(target_name, refined_obs, %s_pretraining_mask)", task_name)
@@ -113,8 +113,8 @@ create_multilake_model_plan <- function(nhd_ids, experiment = "random_01", n_pro
     command = function(target_name, task_name, step_name, ...) {
       exp_n <- strsplit(step_name, '[_]') %>% .[[1]] %>% tail(1)
       prof_n <- stringr::str_pad(n_profiles_train, width = 3, pad = "0")
-      train_file <- sprintf('/media/sf_VM_shared_cache/%s_train_%s_profiles_experiment_%s.feather', task_name, prof_n, exp_n)
-      test_file <- sprintf('/media/sf_VM_shared_cache/%s_test_all_profiles.feather', task_name)
+      train_file <- sprintf('/media/sf_VM_shared_cache/%s_train_%s_profiles_experiment_%s.csv', task_name, prof_n, exp_n)
+      test_file <- sprintf('/media/sf_VM_shared_cache/%s_test_all_profiles.csv', task_name)
       nml_file <- sprintf('/media/sf_VM_shared_cache/%s_nml.nml', task_name)
       driver_file <- sprintf('/media/sf_VM_shared_cache/%s_meteo.csv', task_name)
       sprintf("run_optim_glm(driver_file = '%s',\n      nml_file = '%s',\n      train_file = '%s',\n      test_file = '%s',\n      sheets_id = %s)",

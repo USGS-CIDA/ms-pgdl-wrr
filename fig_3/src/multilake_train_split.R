@@ -18,13 +18,16 @@ subset_training_random <- function(filepath, obs_data, test_mask){
   prof_n <- name_details[4] %>% as.numeric()
   site_id <- paste0('nhd_', name_details[2])
   random_seed <- exp_n + as.numeric(name_details[2]) + prof_n# combo of experiment number, number of profiles, and nhd_id as a numeric
-  non_test_obs <- obs_data %>% filter(nhd_id == site_id) %>% arrange(desc(date))  %>% filter(date < test_mask$mask_start | date > test_mask$mask_end)
+
+  non_test_obs <- obs_data %>% filter(nhd_id == site_id) %>% arrange(desc(date)) %>% filter(date < test_mask$mask_start | date > test_mask$mask_end) %>%
+    group_by(nhd_id, date, depth) %>% summarize(temp = mean(temp, na.rm = TRUE))
 
   set.seed(random_seed)
   train_dates <- non_test_obs %>% pull(date) %>% unique() %>% sample(size = prof_n, replace = FALSE)
 
   non_test_obs %>% filter(date %in% train_dates) %>% arrange(date) %>%
-    feather::write_feather(filepath)
+    select(DateTime = date, Depth = depth, temp) %>%
+    readr::write_csv(filepath)
 }
 
 subset_training <- function(filepath, obs_data, test_mask){
@@ -34,15 +37,19 @@ subset_training <- function(filepath, obs_data, test_mask){
   site_id <- paste0('nhd_', name_details[2])
 
   obs_data %>% filter(nhd_id == site_id) %>% arrange(desc(date))  %>% filter(date < test_mask$mask_start | date > test_mask$mask_end) %>% arrange(date) %>%
-    feather::write_feather(filepath)
+    group_by(nhd_id, date, depth) %>% summarize(temp = mean(temp, na.rm = TRUE)) %>%
+    select(DateTime = date, Depth = depth, temp) %>%
+    readr::write_csv(filepath)
 }
 
 subset_testing <- function(filepath, obs_data, test_mask){
   name_details <- basename(filepath) %>% strsplit('[_]') %>% .[[1]]
   site_id <- paste0('nhd_', name_details[2])
 
-  test_obs <- obs_data %>% filter(nhd_id == site_id) %>% arrange(desc(date)) %>% filter(date >= test_mask$mask_start & date <= test_mask$mask_end) %>% arrange(date) %>%
-    feather::write_feather(filepath)
+  test_obs <- obs_data %>% filter(nhd_id == site_id) %>% arrange(desc(date)) %>% filter(date >= test_mask$mask_start & date <= test_mask$mask_end) %>% arrange(date) %>% arrange(date) %>%
+    group_by(nhd_id, date, depth) %>% summarize(temp = mean(temp, na.rm = TRUE)) %>%
+    select(DateTime = date, Depth = depth, temp) %>%
+    readr::write_csv(filepath)
 }
 
 
