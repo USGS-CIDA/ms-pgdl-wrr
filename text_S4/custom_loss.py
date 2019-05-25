@@ -222,13 +222,12 @@ def calculate_vapour_pressure_saturated(temp):
 
     Args:
         temp (n_days): Air temperatures, assumed to equal water temperatures
-            at air-water interface (degC)
+            if at air-water interface (degC)
 
     Returns:
         (n_days) Saturated vapour pressures of air (mb)
     """
-    #return tf.exp((9.28603523 - (2332.37885/(temp + 273.15)) * np.log(10))) # wrong
-    return tf.exp((9.28603523 - (2332.37885/(temp + 273.15))) * np.log(10)) # right
+    return tf.exp((9.28603523 - (2332.37885/(temp + 273.15))) * np.log(10))
 
 def calculate_wind_speed_10m(ws, ref_height=2.):
     """Estimate the wind speed at 10m above the lake surface
