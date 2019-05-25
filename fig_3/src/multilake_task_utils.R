@@ -130,7 +130,7 @@ create_multilake_model_plan <- function(nhd_ids, experiment = "random_01", n_pro
       sprintf('%s_%s', task_name, step_name)
     },
     command = function(target_name, task_name, step_name, ...) {
-      sprintf("post_results_sheet(optim_results = %s,\n      sheets_id = %s)",
+      sprintf("post_results_sheet(target_name, results_df = %s,\n      sheets_id = %s)",
               sprintf('%s_%s', task_name, step1_name), sheets_id)
     }
   )
