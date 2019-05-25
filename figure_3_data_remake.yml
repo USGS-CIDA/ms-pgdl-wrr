@@ -6,6 +6,7 @@ packages:
   - feather
   - dplyr
   - scipiper
+  - googlesheets
 
 
 target_default: multilake_files
@@ -20,7 +21,8 @@ sources:
 targets:
   multilake_files:
     depends:
-      - multilake_data_tasks.yml
+      - fig_3/out/figure3_pretraining_masks.feather
+      - fig_3/out/figure3_model_01_results.feather
 
 
 # read in all obs temp data
@@ -44,9 +46,14 @@ targets:
     command: create_multilake_data_plan(lakes_to_model,
       start = I("1979-04-01"), stop = I("2018-12-20"), n_profiles_train = I(10))
 
-  multilake_model_task_plan:
+  model_results_sheet_id:
+    command: gs_title(I("revision_Figure_3_GLM_results"))
+
+  multilake_model_task_plan_01:
     command: create_multilake_model_plan(lakes_to_model,
-      start = I("1979-04-01"), stop = I("2018-12-20"))
+      experiment = I("random_01"),
+      n_profiles_train = I(10),
+      sheets_id = I("model_results_sheet_id"))
 
   multilake_data_tasks.yml:
     command: create_task_makefile(
@@ -56,12 +63,18 @@ targets:
       final_targets = I("fig_3/out/figure3_pretraining_masks.feather"),
       finalize_funs = I('create_masks_feather'))
 
+  multilake_model_tasks_01.yml: # also include multilake data remake?
+    command: create_task_makefile(
+      task_plan = multilake_model_task_plan_01,
+      makefile = target_name,
+      packages = I("glmtools"),
+      include = I("figure_3_data_remake.yml"),
+      final_targets = I("fig_3/out/figure3_model_01_results.feather"),
+      finalize_funs = I("combine_model_results_feather"))
+
   fig_3/out/figure3_pretraining_masks.feather:
     command: scmake(remake_file = 'multilake_data_tasks.yml')
-  multilake_model_tasks.yml:
-    command: create_task_makefile(
-      task_plan = multilake_model_task_plan,
-      makefile = target_name,
-      include = 'multilake_data_tasks.yml',
-      final_targets = I("fig_3/out/??"),
-      finalize_funs = I('???'))
+
+  fig_3/out/figure3_model_01_results.feather:
+    command: loop_tasks(multilake_model_task_plan_01, "multilake_model_tasks_01.yml")
+

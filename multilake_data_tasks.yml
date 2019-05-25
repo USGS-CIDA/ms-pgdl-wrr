@@ -25,8 +25,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_10596466'))
 
-  nhd_10596466_nml:
-    command: get_set_base_nml(I('nhd_10596466'),
+  fig_3/VM_shared_cache/nhd_10596466_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_10596466'),
       driver = 'fig_3/VM_shared_cache/nhd_10596466_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -62,8 +62,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1097324'))
 
-  nhd_1097324_nml:
-    command: get_set_base_nml(I('nhd_1097324'),
+  fig_3/VM_shared_cache/nhd_1097324_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1097324'),
       driver = 'fig_3/VM_shared_cache/nhd_1097324_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -99,8 +99,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1099052'))
 
-  nhd_1099052_nml:
-    command: get_set_base_nml(I('nhd_1099052'),
+  fig_3/VM_shared_cache/nhd_1099052_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1099052'),
       driver = 'fig_3/VM_shared_cache/nhd_1099052_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -136,8 +136,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1099136'))
 
-  nhd_1099136_nml:
-    command: get_set_base_nml(I('nhd_1099136'),
+  fig_3/VM_shared_cache/nhd_1099136_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1099136'),
       driver = 'fig_3/VM_shared_cache/nhd_1099136_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -173,8 +173,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1099172'))
 
-  nhd_1099172_nml:
-    command: get_set_base_nml(I('nhd_1099172'),
+  fig_3/VM_shared_cache/nhd_1099172_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1099172'),
       driver = 'fig_3/VM_shared_cache/nhd_1099172_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -210,8 +210,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1099240'))
 
-  nhd_1099240_nml:
-    command: get_set_base_nml(I('nhd_1099240'),
+  fig_3/VM_shared_cache/nhd_1099240_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1099240'),
       driver = 'fig_3/VM_shared_cache/nhd_1099240_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -247,8 +247,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1099282'))
 
-  nhd_1099282_nml:
-    command: get_set_base_nml(I('nhd_1099282'),
+  fig_3/VM_shared_cache/nhd_1099282_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1099282'),
       driver = 'fig_3/VM_shared_cache/nhd_1099282_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -284,8 +284,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1099420'))
 
-  nhd_1099420_nml:
-    command: get_set_base_nml(I('nhd_1099420'),
+  fig_3/VM_shared_cache/nhd_1099420_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1099420'),
       driver = 'fig_3/VM_shared_cache/nhd_1099420_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -321,8 +321,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1099430'))
 
-  nhd_1099430_nml:
-    command: get_set_base_nml(I('nhd_1099430'),
+  fig_3/VM_shared_cache/nhd_1099430_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1099430'),
       driver = 'fig_3/VM_shared_cache/nhd_1099430_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -358,8 +358,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1099432'))
 
-  nhd_1099432_nml:
-    command: get_set_base_nml(I('nhd_1099432'),
+  fig_3/VM_shared_cache/nhd_1099432_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1099432'),
       driver = 'fig_3/VM_shared_cache/nhd_1099432_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -395,8 +395,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1099450'))
 
-  nhd_1099450_nml:
-    command: get_set_base_nml(I('nhd_1099450'),
+  fig_3/VM_shared_cache/nhd_1099450_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1099450'),
       driver = 'fig_3/VM_shared_cache/nhd_1099450_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -432,8 +432,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1099476'))
 
-  nhd_1099476_nml:
-    command: get_set_base_nml(I('nhd_1099476'),
+  fig_3/VM_shared_cache/nhd_1099476_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1099476'),
       driver = 'fig_3/VM_shared_cache/nhd_1099476_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -469,8 +469,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1099526'))
 
-  nhd_1099526_nml:
-    command: get_set_base_nml(I('nhd_1099526'),
+  fig_3/VM_shared_cache/nhd_1099526_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1099526'),
       driver = 'fig_3/VM_shared_cache/nhd_1099526_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -506,8 +506,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1100962'))
 
-  nhd_1100962_nml:
-    command: get_set_base_nml(I('nhd_1100962'),
+  fig_3/VM_shared_cache/nhd_1100962_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1100962'),
       driver = 'fig_3/VM_shared_cache/nhd_1100962_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -543,8 +543,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1101504'))
 
-  nhd_1101504_nml:
-    command: get_set_base_nml(I('nhd_1101504'),
+  fig_3/VM_shared_cache/nhd_1101504_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1101504'),
       driver = 'fig_3/VM_shared_cache/nhd_1101504_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -580,8 +580,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1101506'))
 
-  nhd_1101506_nml:
-    command: get_set_base_nml(I('nhd_1101506'),
+  fig_3/VM_shared_cache/nhd_1101506_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1101506'),
       driver = 'fig_3/VM_shared_cache/nhd_1101506_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -617,8 +617,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1101544'))
 
-  nhd_1101544_nml:
-    command: get_set_base_nml(I('nhd_1101544'),
+  fig_3/VM_shared_cache/nhd_1101544_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1101544'),
       driver = 'fig_3/VM_shared_cache/nhd_1101544_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -654,8 +654,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1101590'))
 
-  nhd_1101590_nml:
-    command: get_set_base_nml(I('nhd_1101590'),
+  fig_3/VM_shared_cache/nhd_1101590_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1101590'),
       driver = 'fig_3/VM_shared_cache/nhd_1101590_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -691,8 +691,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1101616'))
 
-  nhd_1101616_nml:
-    command: get_set_base_nml(I('nhd_1101616'),
+  fig_3/VM_shared_cache/nhd_1101616_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1101616'),
       driver = 'fig_3/VM_shared_cache/nhd_1101616_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -728,8 +728,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1101636'))
 
-  nhd_1101636_nml:
-    command: get_set_base_nml(I('nhd_1101636'),
+  fig_3/VM_shared_cache/nhd_1101636_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1101636'),
       driver = 'fig_3/VM_shared_cache/nhd_1101636_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -765,8 +765,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1101684'))
 
-  nhd_1101684_nml:
-    command: get_set_base_nml(I('nhd_1101684'),
+  fig_3/VM_shared_cache/nhd_1101684_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1101684'),
       driver = 'fig_3/VM_shared_cache/nhd_1101684_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -802,8 +802,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1101754'))
 
-  nhd_1101754_nml:
-    command: get_set_base_nml(I('nhd_1101754'),
+  fig_3/VM_shared_cache/nhd_1101754_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1101754'),
       driver = 'fig_3/VM_shared_cache/nhd_1101754_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -839,8 +839,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1101778'))
 
-  nhd_1101778_nml:
-    command: get_set_base_nml(I('nhd_1101778'),
+  fig_3/VM_shared_cache/nhd_1101778_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1101778'),
       driver = 'fig_3/VM_shared_cache/nhd_1101778_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -876,8 +876,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1101812'))
 
-  nhd_1101812_nml:
-    command: get_set_base_nml(I('nhd_1101812'),
+  fig_3/VM_shared_cache/nhd_1101812_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1101812'),
       driver = 'fig_3/VM_shared_cache/nhd_1101812_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -913,8 +913,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1101864'))
 
-  nhd_1101864_nml:
-    command: get_set_base_nml(I('nhd_1101864'),
+  fig_3/VM_shared_cache/nhd_1101864_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1101864'),
       driver = 'fig_3/VM_shared_cache/nhd_1101864_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -950,8 +950,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1101938'))
 
-  nhd_1101938_nml:
-    command: get_set_base_nml(I('nhd_1101938'),
+  fig_3/VM_shared_cache/nhd_1101938_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1101938'),
       driver = 'fig_3/VM_shared_cache/nhd_1101938_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -987,8 +987,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1101942'))
 
-  nhd_1101942_nml:
-    command: get_set_base_nml(I('nhd_1101942'),
+  fig_3/VM_shared_cache/nhd_1101942_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1101942'),
       driver = 'fig_3/VM_shared_cache/nhd_1101942_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -1024,8 +1024,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1102086'))
 
-  nhd_1102086_nml:
-    command: get_set_base_nml(I('nhd_1102086'),
+  fig_3/VM_shared_cache/nhd_1102086_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1102086'),
       driver = 'fig_3/VM_shared_cache/nhd_1102086_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -1061,8 +1061,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1102088'))
 
-  nhd_1102088_nml:
-    command: get_set_base_nml(I('nhd_1102088'),
+  fig_3/VM_shared_cache/nhd_1102088_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1102088'),
       driver = 'fig_3/VM_shared_cache/nhd_1102088_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -1098,8 +1098,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1102284'))
 
-  nhd_1102284_nml:
-    command: get_set_base_nml(I('nhd_1102284'),
+  fig_3/VM_shared_cache/nhd_1102284_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1102284'),
       driver = 'fig_3/VM_shared_cache/nhd_1102284_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -1135,8 +1135,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_1102366'))
 
-  nhd_1102366_nml:
-    command: get_set_base_nml(I('nhd_1102366'),
+  fig_3/VM_shared_cache/nhd_1102366_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_1102366'),
       driver = 'fig_3/VM_shared_cache/nhd_1102366_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -1172,8 +1172,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_120051922'))
 
-  nhd_120051922_nml:
-    command: get_set_base_nml(I('nhd_120051922'),
+  fig_3/VM_shared_cache/nhd_120051922_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_120051922'),
       driver = 'fig_3/VM_shared_cache/nhd_120051922_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -1209,8 +1209,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_120052022'))
 
-  nhd_120052022_nml:
-    command: get_set_base_nml(I('nhd_120052022'),
+  fig_3/VM_shared_cache/nhd_120052022_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_120052022'),
       driver = 'fig_3/VM_shared_cache/nhd_120052022_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -1246,8 +1246,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_120052233'))
 
-  nhd_120052233_nml:
-    command: get_set_base_nml(I('nhd_120052233'),
+  fig_3/VM_shared_cache/nhd_120052233_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_120052233'),
       driver = 'fig_3/VM_shared_cache/nhd_120052233_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -1283,8 +1283,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_120052351'))
 
-  nhd_120052351_nml:
-    command: get_set_base_nml(I('nhd_120052351'),
+  fig_3/VM_shared_cache/nhd_120052351_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_120052351'),
       driver = 'fig_3/VM_shared_cache/nhd_120052351_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -1320,8 +1320,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_120052587'))
 
-  nhd_120052587_nml:
-    command: get_set_base_nml(I('nhd_120052587'),
+  fig_3/VM_shared_cache/nhd_120052587_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_120052587'),
       driver = 'fig_3/VM_shared_cache/nhd_120052587_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -1357,8 +1357,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_120053694'))
 
-  nhd_120053694_nml:
-    command: get_set_base_nml(I('nhd_120053694'),
+  fig_3/VM_shared_cache/nhd_120053694_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_120053694'),
       driver = 'fig_3/VM_shared_cache/nhd_120053694_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -1394,8 +1394,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_12160852'))
 
-  nhd_12160852_nml:
-    command: get_set_base_nml(I('nhd_12160852'),
+  fig_3/VM_shared_cache/nhd_12160852_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_12160852'),
       driver = 'fig_3/VM_shared_cache/nhd_12160852_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -1431,8 +1431,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_12162854'))
 
-  nhd_12162854_nml:
-    command: get_set_base_nml(I('nhd_12162854'),
+  fig_3/VM_shared_cache/nhd_12162854_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_12162854'),
       driver = 'fig_3/VM_shared_cache/nhd_12162854_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -1468,8 +1468,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_13290898'))
 
-  nhd_13290898_nml:
-    command: get_set_base_nml(I('nhd_13290898'),
+  fig_3/VM_shared_cache/nhd_13290898_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_13290898'),
       driver = 'fig_3/VM_shared_cache/nhd_13290898_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -1505,8 +1505,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_13293262'))
 
-  nhd_13293262_nml:
-    command: get_set_base_nml(I('nhd_13293262'),
+  fig_3/VM_shared_cache/nhd_13293262_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_13293262'),
       driver = 'fig_3/VM_shared_cache/nhd_13293262_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -1542,8 +1542,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_13294464'))
 
-  nhd_13294464_nml:
-    command: get_set_base_nml(I('nhd_13294464'),
+  fig_3/VM_shared_cache/nhd_13294464_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_13294464'),
       driver = 'fig_3/VM_shared_cache/nhd_13294464_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -1579,8 +1579,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_13294928'))
 
-  nhd_13294928_nml:
-    command: get_set_base_nml(I('nhd_13294928'),
+  fig_3/VM_shared_cache/nhd_13294928_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_13294928'),
       driver = 'fig_3/VM_shared_cache/nhd_13294928_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -1616,8 +1616,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_13343906'))
 
-  nhd_13343906_nml:
-    command: get_set_base_nml(I('nhd_13343906'),
+  fig_3/VM_shared_cache/nhd_13343906_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_13343906'),
       driver = 'fig_3/VM_shared_cache/nhd_13343906_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -1653,8 +1653,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_13344056'))
 
-  nhd_13344056_nml:
-    command: get_set_base_nml(I('nhd_13344056'),
+  fig_3/VM_shared_cache/nhd_13344056_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_13344056'),
       driver = 'fig_3/VM_shared_cache/nhd_13344056_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -1690,8 +1690,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_13344170'))
 
-  nhd_13344170_nml:
-    command: get_set_base_nml(I('nhd_13344170'),
+  fig_3/VM_shared_cache/nhd_13344170_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_13344170'),
       driver = 'fig_3/VM_shared_cache/nhd_13344170_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -1727,8 +1727,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_13344210'))
 
-  nhd_13344210_nml:
-    command: get_set_base_nml(I('nhd_13344210'),
+  fig_3/VM_shared_cache/nhd_13344210_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_13344210'),
       driver = 'fig_3/VM_shared_cache/nhd_13344210_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -1764,8 +1764,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_13344284'))
 
-  nhd_13344284_nml:
-    command: get_set_base_nml(I('nhd_13344284'),
+  fig_3/VM_shared_cache/nhd_13344284_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_13344284'),
       driver = 'fig_3/VM_shared_cache/nhd_13344284_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -1801,8 +1801,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_13393533'))
 
-  nhd_13393533_nml:
-    command: get_set_base_nml(I('nhd_13393533'),
+  fig_3/VM_shared_cache/nhd_13393533_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_13393533'),
       driver = 'fig_3/VM_shared_cache/nhd_13393533_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -1838,8 +1838,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_13393567'))
 
-  nhd_13393567_nml:
-    command: get_set_base_nml(I('nhd_13393567'),
+  fig_3/VM_shared_cache/nhd_13393567_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_13393567'),
       driver = 'fig_3/VM_shared_cache/nhd_13393567_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -1875,8 +1875,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_13631637'))
 
-  nhd_13631637_nml:
-    command: get_set_base_nml(I('nhd_13631637'),
+  fig_3/VM_shared_cache/nhd_13631637_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_13631637'),
       driver = 'fig_3/VM_shared_cache/nhd_13631637_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -1912,8 +1912,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_14783883'))
 
-  nhd_14783883_nml:
-    command: get_set_base_nml(I('nhd_14783883'),
+  fig_3/VM_shared_cache/nhd_14783883_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_14783883'),
       driver = 'fig_3/VM_shared_cache/nhd_14783883_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -1949,8 +1949,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_2349188'))
 
-  nhd_2349188_nml:
-    command: get_set_base_nml(I('nhd_2349188'),
+  fig_3/VM_shared_cache/nhd_2349188_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_2349188'),
       driver = 'fig_3/VM_shared_cache/nhd_2349188_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -1986,8 +1986,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_2349198'))
 
-  nhd_2349198_nml:
-    command: get_set_base_nml(I('nhd_2349198'),
+  fig_3/VM_shared_cache/nhd_2349198_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_2349198'),
       driver = 'fig_3/VM_shared_cache/nhd_2349198_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -2023,8 +2023,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_2353946'))
 
-  nhd_2353946_nml:
-    command: get_set_base_nml(I('nhd_2353946'),
+  fig_3/VM_shared_cache/nhd_2353946_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_2353946'),
       driver = 'fig_3/VM_shared_cache/nhd_2353946_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -2060,8 +2060,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_2384584'))
 
-  nhd_2384584_nml:
-    command: get_set_base_nml(I('nhd_2384584'),
+  fig_3/VM_shared_cache/nhd_2384584_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_2384584'),
       driver = 'fig_3/VM_shared_cache/nhd_2384584_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -2097,8 +2097,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_2384766'))
 
-  nhd_2384766_nml:
-    command: get_set_base_nml(I('nhd_2384766'),
+  fig_3/VM_shared_cache/nhd_2384766_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_2384766'),
       driver = 'fig_3/VM_shared_cache/nhd_2384766_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -2134,8 +2134,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_2385444'))
 
-  nhd_2385444_nml:
-    command: get_set_base_nml(I('nhd_2385444'),
+  fig_3/VM_shared_cache/nhd_2385444_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_2385444'),
       driver = 'fig_3/VM_shared_cache/nhd_2385444_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -2171,8 +2171,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_2385496'))
 
-  nhd_2385496_nml:
-    command: get_set_base_nml(I('nhd_2385496'),
+  fig_3/VM_shared_cache/nhd_2385496_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_2385496'),
       driver = 'fig_3/VM_shared_cache/nhd_2385496_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -2208,8 +2208,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_2385648'))
 
-  nhd_2385648_nml:
-    command: get_set_base_nml(I('nhd_2385648'),
+  fig_3/VM_shared_cache/nhd_2385648_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_2385648'),
       driver = 'fig_3/VM_shared_cache/nhd_2385648_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -2245,8 +2245,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_2647582'))
 
-  nhd_2647582_nml:
-    command: get_set_base_nml(I('nhd_2647582'),
+  fig_3/VM_shared_cache/nhd_2647582_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_2647582'),
       driver = 'fig_3/VM_shared_cache/nhd_2647582_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -2282,8 +2282,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_2648034'))
 
-  nhd_2648034_nml:
-    command: get_set_base_nml(I('nhd_2648034'),
+  fig_3/VM_shared_cache/nhd_2648034_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_2648034'),
       driver = 'fig_3/VM_shared_cache/nhd_2648034_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -2319,8 +2319,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_2723765'))
 
-  nhd_2723765_nml:
-    command: get_set_base_nml(I('nhd_2723765'),
+  fig_3/VM_shared_cache/nhd_2723765_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_2723765'),
       driver = 'fig_3/VM_shared_cache/nhd_2723765_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -2356,8 +2356,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_2723803'))
 
-  nhd_2723803_nml:
-    command: get_set_base_nml(I('nhd_2723803'),
+  fig_3/VM_shared_cache/nhd_2723803_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_2723803'),
       driver = 'fig_3/VM_shared_cache/nhd_2723803_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -2393,8 +2393,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_2723871'))
 
-  nhd_2723871_nml:
-    command: get_set_base_nml(I('nhd_2723871'),
+  fig_3/VM_shared_cache/nhd_2723871_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_2723871'),
       driver = 'fig_3/VM_shared_cache/nhd_2723871_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -2430,8 +2430,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_4250586'))
 
-  nhd_4250586_nml:
-    command: get_set_base_nml(I('nhd_4250586'),
+  fig_3/VM_shared_cache/nhd_4250586_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_4250586'),
       driver = 'fig_3/VM_shared_cache/nhd_4250586_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -2467,8 +2467,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_4250588'))
 
-  nhd_4250588_nml:
-    command: get_set_base_nml(I('nhd_4250588'),
+  fig_3/VM_shared_cache/nhd_4250588_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_4250588'),
       driver = 'fig_3/VM_shared_cache/nhd_4250588_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
@@ -2504,8 +2504,8 @@ targets:
     command: get_write_driver(driver = target_name,
       I('nhd_9022741'))
 
-  nhd_9022741_nml:
-    command: get_set_base_nml(I('nhd_9022741'),
+  fig_3/VM_shared_cache/nhd_9022741_nml.nml:
+    command: get_write_base_nml(target_name, I('nhd_9022741'),
       driver = 'fig_3/VM_shared_cache/nhd_9022741_meteo.csv',
       start = I('1979-04-01'),
       stop = I('2018-12-20'),

@@ -38,3 +38,11 @@ get_set_base_nml <- function(nhd_id, driverpath, ...){
   return(nml)
 
 }
+
+get_write_base_nml <- function(nml_path, nhd_id, driverpath, ...){
+
+  nml <- get_set_base_nml(nhd_id = nhd_id, driverpath = driverpath, ...)
+
+  glmtools::write_nml(glm_nml = nml, nml_path)
+
+}

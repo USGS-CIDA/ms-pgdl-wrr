@@ -12,10 +12,10 @@ create_multilake_data_plan <- function(nhd_ids, start, stop, n_profiles_train){
   step2 <- create_task_step(
     step_name = 'get_set_nml',
     target_name = function(task_name, step_name, ...) {
-      sprintf('%s_nml', task_name)
+      sprintf('fig_3/VM_shared_cache/%s_nml.nml', task_name)
     },
     command = function(target_name, task_name, ...) {
-      sprintf("get_set_base_nml(I('%s'),\n      driver = 'fig_3/VM_shared_cache/%s_meteo.csv',\n      start = I('%s'),\n      stop = I('%s'),\n      dt = I(3600),\n      nsave=I(24))", task_name, task_name, start, stop)
+      sprintf("get_write_base_nml(target_name, I('%s'),\n      driver = 'fig_3/VM_shared_cache/%s_meteo.csv',\n      start = I('%s'),\n      stop = I('%s'),\n      dt = I(3600),\n      nsave=I(24))", task_name, task_name, start, stop)
     }
   )
 
@@ -98,5 +98,30 @@ create_multilake_data_plan <- function(nhd_ids, start, stop, n_profiles_train){
 
   task_plan <- create_task_plan(task_names = nhd_ids, list(step1, step2, step3, step4, step5, step6, step7, step8, step9),
                                 final_steps='calc_test_masks', add_complete = FALSE)
+  return(task_plan)
+}
+
+create_multilake_model_plan <- function(nhd_ids, experiment = "random_01", n_profiles_train, sheets_id){
+
+  step1_name <- sprintf('optim_glm_subset_%s', experiment)
+
+  step1 <- create_task_step(
+    step_name = step1_name,
+    target_name = function(task_name, step_name, ...) {
+      sprintf('%s_%s', task_name, step_name)
+    },
+    command = function(target_name, task_name, step_name, ...) {
+      exp_n <- strsplit(step_name, '[_]') %>% .[[1]] %>% tail(1)
+      prof_n <- stringr::str_pad(n_profiles_train, width = 3, pad = "0")
+      train_file <- sprintf('fig_3/VM_shared_cache/%s_train_%s_profiles_experiment_%s.feather', task_name, prof_n, exp_n)
+      test_file <- sprintf('fig_3/VM_shared_cache/%s_test_all_profiles.feather', task_name)
+      nml_file <- sprintf('fig_3/VM_shared_cache/%s_nml.nml', task_name)
+      driver_file <- sprintf('fig_3/VM_shared_cache/%s_meteo.csv', task_name)
+      sprintf("run_optim_glm(driver_file = '%s',\n      nml_file = '%s',\n      train_file = '%s',\n      test_file = '%s',\n      sheets_id = %s)",
+              driver_file, nml_file, train_file, test_file, sheets_id)
+    }
+  )
+  task_plan <- create_task_plan(task_names = nhd_ids, list(step1),
+                                final_steps = step1_name, add_complete = FALSE)
   return(task_plan)
 }

@@ -30,3 +30,8 @@ export_test_train <- function(filepath, site_id, obs, num_train_dates){
     write_feather(path = filepath)
 }
 
+combine_model_results_feather <- function(filepath, ...){
+  results_in <- list(...)
+  results_out <- Reduce(function(x, y) merge(x, y, all=TRUE), results_in)
+  feather::write_feather(results_out, path = filepath)
+}
