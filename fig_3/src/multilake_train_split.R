@@ -25,7 +25,7 @@ subset_training_random <- function(filepath, obs_data, test_mask){
   set.seed(random_seed)
   train_dates <- non_test_obs %>% pull(date) %>% unique() %>% sample(size = prof_n, replace = FALSE)
 
-  non_test_obs %>% filter(date %in% train_dates) %>% arrange(date) %>%
+  non_test_obs %>% filter(date %in% train_dates) %>% arrange(date) %>% ungroup() %>%
     select(DateTime = date, Depth = depth, temp) %>%
     readr::write_csv(filepath)
 }
@@ -37,7 +37,7 @@ subset_training <- function(filepath, obs_data, test_mask){
   site_id <- paste0('nhd_', name_details[2])
 
   obs_data %>% filter(nhd_id == site_id) %>% arrange(desc(date))  %>% filter(date < test_mask$mask_start | date > test_mask$mask_end) %>% arrange(date) %>%
-    group_by(nhd_id, date, depth) %>% summarize(temp = mean(temp, na.rm = TRUE)) %>%
+    group_by(nhd_id, date, depth) %>% summarize(temp = mean(temp, na.rm = TRUE)) %>% ungroup() %>%
     select(DateTime = date, Depth = depth, temp) %>%
     readr::write_csv(filepath)
 }
@@ -46,8 +46,8 @@ subset_testing <- function(filepath, obs_data, test_mask){
   name_details <- basename(filepath) %>% strsplit('[_]') %>% .[[1]]
   site_id <- paste0('nhd_', name_details[2])
 
-  test_obs <- obs_data %>% filter(nhd_id == site_id) %>% arrange(desc(date)) %>% filter(date >= test_mask$mask_start & date <= test_mask$mask_end) %>% arrange(date) %>% arrange(date) %>%
-    group_by(nhd_id, date, depth) %>% summarize(temp = mean(temp, na.rm = TRUE)) %>%
+  test_obs <- obs_data %>% filter(nhd_id == site_id) %>% arrange(desc(date)) %>% filter(date >= test_mask$mask_start & date <= test_mask$mask_end) %>% arrange(date) %>%
+    group_by(nhd_id, date, depth) %>% summarize(temp = mean(temp, na.rm = TRUE)) %>% ungroup() %>%
     select(DateTime = date, Depth = depth, temp) %>%
     readr::write_csv(filepath)
 }
