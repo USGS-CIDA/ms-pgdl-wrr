@@ -1,18 +1,19 @@
-run_optim_glm <- function(driver_file, nml_file, train_file, test_file, sheets_id){
+run_optim_glm <- function(driver_file, nml_file, train_file, test_file){
 
   sim_dir <- '.sim_raw'
   on.exit(unlink(sim_dir, recursive = TRUE))
 
-  results_df <- optim_multilake_glm(driver_file, nml_file, train_file, test_file, sim_dir)
-  post_to_results_sheets(results_df, sheets_id)
-
+  results_df <- optim_multilake_glm(driver_file, nml_file, train_file, test_file, sim_dir) %>%
+    select(nhd_id, train_rmse, test_rmse, everything())
 
   return(results_df)
 }
 
-post_to_results_sheets <- function(results_df, sheets_id){
-  gs_anchor <- gs_read(sheets_id) %>% nrow %>% .+1 %>% sprintf("A%s", .)
-  gs_edit_cells(sheets_id, ws = 1, input = results_df, anchor = gs_anchor, byrow = TRUE)
+post_results_sheet <- function(optim_results, sheets_id){
+  n_existing_rows <- gs_read(sheets_id) %>% nrow
+  gs_anchor <-  sprintf("A%s", (n_existing_rows+1))
+  gs_edit_cells(sheets_id, ws = 1, input = optim_results, anchor = gs_anchor,
+                byrow = TRUE, col_names = FALSE)
 }
 
 
@@ -40,19 +41,19 @@ optim_multilake_glm <- function(driver_file, nml_file, train_file, test_file, si
 
   # optimize initial parameters
   out = optim(fn = run_cal_simulation, par=initial_params, control=list(parscale=parscale),
-              train_csv_file = train_filepath, sim_dir = sim_dir, nml_obj = nml_obj)
+              train_filepath = train_filepath, sim_dir = sim_dir, nml_obj = nml_obj)
   results <- data.frame(as.list(out$par), train_rmse = out$value)
   results$test_rmse <- compare_to_field(sprintf('%s/output.nc', sim_dir),
                                         test_filepath,
                                         metric = 'water.temperature')
-  resutls$nhd_id <- nhd_id
+  results$nhd_id <- nhd_id
   unlink(sim_dir, recursive = TRUE)
 
   return(results)
 }
 
 
-
+quick_test <- TRUE
 run_cal_simulation <- function(par, train_filepath, sim_dir, nml_obj){
 
   nml_path <- paste0(sim_dir,'/glm2.nml')
@@ -60,8 +61,9 @@ run_cal_simulation <- function(par, train_filepath, sim_dir, nml_obj){
   write_nml(glm_nml = nml_obj, file = nml_path)
 
   rmse = tryCatch({
-    stop('forcing failure to test system')
+    if (!quick_test) stop('forcing failure to test system') # use one successful run
     sim = run_glm(sim_dir, verbose = FALSE)
+    quick_test <<- FALSE
     last_time <- glmtools::get_var(sprintf('%s/output.nc', sim_dir), 'wind') %>%
       tail(1) %>% pull(DateTime)
     if (last_time < as.Date(as.Date(get_nml_value(nml_obj, "stop")))){
