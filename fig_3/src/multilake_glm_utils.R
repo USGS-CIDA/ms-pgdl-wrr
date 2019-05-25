@@ -11,7 +11,8 @@ run_optim_glm <- function(driver_file, nml_file, train_file, test_file, sheets_i
 }
 
 post_to_results_sheets <- function(results_df, sheets_id){
-
+  gs_anchor <- gs_read(sheets_id) %>% nrow %>% .+1 %>% sprintf("A%s", .)
+  gs_edit_cells(sheets_id, ws = 1, input = results_df, anchor = gs_anchor, byrow = TRUE)
 }
 
 
@@ -59,6 +60,7 @@ run_cal_simulation <- function(par, train_filepath, sim_dir, nml_obj){
   write_nml(glm_nml = nml_obj, file = nml_path)
 
   rmse = tryCatch({
+    stop('forcing failure to test system')
     sim = run_glm(sim_dir, verbose = FALSE)
     last_time <- glmtools::get_var(sprintf('%s/output.nc', sim_dir), 'wind') %>%
       tail(1) %>% pull(DateTime)
