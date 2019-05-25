@@ -17,7 +17,7 @@ post_to_results_sheets <- function(results_df, sheets_id){
 
 optim_multilake_glm <- function(driver_file, nml_file, train_file, test_file, sim_dir){
 
-
+  nhd_id <- basename(driver_file) %>% strsplit('[_]') %>% .[[1]] %>% .[2] %>% sprintf('nhd_%s', .)
   dir.create(sim_dir)
   nml_obj <- read_nml(nml_file)
   cd_start <- get_nml_value(nml_obj, "cd")
@@ -35,8 +35,8 @@ optim_multilake_glm <- function(driver_file, nml_file, train_file, test_file, si
   # field_file <- file.path(tempdir(), 'field.csv')
   # readr::write_csv(field_data, field_file)
   #???
-  feather::read_feather(train_file) %>% readr::write_csv(sprintf('%s/train_data.csv', sim_dir))
-  feather::read_feather(test_file) %>% readr::write_csv(sprintf('%s/test_data.csv', sim_dir))
+  readr::read_csv(train_file) %>% select(DateTime = date, Depth = depth, temp) %>% readr::write_csv(sprintf('%s/train_data.csv', sim_dir))
+  readr::read_csv(test_file) %>% select(DateTime = date, Depth = depth, temp) %>% readr::write_csv(sprintf('%s/test_data.csv', sim_dir))
 
 
   initial_params = c('cd'=cd_start, coef_wind_stir=0.23, Kw = kw_start)
@@ -45,23 +45,14 @@ optim_multilake_glm <- function(driver_file, nml_file, train_file, test_file, si
   # optimize initial parameters
   out = optim(fn = run_cal_simulation, par=initial_params, control=list(parscale=parscale),
               train_csv_file = "train_data.csv", sim_dir = sim_dir, nml_obj = nml_obj)
-
-  train_rmse = out$value
-  test_rmse = glmtools::compare_to_field(
-    '.sim_raw/output.nc',
-    field_file = sprintf('multilake/out/%s_test.csv', nhd_id),
-    metric = 'water.temperature')
-  fit_stats <- list(nhd_id = nhd_id,
-                    train_rmse = out$value,
-                    test_rmse = test_rmse
-  )
-
-  cat(paste0(paste(nhd_id, train_rmse, test_rmse, Sys.time(), sep = '\t'),'\n'), file = 'multi_lake_runs.tsv', append = TRUE)
-  message('test rmse:', test_rmse, ' written to file...\n\n')
-
+  results <- data.frame(as.list(out$par), train_rmse = out$value)
+  results$test_rmse <- compare_to_field(sprintf('%s/output.nc', sim_dir),
+                                        sprintf('%s/test_data.csv', sim_dir),
+                                        metric = 'water.temperature')
+  resutls$nhd_id <- nhd_id
   unlink(sim_dir, recursive = TRUE)
 
-  return(fit_stats)
+  return(results)
 }
 
 
@@ -69,18 +60,18 @@ optim_multilake_glm <- function(driver_file, nml_file, train_file, test_file, si
 run_cal_simulation <- function(par, train_csv_file, sim_dir, nml_obj){
 
   nml_path <- paste0(sim_dir,'/glm2.nml')
-  nml <- set_nml(nml_obj, arg_list = as.list(par)) # custom param shifts
+  nml_obj <- set_nml(nml_obj, arg_list = as.list(par)) # custom param shifts
   write_nml(glm_nml = nml_obj, file = nml_path)
 
   rmse = tryCatch({
     sim = run_glm(sim_dir, verbose = FALSE)
     last_time <- glmtools::get_var(sprintf('%s/output.nc', sim_dir), 'wind') %>%
       tail(1) %>% pull(DateTime)
-    if (last_time < as.Date(stop)){
+    if (last_time < as.Date(as.Date(get_nml_value(nml_obj, "stop")))){
       stop('incomplete sim, ended on ', last_time)
     }
     rmse = compare_to_field(file.path(sim_dir, 'output.nc'),
-                            field_file = train_csv_file,
+                            field_file = file.path(sim_dir, train_csv_file),
                             metric = 'water.temperature')
   }, error = function(e){
     message(e$message)

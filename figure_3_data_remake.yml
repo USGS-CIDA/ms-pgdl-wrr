@@ -68,6 +68,7 @@ targets:
       task_plan = multilake_model_task_plan_01,
       makefile = target_name,
       packages = I("glmtools"),
+      sources = 'fig_3/src/multilake_glm_utils.R',
       include = I("figure_3_data_remake.yml"),
       final_targets = I("fig_3/out/figure3_model_01_results.feather"),
       finalize_funs = I("combine_model_results_feather"))
