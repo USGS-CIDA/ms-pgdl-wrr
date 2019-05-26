@@ -9,9 +9,15 @@ run_optim_glm <- function(driver_file, nml_file, train_file, test_file){
   return(results_df)
 }
 
-post_results_sheet <- function(optim_results, sheets_id, gs_anchor){
-  gs_edit_cells(sheets_id, ws = 1, input = optim_results, anchor = gs_anchor,
+post_results_sheet <- function(target_name, results_df, sheets_id, gs_anchor){
+
+  experiment_name <- target_name %>% strsplit('[_]') %>% .[[1]] %>% tail(-4L) %>% paste(collapse = '_')
+  results_df <- results_df %>% mutate(experiment_name = experiment_name, time = Sys.time()) %>%
+    select(nhd_id, experiment_name, everything(), time)
+  gs_edit_cells(sheets_id, ws = 1, input = as.vector(results_df), anchor = gs_anchor,
                 byrow = TRUE, col_names = FALSE)
+
+  select(results_df, -time)
 }
 
 
@@ -50,8 +56,6 @@ optim_multilake_glm <- function(driver_file, nml_file, train_file, test_file, si
   return(results)
 }
 
-
-quick_test <- TRUE
 run_cal_simulation <- function(par, train_filepath, sim_dir, nml_obj){
 
   nml_path <- paste0(sim_dir,'/glm2.nml')
@@ -59,9 +63,7 @@ run_cal_simulation <- function(par, train_filepath, sim_dir, nml_obj){
   write_nml(glm_nml = nml_obj, file = nml_path)
 
   rmse = tryCatch({
-    if (!quick_test) stop('forcing failure to test system') # use one successful run
     sim = run_glm(sim_dir, verbose = FALSE)
-    quick_test <<- FALSE
     last_time <- glmtools::get_var(sprintf('%s/output.nc', sim_dir), 'wind') %>%
       tail(1) %>% pull(DateTime)
     if (last_time < as.Date(as.Date(get_nml_value(nml_obj, "stop")))){
