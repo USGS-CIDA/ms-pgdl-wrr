@@ -103,6 +103,9 @@ create_multilake_data_plan <- function(nhd_ids, start, stop, n_profiles_train){
 
 create_multilake_model_plan <- function(nhd_ids, experiment = "random_01", n_profiles_train, sheets_id){
 
+  nhd_ids <- unique(nhd_ids)
+  sheet_anchors <- data.frame(id = nhd_ids) %>% mutate(gs_anchor = sprintf("A%s", row_number()+1))
+
   step1_name <- sprintf('optim_glm_subset_%s', experiment)
 
   step2_name <- sprintf('optim_posted_subset_%s', experiment)
@@ -130,8 +133,9 @@ create_multilake_model_plan <- function(nhd_ids, experiment = "random_01", n_pro
       sprintf('%s_%s', task_name, step_name)
     },
     command = function(target_name, task_name, step_name, ...) {
-      sprintf("post_results_sheet(target_name, results_df = %s,\n      sheets_id = %s)",
-              sprintf('%s_%s', task_name, step1_name), sheets_id)
+      gs_anchor = sheet_anchors %>% filter(id == task_name) %>% pull(gs_anchor)
+      sprintf("post_results_sheet(target_name, results_df = %s,\n      sheets_id = %s,\n      gs_anchor = I('%s'))",
+              sprintf('%s_%s', task_name, step1_name), sheets_id, gs_anchor)
     }
   )
 

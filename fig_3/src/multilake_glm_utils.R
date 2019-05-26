@@ -9,9 +9,7 @@ run_optim_glm <- function(driver_file, nml_file, train_file, test_file){
   return(results_df)
 }
 
-post_results_sheet <- function(optim_results, sheets_id){
-  n_existing_rows <- gs_read(sheets_id) %>% nrow
-  gs_anchor <-  sprintf("A%s", (n_existing_rows+1))
+post_results_sheet <- function(optim_results, sheets_id, gs_anchor){
   gs_edit_cells(sheets_id, ws = 1, input = optim_results, anchor = gs_anchor,
                 byrow = TRUE, col_names = FALSE)
 }
@@ -38,7 +36,7 @@ optim_multilake_glm <- function(driver_file, nml_file, train_file, test_file, si
 
   initial_params = c('cd'=cd_start, coef_wind_stir=0.23, Kw = kw_start)
   parscale = c('cd'=0.0001, coef_wind_stir=0.001, Kw = 0.1*kw_start)
-
+  min_rmse <<- 10
   # optimize initial parameters
   out = optim(fn = run_cal_simulation, par=initial_params, control=list(parscale=parscale),
               train_filepath = train_filepath, sim_dir = sim_dir, nml_obj = nml_obj)
@@ -79,8 +77,11 @@ run_cal_simulation <- function(par, train_filepath, sim_dir, nml_obj){
 
 
   # need to compare to obs and return NLL or RMSE stats; using rmse for now
+  if (rmse < min_rmse){
+    min_rmse <<- rmse
+    message(rmse)
+  }
 
-  message(rmse)
 
   return(rmse)
 }
