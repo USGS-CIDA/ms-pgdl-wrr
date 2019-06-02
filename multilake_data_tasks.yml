@@ -17,38 +17,35 @@ file_extensions:
 targets:
   multilake_data_tasks:
     depends:
-      - figure3_pretraining_masks.feather_promise
+      - fig_3_yeti_jobs.csv_promise
 
   # --- nhd_10596466 --- #
   
-  fig_3/VM_shared_cache/nhd_10596466_meteo.csv:
+  fig_3/yeti_sync/nhd_10596466_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_10596466'))
 
-  fig_3/VM_shared_cache/nhd_10596466_nml.nml:
+  fig_3/yeti_sync/nhd_10596466_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_10596466'),
-      driver = 'fig_3/VM_shared_cache/nhd_10596466_meteo.csv',
+      driver = I('nhd_10596466_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_10596466_geometry.csv:
-    command: export_geometry(target_name, I('nhd_10596466'))
-
-  fig_3/VM_shared_cache/nhd_10596466_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_10596466_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_10596466_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_10596466_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_10596466_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_10596466_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_10596466_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_10596466_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_10596466_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_10596466_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_10596466_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_10596466_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_10596466_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_10596466_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_10596466_pretraining_mask)
 
   nhd_10596466_pretraining_mask:
@@ -56,36 +53,43 @@ targets:
       site_id = I('nhd_10596466'),
       test_location = I(1/3))
 
+  nhd_10596466_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_10596466_meteo.csv',
+      'fig_3/yeti_sync/nhd_10596466_nml.nml',
+      'fig_3/yeti_sync/nhd_10596466_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_10596466_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_10596466_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_10596466_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_10596466_test_all_profiles.csv')
+
   # --- nhd_1097324 --- #
   
-  fig_3/VM_shared_cache/nhd_1097324_meteo.csv:
+  fig_3/yeti_sync/nhd_1097324_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1097324'))
 
-  fig_3/VM_shared_cache/nhd_1097324_nml.nml:
+  fig_3/yeti_sync/nhd_1097324_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1097324'),
-      driver = 'fig_3/VM_shared_cache/nhd_1097324_meteo.csv',
+      driver = I('nhd_1097324_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1097324_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1097324'))
-
-  fig_3/VM_shared_cache/nhd_1097324_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1097324_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1097324_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1097324_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1097324_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1097324_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1097324_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1097324_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1097324_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1097324_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1097324_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1097324_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1097324_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1097324_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1097324_pretraining_mask)
 
   nhd_1097324_pretraining_mask:
@@ -93,36 +97,43 @@ targets:
       site_id = I('nhd_1097324'),
       test_location = I(1/3))
 
+  nhd_1097324_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1097324_meteo.csv',
+      'fig_3/yeti_sync/nhd_1097324_nml.nml',
+      'fig_3/yeti_sync/nhd_1097324_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1097324_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1097324_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1097324_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1097324_test_all_profiles.csv')
+
   # --- nhd_1099052 --- #
   
-  fig_3/VM_shared_cache/nhd_1099052_meteo.csv:
+  fig_3/yeti_sync/nhd_1099052_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1099052'))
 
-  fig_3/VM_shared_cache/nhd_1099052_nml.nml:
+  fig_3/yeti_sync/nhd_1099052_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1099052'),
-      driver = 'fig_3/VM_shared_cache/nhd_1099052_meteo.csv',
+      driver = I('nhd_1099052_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1099052_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1099052'))
-
-  fig_3/VM_shared_cache/nhd_1099052_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1099052_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099052_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099052_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1099052_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099052_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099052_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1099052_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099052_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099052_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1099052_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1099052_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099052_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1099052_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1099052_pretraining_mask)
 
   nhd_1099052_pretraining_mask:
@@ -130,36 +141,43 @@ targets:
       site_id = I('nhd_1099052'),
       test_location = I(1/3))
 
+  nhd_1099052_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1099052_meteo.csv',
+      'fig_3/yeti_sync/nhd_1099052_nml.nml',
+      'fig_3/yeti_sync/nhd_1099052_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1099052_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1099052_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1099052_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1099052_test_all_profiles.csv')
+
   # --- nhd_1099136 --- #
   
-  fig_3/VM_shared_cache/nhd_1099136_meteo.csv:
+  fig_3/yeti_sync/nhd_1099136_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1099136'))
 
-  fig_3/VM_shared_cache/nhd_1099136_nml.nml:
+  fig_3/yeti_sync/nhd_1099136_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1099136'),
-      driver = 'fig_3/VM_shared_cache/nhd_1099136_meteo.csv',
+      driver = I('nhd_1099136_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1099136_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1099136'))
-
-  fig_3/VM_shared_cache/nhd_1099136_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1099136_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099136_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099136_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1099136_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099136_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099136_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1099136_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099136_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099136_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1099136_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1099136_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099136_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1099136_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1099136_pretraining_mask)
 
   nhd_1099136_pretraining_mask:
@@ -167,36 +185,43 @@ targets:
       site_id = I('nhd_1099136'),
       test_location = I(1/3))
 
+  nhd_1099136_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1099136_meteo.csv',
+      'fig_3/yeti_sync/nhd_1099136_nml.nml',
+      'fig_3/yeti_sync/nhd_1099136_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1099136_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1099136_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1099136_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1099136_test_all_profiles.csv')
+
   # --- nhd_1099172 --- #
   
-  fig_3/VM_shared_cache/nhd_1099172_meteo.csv:
+  fig_3/yeti_sync/nhd_1099172_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1099172'))
 
-  fig_3/VM_shared_cache/nhd_1099172_nml.nml:
+  fig_3/yeti_sync/nhd_1099172_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1099172'),
-      driver = 'fig_3/VM_shared_cache/nhd_1099172_meteo.csv',
+      driver = I('nhd_1099172_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1099172_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1099172'))
-
-  fig_3/VM_shared_cache/nhd_1099172_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1099172_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099172_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099172_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1099172_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099172_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099172_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1099172_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099172_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099172_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1099172_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1099172_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099172_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1099172_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1099172_pretraining_mask)
 
   nhd_1099172_pretraining_mask:
@@ -204,36 +229,43 @@ targets:
       site_id = I('nhd_1099172'),
       test_location = I(1/3))
 
+  nhd_1099172_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1099172_meteo.csv',
+      'fig_3/yeti_sync/nhd_1099172_nml.nml',
+      'fig_3/yeti_sync/nhd_1099172_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1099172_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1099172_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1099172_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1099172_test_all_profiles.csv')
+
   # --- nhd_1099240 --- #
   
-  fig_3/VM_shared_cache/nhd_1099240_meteo.csv:
+  fig_3/yeti_sync/nhd_1099240_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1099240'))
 
-  fig_3/VM_shared_cache/nhd_1099240_nml.nml:
+  fig_3/yeti_sync/nhd_1099240_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1099240'),
-      driver = 'fig_3/VM_shared_cache/nhd_1099240_meteo.csv',
+      driver = I('nhd_1099240_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1099240_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1099240'))
-
-  fig_3/VM_shared_cache/nhd_1099240_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1099240_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099240_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099240_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1099240_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099240_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099240_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1099240_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099240_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099240_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1099240_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1099240_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099240_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1099240_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1099240_pretraining_mask)
 
   nhd_1099240_pretraining_mask:
@@ -241,36 +273,43 @@ targets:
       site_id = I('nhd_1099240'),
       test_location = I(1/3))
 
+  nhd_1099240_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1099240_meteo.csv',
+      'fig_3/yeti_sync/nhd_1099240_nml.nml',
+      'fig_3/yeti_sync/nhd_1099240_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1099240_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1099240_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1099240_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1099240_test_all_profiles.csv')
+
   # --- nhd_1099282 --- #
   
-  fig_3/VM_shared_cache/nhd_1099282_meteo.csv:
+  fig_3/yeti_sync/nhd_1099282_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1099282'))
 
-  fig_3/VM_shared_cache/nhd_1099282_nml.nml:
+  fig_3/yeti_sync/nhd_1099282_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1099282'),
-      driver = 'fig_3/VM_shared_cache/nhd_1099282_meteo.csv',
+      driver = I('nhd_1099282_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1099282_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1099282'))
-
-  fig_3/VM_shared_cache/nhd_1099282_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1099282_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099282_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099282_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1099282_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099282_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099282_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1099282_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099282_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099282_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1099282_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1099282_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099282_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1099282_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1099282_pretraining_mask)
 
   nhd_1099282_pretraining_mask:
@@ -278,36 +317,43 @@ targets:
       site_id = I('nhd_1099282'),
       test_location = I(1/3))
 
+  nhd_1099282_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1099282_meteo.csv',
+      'fig_3/yeti_sync/nhd_1099282_nml.nml',
+      'fig_3/yeti_sync/nhd_1099282_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1099282_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1099282_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1099282_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1099282_test_all_profiles.csv')
+
   # --- nhd_1099420 --- #
   
-  fig_3/VM_shared_cache/nhd_1099420_meteo.csv:
+  fig_3/yeti_sync/nhd_1099420_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1099420'))
 
-  fig_3/VM_shared_cache/nhd_1099420_nml.nml:
+  fig_3/yeti_sync/nhd_1099420_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1099420'),
-      driver = 'fig_3/VM_shared_cache/nhd_1099420_meteo.csv',
+      driver = I('nhd_1099420_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1099420_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1099420'))
-
-  fig_3/VM_shared_cache/nhd_1099420_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1099420_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099420_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099420_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1099420_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099420_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099420_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1099420_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099420_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099420_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1099420_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1099420_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099420_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1099420_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1099420_pretraining_mask)
 
   nhd_1099420_pretraining_mask:
@@ -315,36 +361,43 @@ targets:
       site_id = I('nhd_1099420'),
       test_location = I(1/3))
 
+  nhd_1099420_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1099420_meteo.csv',
+      'fig_3/yeti_sync/nhd_1099420_nml.nml',
+      'fig_3/yeti_sync/nhd_1099420_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1099420_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1099420_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1099420_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1099420_test_all_profiles.csv')
+
   # --- nhd_1099430 --- #
   
-  fig_3/VM_shared_cache/nhd_1099430_meteo.csv:
+  fig_3/yeti_sync/nhd_1099430_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1099430'))
 
-  fig_3/VM_shared_cache/nhd_1099430_nml.nml:
+  fig_3/yeti_sync/nhd_1099430_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1099430'),
-      driver = 'fig_3/VM_shared_cache/nhd_1099430_meteo.csv',
+      driver = I('nhd_1099430_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1099430_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1099430'))
-
-  fig_3/VM_shared_cache/nhd_1099430_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1099430_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099430_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099430_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1099430_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099430_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099430_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1099430_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099430_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099430_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1099430_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1099430_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099430_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1099430_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1099430_pretraining_mask)
 
   nhd_1099430_pretraining_mask:
@@ -352,36 +405,43 @@ targets:
       site_id = I('nhd_1099430'),
       test_location = I(1/3))
 
+  nhd_1099430_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1099430_meteo.csv',
+      'fig_3/yeti_sync/nhd_1099430_nml.nml',
+      'fig_3/yeti_sync/nhd_1099430_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1099430_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1099430_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1099430_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1099430_test_all_profiles.csv')
+
   # --- nhd_1099432 --- #
   
-  fig_3/VM_shared_cache/nhd_1099432_meteo.csv:
+  fig_3/yeti_sync/nhd_1099432_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1099432'))
 
-  fig_3/VM_shared_cache/nhd_1099432_nml.nml:
+  fig_3/yeti_sync/nhd_1099432_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1099432'),
-      driver = 'fig_3/VM_shared_cache/nhd_1099432_meteo.csv',
+      driver = I('nhd_1099432_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1099432_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1099432'))
-
-  fig_3/VM_shared_cache/nhd_1099432_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1099432_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099432_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099432_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1099432_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099432_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099432_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1099432_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099432_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099432_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1099432_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1099432_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099432_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1099432_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1099432_pretraining_mask)
 
   nhd_1099432_pretraining_mask:
@@ -389,36 +449,43 @@ targets:
       site_id = I('nhd_1099432'),
       test_location = I(1/3))
 
+  nhd_1099432_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1099432_meteo.csv',
+      'fig_3/yeti_sync/nhd_1099432_nml.nml',
+      'fig_3/yeti_sync/nhd_1099432_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1099432_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1099432_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1099432_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1099432_test_all_profiles.csv')
+
   # --- nhd_1099450 --- #
   
-  fig_3/VM_shared_cache/nhd_1099450_meteo.csv:
+  fig_3/yeti_sync/nhd_1099450_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1099450'))
 
-  fig_3/VM_shared_cache/nhd_1099450_nml.nml:
+  fig_3/yeti_sync/nhd_1099450_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1099450'),
-      driver = 'fig_3/VM_shared_cache/nhd_1099450_meteo.csv',
+      driver = I('nhd_1099450_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1099450_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1099450'))
-
-  fig_3/VM_shared_cache/nhd_1099450_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1099450_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099450_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099450_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1099450_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099450_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099450_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1099450_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099450_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099450_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1099450_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1099450_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099450_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1099450_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1099450_pretraining_mask)
 
   nhd_1099450_pretraining_mask:
@@ -426,36 +493,43 @@ targets:
       site_id = I('nhd_1099450'),
       test_location = I(1/3))
 
+  nhd_1099450_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1099450_meteo.csv',
+      'fig_3/yeti_sync/nhd_1099450_nml.nml',
+      'fig_3/yeti_sync/nhd_1099450_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1099450_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1099450_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1099450_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1099450_test_all_profiles.csv')
+
   # --- nhd_1099476 --- #
   
-  fig_3/VM_shared_cache/nhd_1099476_meteo.csv:
+  fig_3/yeti_sync/nhd_1099476_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1099476'))
 
-  fig_3/VM_shared_cache/nhd_1099476_nml.nml:
+  fig_3/yeti_sync/nhd_1099476_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1099476'),
-      driver = 'fig_3/VM_shared_cache/nhd_1099476_meteo.csv',
+      driver = I('nhd_1099476_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1099476_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1099476'))
-
-  fig_3/VM_shared_cache/nhd_1099476_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1099476_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099476_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099476_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1099476_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099476_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099476_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1099476_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099476_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099476_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1099476_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1099476_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099476_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1099476_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1099476_pretraining_mask)
 
   nhd_1099476_pretraining_mask:
@@ -463,36 +537,43 @@ targets:
       site_id = I('nhd_1099476'),
       test_location = I(1/3))
 
+  nhd_1099476_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1099476_meteo.csv',
+      'fig_3/yeti_sync/nhd_1099476_nml.nml',
+      'fig_3/yeti_sync/nhd_1099476_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1099476_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1099476_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1099476_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1099476_test_all_profiles.csv')
+
   # --- nhd_1099526 --- #
   
-  fig_3/VM_shared_cache/nhd_1099526_meteo.csv:
+  fig_3/yeti_sync/nhd_1099526_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1099526'))
 
-  fig_3/VM_shared_cache/nhd_1099526_nml.nml:
+  fig_3/yeti_sync/nhd_1099526_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1099526'),
-      driver = 'fig_3/VM_shared_cache/nhd_1099526_meteo.csv',
+      driver = I('nhd_1099526_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1099526_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1099526'))
-
-  fig_3/VM_shared_cache/nhd_1099526_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1099526_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099526_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099526_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1099526_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099526_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099526_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1099526_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1099526_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099526_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1099526_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1099526_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1099526_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1099526_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1099526_pretraining_mask)
 
   nhd_1099526_pretraining_mask:
@@ -500,36 +581,43 @@ targets:
       site_id = I('nhd_1099526'),
       test_location = I(1/3))
 
+  nhd_1099526_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1099526_meteo.csv',
+      'fig_3/yeti_sync/nhd_1099526_nml.nml',
+      'fig_3/yeti_sync/nhd_1099526_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1099526_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1099526_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1099526_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1099526_test_all_profiles.csv')
+
   # --- nhd_1100962 --- #
   
-  fig_3/VM_shared_cache/nhd_1100962_meteo.csv:
+  fig_3/yeti_sync/nhd_1100962_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1100962'))
 
-  fig_3/VM_shared_cache/nhd_1100962_nml.nml:
+  fig_3/yeti_sync/nhd_1100962_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1100962'),
-      driver = 'fig_3/VM_shared_cache/nhd_1100962_meteo.csv',
+      driver = I('nhd_1100962_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1100962_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1100962'))
-
-  fig_3/VM_shared_cache/nhd_1100962_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1100962_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1100962_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1100962_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1100962_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1100962_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1100962_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1100962_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1100962_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1100962_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1100962_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1100962_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1100962_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1100962_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1100962_pretraining_mask)
 
   nhd_1100962_pretraining_mask:
@@ -537,36 +625,43 @@ targets:
       site_id = I('nhd_1100962'),
       test_location = I(1/3))
 
+  nhd_1100962_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1100962_meteo.csv',
+      'fig_3/yeti_sync/nhd_1100962_nml.nml',
+      'fig_3/yeti_sync/nhd_1100962_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1100962_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1100962_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1100962_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1100962_test_all_profiles.csv')
+
   # --- nhd_1101504 --- #
   
-  fig_3/VM_shared_cache/nhd_1101504_meteo.csv:
+  fig_3/yeti_sync/nhd_1101504_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1101504'))
 
-  fig_3/VM_shared_cache/nhd_1101504_nml.nml:
+  fig_3/yeti_sync/nhd_1101504_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1101504'),
-      driver = 'fig_3/VM_shared_cache/nhd_1101504_meteo.csv',
+      driver = I('nhd_1101504_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1101504_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1101504'))
-
-  fig_3/VM_shared_cache/nhd_1101504_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1101504_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101504_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101504_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1101504_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101504_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101504_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1101504_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101504_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101504_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1101504_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1101504_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101504_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1101504_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1101504_pretraining_mask)
 
   nhd_1101504_pretraining_mask:
@@ -574,36 +669,43 @@ targets:
       site_id = I('nhd_1101504'),
       test_location = I(1/3))
 
+  nhd_1101504_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1101504_meteo.csv',
+      'fig_3/yeti_sync/nhd_1101504_nml.nml',
+      'fig_3/yeti_sync/nhd_1101504_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1101504_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1101504_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1101504_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1101504_test_all_profiles.csv')
+
   # --- nhd_1101506 --- #
   
-  fig_3/VM_shared_cache/nhd_1101506_meteo.csv:
+  fig_3/yeti_sync/nhd_1101506_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1101506'))
 
-  fig_3/VM_shared_cache/nhd_1101506_nml.nml:
+  fig_3/yeti_sync/nhd_1101506_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1101506'),
-      driver = 'fig_3/VM_shared_cache/nhd_1101506_meteo.csv',
+      driver = I('nhd_1101506_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1101506_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1101506'))
-
-  fig_3/VM_shared_cache/nhd_1101506_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1101506_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101506_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101506_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1101506_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101506_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101506_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1101506_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101506_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101506_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1101506_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1101506_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101506_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1101506_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1101506_pretraining_mask)
 
   nhd_1101506_pretraining_mask:
@@ -611,36 +713,43 @@ targets:
       site_id = I('nhd_1101506'),
       test_location = I(1/3))
 
+  nhd_1101506_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1101506_meteo.csv',
+      'fig_3/yeti_sync/nhd_1101506_nml.nml',
+      'fig_3/yeti_sync/nhd_1101506_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1101506_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1101506_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1101506_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1101506_test_all_profiles.csv')
+
   # --- nhd_1101544 --- #
   
-  fig_3/VM_shared_cache/nhd_1101544_meteo.csv:
+  fig_3/yeti_sync/nhd_1101544_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1101544'))
 
-  fig_3/VM_shared_cache/nhd_1101544_nml.nml:
+  fig_3/yeti_sync/nhd_1101544_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1101544'),
-      driver = 'fig_3/VM_shared_cache/nhd_1101544_meteo.csv',
+      driver = I('nhd_1101544_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1101544_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1101544'))
-
-  fig_3/VM_shared_cache/nhd_1101544_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1101544_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101544_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101544_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1101544_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101544_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101544_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1101544_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101544_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101544_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1101544_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1101544_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101544_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1101544_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1101544_pretraining_mask)
 
   nhd_1101544_pretraining_mask:
@@ -648,36 +757,43 @@ targets:
       site_id = I('nhd_1101544'),
       test_location = I(1/3))
 
+  nhd_1101544_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1101544_meteo.csv',
+      'fig_3/yeti_sync/nhd_1101544_nml.nml',
+      'fig_3/yeti_sync/nhd_1101544_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1101544_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1101544_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1101544_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1101544_test_all_profiles.csv')
+
   # --- nhd_1101590 --- #
   
-  fig_3/VM_shared_cache/nhd_1101590_meteo.csv:
+  fig_3/yeti_sync/nhd_1101590_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1101590'))
 
-  fig_3/VM_shared_cache/nhd_1101590_nml.nml:
+  fig_3/yeti_sync/nhd_1101590_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1101590'),
-      driver = 'fig_3/VM_shared_cache/nhd_1101590_meteo.csv',
+      driver = I('nhd_1101590_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1101590_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1101590'))
-
-  fig_3/VM_shared_cache/nhd_1101590_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1101590_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101590_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101590_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1101590_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101590_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101590_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1101590_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101590_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101590_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1101590_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1101590_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101590_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1101590_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1101590_pretraining_mask)
 
   nhd_1101590_pretraining_mask:
@@ -685,36 +801,43 @@ targets:
       site_id = I('nhd_1101590'),
       test_location = I(1/3))
 
+  nhd_1101590_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1101590_meteo.csv',
+      'fig_3/yeti_sync/nhd_1101590_nml.nml',
+      'fig_3/yeti_sync/nhd_1101590_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1101590_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1101590_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1101590_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1101590_test_all_profiles.csv')
+
   # --- nhd_1101616 --- #
   
-  fig_3/VM_shared_cache/nhd_1101616_meteo.csv:
+  fig_3/yeti_sync/nhd_1101616_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1101616'))
 
-  fig_3/VM_shared_cache/nhd_1101616_nml.nml:
+  fig_3/yeti_sync/nhd_1101616_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1101616'),
-      driver = 'fig_3/VM_shared_cache/nhd_1101616_meteo.csv',
+      driver = I('nhd_1101616_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1101616_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1101616'))
-
-  fig_3/VM_shared_cache/nhd_1101616_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1101616_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101616_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101616_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1101616_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101616_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101616_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1101616_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101616_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101616_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1101616_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1101616_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101616_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1101616_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1101616_pretraining_mask)
 
   nhd_1101616_pretraining_mask:
@@ -722,36 +845,43 @@ targets:
       site_id = I('nhd_1101616'),
       test_location = I(1/3))
 
+  nhd_1101616_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1101616_meteo.csv',
+      'fig_3/yeti_sync/nhd_1101616_nml.nml',
+      'fig_3/yeti_sync/nhd_1101616_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1101616_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1101616_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1101616_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1101616_test_all_profiles.csv')
+
   # --- nhd_1101636 --- #
   
-  fig_3/VM_shared_cache/nhd_1101636_meteo.csv:
+  fig_3/yeti_sync/nhd_1101636_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1101636'))
 
-  fig_3/VM_shared_cache/nhd_1101636_nml.nml:
+  fig_3/yeti_sync/nhd_1101636_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1101636'),
-      driver = 'fig_3/VM_shared_cache/nhd_1101636_meteo.csv',
+      driver = I('nhd_1101636_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1101636_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1101636'))
-
-  fig_3/VM_shared_cache/nhd_1101636_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1101636_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101636_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101636_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1101636_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101636_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101636_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1101636_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101636_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101636_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1101636_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1101636_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101636_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1101636_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1101636_pretraining_mask)
 
   nhd_1101636_pretraining_mask:
@@ -759,36 +889,43 @@ targets:
       site_id = I('nhd_1101636'),
       test_location = I(1/3))
 
+  nhd_1101636_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1101636_meteo.csv',
+      'fig_3/yeti_sync/nhd_1101636_nml.nml',
+      'fig_3/yeti_sync/nhd_1101636_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1101636_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1101636_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1101636_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1101636_test_all_profiles.csv')
+
   # --- nhd_1101684 --- #
   
-  fig_3/VM_shared_cache/nhd_1101684_meteo.csv:
+  fig_3/yeti_sync/nhd_1101684_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1101684'))
 
-  fig_3/VM_shared_cache/nhd_1101684_nml.nml:
+  fig_3/yeti_sync/nhd_1101684_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1101684'),
-      driver = 'fig_3/VM_shared_cache/nhd_1101684_meteo.csv',
+      driver = I('nhd_1101684_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1101684_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1101684'))
-
-  fig_3/VM_shared_cache/nhd_1101684_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1101684_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101684_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101684_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1101684_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101684_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101684_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1101684_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101684_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101684_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1101684_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1101684_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101684_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1101684_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1101684_pretraining_mask)
 
   nhd_1101684_pretraining_mask:
@@ -796,36 +933,43 @@ targets:
       site_id = I('nhd_1101684'),
       test_location = I(1/3))
 
+  nhd_1101684_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1101684_meteo.csv',
+      'fig_3/yeti_sync/nhd_1101684_nml.nml',
+      'fig_3/yeti_sync/nhd_1101684_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1101684_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1101684_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1101684_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1101684_test_all_profiles.csv')
+
   # --- nhd_1101754 --- #
   
-  fig_3/VM_shared_cache/nhd_1101754_meteo.csv:
+  fig_3/yeti_sync/nhd_1101754_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1101754'))
 
-  fig_3/VM_shared_cache/nhd_1101754_nml.nml:
+  fig_3/yeti_sync/nhd_1101754_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1101754'),
-      driver = 'fig_3/VM_shared_cache/nhd_1101754_meteo.csv',
+      driver = I('nhd_1101754_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1101754_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1101754'))
-
-  fig_3/VM_shared_cache/nhd_1101754_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1101754_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101754_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101754_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1101754_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101754_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101754_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1101754_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101754_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101754_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1101754_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1101754_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101754_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1101754_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1101754_pretraining_mask)
 
   nhd_1101754_pretraining_mask:
@@ -833,36 +977,43 @@ targets:
       site_id = I('nhd_1101754'),
       test_location = I(1/3))
 
+  nhd_1101754_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1101754_meteo.csv',
+      'fig_3/yeti_sync/nhd_1101754_nml.nml',
+      'fig_3/yeti_sync/nhd_1101754_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1101754_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1101754_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1101754_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1101754_test_all_profiles.csv')
+
   # --- nhd_1101778 --- #
   
-  fig_3/VM_shared_cache/nhd_1101778_meteo.csv:
+  fig_3/yeti_sync/nhd_1101778_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1101778'))
 
-  fig_3/VM_shared_cache/nhd_1101778_nml.nml:
+  fig_3/yeti_sync/nhd_1101778_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1101778'),
-      driver = 'fig_3/VM_shared_cache/nhd_1101778_meteo.csv',
+      driver = I('nhd_1101778_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1101778_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1101778'))
-
-  fig_3/VM_shared_cache/nhd_1101778_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1101778_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101778_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101778_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1101778_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101778_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101778_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1101778_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101778_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101778_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1101778_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1101778_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101778_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1101778_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1101778_pretraining_mask)
 
   nhd_1101778_pretraining_mask:
@@ -870,36 +1021,43 @@ targets:
       site_id = I('nhd_1101778'),
       test_location = I(1/3))
 
+  nhd_1101778_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1101778_meteo.csv',
+      'fig_3/yeti_sync/nhd_1101778_nml.nml',
+      'fig_3/yeti_sync/nhd_1101778_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1101778_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1101778_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1101778_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1101778_test_all_profiles.csv')
+
   # --- nhd_1101812 --- #
   
-  fig_3/VM_shared_cache/nhd_1101812_meteo.csv:
+  fig_3/yeti_sync/nhd_1101812_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1101812'))
 
-  fig_3/VM_shared_cache/nhd_1101812_nml.nml:
+  fig_3/yeti_sync/nhd_1101812_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1101812'),
-      driver = 'fig_3/VM_shared_cache/nhd_1101812_meteo.csv',
+      driver = I('nhd_1101812_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1101812_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1101812'))
-
-  fig_3/VM_shared_cache/nhd_1101812_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1101812_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101812_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101812_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1101812_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101812_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101812_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1101812_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101812_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101812_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1101812_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1101812_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101812_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1101812_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1101812_pretraining_mask)
 
   nhd_1101812_pretraining_mask:
@@ -907,36 +1065,43 @@ targets:
       site_id = I('nhd_1101812'),
       test_location = I(1/3))
 
+  nhd_1101812_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1101812_meteo.csv',
+      'fig_3/yeti_sync/nhd_1101812_nml.nml',
+      'fig_3/yeti_sync/nhd_1101812_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1101812_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1101812_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1101812_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1101812_test_all_profiles.csv')
+
   # --- nhd_1101864 --- #
   
-  fig_3/VM_shared_cache/nhd_1101864_meteo.csv:
+  fig_3/yeti_sync/nhd_1101864_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1101864'))
 
-  fig_3/VM_shared_cache/nhd_1101864_nml.nml:
+  fig_3/yeti_sync/nhd_1101864_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1101864'),
-      driver = 'fig_3/VM_shared_cache/nhd_1101864_meteo.csv',
+      driver = I('nhd_1101864_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1101864_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1101864'))
-
-  fig_3/VM_shared_cache/nhd_1101864_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1101864_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101864_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101864_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1101864_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101864_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101864_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1101864_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101864_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101864_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1101864_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1101864_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101864_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1101864_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1101864_pretraining_mask)
 
   nhd_1101864_pretraining_mask:
@@ -944,36 +1109,43 @@ targets:
       site_id = I('nhd_1101864'),
       test_location = I(1/3))
 
+  nhd_1101864_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1101864_meteo.csv',
+      'fig_3/yeti_sync/nhd_1101864_nml.nml',
+      'fig_3/yeti_sync/nhd_1101864_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1101864_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1101864_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1101864_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1101864_test_all_profiles.csv')
+
   # --- nhd_1101938 --- #
   
-  fig_3/VM_shared_cache/nhd_1101938_meteo.csv:
+  fig_3/yeti_sync/nhd_1101938_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1101938'))
 
-  fig_3/VM_shared_cache/nhd_1101938_nml.nml:
+  fig_3/yeti_sync/nhd_1101938_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1101938'),
-      driver = 'fig_3/VM_shared_cache/nhd_1101938_meteo.csv',
+      driver = I('nhd_1101938_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1101938_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1101938'))
-
-  fig_3/VM_shared_cache/nhd_1101938_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1101938_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101938_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101938_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1101938_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101938_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101938_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1101938_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101938_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101938_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1101938_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1101938_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101938_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1101938_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1101938_pretraining_mask)
 
   nhd_1101938_pretraining_mask:
@@ -981,36 +1153,43 @@ targets:
       site_id = I('nhd_1101938'),
       test_location = I(1/3))
 
+  nhd_1101938_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1101938_meteo.csv',
+      'fig_3/yeti_sync/nhd_1101938_nml.nml',
+      'fig_3/yeti_sync/nhd_1101938_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1101938_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1101938_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1101938_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1101938_test_all_profiles.csv')
+
   # --- nhd_1101942 --- #
   
-  fig_3/VM_shared_cache/nhd_1101942_meteo.csv:
+  fig_3/yeti_sync/nhd_1101942_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1101942'))
 
-  fig_3/VM_shared_cache/nhd_1101942_nml.nml:
+  fig_3/yeti_sync/nhd_1101942_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1101942'),
-      driver = 'fig_3/VM_shared_cache/nhd_1101942_meteo.csv',
+      driver = I('nhd_1101942_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1101942_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1101942'))
-
-  fig_3/VM_shared_cache/nhd_1101942_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1101942_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101942_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101942_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1101942_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101942_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101942_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1101942_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1101942_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101942_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1101942_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1101942_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1101942_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1101942_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1101942_pretraining_mask)
 
   nhd_1101942_pretraining_mask:
@@ -1018,36 +1197,43 @@ targets:
       site_id = I('nhd_1101942'),
       test_location = I(1/3))
 
+  nhd_1101942_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1101942_meteo.csv',
+      'fig_3/yeti_sync/nhd_1101942_nml.nml',
+      'fig_3/yeti_sync/nhd_1101942_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1101942_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1101942_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1101942_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1101942_test_all_profiles.csv')
+
   # --- nhd_1102086 --- #
   
-  fig_3/VM_shared_cache/nhd_1102086_meteo.csv:
+  fig_3/yeti_sync/nhd_1102086_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1102086'))
 
-  fig_3/VM_shared_cache/nhd_1102086_nml.nml:
+  fig_3/yeti_sync/nhd_1102086_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1102086'),
-      driver = 'fig_3/VM_shared_cache/nhd_1102086_meteo.csv',
+      driver = I('nhd_1102086_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1102086_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1102086'))
-
-  fig_3/VM_shared_cache/nhd_1102086_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1102086_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1102086_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102086_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1102086_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1102086_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102086_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1102086_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1102086_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102086_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1102086_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1102086_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102086_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1102086_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1102086_pretraining_mask)
 
   nhd_1102086_pretraining_mask:
@@ -1055,36 +1241,43 @@ targets:
       site_id = I('nhd_1102086'),
       test_location = I(1/3))
 
+  nhd_1102086_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1102086_meteo.csv',
+      'fig_3/yeti_sync/nhd_1102086_nml.nml',
+      'fig_3/yeti_sync/nhd_1102086_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1102086_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1102086_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1102086_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1102086_test_all_profiles.csv')
+
   # --- nhd_1102088 --- #
   
-  fig_3/VM_shared_cache/nhd_1102088_meteo.csv:
+  fig_3/yeti_sync/nhd_1102088_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1102088'))
 
-  fig_3/VM_shared_cache/nhd_1102088_nml.nml:
+  fig_3/yeti_sync/nhd_1102088_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1102088'),
-      driver = 'fig_3/VM_shared_cache/nhd_1102088_meteo.csv',
+      driver = I('nhd_1102088_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1102088_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1102088'))
-
-  fig_3/VM_shared_cache/nhd_1102088_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1102088_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1102088_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102088_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1102088_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1102088_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102088_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1102088_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1102088_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102088_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1102088_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1102088_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102088_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1102088_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1102088_pretraining_mask)
 
   nhd_1102088_pretraining_mask:
@@ -1092,36 +1285,43 @@ targets:
       site_id = I('nhd_1102088'),
       test_location = I(1/3))
 
+  nhd_1102088_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1102088_meteo.csv',
+      'fig_3/yeti_sync/nhd_1102088_nml.nml',
+      'fig_3/yeti_sync/nhd_1102088_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1102088_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1102088_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1102088_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1102088_test_all_profiles.csv')
+
   # --- nhd_1102284 --- #
   
-  fig_3/VM_shared_cache/nhd_1102284_meteo.csv:
+  fig_3/yeti_sync/nhd_1102284_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1102284'))
 
-  fig_3/VM_shared_cache/nhd_1102284_nml.nml:
+  fig_3/yeti_sync/nhd_1102284_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1102284'),
-      driver = 'fig_3/VM_shared_cache/nhd_1102284_meteo.csv',
+      driver = I('nhd_1102284_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1102284_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1102284'))
-
-  fig_3/VM_shared_cache/nhd_1102284_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1102284_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1102284_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102284_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1102284_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1102284_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102284_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1102284_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1102284_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102284_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1102284_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1102284_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102284_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1102284_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1102284_pretraining_mask)
 
   nhd_1102284_pretraining_mask:
@@ -1129,36 +1329,43 @@ targets:
       site_id = I('nhd_1102284'),
       test_location = I(1/3))
 
+  nhd_1102284_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1102284_meteo.csv',
+      'fig_3/yeti_sync/nhd_1102284_nml.nml',
+      'fig_3/yeti_sync/nhd_1102284_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1102284_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1102284_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1102284_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1102284_test_all_profiles.csv')
+
   # --- nhd_1102366 --- #
   
-  fig_3/VM_shared_cache/nhd_1102366_meteo.csv:
+  fig_3/yeti_sync/nhd_1102366_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_1102366'))
 
-  fig_3/VM_shared_cache/nhd_1102366_nml.nml:
+  fig_3/yeti_sync/nhd_1102366_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_1102366'),
-      driver = 'fig_3/VM_shared_cache/nhd_1102366_meteo.csv',
+      driver = I('nhd_1102366_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_1102366_geometry.csv:
-    command: export_geometry(target_name, I('nhd_1102366'))
-
-  fig_3/VM_shared_cache/nhd_1102366_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_1102366_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1102366_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102366_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_1102366_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1102366_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102366_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_1102366_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_1102366_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102366_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1102366_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_1102366_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_1102366_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_1102366_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_1102366_pretraining_mask)
 
   nhd_1102366_pretraining_mask:
@@ -1166,36 +1373,43 @@ targets:
       site_id = I('nhd_1102366'),
       test_location = I(1/3))
 
+  nhd_1102366_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_1102366_meteo.csv',
+      'fig_3/yeti_sync/nhd_1102366_nml.nml',
+      'fig_3/yeti_sync/nhd_1102366_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_1102366_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_1102366_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_1102366_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_1102366_test_all_profiles.csv')
+
   # --- nhd_120051922 --- #
   
-  fig_3/VM_shared_cache/nhd_120051922_meteo.csv:
+  fig_3/yeti_sync/nhd_120051922_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_120051922'))
 
-  fig_3/VM_shared_cache/nhd_120051922_nml.nml:
+  fig_3/yeti_sync/nhd_120051922_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_120051922'),
-      driver = 'fig_3/VM_shared_cache/nhd_120051922_meteo.csv',
+      driver = I('nhd_120051922_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_120051922_geometry.csv:
-    command: export_geometry(target_name, I('nhd_120051922'))
-
-  fig_3/VM_shared_cache/nhd_120051922_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_120051922_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120051922_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120051922_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_120051922_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120051922_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120051922_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_120051922_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120051922_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120051922_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_120051922_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_120051922_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120051922_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_120051922_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_120051922_pretraining_mask)
 
   nhd_120051922_pretraining_mask:
@@ -1203,36 +1417,43 @@ targets:
       site_id = I('nhd_120051922'),
       test_location = I(1/3))
 
+  nhd_120051922_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_120051922_meteo.csv',
+      'fig_3/yeti_sync/nhd_120051922_nml.nml',
+      'fig_3/yeti_sync/nhd_120051922_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_120051922_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_120051922_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_120051922_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_120051922_test_all_profiles.csv')
+
   # --- nhd_120052022 --- #
   
-  fig_3/VM_shared_cache/nhd_120052022_meteo.csv:
+  fig_3/yeti_sync/nhd_120052022_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_120052022'))
 
-  fig_3/VM_shared_cache/nhd_120052022_nml.nml:
+  fig_3/yeti_sync/nhd_120052022_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_120052022'),
-      driver = 'fig_3/VM_shared_cache/nhd_120052022_meteo.csv',
+      driver = I('nhd_120052022_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_120052022_geometry.csv:
-    command: export_geometry(target_name, I('nhd_120052022'))
-
-  fig_3/VM_shared_cache/nhd_120052022_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_120052022_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120052022_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052022_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_120052022_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120052022_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052022_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_120052022_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120052022_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052022_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_120052022_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_120052022_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052022_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_120052022_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_120052022_pretraining_mask)
 
   nhd_120052022_pretraining_mask:
@@ -1240,36 +1461,43 @@ targets:
       site_id = I('nhd_120052022'),
       test_location = I(1/3))
 
+  nhd_120052022_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_120052022_meteo.csv',
+      'fig_3/yeti_sync/nhd_120052022_nml.nml',
+      'fig_3/yeti_sync/nhd_120052022_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_120052022_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_120052022_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_120052022_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_120052022_test_all_profiles.csv')
+
   # --- nhd_120052233 --- #
   
-  fig_3/VM_shared_cache/nhd_120052233_meteo.csv:
+  fig_3/yeti_sync/nhd_120052233_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_120052233'))
 
-  fig_3/VM_shared_cache/nhd_120052233_nml.nml:
+  fig_3/yeti_sync/nhd_120052233_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_120052233'),
-      driver = 'fig_3/VM_shared_cache/nhd_120052233_meteo.csv',
+      driver = I('nhd_120052233_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_120052233_geometry.csv:
-    command: export_geometry(target_name, I('nhd_120052233'))
-
-  fig_3/VM_shared_cache/nhd_120052233_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_120052233_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120052233_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052233_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_120052233_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120052233_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052233_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_120052233_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120052233_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052233_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_120052233_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_120052233_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052233_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_120052233_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_120052233_pretraining_mask)
 
   nhd_120052233_pretraining_mask:
@@ -1277,36 +1505,43 @@ targets:
       site_id = I('nhd_120052233'),
       test_location = I(1/3))
 
+  nhd_120052233_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_120052233_meteo.csv',
+      'fig_3/yeti_sync/nhd_120052233_nml.nml',
+      'fig_3/yeti_sync/nhd_120052233_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_120052233_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_120052233_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_120052233_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_120052233_test_all_profiles.csv')
+
   # --- nhd_120052351 --- #
   
-  fig_3/VM_shared_cache/nhd_120052351_meteo.csv:
+  fig_3/yeti_sync/nhd_120052351_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_120052351'))
 
-  fig_3/VM_shared_cache/nhd_120052351_nml.nml:
+  fig_3/yeti_sync/nhd_120052351_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_120052351'),
-      driver = 'fig_3/VM_shared_cache/nhd_120052351_meteo.csv',
+      driver = I('nhd_120052351_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_120052351_geometry.csv:
-    command: export_geometry(target_name, I('nhd_120052351'))
-
-  fig_3/VM_shared_cache/nhd_120052351_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_120052351_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120052351_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052351_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_120052351_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120052351_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052351_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_120052351_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120052351_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052351_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_120052351_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_120052351_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052351_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_120052351_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_120052351_pretraining_mask)
 
   nhd_120052351_pretraining_mask:
@@ -1314,36 +1549,43 @@ targets:
       site_id = I('nhd_120052351'),
       test_location = I(1/3))
 
+  nhd_120052351_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_120052351_meteo.csv',
+      'fig_3/yeti_sync/nhd_120052351_nml.nml',
+      'fig_3/yeti_sync/nhd_120052351_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_120052351_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_120052351_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_120052351_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_120052351_test_all_profiles.csv')
+
   # --- nhd_120052587 --- #
   
-  fig_3/VM_shared_cache/nhd_120052587_meteo.csv:
+  fig_3/yeti_sync/nhd_120052587_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_120052587'))
 
-  fig_3/VM_shared_cache/nhd_120052587_nml.nml:
+  fig_3/yeti_sync/nhd_120052587_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_120052587'),
-      driver = 'fig_3/VM_shared_cache/nhd_120052587_meteo.csv',
+      driver = I('nhd_120052587_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_120052587_geometry.csv:
-    command: export_geometry(target_name, I('nhd_120052587'))
-
-  fig_3/VM_shared_cache/nhd_120052587_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_120052587_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120052587_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052587_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_120052587_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120052587_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052587_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_120052587_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120052587_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052587_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_120052587_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_120052587_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120052587_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_120052587_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_120052587_pretraining_mask)
 
   nhd_120052587_pretraining_mask:
@@ -1351,36 +1593,43 @@ targets:
       site_id = I('nhd_120052587'),
       test_location = I(1/3))
 
+  nhd_120052587_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_120052587_meteo.csv',
+      'fig_3/yeti_sync/nhd_120052587_nml.nml',
+      'fig_3/yeti_sync/nhd_120052587_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_120052587_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_120052587_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_120052587_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_120052587_test_all_profiles.csv')
+
   # --- nhd_120053694 --- #
   
-  fig_3/VM_shared_cache/nhd_120053694_meteo.csv:
+  fig_3/yeti_sync/nhd_120053694_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_120053694'))
 
-  fig_3/VM_shared_cache/nhd_120053694_nml.nml:
+  fig_3/yeti_sync/nhd_120053694_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_120053694'),
-      driver = 'fig_3/VM_shared_cache/nhd_120053694_meteo.csv',
+      driver = I('nhd_120053694_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_120053694_geometry.csv:
-    command: export_geometry(target_name, I('nhd_120053694'))
-
-  fig_3/VM_shared_cache/nhd_120053694_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_120053694_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120053694_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120053694_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_120053694_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120053694_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120053694_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_120053694_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_120053694_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120053694_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_120053694_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_120053694_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_120053694_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_120053694_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_120053694_pretraining_mask)
 
   nhd_120053694_pretraining_mask:
@@ -1388,36 +1637,43 @@ targets:
       site_id = I('nhd_120053694'),
       test_location = I(1/3))
 
+  nhd_120053694_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_120053694_meteo.csv',
+      'fig_3/yeti_sync/nhd_120053694_nml.nml',
+      'fig_3/yeti_sync/nhd_120053694_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_120053694_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_120053694_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_120053694_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_120053694_test_all_profiles.csv')
+
   # --- nhd_12160852 --- #
   
-  fig_3/VM_shared_cache/nhd_12160852_meteo.csv:
+  fig_3/yeti_sync/nhd_12160852_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_12160852'))
 
-  fig_3/VM_shared_cache/nhd_12160852_nml.nml:
+  fig_3/yeti_sync/nhd_12160852_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_12160852'),
-      driver = 'fig_3/VM_shared_cache/nhd_12160852_meteo.csv',
+      driver = I('nhd_12160852_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_12160852_geometry.csv:
-    command: export_geometry(target_name, I('nhd_12160852'))
-
-  fig_3/VM_shared_cache/nhd_12160852_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_12160852_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_12160852_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_12160852_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_12160852_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_12160852_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_12160852_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_12160852_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_12160852_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_12160852_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_12160852_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_12160852_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_12160852_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_12160852_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_12160852_pretraining_mask)
 
   nhd_12160852_pretraining_mask:
@@ -1425,36 +1681,43 @@ targets:
       site_id = I('nhd_12160852'),
       test_location = I(1/3))
 
+  nhd_12160852_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_12160852_meteo.csv',
+      'fig_3/yeti_sync/nhd_12160852_nml.nml',
+      'fig_3/yeti_sync/nhd_12160852_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_12160852_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_12160852_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_12160852_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_12160852_test_all_profiles.csv')
+
   # --- nhd_12162854 --- #
   
-  fig_3/VM_shared_cache/nhd_12162854_meteo.csv:
+  fig_3/yeti_sync/nhd_12162854_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_12162854'))
 
-  fig_3/VM_shared_cache/nhd_12162854_nml.nml:
+  fig_3/yeti_sync/nhd_12162854_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_12162854'),
-      driver = 'fig_3/VM_shared_cache/nhd_12162854_meteo.csv',
+      driver = I('nhd_12162854_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_12162854_geometry.csv:
-    command: export_geometry(target_name, I('nhd_12162854'))
-
-  fig_3/VM_shared_cache/nhd_12162854_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_12162854_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_12162854_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_12162854_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_12162854_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_12162854_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_12162854_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_12162854_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_12162854_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_12162854_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_12162854_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_12162854_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_12162854_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_12162854_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_12162854_pretraining_mask)
 
   nhd_12162854_pretraining_mask:
@@ -1462,36 +1725,43 @@ targets:
       site_id = I('nhd_12162854'),
       test_location = I(1/3))
 
+  nhd_12162854_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_12162854_meteo.csv',
+      'fig_3/yeti_sync/nhd_12162854_nml.nml',
+      'fig_3/yeti_sync/nhd_12162854_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_12162854_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_12162854_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_12162854_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_12162854_test_all_profiles.csv')
+
   # --- nhd_13290898 --- #
   
-  fig_3/VM_shared_cache/nhd_13290898_meteo.csv:
+  fig_3/yeti_sync/nhd_13290898_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_13290898'))
 
-  fig_3/VM_shared_cache/nhd_13290898_nml.nml:
+  fig_3/yeti_sync/nhd_13290898_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_13290898'),
-      driver = 'fig_3/VM_shared_cache/nhd_13290898_meteo.csv',
+      driver = I('nhd_13290898_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_13290898_geometry.csv:
-    command: export_geometry(target_name, I('nhd_13290898'))
-
-  fig_3/VM_shared_cache/nhd_13290898_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_13290898_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13290898_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13290898_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_13290898_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13290898_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13290898_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_13290898_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13290898_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13290898_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_13290898_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_13290898_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13290898_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_13290898_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_13290898_pretraining_mask)
 
   nhd_13290898_pretraining_mask:
@@ -1499,36 +1769,43 @@ targets:
       site_id = I('nhd_13290898'),
       test_location = I(1/3))
 
+  nhd_13290898_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_13290898_meteo.csv',
+      'fig_3/yeti_sync/nhd_13290898_nml.nml',
+      'fig_3/yeti_sync/nhd_13290898_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_13290898_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_13290898_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_13290898_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_13290898_test_all_profiles.csv')
+
   # --- nhd_13293262 --- #
   
-  fig_3/VM_shared_cache/nhd_13293262_meteo.csv:
+  fig_3/yeti_sync/nhd_13293262_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_13293262'))
 
-  fig_3/VM_shared_cache/nhd_13293262_nml.nml:
+  fig_3/yeti_sync/nhd_13293262_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_13293262'),
-      driver = 'fig_3/VM_shared_cache/nhd_13293262_meteo.csv',
+      driver = I('nhd_13293262_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_13293262_geometry.csv:
-    command: export_geometry(target_name, I('nhd_13293262'))
-
-  fig_3/VM_shared_cache/nhd_13293262_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_13293262_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13293262_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13293262_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_13293262_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13293262_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13293262_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_13293262_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13293262_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13293262_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_13293262_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_13293262_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13293262_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_13293262_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_13293262_pretraining_mask)
 
   nhd_13293262_pretraining_mask:
@@ -1536,36 +1813,43 @@ targets:
       site_id = I('nhd_13293262'),
       test_location = I(1/3))
 
+  nhd_13293262_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_13293262_meteo.csv',
+      'fig_3/yeti_sync/nhd_13293262_nml.nml',
+      'fig_3/yeti_sync/nhd_13293262_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_13293262_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_13293262_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_13293262_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_13293262_test_all_profiles.csv')
+
   # --- nhd_13294464 --- #
   
-  fig_3/VM_shared_cache/nhd_13294464_meteo.csv:
+  fig_3/yeti_sync/nhd_13294464_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_13294464'))
 
-  fig_3/VM_shared_cache/nhd_13294464_nml.nml:
+  fig_3/yeti_sync/nhd_13294464_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_13294464'),
-      driver = 'fig_3/VM_shared_cache/nhd_13294464_meteo.csv',
+      driver = I('nhd_13294464_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_13294464_geometry.csv:
-    command: export_geometry(target_name, I('nhd_13294464'))
-
-  fig_3/VM_shared_cache/nhd_13294464_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_13294464_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13294464_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13294464_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_13294464_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13294464_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13294464_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_13294464_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13294464_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13294464_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_13294464_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_13294464_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13294464_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_13294464_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_13294464_pretraining_mask)
 
   nhd_13294464_pretraining_mask:
@@ -1573,36 +1857,43 @@ targets:
       site_id = I('nhd_13294464'),
       test_location = I(1/3))
 
+  nhd_13294464_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_13294464_meteo.csv',
+      'fig_3/yeti_sync/nhd_13294464_nml.nml',
+      'fig_3/yeti_sync/nhd_13294464_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_13294464_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_13294464_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_13294464_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_13294464_test_all_profiles.csv')
+
   # --- nhd_13294928 --- #
   
-  fig_3/VM_shared_cache/nhd_13294928_meteo.csv:
+  fig_3/yeti_sync/nhd_13294928_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_13294928'))
 
-  fig_3/VM_shared_cache/nhd_13294928_nml.nml:
+  fig_3/yeti_sync/nhd_13294928_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_13294928'),
-      driver = 'fig_3/VM_shared_cache/nhd_13294928_meteo.csv',
+      driver = I('nhd_13294928_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_13294928_geometry.csv:
-    command: export_geometry(target_name, I('nhd_13294928'))
-
-  fig_3/VM_shared_cache/nhd_13294928_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_13294928_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13294928_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13294928_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_13294928_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13294928_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13294928_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_13294928_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13294928_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13294928_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_13294928_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_13294928_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13294928_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_13294928_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_13294928_pretraining_mask)
 
   nhd_13294928_pretraining_mask:
@@ -1610,36 +1901,43 @@ targets:
       site_id = I('nhd_13294928'),
       test_location = I(1/3))
 
+  nhd_13294928_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_13294928_meteo.csv',
+      'fig_3/yeti_sync/nhd_13294928_nml.nml',
+      'fig_3/yeti_sync/nhd_13294928_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_13294928_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_13294928_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_13294928_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_13294928_test_all_profiles.csv')
+
   # --- nhd_13343906 --- #
   
-  fig_3/VM_shared_cache/nhd_13343906_meteo.csv:
+  fig_3/yeti_sync/nhd_13343906_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_13343906'))
 
-  fig_3/VM_shared_cache/nhd_13343906_nml.nml:
+  fig_3/yeti_sync/nhd_13343906_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_13343906'),
-      driver = 'fig_3/VM_shared_cache/nhd_13343906_meteo.csv',
+      driver = I('nhd_13343906_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_13343906_geometry.csv:
-    command: export_geometry(target_name, I('nhd_13343906'))
-
-  fig_3/VM_shared_cache/nhd_13343906_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_13343906_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13343906_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13343906_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_13343906_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13343906_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13343906_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_13343906_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13343906_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13343906_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_13343906_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_13343906_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13343906_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_13343906_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_13343906_pretraining_mask)
 
   nhd_13343906_pretraining_mask:
@@ -1647,36 +1945,43 @@ targets:
       site_id = I('nhd_13343906'),
       test_location = I(1/3))
 
+  nhd_13343906_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_13343906_meteo.csv',
+      'fig_3/yeti_sync/nhd_13343906_nml.nml',
+      'fig_3/yeti_sync/nhd_13343906_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_13343906_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_13343906_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_13343906_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_13343906_test_all_profiles.csv')
+
   # --- nhd_13344056 --- #
   
-  fig_3/VM_shared_cache/nhd_13344056_meteo.csv:
+  fig_3/yeti_sync/nhd_13344056_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_13344056'))
 
-  fig_3/VM_shared_cache/nhd_13344056_nml.nml:
+  fig_3/yeti_sync/nhd_13344056_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_13344056'),
-      driver = 'fig_3/VM_shared_cache/nhd_13344056_meteo.csv',
+      driver = I('nhd_13344056_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_13344056_geometry.csv:
-    command: export_geometry(target_name, I('nhd_13344056'))
-
-  fig_3/VM_shared_cache/nhd_13344056_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_13344056_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13344056_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344056_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_13344056_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13344056_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344056_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_13344056_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13344056_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344056_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_13344056_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_13344056_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344056_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_13344056_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_13344056_pretraining_mask)
 
   nhd_13344056_pretraining_mask:
@@ -1684,36 +1989,43 @@ targets:
       site_id = I('nhd_13344056'),
       test_location = I(1/3))
 
+  nhd_13344056_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_13344056_meteo.csv',
+      'fig_3/yeti_sync/nhd_13344056_nml.nml',
+      'fig_3/yeti_sync/nhd_13344056_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_13344056_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_13344056_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_13344056_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_13344056_test_all_profiles.csv')
+
   # --- nhd_13344170 --- #
   
-  fig_3/VM_shared_cache/nhd_13344170_meteo.csv:
+  fig_3/yeti_sync/nhd_13344170_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_13344170'))
 
-  fig_3/VM_shared_cache/nhd_13344170_nml.nml:
+  fig_3/yeti_sync/nhd_13344170_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_13344170'),
-      driver = 'fig_3/VM_shared_cache/nhd_13344170_meteo.csv',
+      driver = I('nhd_13344170_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_13344170_geometry.csv:
-    command: export_geometry(target_name, I('nhd_13344170'))
-
-  fig_3/VM_shared_cache/nhd_13344170_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_13344170_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13344170_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344170_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_13344170_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13344170_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344170_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_13344170_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13344170_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344170_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_13344170_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_13344170_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344170_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_13344170_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_13344170_pretraining_mask)
 
   nhd_13344170_pretraining_mask:
@@ -1721,36 +2033,43 @@ targets:
       site_id = I('nhd_13344170'),
       test_location = I(1/3))
 
+  nhd_13344170_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_13344170_meteo.csv',
+      'fig_3/yeti_sync/nhd_13344170_nml.nml',
+      'fig_3/yeti_sync/nhd_13344170_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_13344170_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_13344170_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_13344170_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_13344170_test_all_profiles.csv')
+
   # --- nhd_13344210 --- #
   
-  fig_3/VM_shared_cache/nhd_13344210_meteo.csv:
+  fig_3/yeti_sync/nhd_13344210_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_13344210'))
 
-  fig_3/VM_shared_cache/nhd_13344210_nml.nml:
+  fig_3/yeti_sync/nhd_13344210_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_13344210'),
-      driver = 'fig_3/VM_shared_cache/nhd_13344210_meteo.csv',
+      driver = I('nhd_13344210_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_13344210_geometry.csv:
-    command: export_geometry(target_name, I('nhd_13344210'))
-
-  fig_3/VM_shared_cache/nhd_13344210_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_13344210_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13344210_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344210_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_13344210_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13344210_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344210_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_13344210_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13344210_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344210_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_13344210_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_13344210_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344210_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_13344210_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_13344210_pretraining_mask)
 
   nhd_13344210_pretraining_mask:
@@ -1758,36 +2077,43 @@ targets:
       site_id = I('nhd_13344210'),
       test_location = I(1/3))
 
+  nhd_13344210_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_13344210_meteo.csv',
+      'fig_3/yeti_sync/nhd_13344210_nml.nml',
+      'fig_3/yeti_sync/nhd_13344210_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_13344210_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_13344210_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_13344210_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_13344210_test_all_profiles.csv')
+
   # --- nhd_13344284 --- #
   
-  fig_3/VM_shared_cache/nhd_13344284_meteo.csv:
+  fig_3/yeti_sync/nhd_13344284_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_13344284'))
 
-  fig_3/VM_shared_cache/nhd_13344284_nml.nml:
+  fig_3/yeti_sync/nhd_13344284_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_13344284'),
-      driver = 'fig_3/VM_shared_cache/nhd_13344284_meteo.csv',
+      driver = I('nhd_13344284_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_13344284_geometry.csv:
-    command: export_geometry(target_name, I('nhd_13344284'))
-
-  fig_3/VM_shared_cache/nhd_13344284_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_13344284_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13344284_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344284_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_13344284_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13344284_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344284_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_13344284_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13344284_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344284_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_13344284_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_13344284_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13344284_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_13344284_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_13344284_pretraining_mask)
 
   nhd_13344284_pretraining_mask:
@@ -1795,36 +2121,43 @@ targets:
       site_id = I('nhd_13344284'),
       test_location = I(1/3))
 
+  nhd_13344284_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_13344284_meteo.csv',
+      'fig_3/yeti_sync/nhd_13344284_nml.nml',
+      'fig_3/yeti_sync/nhd_13344284_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_13344284_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_13344284_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_13344284_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_13344284_test_all_profiles.csv')
+
   # --- nhd_13393533 --- #
   
-  fig_3/VM_shared_cache/nhd_13393533_meteo.csv:
+  fig_3/yeti_sync/nhd_13393533_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_13393533'))
 
-  fig_3/VM_shared_cache/nhd_13393533_nml.nml:
+  fig_3/yeti_sync/nhd_13393533_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_13393533'),
-      driver = 'fig_3/VM_shared_cache/nhd_13393533_meteo.csv',
+      driver = I('nhd_13393533_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_13393533_geometry.csv:
-    command: export_geometry(target_name, I('nhd_13393533'))
-
-  fig_3/VM_shared_cache/nhd_13393533_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_13393533_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13393533_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13393533_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_13393533_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13393533_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13393533_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_13393533_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13393533_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13393533_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_13393533_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_13393533_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13393533_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_13393533_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_13393533_pretraining_mask)
 
   nhd_13393533_pretraining_mask:
@@ -1832,36 +2165,43 @@ targets:
       site_id = I('nhd_13393533'),
       test_location = I(1/3))
 
+  nhd_13393533_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_13393533_meteo.csv',
+      'fig_3/yeti_sync/nhd_13393533_nml.nml',
+      'fig_3/yeti_sync/nhd_13393533_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_13393533_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_13393533_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_13393533_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_13393533_test_all_profiles.csv')
+
   # --- nhd_13393567 --- #
   
-  fig_3/VM_shared_cache/nhd_13393567_meteo.csv:
+  fig_3/yeti_sync/nhd_13393567_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_13393567'))
 
-  fig_3/VM_shared_cache/nhd_13393567_nml.nml:
+  fig_3/yeti_sync/nhd_13393567_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_13393567'),
-      driver = 'fig_3/VM_shared_cache/nhd_13393567_meteo.csv',
+      driver = I('nhd_13393567_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_13393567_geometry.csv:
-    command: export_geometry(target_name, I('nhd_13393567'))
-
-  fig_3/VM_shared_cache/nhd_13393567_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_13393567_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13393567_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13393567_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_13393567_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13393567_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13393567_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_13393567_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13393567_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13393567_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_13393567_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_13393567_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13393567_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_13393567_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_13393567_pretraining_mask)
 
   nhd_13393567_pretraining_mask:
@@ -1869,36 +2209,43 @@ targets:
       site_id = I('nhd_13393567'),
       test_location = I(1/3))
 
+  nhd_13393567_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_13393567_meteo.csv',
+      'fig_3/yeti_sync/nhd_13393567_nml.nml',
+      'fig_3/yeti_sync/nhd_13393567_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_13393567_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_13393567_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_13393567_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_13393567_test_all_profiles.csv')
+
   # --- nhd_13631637 --- #
   
-  fig_3/VM_shared_cache/nhd_13631637_meteo.csv:
+  fig_3/yeti_sync/nhd_13631637_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_13631637'))
 
-  fig_3/VM_shared_cache/nhd_13631637_nml.nml:
+  fig_3/yeti_sync/nhd_13631637_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_13631637'),
-      driver = 'fig_3/VM_shared_cache/nhd_13631637_meteo.csv',
+      driver = I('nhd_13631637_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_13631637_geometry.csv:
-    command: export_geometry(target_name, I('nhd_13631637'))
-
-  fig_3/VM_shared_cache/nhd_13631637_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_13631637_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13631637_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13631637_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_13631637_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13631637_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13631637_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_13631637_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_13631637_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13631637_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_13631637_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_13631637_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_13631637_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_13631637_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_13631637_pretraining_mask)
 
   nhd_13631637_pretraining_mask:
@@ -1906,36 +2253,43 @@ targets:
       site_id = I('nhd_13631637'),
       test_location = I(1/3))
 
+  nhd_13631637_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_13631637_meteo.csv',
+      'fig_3/yeti_sync/nhd_13631637_nml.nml',
+      'fig_3/yeti_sync/nhd_13631637_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_13631637_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_13631637_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_13631637_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_13631637_test_all_profiles.csv')
+
   # --- nhd_14783883 --- #
   
-  fig_3/VM_shared_cache/nhd_14783883_meteo.csv:
+  fig_3/yeti_sync/nhd_14783883_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_14783883'))
 
-  fig_3/VM_shared_cache/nhd_14783883_nml.nml:
+  fig_3/yeti_sync/nhd_14783883_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_14783883'),
-      driver = 'fig_3/VM_shared_cache/nhd_14783883_meteo.csv',
+      driver = I('nhd_14783883_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_14783883_geometry.csv:
-    command: export_geometry(target_name, I('nhd_14783883'))
-
-  fig_3/VM_shared_cache/nhd_14783883_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_14783883_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_14783883_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_14783883_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_14783883_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_14783883_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_14783883_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_14783883_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_14783883_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_14783883_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_14783883_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_14783883_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_14783883_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_14783883_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_14783883_pretraining_mask)
 
   nhd_14783883_pretraining_mask:
@@ -1943,36 +2297,43 @@ targets:
       site_id = I('nhd_14783883'),
       test_location = I(1/3))
 
+  nhd_14783883_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_14783883_meteo.csv',
+      'fig_3/yeti_sync/nhd_14783883_nml.nml',
+      'fig_3/yeti_sync/nhd_14783883_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_14783883_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_14783883_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_14783883_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_14783883_test_all_profiles.csv')
+
   # --- nhd_2349188 --- #
   
-  fig_3/VM_shared_cache/nhd_2349188_meteo.csv:
+  fig_3/yeti_sync/nhd_2349188_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_2349188'))
 
-  fig_3/VM_shared_cache/nhd_2349188_nml.nml:
+  fig_3/yeti_sync/nhd_2349188_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_2349188'),
-      driver = 'fig_3/VM_shared_cache/nhd_2349188_meteo.csv',
+      driver = I('nhd_2349188_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_2349188_geometry.csv:
-    command: export_geometry(target_name, I('nhd_2349188'))
-
-  fig_3/VM_shared_cache/nhd_2349188_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_2349188_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2349188_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2349188_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_2349188_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2349188_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2349188_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_2349188_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2349188_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2349188_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_2349188_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_2349188_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2349188_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_2349188_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_2349188_pretraining_mask)
 
   nhd_2349188_pretraining_mask:
@@ -1980,36 +2341,43 @@ targets:
       site_id = I('nhd_2349188'),
       test_location = I(1/3))
 
+  nhd_2349188_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_2349188_meteo.csv',
+      'fig_3/yeti_sync/nhd_2349188_nml.nml',
+      'fig_3/yeti_sync/nhd_2349188_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_2349188_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_2349188_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_2349188_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_2349188_test_all_profiles.csv')
+
   # --- nhd_2349198 --- #
   
-  fig_3/VM_shared_cache/nhd_2349198_meteo.csv:
+  fig_3/yeti_sync/nhd_2349198_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_2349198'))
 
-  fig_3/VM_shared_cache/nhd_2349198_nml.nml:
+  fig_3/yeti_sync/nhd_2349198_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_2349198'),
-      driver = 'fig_3/VM_shared_cache/nhd_2349198_meteo.csv',
+      driver = I('nhd_2349198_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_2349198_geometry.csv:
-    command: export_geometry(target_name, I('nhd_2349198'))
-
-  fig_3/VM_shared_cache/nhd_2349198_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_2349198_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2349198_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2349198_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_2349198_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2349198_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2349198_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_2349198_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2349198_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2349198_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_2349198_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_2349198_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2349198_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_2349198_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_2349198_pretraining_mask)
 
   nhd_2349198_pretraining_mask:
@@ -2017,36 +2385,43 @@ targets:
       site_id = I('nhd_2349198'),
       test_location = I(1/3))
 
+  nhd_2349198_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_2349198_meteo.csv',
+      'fig_3/yeti_sync/nhd_2349198_nml.nml',
+      'fig_3/yeti_sync/nhd_2349198_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_2349198_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_2349198_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_2349198_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_2349198_test_all_profiles.csv')
+
   # --- nhd_2353946 --- #
   
-  fig_3/VM_shared_cache/nhd_2353946_meteo.csv:
+  fig_3/yeti_sync/nhd_2353946_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_2353946'))
 
-  fig_3/VM_shared_cache/nhd_2353946_nml.nml:
+  fig_3/yeti_sync/nhd_2353946_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_2353946'),
-      driver = 'fig_3/VM_shared_cache/nhd_2353946_meteo.csv',
+      driver = I('nhd_2353946_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_2353946_geometry.csv:
-    command: export_geometry(target_name, I('nhd_2353946'))
-
-  fig_3/VM_shared_cache/nhd_2353946_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_2353946_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2353946_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2353946_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_2353946_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2353946_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2353946_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_2353946_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2353946_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2353946_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_2353946_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_2353946_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2353946_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_2353946_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_2353946_pretraining_mask)
 
   nhd_2353946_pretraining_mask:
@@ -2054,36 +2429,43 @@ targets:
       site_id = I('nhd_2353946'),
       test_location = I(1/3))
 
+  nhd_2353946_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_2353946_meteo.csv',
+      'fig_3/yeti_sync/nhd_2353946_nml.nml',
+      'fig_3/yeti_sync/nhd_2353946_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_2353946_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_2353946_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_2353946_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_2353946_test_all_profiles.csv')
+
   # --- nhd_2384584 --- #
   
-  fig_3/VM_shared_cache/nhd_2384584_meteo.csv:
+  fig_3/yeti_sync/nhd_2384584_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_2384584'))
 
-  fig_3/VM_shared_cache/nhd_2384584_nml.nml:
+  fig_3/yeti_sync/nhd_2384584_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_2384584'),
-      driver = 'fig_3/VM_shared_cache/nhd_2384584_meteo.csv',
+      driver = I('nhd_2384584_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_2384584_geometry.csv:
-    command: export_geometry(target_name, I('nhd_2384584'))
-
-  fig_3/VM_shared_cache/nhd_2384584_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_2384584_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2384584_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2384584_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_2384584_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2384584_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2384584_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_2384584_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2384584_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2384584_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_2384584_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_2384584_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2384584_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_2384584_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_2384584_pretraining_mask)
 
   nhd_2384584_pretraining_mask:
@@ -2091,36 +2473,43 @@ targets:
       site_id = I('nhd_2384584'),
       test_location = I(1/3))
 
+  nhd_2384584_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_2384584_meteo.csv',
+      'fig_3/yeti_sync/nhd_2384584_nml.nml',
+      'fig_3/yeti_sync/nhd_2384584_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_2384584_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_2384584_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_2384584_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_2384584_test_all_profiles.csv')
+
   # --- nhd_2384766 --- #
   
-  fig_3/VM_shared_cache/nhd_2384766_meteo.csv:
+  fig_3/yeti_sync/nhd_2384766_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_2384766'))
 
-  fig_3/VM_shared_cache/nhd_2384766_nml.nml:
+  fig_3/yeti_sync/nhd_2384766_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_2384766'),
-      driver = 'fig_3/VM_shared_cache/nhd_2384766_meteo.csv',
+      driver = I('nhd_2384766_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_2384766_geometry.csv:
-    command: export_geometry(target_name, I('nhd_2384766'))
-
-  fig_3/VM_shared_cache/nhd_2384766_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_2384766_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2384766_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2384766_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_2384766_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2384766_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2384766_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_2384766_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2384766_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2384766_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_2384766_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_2384766_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2384766_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_2384766_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_2384766_pretraining_mask)
 
   nhd_2384766_pretraining_mask:
@@ -2128,36 +2517,43 @@ targets:
       site_id = I('nhd_2384766'),
       test_location = I(1/3))
 
+  nhd_2384766_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_2384766_meteo.csv',
+      'fig_3/yeti_sync/nhd_2384766_nml.nml',
+      'fig_3/yeti_sync/nhd_2384766_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_2384766_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_2384766_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_2384766_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_2384766_test_all_profiles.csv')
+
   # --- nhd_2385444 --- #
   
-  fig_3/VM_shared_cache/nhd_2385444_meteo.csv:
+  fig_3/yeti_sync/nhd_2385444_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_2385444'))
 
-  fig_3/VM_shared_cache/nhd_2385444_nml.nml:
+  fig_3/yeti_sync/nhd_2385444_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_2385444'),
-      driver = 'fig_3/VM_shared_cache/nhd_2385444_meteo.csv',
+      driver = I('nhd_2385444_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_2385444_geometry.csv:
-    command: export_geometry(target_name, I('nhd_2385444'))
-
-  fig_3/VM_shared_cache/nhd_2385444_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_2385444_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2385444_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2385444_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_2385444_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2385444_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2385444_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_2385444_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2385444_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2385444_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_2385444_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_2385444_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2385444_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_2385444_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_2385444_pretraining_mask)
 
   nhd_2385444_pretraining_mask:
@@ -2165,36 +2561,43 @@ targets:
       site_id = I('nhd_2385444'),
       test_location = I(1/3))
 
+  nhd_2385444_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_2385444_meteo.csv',
+      'fig_3/yeti_sync/nhd_2385444_nml.nml',
+      'fig_3/yeti_sync/nhd_2385444_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_2385444_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_2385444_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_2385444_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_2385444_test_all_profiles.csv')
+
   # --- nhd_2385496 --- #
   
-  fig_3/VM_shared_cache/nhd_2385496_meteo.csv:
+  fig_3/yeti_sync/nhd_2385496_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_2385496'))
 
-  fig_3/VM_shared_cache/nhd_2385496_nml.nml:
+  fig_3/yeti_sync/nhd_2385496_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_2385496'),
-      driver = 'fig_3/VM_shared_cache/nhd_2385496_meteo.csv',
+      driver = I('nhd_2385496_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_2385496_geometry.csv:
-    command: export_geometry(target_name, I('nhd_2385496'))
-
-  fig_3/VM_shared_cache/nhd_2385496_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_2385496_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2385496_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2385496_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_2385496_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2385496_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2385496_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_2385496_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2385496_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2385496_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_2385496_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_2385496_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2385496_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_2385496_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_2385496_pretraining_mask)
 
   nhd_2385496_pretraining_mask:
@@ -2202,36 +2605,43 @@ targets:
       site_id = I('nhd_2385496'),
       test_location = I(1/3))
 
+  nhd_2385496_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_2385496_meteo.csv',
+      'fig_3/yeti_sync/nhd_2385496_nml.nml',
+      'fig_3/yeti_sync/nhd_2385496_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_2385496_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_2385496_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_2385496_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_2385496_test_all_profiles.csv')
+
   # --- nhd_2385648 --- #
   
-  fig_3/VM_shared_cache/nhd_2385648_meteo.csv:
+  fig_3/yeti_sync/nhd_2385648_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_2385648'))
 
-  fig_3/VM_shared_cache/nhd_2385648_nml.nml:
+  fig_3/yeti_sync/nhd_2385648_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_2385648'),
-      driver = 'fig_3/VM_shared_cache/nhd_2385648_meteo.csv',
+      driver = I('nhd_2385648_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_2385648_geometry.csv:
-    command: export_geometry(target_name, I('nhd_2385648'))
-
-  fig_3/VM_shared_cache/nhd_2385648_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_2385648_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2385648_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2385648_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_2385648_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2385648_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2385648_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_2385648_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2385648_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2385648_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_2385648_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_2385648_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2385648_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_2385648_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_2385648_pretraining_mask)
 
   nhd_2385648_pretraining_mask:
@@ -2239,36 +2649,43 @@ targets:
       site_id = I('nhd_2385648'),
       test_location = I(1/3))
 
+  nhd_2385648_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_2385648_meteo.csv',
+      'fig_3/yeti_sync/nhd_2385648_nml.nml',
+      'fig_3/yeti_sync/nhd_2385648_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_2385648_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_2385648_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_2385648_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_2385648_test_all_profiles.csv')
+
   # --- nhd_2647582 --- #
   
-  fig_3/VM_shared_cache/nhd_2647582_meteo.csv:
+  fig_3/yeti_sync/nhd_2647582_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_2647582'))
 
-  fig_3/VM_shared_cache/nhd_2647582_nml.nml:
+  fig_3/yeti_sync/nhd_2647582_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_2647582'),
-      driver = 'fig_3/VM_shared_cache/nhd_2647582_meteo.csv',
+      driver = I('nhd_2647582_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_2647582_geometry.csv:
-    command: export_geometry(target_name, I('nhd_2647582'))
-
-  fig_3/VM_shared_cache/nhd_2647582_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_2647582_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2647582_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2647582_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_2647582_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2647582_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2647582_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_2647582_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2647582_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2647582_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_2647582_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_2647582_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2647582_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_2647582_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_2647582_pretraining_mask)
 
   nhd_2647582_pretraining_mask:
@@ -2276,36 +2693,43 @@ targets:
       site_id = I('nhd_2647582'),
       test_location = I(1/3))
 
+  nhd_2647582_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_2647582_meteo.csv',
+      'fig_3/yeti_sync/nhd_2647582_nml.nml',
+      'fig_3/yeti_sync/nhd_2647582_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_2647582_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_2647582_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_2647582_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_2647582_test_all_profiles.csv')
+
   # --- nhd_2648034 --- #
   
-  fig_3/VM_shared_cache/nhd_2648034_meteo.csv:
+  fig_3/yeti_sync/nhd_2648034_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_2648034'))
 
-  fig_3/VM_shared_cache/nhd_2648034_nml.nml:
+  fig_3/yeti_sync/nhd_2648034_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_2648034'),
-      driver = 'fig_3/VM_shared_cache/nhd_2648034_meteo.csv',
+      driver = I('nhd_2648034_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_2648034_geometry.csv:
-    command: export_geometry(target_name, I('nhd_2648034'))
-
-  fig_3/VM_shared_cache/nhd_2648034_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_2648034_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2648034_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2648034_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_2648034_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2648034_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2648034_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_2648034_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2648034_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2648034_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_2648034_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_2648034_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2648034_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_2648034_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_2648034_pretraining_mask)
 
   nhd_2648034_pretraining_mask:
@@ -2313,36 +2737,43 @@ targets:
       site_id = I('nhd_2648034'),
       test_location = I(1/3))
 
+  nhd_2648034_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_2648034_meteo.csv',
+      'fig_3/yeti_sync/nhd_2648034_nml.nml',
+      'fig_3/yeti_sync/nhd_2648034_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_2648034_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_2648034_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_2648034_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_2648034_test_all_profiles.csv')
+
   # --- nhd_2723765 --- #
   
-  fig_3/VM_shared_cache/nhd_2723765_meteo.csv:
+  fig_3/yeti_sync/nhd_2723765_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_2723765'))
 
-  fig_3/VM_shared_cache/nhd_2723765_nml.nml:
+  fig_3/yeti_sync/nhd_2723765_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_2723765'),
-      driver = 'fig_3/VM_shared_cache/nhd_2723765_meteo.csv',
+      driver = I('nhd_2723765_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_2723765_geometry.csv:
-    command: export_geometry(target_name, I('nhd_2723765'))
-
-  fig_3/VM_shared_cache/nhd_2723765_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_2723765_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2723765_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2723765_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_2723765_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2723765_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2723765_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_2723765_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2723765_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2723765_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_2723765_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_2723765_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2723765_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_2723765_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_2723765_pretraining_mask)
 
   nhd_2723765_pretraining_mask:
@@ -2350,36 +2781,43 @@ targets:
       site_id = I('nhd_2723765'),
       test_location = I(1/3))
 
+  nhd_2723765_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_2723765_meteo.csv',
+      'fig_3/yeti_sync/nhd_2723765_nml.nml',
+      'fig_3/yeti_sync/nhd_2723765_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_2723765_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_2723765_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_2723765_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_2723765_test_all_profiles.csv')
+
   # --- nhd_2723803 --- #
   
-  fig_3/VM_shared_cache/nhd_2723803_meteo.csv:
+  fig_3/yeti_sync/nhd_2723803_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_2723803'))
 
-  fig_3/VM_shared_cache/nhd_2723803_nml.nml:
+  fig_3/yeti_sync/nhd_2723803_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_2723803'),
-      driver = 'fig_3/VM_shared_cache/nhd_2723803_meteo.csv',
+      driver = I('nhd_2723803_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_2723803_geometry.csv:
-    command: export_geometry(target_name, I('nhd_2723803'))
-
-  fig_3/VM_shared_cache/nhd_2723803_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_2723803_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2723803_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2723803_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_2723803_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2723803_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2723803_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_2723803_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2723803_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2723803_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_2723803_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_2723803_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2723803_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_2723803_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_2723803_pretraining_mask)
 
   nhd_2723803_pretraining_mask:
@@ -2387,36 +2825,43 @@ targets:
       site_id = I('nhd_2723803'),
       test_location = I(1/3))
 
+  nhd_2723803_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_2723803_meteo.csv',
+      'fig_3/yeti_sync/nhd_2723803_nml.nml',
+      'fig_3/yeti_sync/nhd_2723803_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_2723803_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_2723803_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_2723803_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_2723803_test_all_profiles.csv')
+
   # --- nhd_2723871 --- #
   
-  fig_3/VM_shared_cache/nhd_2723871_meteo.csv:
+  fig_3/yeti_sync/nhd_2723871_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_2723871'))
 
-  fig_3/VM_shared_cache/nhd_2723871_nml.nml:
+  fig_3/yeti_sync/nhd_2723871_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_2723871'),
-      driver = 'fig_3/VM_shared_cache/nhd_2723871_meteo.csv',
+      driver = I('nhd_2723871_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_2723871_geometry.csv:
-    command: export_geometry(target_name, I('nhd_2723871'))
-
-  fig_3/VM_shared_cache/nhd_2723871_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_2723871_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2723871_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2723871_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_2723871_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2723871_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2723871_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_2723871_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_2723871_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2723871_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_2723871_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_2723871_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_2723871_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_2723871_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_2723871_pretraining_mask)
 
   nhd_2723871_pretraining_mask:
@@ -2424,36 +2869,43 @@ targets:
       site_id = I('nhd_2723871'),
       test_location = I(1/3))
 
+  nhd_2723871_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_2723871_meteo.csv',
+      'fig_3/yeti_sync/nhd_2723871_nml.nml',
+      'fig_3/yeti_sync/nhd_2723871_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_2723871_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_2723871_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_2723871_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_2723871_test_all_profiles.csv')
+
   # --- nhd_4250586 --- #
   
-  fig_3/VM_shared_cache/nhd_4250586_meteo.csv:
+  fig_3/yeti_sync/nhd_4250586_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_4250586'))
 
-  fig_3/VM_shared_cache/nhd_4250586_nml.nml:
+  fig_3/yeti_sync/nhd_4250586_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_4250586'),
-      driver = 'fig_3/VM_shared_cache/nhd_4250586_meteo.csv',
+      driver = I('nhd_4250586_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_4250586_geometry.csv:
-    command: export_geometry(target_name, I('nhd_4250586'))
-
-  fig_3/VM_shared_cache/nhd_4250586_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_4250586_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_4250586_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_4250586_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_4250586_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_4250586_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_4250586_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_4250586_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_4250586_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_4250586_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_4250586_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_4250586_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_4250586_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_4250586_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_4250586_pretraining_mask)
 
   nhd_4250586_pretraining_mask:
@@ -2461,36 +2913,43 @@ targets:
       site_id = I('nhd_4250586'),
       test_location = I(1/3))
 
+  nhd_4250586_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_4250586_meteo.csv',
+      'fig_3/yeti_sync/nhd_4250586_nml.nml',
+      'fig_3/yeti_sync/nhd_4250586_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_4250586_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_4250586_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_4250586_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_4250586_test_all_profiles.csv')
+
   # --- nhd_4250588 --- #
   
-  fig_3/VM_shared_cache/nhd_4250588_meteo.csv:
+  fig_3/yeti_sync/nhd_4250588_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_4250588'))
 
-  fig_3/VM_shared_cache/nhd_4250588_nml.nml:
+  fig_3/yeti_sync/nhd_4250588_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_4250588'),
-      driver = 'fig_3/VM_shared_cache/nhd_4250588_meteo.csv',
+      driver = I('nhd_4250588_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_4250588_geometry.csv:
-    command: export_geometry(target_name, I('nhd_4250588'))
-
-  fig_3/VM_shared_cache/nhd_4250588_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_4250588_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_4250588_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_4250588_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_4250588_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_4250588_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_4250588_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_4250588_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_4250588_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_4250588_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_4250588_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_4250588_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_4250588_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_4250588_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_4250588_pretraining_mask)
 
   nhd_4250588_pretraining_mask:
@@ -2498,36 +2957,43 @@ targets:
       site_id = I('nhd_4250588'),
       test_location = I(1/3))
 
+  nhd_4250588_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_4250588_meteo.csv',
+      'fig_3/yeti_sync/nhd_4250588_nml.nml',
+      'fig_3/yeti_sync/nhd_4250588_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_4250588_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_4250588_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_4250588_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_4250588_test_all_profiles.csv')
+
   # --- nhd_9022741 --- #
   
-  fig_3/VM_shared_cache/nhd_9022741_meteo.csv:
+  fig_3/yeti_sync/nhd_9022741_meteo.csv:
     command: get_write_driver(driver = target_name,
       I('nhd_9022741'))
 
-  fig_3/VM_shared_cache/nhd_9022741_nml.nml:
+  fig_3/yeti_sync/nhd_9022741_nml.nml:
     command: get_write_base_nml(target_name, I('nhd_9022741'),
-      driver = 'fig_3/VM_shared_cache/nhd_9022741_meteo.csv',
+      driver = I('nhd_9022741_meteo.csv'),
       start = I('1979-04-01'),
       stop = I('2018-12-20'),
       dt = I(3600),
       nsave=I(24))
 
-  fig_3/VM_shared_cache/nhd_9022741_geometry.csv:
-    command: export_geometry(target_name, I('nhd_9022741'))
-
-  fig_3/VM_shared_cache/nhd_9022741_train_010_profiles_experiment_01.csv:
+  fig_3/yeti_sync/nhd_9022741_train_010_profiles_experiment_01.csv:
     command: subset_training_random(target_name, refined_obs, nhd_9022741_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_9022741_train_010_profiles_experiment_02.csv:
+  fig_3/yeti_sync/nhd_9022741_train_010_profiles_experiment_02.csv:
     command: subset_training_random(target_name, refined_obs, nhd_9022741_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_9022741_train_010_profiles_experiment_03.csv:
+  fig_3/yeti_sync/nhd_9022741_train_010_profiles_experiment_03.csv:
     command: subset_training_random(target_name, refined_obs, nhd_9022741_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_9022741_train_all_profiles.csv:
+  fig_3/yeti_sync/nhd_9022741_train_all_profiles.csv:
     command: subset_training(target_name, refined_obs, nhd_9022741_pretraining_mask)
 
-  fig_3/VM_shared_cache/nhd_9022741_test_all_profiles.csv:
+  fig_3/yeti_sync/nhd_9022741_test_all_profiles.csv:
     command: subset_testing(target_name, refined_obs, nhd_9022741_pretraining_mask)
 
   nhd_9022741_pretraining_mask:
@@ -2535,76 +3001,86 @@ targets:
       site_id = I('nhd_9022741'),
       test_location = I(1/3))
 
+  nhd_9022741_sync_files:
+    command: combine_to_ind(ind_file = I(''),
+      'fig_3/yeti_sync/nhd_9022741_meteo.csv',
+      'fig_3/yeti_sync/nhd_9022741_nml.nml',
+      'fig_3/yeti_sync/nhd_9022741_train_010_profiles_experiment_01.csv',
+      'fig_3/yeti_sync/nhd_9022741_train_010_profiles_experiment_02.csv',
+      'fig_3/yeti_sync/nhd_9022741_train_010_profiles_experiment_03.csv',
+      'fig_3/yeti_sync/nhd_9022741_train_all_profiles.csv',
+      'fig_3/yeti_sync/nhd_9022741_test_all_profiles.csv')
+
   # --- Overall job --- #
 
-  figure3_pretraining_masks.feather_promise:
-    command: create_masks_feather(I('fig_3/out/figure3_pretraining_masks.feather'),
-      nhd_10596466_pretraining_mask,
-      nhd_1097324_pretraining_mask,
-      nhd_1099052_pretraining_mask,
-      nhd_1099136_pretraining_mask,
-      nhd_1099172_pretraining_mask,
-      nhd_1099240_pretraining_mask,
-      nhd_1099282_pretraining_mask,
-      nhd_1099420_pretraining_mask,
-      nhd_1099430_pretraining_mask,
-      nhd_1099432_pretraining_mask,
-      nhd_1099450_pretraining_mask,
-      nhd_1099476_pretraining_mask,
-      nhd_1099526_pretraining_mask,
-      nhd_1100962_pretraining_mask,
-      nhd_1101504_pretraining_mask,
-      nhd_1101506_pretraining_mask,
-      nhd_1101544_pretraining_mask,
-      nhd_1101590_pretraining_mask,
-      nhd_1101616_pretraining_mask,
-      nhd_1101636_pretraining_mask,
-      nhd_1101684_pretraining_mask,
-      nhd_1101754_pretraining_mask,
-      nhd_1101778_pretraining_mask,
-      nhd_1101812_pretraining_mask,
-      nhd_1101864_pretraining_mask,
-      nhd_1101938_pretraining_mask,
-      nhd_1101942_pretraining_mask,
-      nhd_1102086_pretraining_mask,
-      nhd_1102088_pretraining_mask,
-      nhd_1102284_pretraining_mask,
-      nhd_1102366_pretraining_mask,
-      nhd_120051922_pretraining_mask,
-      nhd_120052022_pretraining_mask,
-      nhd_120052233_pretraining_mask,
-      nhd_120052351_pretraining_mask,
-      nhd_120052587_pretraining_mask,
-      nhd_120053694_pretraining_mask,
-      nhd_12160852_pretraining_mask,
-      nhd_12162854_pretraining_mask,
-      nhd_13290898_pretraining_mask,
-      nhd_13293262_pretraining_mask,
-      nhd_13294464_pretraining_mask,
-      nhd_13294928_pretraining_mask,
-      nhd_13343906_pretraining_mask,
-      nhd_13344056_pretraining_mask,
-      nhd_13344170_pretraining_mask,
-      nhd_13344210_pretraining_mask,
-      nhd_13344284_pretraining_mask,
-      nhd_13393533_pretraining_mask,
-      nhd_13393567_pretraining_mask,
-      nhd_13631637_pretraining_mask,
-      nhd_14783883_pretraining_mask,
-      nhd_2349188_pretraining_mask,
-      nhd_2349198_pretraining_mask,
-      nhd_2353946_pretraining_mask,
-      nhd_2384584_pretraining_mask,
-      nhd_2384766_pretraining_mask,
-      nhd_2385444_pretraining_mask,
-      nhd_2385496_pretraining_mask,
-      nhd_2385648_pretraining_mask,
-      nhd_2647582_pretraining_mask,
-      nhd_2648034_pretraining_mask,
-      nhd_2723765_pretraining_mask,
-      nhd_2723803_pretraining_mask,
-      nhd_2723871_pretraining_mask,
-      nhd_4250586_pretraining_mask,
-      nhd_4250588_pretraining_mask,
-      nhd_9022741_pretraining_mask)
+  fig_3_yeti_jobs.csv_promise:
+    command: combine_to_job_table(I('fig_3/out/fig_3_yeti_jobs.csv'),
+      nhd_10596466_sync_files,
+      nhd_1097324_sync_files,
+      nhd_1099052_sync_files,
+      nhd_1099136_sync_files,
+      nhd_1099172_sync_files,
+      nhd_1099240_sync_files,
+      nhd_1099282_sync_files,
+      nhd_1099420_sync_files,
+      nhd_1099430_sync_files,
+      nhd_1099432_sync_files,
+      nhd_1099450_sync_files,
+      nhd_1099476_sync_files,
+      nhd_1099526_sync_files,
+      nhd_1100962_sync_files,
+      nhd_1101504_sync_files,
+      nhd_1101506_sync_files,
+      nhd_1101544_sync_files,
+      nhd_1101590_sync_files,
+      nhd_1101616_sync_files,
+      nhd_1101636_sync_files,
+      nhd_1101684_sync_files,
+      nhd_1101754_sync_files,
+      nhd_1101778_sync_files,
+      nhd_1101812_sync_files,
+      nhd_1101864_sync_files,
+      nhd_1101938_sync_files,
+      nhd_1101942_sync_files,
+      nhd_1102086_sync_files,
+      nhd_1102088_sync_files,
+      nhd_1102284_sync_files,
+      nhd_1102366_sync_files,
+      nhd_120051922_sync_files,
+      nhd_120052022_sync_files,
+      nhd_120052233_sync_files,
+      nhd_120052351_sync_files,
+      nhd_120052587_sync_files,
+      nhd_120053694_sync_files,
+      nhd_12160852_sync_files,
+      nhd_12162854_sync_files,
+      nhd_13290898_sync_files,
+      nhd_13293262_sync_files,
+      nhd_13294464_sync_files,
+      nhd_13294928_sync_files,
+      nhd_13343906_sync_files,
+      nhd_13344056_sync_files,
+      nhd_13344170_sync_files,
+      nhd_13344210_sync_files,
+      nhd_13344284_sync_files,
+      nhd_13393533_sync_files,
+      nhd_13393567_sync_files,
+      nhd_13631637_sync_files,
+      nhd_14783883_sync_files,
+      nhd_2349188_sync_files,
+      nhd_2349198_sync_files,
+      nhd_2353946_sync_files,
+      nhd_2384584_sync_files,
+      nhd_2384766_sync_files,
+      nhd_2385444_sync_files,
+      nhd_2385496_sync_files,
+      nhd_2385648_sync_files,
+      nhd_2647582_sync_files,
+      nhd_2648034_sync_files,
+      nhd_2723765_sync_files,
+      nhd_2723803_sync_files,
+      nhd_2723871_sync_files,
+      nhd_4250586_sync_files,
+      nhd_4250588_sync_files,
+      nhd_9022741_sync_files)
     

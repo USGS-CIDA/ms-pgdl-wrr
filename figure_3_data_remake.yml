@@ -60,8 +60,8 @@ targets:
       task_plan = multilake_data_task_plan,
       makefile = target_name,
       include = I("figure_3_data_remake.yml"),
-      final_targets = I("fig_3/out/figure3_pretraining_masks.feather"),
-      finalize_funs = I('create_masks_feather'))
+      final_targets = I("fig_3/out/fig_3_yeti_jobs.csv"),
+      finalize_funs = I('combine_to_job_table'))
 
   multilake_model_tasks_01.yml: # also include multilake data remake?
     command: create_task_makefile(
@@ -73,7 +73,7 @@ targets:
       final_targets = I("fig_3/out/figure3_model_01_results.feather"),
       finalize_funs = I("combine_model_results_feather"))
 
-  fig_3/out/figure3_pretraining_masks.feather:
+  fig_3/out/fig_3_yeti_jobs.csv:
     command: scmake(remake_file = 'multilake_data_tasks.yml')
 
   fig_3/out/figure3_model_01_results.feather:

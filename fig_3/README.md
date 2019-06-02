@@ -38,17 +38,44 @@ cd /cxfs/projects/usgs/water/iidd/data-sci/lake-temp/glm-optim-wrr
 `out` is where the results go 
 `out/fig_3` is where figure 3 results are written to
 `in` is where we sync external data to
-`in/fig_3` is where we sync figure 3 datat to
+`in/fig_3` is where we sync figure 3 data to
 `Rlib` is where our R packages are installed to
 `src` is where our R scripts are
 `sim-scratch` is where sims are run (in sub dirs)
-`sim-scratch/fig_3/nhd_10596466_subset_random_01` is an example simulation directory that is created and then unlinked when complete
+`sim-scratch/fig_3/nhd_10596466_010_profiles_experiment_01` is an example simulation directory that is created and then unlinked when complete
 
 `sbatch {array_job_names}.batch` to start the jobs
 `squeue -u jread --start` to check job status
 
-to sync data to Yeti:
-```
-rsync -avz 7_drivers_munge/out/  jread@yeti.cr.usgs.gov:/cxfs/projects/usgs/water/iidd/data-sci/lake-temp/glm-optim-wrr/in/fig_3
+to build the files for yeti sync:
+```r
+scmake('fig_3/out/figure3_data_files.feather','figure_3_data_remake.yml')
 ```
 
+to sync data to Yeti:
+```
+cd fig_3/yeti_sync
+rsync -avz .  jread@yeti.cr.usgs.gov:/cxfs/projects/usgs/water/iidd/data-sci/lake-temp/glm-optim-wrr/in/fig_3
+```
+
+to sync R script to Yeti:
+```
+cd fig_3/src
+rsync yeti_src_glm_optim.R jread@yeti.cr.usgs.gov:/cxfs/projects/usgs/water/iidd/data-sci/lake-temp/glm-optim-wrr/src/yeti_src_glm_optim.R
+```
+
+to sync job table to Yeti:
+```
+cd fig_3/out
+rsync fig_3_yeti_jobs.csv jread@yeti.cr.usgs.gov:/cxfs/projects/usgs/water/iidd/data-sci/lake-temp/glm-optim-wrr/in/fig_3_yeti_jobs.csv
+```
+
+on yeti, can tail a log w/ 
+```
+tail sim-scratch/{nhd_10596466_010_profiles_experiment_01}/results_log.txt
+```
+
+see what jobs are done w/ 
+```
+ls out/fig_3
+```
