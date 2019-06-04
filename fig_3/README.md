@@ -75,7 +75,9 @@ on yeti, can tail a log w/
 tail sim-scratch/{nhd_10596466_010_profiles_experiment_01}/results_log.txt
 ```
 
-see what jobs are done w/ 
+see what jobs are done and/or count complete jobs with:
 ```
 ls out/fig_3
+
+ls out/fig_3/ | wc -l
 ```

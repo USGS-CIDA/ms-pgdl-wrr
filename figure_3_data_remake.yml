@@ -9,7 +9,7 @@ packages:
   - googlesheets
 
 
-target_default: multilake_files
+target_default: fig_3_multilake_files
 
 sources:
   - fig_3/src/multilake_train_split.R
@@ -19,7 +19,7 @@ sources:
 
 
 targets:
-  multilake_files:
+  fig_3_multilake_files:
     depends:
       - fig_3/out/figure3_pretraining_masks.feather
       - fig_3/out/figure3_model_01_results.feather

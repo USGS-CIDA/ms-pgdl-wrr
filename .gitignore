@@ -6,3 +6,7 @@
 .Rproj.user
 .spyproject
 *__pycache__
+.httr-oauth
+*fig_3/yeti_sync
+*fig_3/VM_shared_cache
+*fig_2/yeti_sync
