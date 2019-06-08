@@ -24,13 +24,13 @@ optim_multilake_glm <- function(driver_file, nml_file, train_file, test_file, si
 
   # set all fixed nml values
   # check metweo file is named right in nml??
-  file.copy(from = driver_file, to = sprintf('%s/%s', sim_dir, meteo_file))
+  file.copy(from = driver_file, to = sprintf('%s/%s', sim_dir, meteo_file), overwrite = TRUE)
   nml_obj <- set_nml(nml_obj, arg_list = list(meteo_fl = meteo_file))
 
   train_filepath <- sprintf('%s/train_data.csv', sim_dir)
   test_filepath <- sprintf('%s/test_data.csv', sim_dir)
-  file.copy(from = train_file, to = train_filepath)
-  file.copy(from = test_file, to = test_filepath)
+  file.copy(from = train_file, to = train_filepath, overwrite = TRUE)
+  file.copy(from = test_file, to = test_filepath, overwrite = TRUE)
 
   initial_params = c('cd'=cd_start, coef_wind_stir=0.23, Kw = kw_start)
   parscale = c('cd'=0.0001, coef_wind_stir=0.001, Kw = 0.1*kw_start)
@@ -121,15 +121,15 @@ driver_file <- file.path('in/fig_2', job_table$meteo_file[task_id])
 train_file <- file.path('in/fig_2', job_table$train_file[task_id])
 test_file <- file.path('in/fig_2', job_table$test_file[task_id])
 exper_id <- job_table$exper_id[task_id]
-sim_dir <- sprintf('sim-scratch/task_%s_%s', task_id, exper_id)
-dir.create(sim_dir)
+sim_dir <- file.path(Sys.getenv('LOCAL_SCRATCH', unset="sim-scratch"), sprintf('task_%s_%s', task_id, exper_id))
+dir.create(sim_dir, recursive = TRUE)
 
 # it seems to be very slow to run opim on many nodes. Is this because they are all hitting the same GLM exe?
 # copy glm exe and use the copy for each sim:
 glm_nix_dir <- file.path(sim_dir, 'glm_nix')
 dir.create(glm_nix_dir)
-file.copy(system.file('exec/nixglm', package='GLMr'), file.path(glm_nix_dir, 'glm_nix_exe'))
-file.copy(system.file('extbin/nixGLM', package='GLMr'), glm_nix_dir, recursive = TRUE)
+file.copy(system.file('exec/nixglm', package='GLMr'), file.path(glm_nix_dir, 'glm_nix_exe'), overwrite = TRUE)
+file.copy(system.file('extbin/nixGLM', package='GLMr'), glm_nix_dir, recursive = TRUE, overwrite = TRUE)
 
-glm_nix_full_dir <- file.path(getwd(), glm_nix_dir)
+glm_nix_full_dir <- glm_nix_dir
 run_optim_glm(driver_file, nml_file, train_file, test_file, exper_id, sim_dir, glm_nix_full_dir)

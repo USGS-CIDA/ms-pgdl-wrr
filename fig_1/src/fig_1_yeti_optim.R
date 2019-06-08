@@ -7,7 +7,7 @@ run_optim_glm <- function(driver_file, nml_file, train_file, test_file, exper_id
 
   optim_multilake_glm(driver_file, nml_file, train_file, test_file, sim_dir, glm_nix_dir) %>%
     select(nhd_id, train_rmse, test_rmse, everything()) %>%
-    write_csv(paste0('out/fig_3/', exper_id, "_results.csv"))
+    write_csv(paste0('out/fig_1/', exper_id, "_results.csv"))
 }
 
 optim_multilake_glm <- function(driver_file, nml_file, train_file, test_file, sim_dir, glm_nix_dir){
@@ -86,7 +86,6 @@ run_glm_copy <- function(sim_folder, glm_nix_dir, verbose = FALSE){
   setwd(sim_folder)
   Sys.setenv(LD_LIBRARY_PATH=file.path(glm_nix_dir, 'nixGLM'))
   glm_path <- file.path(glm_nix_dir, "glm_nix_exe")
-
   tryCatch({
     if (verbose){
       out <- system2(glm_path, wait = TRUE, stdout = "",
@@ -114,11 +113,11 @@ if(is.na(task_id)){
   stop("ERROR Can not read task_id, NA returned")
 }
 
-job_table <- read_csv('in/fig_3_yeti_jobs.csv')
-nml_file <- file.path('in/fig_3', job_table$nml_file[task_id])
-driver_file <- file.path('in/fig_3', job_table$meteo_file[task_id])
-train_file <- file.path('in/fig_3', job_table$train_file[task_id])
-test_file <- file.path('in/fig_3', job_table$test_file[task_id])
+job_table <- read_csv('in/fig_1_yeti_jobs.csv')
+nml_file <- file.path('in/fig_1', job_table$nml_file[task_id])
+driver_file <- file.path('in/fig_1', job_table$meteo_file[task_id])
+train_file <- file.path('in/fig_1', job_table$train_file[task_id])
+test_file <- file.path('in/fig_1', job_table$test_file[task_id])
 exper_id <- job_table$exper_id[task_id]
 sim_dir <- file.path(Sys.getenv('LOCAL_SCRATCH', unset="sim-scratch"), sprintf('task_%s_%s', task_id, exper_id))
 dir.create(sim_dir, recursive = TRUE)

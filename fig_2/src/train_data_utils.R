@@ -1,4 +1,16 @@
 
+# because there are some instrument error issues, we are removing some variables from LTER and replacing w/ NLDAS
+combine_lter_nldas <- function(filepath, lter_filepath, nldas_filepath, use_nldas){
+
+  lter_data <- read_csv(lter_filepath) %>% select(-use_nldas)
+  stopifnot(unique(diff(lter_data$time)) == 1) # isn't continuous or complete
+
+  nldas_data <- read_csv(nldas_filepath) %>% select(time, use_nldas)
+
+  left_join(lter_data, nldas_data) %>%
+    select(time, ShortWave, LongWave, AirTemp, RelHum, WindSpeed, Rain, Snow) %>%
+    write_csv(filepath)
+}
 
 build_sparse_training <- function(filepath, buoy_data, chunksize, remove_chunks, exp_n, prof_n){
 

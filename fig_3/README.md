@@ -57,6 +57,11 @@ to sync data to Yeti:
 cd fig_3/yeti_sync
 rsync -avz .  jread@yeti.cr.usgs.gov:/cxfs/projects/usgs/water/iidd/data-sci/lake-temp/glm-optim-wrr/in/fig_3
 ```
+to get data from Yeti:
+```
+cd yeti_in
+rsync -avz jread@yeti.cr.usgs.gov:/cxfs/projects/usgs/water/iidd/data-sci/lake-temp/glm-optim-wrr/out/. .
+```
 
 to sync R script to Yeti:
 ```
