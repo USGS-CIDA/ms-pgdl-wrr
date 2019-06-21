@@ -48,7 +48,7 @@ targets:
     command: combine_lter_nldas(target_name,
       lter_filepath = "fig_2/in/sparkling_local_meteo.csv",
       nldas_filepath = "fig_3/yeti_sync/nhd_13344210_meteo.csv",
-      use_nldas = I(c("WindSpeed", "RelHum")))
+      use_nldas = I(c("ShortWave", "RelHum")))
 
   fig_2/yeti_sync/me_meteo.csv:
     command: file.copy("fig_2/in/mendota_local_meteo.csv", to = target_name)

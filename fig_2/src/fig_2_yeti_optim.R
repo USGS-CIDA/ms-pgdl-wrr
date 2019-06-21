@@ -8,6 +8,23 @@ run_optim_glm <- function(driver_file, nml_file, train_file, test_file, exper_id
   optim_multilake_glm(driver_file, nml_file, train_file, test_file, sim_dir, glm_nix_dir) %>%
     select(nhd_id, train_rmse, test_rmse, everything()) %>%
     write_csv(paste0('out/fig_2/', exper_id, "_results.csv"))
+
+  export_temp(filepath = paste0('out/fig_2/', exper_id, "_temperatures.feather"), nml_file, sim_dir)
+}
+
+
+export_temp <- function(filepath, nml_file, sim_dir){
+
+  glm_nml <- read_nml(nml_file)
+  lake_depth <- get_nml_value(glm_nml, arg_name = 'lake_depth')
+  export_depths <- seq(0, lake_depth, by = 0.5)
+
+  temp_data <- get_temp(sprintf('%s/output.nc', sim_dir), reference = 'surface', z_out = export_depths)
+  model_out <- get_var(sprintf('%s/output.nc', sim_dir), var_name = 'hice') %>%
+    mutate(ice = hice > 0) %>% select(-hice) %>%
+    left_join(temp_data, ., by = 'DateTime')
+  feather::write_feather(model_out, filepath)
+
 }
 
 optim_multilake_glm <- function(driver_file, nml_file, train_file, test_file, sim_dir, glm_nix_dir){
