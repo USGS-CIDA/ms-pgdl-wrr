@@ -56,19 +56,22 @@ drive_download(as_id('https://docs.google.com/spreadsheets/d/1CiYLoV8169xeZuHNtz
 rmse_dat <- read.csv('D:/R Projects/lake-temp-supplement/fig3_rmse_data.csv', stringsAsFactors = F,nrows = 68)
 rmse_dat$nhd_id <- paste0('nhd_', rmse_dat$nhd_id)
 
+# dropped the 50 versions below, not sure if we want to keep?
 rmse_dat <- mutate(rmse_dat,
                    `GLM (pre-trainer)`= round(`GLM.uncal.rmse`,2),
                    `GLM (calibrated)` = round(`GLM.cal`,2),
                    PGDL = round(PGDL, 2), `PGDL (50)` = round(PGDL_50,2), `PGDL (10)` = round(PGDL_10,2),
                    DL = round(DL, 2), `DL (50)` = round(DL_50,2), `DL (10)` = round(DL_10,2)) %>%
-  select(nhd_id, `GLM (pre-trainer)`, `GLM (calibrated)`,PGDL, `PGDL (50)`, `PGDL (10)`,DL, `DL (50)`, `DL (10)`)
+  select(nhd_id, `GLM (pre-trainer)`, `GLM (calibrated)`,PGDL, `PGDL (10)`,DL, `DL (10)`)
 
 
 # merge in RMSE data
 summary68 <- left_join(summary68,
                        rmse_dat)
 
-# write.csv(summary68, 'supplement/out/temp_obs_summary_update.csv', row.names = F)
+  dir.create('supplement/out', showWarnings = FALSE)
+
+ write.csv(summary68, 'supplement/out/temp_obs_summary_update.csv', row.names = F)
 #  file <- drive_upload(
 #    'supplement/out/temp_obs_summary_update.csv',
 #    path = as_id('https://drive.google.com/drive/u/1/folders/1yCCcqfPeppdQM79adK5dWrUmMzIwBvQv'),
@@ -77,5 +80,5 @@ summary68 <- left_join(summary68,
 #  )
 
 drive_update(file = as_id('https://docs.google.com/spreadsheets/d/1msBsOu92fqT3NuEdfb-OHVMpxULb879qXEEZpaV6qFU/edit#gid=1537497571'),
-             media = 'D:/R Projects/lake-temp-supplement/temp_obs_summary_update.csv.csv')
+             media = 'supplement/out/temp_obs_summary_update.csv')
 
