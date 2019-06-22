@@ -1,7 +1,7 @@
 plot_seasons_years_sparsity <- function(){
   library(dplyr)
 
-  data <- readr::read_csv('~/Downloads/revision_Figure_2_results - Sheet1 (5).csv')#'Figure 2 seasonal_yearly results - Sheet1 (2).csvfig_2/in/Figure 2 seasonal_yearly results - Sheet1.csv')
+  data <- readr::read_csv('~/Downloads/revision_Figure_2_results - Sheet1 (7).csv')#'Figure 2 seasonal_yearly results - Sheet1 (2).csvfig_2/in/Figure 2 seasonal_yearly results - Sheet1.csv')
 
 
   png(filename = 'figures/figure_2_wrr.png', width = 8, height = 4.5, units = 'in', res = 200)
@@ -49,6 +49,7 @@ plot_seasons_years_sparsity <- function(){
     message("Mendota RNN:", filter(plot_data, lake == "mendota", Model == 'RNN') %>% pull(`Test RMSE`) %>% mean)
 
     ME_mean <- filter(plot_data, lake == "mendota", Model == 'PGRNN_pretrained_prev_yrs') %>% pull(`Test RMSE`) %>% mean
+    message("Mendota PGRNN: ", round(ME_mean, 2))
     lines(c(PGRNN_x+me_bmp, PGRNN_x+me_bmp), c(filter(plot_data, lake == "mendota", Model == 'PGRNN_pretrained_prev_yrs') %>% pull(`Test RMSE`) %>% max(),
                                                filter(plot_data, lake == "mendota", Model == 'PGRNN_pretrained_prev_yrs') %>% pull(`Test RMSE`) %>% min()), lwd = 1.5, col = '#7570b3')
     points(PGRNN_x+me_bmp, ME_mean, pch = 23, lwd = 1.5, cex = 3.2, bg = 'white', col = '#7570b3', ljoin = 1)

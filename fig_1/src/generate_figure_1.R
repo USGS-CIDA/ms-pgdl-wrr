@@ -1,7 +1,7 @@
 
 plot_data_sparsity <- function(){
   library(dplyr)
-  data <- readr::read_csv('~/Downloads/revision_Figure_1_results - Sheet1 (2).csv')#Sparse training results (2_prof_GLM-uncal) - Sheet1.csv; 'fig_1/in/Sparse training results.csv')
+  data <- readr::read_csv('~/Downloads/revision_Figure_1_results - Sheet1 (3).csv')#Sparse training results (2_prof_GLM-uncal) - Sheet1.csv; 'fig_1/in/Sparse training results.csv')
 
 
   png(filename = 'figures/figure_1_wrr.png', width = 8, height = 10, units = 'in', res = 200)
@@ -47,14 +47,14 @@ plot_data_sparsity <- function(){
     pg_mean$x <- c(pg_mean$x, x+pgrnn_offsets[1])
     lines(c(x+pgrnn_offsets[1], x+pgrnn_offsets[1]), c(filter(data, n_profiles == x, Model == "PGRNN_pretrained_prev_yrs") %>% pull(`Test RMSE`) %>% max(),
                                                        filter(data, n_profiles == x, Model == "PGRNN_pretrained_prev_yrs") %>% pull(`Test RMSE`) %>% min()), col = '#7570b3', lwd = 2.5)
-
-    this_mean <- filter(data, n_profiles == x, Model == "PGRNN") %>% pull(`Test RMSE`) %>% mean
-    this_train <- filter(data, n_profiles == x, Model == "PGRNN") %>% pull(`Train RMSE`) %>% mean
-    pgto_mean$train <- c(pgto_mean$train, this_train)
-    pgto_mean$y <- c(pgto_mean$y, this_mean)
-    pgto_mean$x <- c(pgto_mean$x, x)
-    lines(c(x, x), c(filter(data, n_profiles == x, Model == "PGRNN") %>% pull(`Test RMSE`) %>% max(),
-                                                       filter(data, n_profiles == x, Model == "PGRNN") %>% pull(`Test RMSE`) %>% min()), col = '#7570b3', lwd = 2.5)
+#
+#     this_mean <- filter(data, n_profiles == x, Model == "PGRNN") %>% pull(`Test RMSE`) %>% mean
+#     this_train <- filter(data, n_profiles == x, Model == "PGRNN") %>% pull(`Train RMSE`) %>% mean
+#     pgto_mean$train <- c(pgto_mean$train, this_train)
+#     pgto_mean$y <- c(pgto_mean$y, this_mean)
+#     pgto_mean$x <- c(pgto_mean$x, x)
+#     lines(c(x, x), c(filter(data, n_profiles == x, Model == "PGRNN") %>% pull(`Test RMSE`) %>% max(),
+#                                                        filter(data, n_profiles == x, Model == "PGRNN") %>% pull(`Test RMSE`) %>% min()), col = '#7570b3', lwd = 2.5)
 
     rnn_offsets <- tail(rnn_offsets, -1L)
     pgrnn_offsets <- tail(pgrnn_offsets, -1L)
@@ -64,8 +64,8 @@ plot_data_sparsity <- function(){
   points(glm_mean$x, glm_mean$y, col = '#1b9e77', pch = 21, bg = 'white', lwd = 2.5, cex = 1.5)
   lines(rnn_mean$x, rnn_mean$y, col = '#d95f02', lty = 'dashed')
   points(rnn_mean$x, rnn_mean$y, col = '#d95f02', pch = 22, bg = 'white', lwd = 2.5, cex = 1.5)
-  lines(pgto_mean$x, pgto_mean$y, col = '#7570b3', lty = 'dashed')
-  points(pgto_mean$x, pgto_mean$y, col = '#7570b3', pch = 23, bg = 'grey65', lwd = 2.5, cex = 1.5)
+  # lines(pgto_mean$x, pgto_mean$y, col = '#7570b3', lty = 'dashed')
+  # points(pgto_mean$x, pgto_mean$y, col = '#7570b3', pch = 23, bg = 'grey65', lwd = 2.5, cex = 1.5)
   lines(pg_mean$x, pg_mean$y, col = '#7570b3', lty = 'dashed')
   points(pg_mean$x, pg_mean$y, col = '#7570b3', pch = 23, bg = 'white', lwd = 2.5, cex = 1.5)
 
@@ -73,6 +73,11 @@ plot_data_sparsity <- function(){
 
   message('PRGNN:', round(tail(pg_mean$y,1),2), "\nRNN:", round(tail(rnn_mean$y,1),2), '\nGLM:', round(tail(glm_mean$y, 1), 2))
   message('PRGNN:', round(tail(pg_mean$train,1),2), "\nRNN:", round(tail(rnn_mean$train,1),2), '\nGLM:', round(tail(glm_mean$train, 1), 2))
+
+  message('GLM_500: ', round(tail(glm_mean$y,2)[1], 2), ' RNN_500:', round(tail(rnn_mean$y,2)[1], 2))
+  message('GLM_100: ', round(tail(glm_mean$y,3)[1], 2), ' RNN_100:', round(tail(rnn_mean$y,3)[1], 2))
+
+  message('GLM_2: ', round(head(glm_mean$y,1), 2), ' PGDL_2: ', round(head(pg_mean$y,1), 2))
 
   points(2.2, 0.79, col = '#7570b3', pch = 23, bg = 'white', lwd = 2.5, cex = 1.5)
   text(2.3, 0.80, 'Process-Guided Deep Learning', pos = 4, cex = 1.1)

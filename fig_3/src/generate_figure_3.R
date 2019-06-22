@@ -5,9 +5,9 @@ plot_calibrated_figure_3 <- function(){
   library(dplyr)
   library(readr)
   library(tidyr)
-  jared_pgdl <- readr::read_csv('~/Downloads/WRR Figure3 sparse results - Sheet1 (2).csv')  %>% #'fig_3/in/glm_uncal_vs_PGDL_rmses.csv'
-    mutate(PGDL_all = as.numeric(`PGDL - all obs`), DL_all = as.numeric(`DL -all obs`),
-           PGDL_10 = as.numeric(`PGDL 10`), DL_10 = as.numeric(`DL 10`),
+  jared_pgdl <- readr::read_csv('~/Downloads/Fig3Data_6_20 - Main Sheet.csv')  %>% #'fig_3/in/glm_uncal_vs_PGDL_rmses.csv'
+    mutate(PGDL_all = as.numeric(`PGDL`), DL_all = as.numeric(`DL`),
+           PGDL_10 = as.numeric(`PGDL_10`), DL_10 = as.numeric(`DL_10`),
            PB_uncal = `GLM uncal rmse`,
            nhd_id = paste0('nhd_', nhd_id)) %>% slice(1:68) %>%
     select(nhd_id, PGDL_10, DL_10, PGDL_all, DL_all)
@@ -35,21 +35,28 @@ plot_calibrated_figure_3 <- function(){
 
 
   n_sims <- nrow(plot_data)
-  browser()
+  message("num_uncal_all better: ", sum(plot_data$PGDL_all > plot_data$PB_uncal))
+  message("num_DL_all better: ", sum(plot_data$PGDL_all > plot_data$DL_all))
+  message("num_PB_all better: ", sum(plot_data$PGDL_all > plot_data$PB_all))
+  message("num_DL_10 better: ", sum(plot_data$PGDL_10 > plot_data$DL_10))
+  message("num_PB_all better: ", sum(plot_data$PGDL_10 > plot_data$PB_10))
+  message("PGDL_all_range: ", range(plot_data$PGDL_all)[1], ' to ', range(plot_data$PGDL_all)[2])
+  message("PB_all_range: ", range(plot_data$PB_all)[1], ' to ', range(plot_data$PB_all)[2])
+  message("DL_all_range: ", range(plot_data$DL_all)[1], ' to ', range(plot_data$DL_all)[2])
   png(filename = 'figures/figure_3_wrr.png', width = 9.5, height = 12, units = 'in', res = 200)
 
   par(omi = c(1,0,0.1,0.1), mai = c(0.2,0.8,0,0), las = 1, mgp = c(2.2,0.8,0))
 
-  ylim <- c(5.7, 0.5)
-  xlim <- c(0.7, 4.55)
+  ylim <- c(7.8, 0.5)
+  xlim <- c(0.2, 3.55)
 
-  positions <- list(PB_uncal = 1,
-                    PB_10 = 1.8,
-                    PB_all = 2.2,
-                    DL_10 = 2.8,
-                    DL_all = 3.2,
-                    PGDL_10 = 3.8,
-                    PGDL_all = 4.2)
+  positions <- list(PB_uncal = 0.4,
+                    PB_10 = 0.8,
+                    PB_all = 1.2,
+                    DL_10 = 1.8,
+                    DL_all = 2.2,
+                    PGDL_10 = 2.8,
+                    PGDL_all = 3.2)
 
   plot(NA, NA, xlim = xlim, ylim = ylim,
        ylab = 'Test RMSE (°C)', axes = FALSE, xaxs = 'i', yaxs = 'i', cex.lab = 1.5)
@@ -67,21 +74,21 @@ plot_calibrated_figure_3 <- function(){
     segments(x0 = positions[[mod_name]]-ind_w, x1 = positions[[mod_name]]+ind_w, y0 = plot_data[[mod_name]], col = 'black')
     segments(x0 = positions[[mod_name]]-ind_w/2, x1 = positions[[mod_name]]+ind_w/2, y0 = plot_data[[mod_name]], col = 'white')
     segments(x0 = positions[[mod_name]]-med_w/2, x1 = positions[[mod_name]]+med_w/2, y0 = median(plot_data[[mod_name]]), col = 'white', lwd = 2)
-    message(round(median(plot_data[[mod_name]]),3), " ", mod_name)
+    message(round(median(plot_data[[mod_name]]),2), " ", mod_name)
   }
 
 
   axis(2, at = seq(0,10), las = 1, tck = -0.01, cex.axis = 1.5, lwd = 1.5)
 
-  axis(1, at = c(-100, 1, 1.8, 2.2, 2.8, 3.2, 3.8, 4.3, 1e10),
-       labels = c("", expression("PB"['u']), expression("PB"['10']), expression("PB"['all']),
+  axis(1, at = c(-100, 0.4, 0.8, 1.2, 1.8, 2.2, 2.8, 3.2, 1e10),
+       labels = c("", expression("PB"['0']), expression("PB"['10']), expression("PB"['all']),
                   expression("DL"['10']), expression("DL"['all']),
                   expression("PGDL"['10']), expression("PGDL"['all']), ""), tck = -0.01)
 
   par(mai = c(0.2,0,0,0), mgp = c(2, 2.3,0))
-  axis(1, at = c(-100, 1, 2, 3, 4, 1e10), labels = c("", "Process-", "Process-", "Deep", "Processs-Guided", ""), tck = NA, cex.axis = 1.5, lwd = NA)
+  axis(1, at = c(-100, 0.8, 2, 3, 1e10), labels = c("", "Process-", "Deep", "Processs-Guided", ""), tck = NA, cex.axis = 1.5, lwd = NA)
   par(mai = c(0.2,0,0,0), mgp = c(2,3.8,0))
-  axis(1, at = c(-100, 1, 2, 3, 4, 1e10), labels = c("", expression("Based"['uncal']), expression("Based"['calibrated']), "Learning","Deep Learning", ""), tck = NA, cex.axis = 1.5, lwd = NA)
+  axis(1, at = c(-100, 0.8, 2, 3, 1e10), labels = c("", "Based", "Learning","Deep Learning", ""), tck = NA, cex.axis = 1.5, lwd = NA)
 
   dev.off()
 }

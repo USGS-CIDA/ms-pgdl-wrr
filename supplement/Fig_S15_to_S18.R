@@ -35,13 +35,13 @@ get_timeseries <- function(lake, type, exp){
   library(tidyr)
   np <- import('numpy')
 
-
+  short_lakes <- c('mendota' = 'me', 'sparkling' = 'sp')
 #lake in c('sparkling','mendota'))
 #(type in c('year','season'))
  #model in c('PGRNN','RNN'))
 
   # get PGRNN (PGDL) output
-  pgdl_dat <- RcppCNPy::npyLoad(sprintf('/Users/jread/Downloads/outputs_new/PGRNN_%s_%s_exp%s.npy', type, lake, exp)) %>%
+  pgdl_dat <- RcppCNPy::npyLoad(sprintf('/Users/jread/Downloads/outputs_6_20_2019/PGRNN_%s_%s_exp%s.npy', type, lake, exp)) %>%
     t() %>%
     as.data.frame() %>% setNames(paste0('temp_',seq(0, length.out = ifelse(lake == "mendota", 50, 37), by = 0.5))) %>% #length.out = 50 for Mendota
     mutate(DateTime = seq(as.Date("2009-04-02"), length.out = 3185, by = 'days')) %>%
@@ -53,7 +53,7 @@ get_timeseries <- function(lake, type, exp){
     distinct()
 
   # get RNN (DL) output
-  dl_dat <- RcppCNPy::npyLoad(sprintf('/Users/jread/Downloads/outputs/RNN_%s_%s_exp%s.npy', type, lake, exp)) %>%
+  dl_dat <- RcppCNPy::npyLoad(sprintf('/Users/jread/Downloads/outputs_6_20_2019/RNN_%s_%s_exp%s.npy', type, lake, exp)) %>%
     t() %>%
     as.data.frame() %>% setNames(paste0('temp_',seq(0, length.out = ifelse(lake == "mendota", 50, 37), by = 0.5))) %>% #length.out = 50 for Mendota
     mutate(DateTime = seq(as.Date("2009-04-02"), length.out = 3185, by = 'days')) %>%
@@ -64,7 +64,7 @@ get_timeseries <- function(lake, type, exp){
     rename(dl_pred = pred) %>%
     distinct()
 
-  glm_preds <- feather::read_feather(sprintf('../lake_modeling/data_imports/out/%s_%s_calibrated_experiment_0%s.feather', lake, type, exp)) %>%
+  glm_preds <- feather::read_feather(sprintf('yeti_in/fig_2/%s_%s_500_profiles_experiment_0%s_temperatures.feather', short_lakes[[lake]], type, exp)) %>% #me_year_500_profiles_experiment_01_temperatures.feather
     mutate(DateTime = as.Date(DateTime)) %>%
     gather(depth_code, temp, -DateTime) %>%
     mutate(Depth = as.numeric(substring(depth_code, 6))) %>%
@@ -90,7 +90,6 @@ plot_timeseries <- function(lake, type, exp) {
   #head(sparkling_year_exp1)
 
   depth_max <- ifelse(lake == 'sparkling', 18, 20)
-
   ts_dat_bias <- ts_dat %>%
     mutate(pgdl_bias = pgdl_pred - obs,
            dl_bias = dl_pred - obs,
@@ -192,16 +191,18 @@ plot_timeseries <- function(lake, type, exp) {
     guides(color = guide_legend(title = 'Depth (m)', title.position = 'left', ncol = 10,
                                 label.position = 'left', direction = "horizontal"))
 
-  ggsave(filename = sprintf('../lake_modeling/data_imports/figures/supp_fig_timeseries_%s_%s.png', lake, type),
+  ggsave(filename = sprintf('figures/supp_fig_timeseries_%s_%s.png', lake, type),
          plot = p, height = 7, width = 10, units = 'in')
 
 }
 
-plot_timeseries(lake = 'mendota', type = 'year', exp = 1)
-plot_timeseries(lake = 'sparkling', type = 'year', exp = 1)
-
 plot_timeseries(lake = 'mendota', type = 'season', exp = 1)
+plot_timeseries(lake = 'sparkling', type = 'year', exp = 1)
 plot_timeseries(lake = 'sparkling', type = 'season', exp = 1)
+plot_timeseries(lake = 'mendota', type = 'year', exp = 1)
+
+
+
 
 
 
