@@ -6,3 +6,5 @@
 .Rproj.user
 .spyproject
 *__pycache__
+.httr-oauth
+*.RDS
