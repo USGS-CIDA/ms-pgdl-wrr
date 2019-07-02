@@ -68,6 +68,7 @@ plot_seasons_years_sparsity <- function(){
                                            filter(plot_data, lake == "mendota", Model == 'GLM') %>% pull(`Test RMSE`) %>% min()), lwd = 1.5, col = '#1b9e77')
     points(GLM_x+me_bmp, ME_mean, pch = 21, lwd = 1.5, cex = 3.2, bg = 'white', col = '#1b9e77', ljoin = 1)
     text(GLM_x+me_bmp, ME_mean, "M", font = 2)
+    message("Mendota GLM:", round(ME_mean,2))
 
     SP_mean <- filter(plot_data, lake == "sparkling", Model == 'RNN') %>% pull(`Test RMSE`) %>% mean
     lines(c(RNN_x+sp_bmp, RNN_x+sp_bmp), c(filter(plot_data, lake == "sparkling", Model == 'RNN') %>% pull(`Test RMSE`) %>% max(),
