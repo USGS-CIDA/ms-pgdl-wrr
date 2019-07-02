@@ -29,6 +29,26 @@ plot_fig_s19 <- function(){
     labs(x = '') +
     scale_y_reverse()
 
+  p2 <- ggplot(mod_10, aes(x = lake_name, y = RMSE)) +
+    geom_point(aes(color = model, shape = model, fill = model), size = 1.7, alpha = 0.8) +
+    scale_shape_manual(values = c(22,21,1,23))+
+    scale_color_manual(values = c('#d95f02',  '#1b9e77','#1b9e77', '#7570b3')) + # match Jordan's colors in fig 3
+    scale_fill_manual(values = c('#d95f02',  '#1b9e77','#1b9e77', '#7570b3')) + # match Jordan's colors in fig 3
+    #scale_shape_manual(values = c(16, 21, 23)) + # match Jordan's shapes in fig 3
+    #facet_grid(rows = vars(model_10)) +
+    theme_bw() +
+    coord_cartesian(ylim = c(0.9, 7.5)) +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
+          legend.position = c(0.1,0.15),
+          panel.grid.minor.y = element_blank(),
+          panel.grid.minor.x = element_blank(),
+          legend.title = element_blank(),
+          legend.background = element_rect(colour = 'black',
+                                           fill = 'white', linetype='solid'),
+          legend.text = element_text(size = 8),
+          legend.key.height = unit(0.5, 'line')) +
+    labs(x = '') +
+    scale_y_reverse()
 
   scale_shape_manual(values = c(22,0,21,1,23,5))+
 
