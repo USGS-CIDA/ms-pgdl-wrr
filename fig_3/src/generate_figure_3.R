@@ -19,8 +19,8 @@ plot_calibrated_figure_3 <- function(){
   # PGDL_10 = as.numeric(`PGDL_10(400 ep)`), DL_10 = as.numeric(`DL_10(400 ep)`),
 
   jared_pgdl <- readr::read_csv('~/Downloads/Comparing Stopping Conditions - Sheet1.csv')  %>% #'fig_3/in/glm_uncal_vs_PGDL_rmses.csv'
-    mutate(PGDL_all = as.numeric(`PGDL(<1 RMSE)`), DL_all = as.numeric(`DL (< 1 RMSE)`),
-           PGDL_10 = as.numeric(`PGDL_10(< 1 RMSE)`), DL_10 = as.numeric(`DL_10(< 1 RMSE)`),
+    mutate(PGDL_all = as.numeric(`PGDL(400 ep)`), DL_all = as.numeric(`DL(400 ep)`),
+           PGDL_10 = as.numeric(`PGDL_10(400 ep)`), DL_10 = as.numeric(`DL_10(400 ep)`),
            PB_uncal = `GLM uncal rmse`,
            n_train = as.numeric(`train days`),
            nhd_id = paste0('nhd_', nhd_id)) %>% slice(1:68) %>%
