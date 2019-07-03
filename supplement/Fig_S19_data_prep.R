@@ -15,7 +15,10 @@ format_figS19_dat <- function() {
 
   summary68 <- read.csv('supplement/in/table_s2.csv', check.names = FALSE, nrows = 68)
 
-  # get lake names from Table S1
+  # get RMSE for GLM and GLM10
+  glm_rmse <- read.csv('supplement/in/calibrated_GLM_wrr_revision.csv')
+  glm_rmse <- gather(glm_rmse, key = model, value = RMSE, -nhd_id)
+
   drive_download(as_id('https://docs.google.com/spreadsheets/d/1FPFi4QSnlIZkutrEQlapYhX5mkhEwiQrtQq3zFiPo3c/edit#gid=88060065'), path = 'supplement/in/lake_metadata_table.csv', overwrite = T)
 
   metadata_table <- read.csv('supplement/in/lake_metadata_table.csv', stringsAsFactors = F,nrows = 68)
@@ -28,8 +31,9 @@ format_figS19_dat <- function() {
   rmse_long <- select(summary68,-num_dates, -`train days`, -`test days`, -`#Train Obs`, -`#Test Obs`) %>%
     gather(key = model, value = RMSE, -nhd_id) %>%
     filter(model %in% c('DL_10(400 ep)', 'DL(400 ep)', 'PGDL(400 ep)',
-                        'PGDL_10(400 ep)', 'GLM uncal rmse', 'GLM cal')) %>%
+                        'PGDL_10(400 ep)', 'GLM uncal rmse')) %>%
     mutate(nhd_id = paste0('nhd_', nhd_id)) %>%
+    bind_rows(glm_rmse) %>%
     left_join(select(metadata_table, nhd_id, lake_name)) %>%
     mutate(model_10 = ifelse(grepl('_10', model), TRUE, FALSE))
 
