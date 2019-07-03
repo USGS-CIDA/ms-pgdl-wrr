@@ -24,7 +24,7 @@ plot_fig_s19 <- function(){
     coord_cartesian(ylim = c(0.9, 5.2)) +
     theme(
       #axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
-      legend.position = c(0.059,0.17),
+      legend.position = c(0.055,0.17),
       panel.grid.minor.y = element_blank(),
           panel.grid.minor.x = element_blank(),
           legend.title = element_blank(),
@@ -50,7 +50,7 @@ plot_fig_s19 <- function(){
     theme_bw() +
     coord_cartesian(ylim = c(0.9, 5.2)) +
     theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
-          legend.position = c(0.059,0.16),
+          legend.position = c(0.055,0.16),
           panel.grid.minor.y = element_blank(),
           panel.grid.minor.x = element_blank(),
           legend.title = element_blank(),
@@ -67,7 +67,7 @@ plot_fig_s19 <- function(){
   dir.create('supplement/out', showWarnings = FALSE)
 
   ggsave('supplement/out/supplement_fig_S19.png', p,
-         height = 175, width = 235, units = 'mm', scale = 0.9)
+         height = 7, width = 10, units = 'in')
 
   # upload to supplement folder
   drive_update(file = as_id('https://drive.google.com/drive/u/1/folders/1yCCcqfPeppdQM79adK5dWrUmMzIwBvQv'),
