@@ -81,6 +81,7 @@ plot_seasons_years_sparsity <- function(){
                                                filter(plot_data, lake == "sparkling", Model == 'PGRNN_pretrained_prev_yrs') %>% pull(`Test RMSE`) %>% min()), lwd = 1.5, col = '#7570b3')
     points(PGRNN_x+sp_bmp, SP_mean, pch = 23, lwd = 1.5, cex = 3.2, bg = 'white', col = '#7570b3', ljoin = 1)
     text(PGRNN_x+sp_bmp, SP_mean, "S", font = 2)
+    message("Sparkling PGDL:", SP_mean)
 
     SP_mean <- filter(plot_data, lake == "sparkling", Model == 'GLM') %>% pull(`Test RMSE`) %>% mean(na.rm = T)
     lines(c(GLM_x+sp_bmp, GLM_x+sp_bmp), c(filter(plot_data, lake == "sparkling", Model == 'GLM') %>% pull(`Test RMSE`) %>% max(na.rm = T),

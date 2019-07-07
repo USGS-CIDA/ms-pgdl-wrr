@@ -15,6 +15,13 @@ format_figS19_dat <- function() {
 
   summary68 <- read.csv('supplement/in/table_s2.csv', check.names = FALSE)
 
+  glm_rmse <- readr::read_tsv('fig_3/in/glm_uncal_rmses.tsv') %>%
+    rename(PB_uncal = rmse) %>%
+    mutate(nhd_id = paste0('nhd_', as.character(nhd_id))) %>%
+    select(nhd_id, PB_uncal)
+
+  summary68 <- left_join(summary68, glm_rmse) %>% select(-`GLM (pre-trainer)`) %>% select(`GLM (pre-trainer)` = PB_uncal, everything())
+
   rmse_order <- mutate(summary68, rmse_diff = `GLM (calibrated)` - `PGDL`) %>%
     arrange(rmse_diff)
 

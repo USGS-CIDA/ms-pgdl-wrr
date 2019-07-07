@@ -7,7 +7,7 @@ library(ggplot2)
 
 # read in all obs temp data
 # file downloaded from: https://drive.google.com/drive/u/1/folders/1pbhIjfYUPZ4lEICm5zwJFjIjGYEz1qwi
-all_dat <- feather::read_feather('D:/R Projects/lake-temp-supplement/merged_temp_data_daily.feather')
+all_dat <- feather::read_feather('~/Downloads/merged_temp_data_daily.feather')
 
 counts <- all_dat %>%
   group_by(nhd_id, date) %>%
@@ -43,4 +43,4 @@ p <- ggplot(plot_dat, aes(x = lakedays, y = nlakes)) +
             vjust = c(rep(0,4), -0.6),
             nudge_x = 0.05, size = 3)
 
-ggsave(filename = '~/Documents/nlakes_nobs.png', height = 4, width = 4)
+ggsave(filename = 'figures/supp_fig_S2.png', height = 4, width = 4)

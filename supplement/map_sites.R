@@ -6,8 +6,8 @@ library(sf)
 library(USAboundaries)
 library(maps)
 
-lake_geo <- readRDS('main_lakes_SHP/lakes_sp.rds')
-lake_metadata <- read.csv('D:/R Projects/lake-temp-supplement/lake_metadata_table.csv')
+lake_geo <- readRDS('~/Downloads/lakes_sp.rds')
+lake_metadata <- read.csv('supplement/in/lake_metadata_table.csv')
 
 lake_geo <- st_as_sf(lake_geo)
 
@@ -20,7 +20,7 @@ getLakes <- function(){
   # filePath <- tempdir()
   # unzip(destination, exdir = filePath)
 
-  lakes <- st_read('main_lakes_SHP', layer = "main_lakes")
+  lakes <- st_read('~/Downloads/main_lakes_SHP', layer = "main_lakes")
   return(lakes)
 }
 
@@ -97,5 +97,5 @@ first_pass <- ggplot() +
   theme_minimal() +
   labs(x = '', y = '')
 
-ggsave('study_map.png', first_pass, height = 6, width = 6)
+ggsave('figures/WRR_S1_map.png', first_pass, height = 6, width = 6)
 
