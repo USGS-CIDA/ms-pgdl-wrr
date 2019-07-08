@@ -8,7 +8,7 @@ library(ggplot2)
 # read in all obs temp data
 # file downloaded from: https://drive.google.com/drive/u/1/folders/1pbhIjfYUPZ4lEICm5zwJFjIjGYEz1qwi
 all_dat <- feather::read_feather('D:/R Projects/lake-temp-supplement/merged_temp_data_daily.feather')
-
+all_dat <- feather::read_feather('C:/Users/soliver/Documents/R Projects/lake-temp-supplement/merged_temp_data_daily.feather')
 counts <- all_dat %>%
   group_by(nhd_id, date) %>%
   summarize(depths = n()) %>%
@@ -28,19 +28,21 @@ vals <- numlakes(counts$lakedays, benchmark = seq(1, 1500, 1))
 
 plot_dat <- data.frame(lakedays = seq(1, 1500, 1), nlakes = vals)
 
+vsegments <- filter(plot_dat, lakedays %in% c(2, 10, 50, 100, 500, 980))
+
 p <- ggplot(plot_dat, aes(x = lakedays, y = nlakes)) +
   geom_line() +
   theme_classic() +
-  scale_x_log10(breaks = c(2, 10, 50, 100, 980)) +
+  scale_x_log10(breaks = c(2, 10, 50, 100, 500, 980)) +
   labs(x = 'Number of unique observation dates',
        y = 'Lakes with temperature observations') +
-  geom_point(data = vsegments, aes(x = x, y = yend),
+  geom_point(data = vsegments, aes(x = lakedays, y = nlakes),
              shape = 21, fill = 'white') +
   geom_text(data = vsegments,
-            aes(x = x, y = yend,
-                label = c('3602 lakes', '1736 lakes', '558 lakes', '267 lakes', '2 lakes')),
-            hjust = c(rep(0, 4), 0.3),
-            vjust = c(rep(0,4), -0.6),
+            aes(x = lakedays, y = nlakes,
+                label = c('3602 lakes', '1736 lakes', '558 lakes', '267 lakes', '9 lakes', '2 lakes')),
+            hjust = c(rep(0, 4), 0.5, 0.3),
+            vjust = c(rep(0,4), -0.7, -0.6),
             nudge_x = 0.05, size = 3)
 
-ggsave(filename = '~/Documents/nlakes_nobs.png', height = 4, width = 4)
+ggsave(filename = 'supplement/out/figure_S2.png', height = 4, width = 5)
