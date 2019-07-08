@@ -6,9 +6,9 @@ plot_fig_s19 <- function(){
   rmse_long <- format_figS19_dat()
 
   mod_10 <- filter(rmse_long, model_10)
-  mod_10$model <- factor(mod_10$model, levels = c('PB_10', "DL_10(400 ep)", "PGDL_10(400 ep)"))
+  mod_10$model <- factor(mod_10$model, levels = c('PB_10', "DL_10", "PGDL_10"))
   mod_other <- filter(rmse_long, !model_10)
-  mod_other$model <- factor(mod_other$model, levels = c("GLM uncal rmse", "PB_all","DL(400 ep)","PGDL(400 ep)"))
+  mod_other$model <- factor(mod_other$model, levels = c("PB_0", "PB_all","DL_all","PGDL_all"))
 
   p1 <- ggplot(mod_other, aes(x = lake_name, y = RMSE)) +
     geom_point(aes(color = model, shape = model, fill = model), size = 1.7, alpha = 0.8) +
@@ -70,6 +70,6 @@ plot_fig_s19 <- function(){
          height = 7, width = 10, units = 'in')
 
   # upload to supplement folder
-  drive_update(file = as_id('https://drive.google.com/drive/u/1/folders/1yCCcqfPeppdQM79adK5dWrUmMzIwBvQv'),
+  drive_update(file = as_id('1yCCcqfPeppdQM79adK5dWrUmMzIwBvQv'),
                media = 'supplement/out/supplement_fig_S19.png')
 }

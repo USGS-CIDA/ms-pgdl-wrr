@@ -94,12 +94,12 @@ generate_tableS2 <- function(){
   dir.create('supplement/out', showWarnings = FALSE)
 
   write.csv(summary68, 'supplement/out/temp_obs_summary_update.csv', row.names = F)
-  #  file <- drive_upload(
-  #    'supplement/out/temp_obs_summary_update.csv',
-  #    path = as_id('https://drive.google.com/drive/u/1/folders/1yCCcqfPeppdQM79adK5dWrUmMzIwBvQv'),
-  #    name = "Table_S2.csv",
-  #    type = "spreadsheet"
-  #  )
+    # file <- drive_upload(
+    #   'supplement/out/temp_obs_summary_update.csv',
+    #   path = 'https://drive.google.com/drive/u/1/folders/1yCCcqfPeppdQM79adK5dWrUmMzIwBvQv',
+    #   name = "Table_S2.csv",
+    #   type = "spreadsheet"
+    # )
 
   drive_update(file = as_id('1msBsOu92fqT3NuEdfb-OHVMpxULb879qXEEZpaV6qFU'),
                media = 'supplement/out/temp_obs_summary_update.csv')
