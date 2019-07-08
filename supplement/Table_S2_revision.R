@@ -68,11 +68,16 @@ generate_tableS2 <- function(){
   # get GLM data
   glm_dat <- read.csv('supplement/in/calibrated_GLM_wrr_revision.csv')
 
+  # get GLM uncal RMSE
+  glm_uncal <- read.table('supplement/in/glm_uncal_rmses.tsv', header = TRUE) %>%
+    mutate(nhd_id = paste0('nhd_', nhd_id))
+
   # merge rmse dat
-  all_rmse <- left_join(rmse_dat, glm_dat)
+  all_rmse <- left_join(rmse_dat, glm_dat) %>%
+    left_join(select(glm_uncal, nhd_id, rmse))
 
   rmse_dat <- mutate(all_rmse,
-                     PB_0 = round(`GLM uncal rmse`,2),
+                     PB_0 = round(`rmse`,2),
                      PB_10 = round(PB_10, 2),
                      PB_all = round(PB_all,2),
                      PGDL_all = round(`PGDL(400 ep)`, 2),
