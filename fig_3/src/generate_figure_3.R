@@ -106,7 +106,6 @@ plot_calibrated_figure_3 <- function(){
   plot_data <- left_join(plot_data, cal_GLM, by = 'nhd_id') %>% filter(!is.na(PB_all), !is.na(PB_10), !is.na(PGDL_all))
 
   plot_data <- left_join(plot_data, readr::read_csv('~/Downloads/site_count_68lakes.csv'))
-
   n_sims <- nrow(plot_data)
 
   sprintf('Predictions from PGDL models applied to %s lakes were more accurate or as accurate (within +/-0.05°C RMSE) as all but %s of the calibrated PB models and %s DL models (',
@@ -131,6 +130,11 @@ plot_calibrated_figure_3 <- function(){
           round(range(plot_data[['PB_uncal']])[2],2)) %>%
     message()
 
+  sprintf('The uncalibrated GLM predictions were worse than PB in %s lakes (%s%% of total)',
+          sum(plot_data$PB_uncal > plot_data$PB_all),
+          round((sum(plot_data$PB_uncal > plot_data$PB_all)/n_sims)*100, 1)) %>%
+    message()
+
   sprintf('were variable across lakes, with %s lakes improving RMSE by over 2° compared to pre-trainer RMSEs, while %s lakes had PGDL predictions that were approximately equal to the pre-trainer (range of %s to %s°C increase in RMSE). ',
           sum(plot_data$PGDL_all + 2.0 < plot_data$PB_uncal),
           sum(plot_data$PGDL_all > plot_data$PB_uncal + 0.05 | plot_data$PGDL_all > plot_data$PB_uncal - 0.05),
@@ -144,8 +148,9 @@ plot_calibrated_figure_3 <- function(){
     message()
 
   sprintf('When observations were artificially removed to leave only 10 dates for training, predictions from PGDL models were more accurate than %s of the calibrated PB models (%s%% of total) and more accurate than %s DL models (Figure 4).',
-          sum(plot_data$PB_10 > plot_data$PGDL_10), round((sum(plot_data$PB_10 > plot_data$PGDL_10)/n_sims)*100, 1),
-          ifelse(all(plot_data$DL_10 > plot_data$PGDL_10), 'all', sum(plot_data$DL_10 > plot_data$PGDL_10))) %>% message()
+          sum(plot_data$PB_10 > plot_data$PGDL_10 - 0.05),
+          round((sum(plot_data$PB_10 > plot_data$PGDL_10 - 0.05)/n_sims)*100, 1),
+          ifelse(all(plot_data$DL_10 > plot_data$PGDL_10 - 0.05), 'all', sum(plot_data$DL_10 > plot_data$PGDL_10 - 0.05))) %>% message()
 
   sprintf('The median RMSE (across all lakes) for 10 training profiles was %s° for PGDL, %s°C for PB, and %s°C for DL. ',
           round(median(plot_data[['PGDL_10']]),2),
