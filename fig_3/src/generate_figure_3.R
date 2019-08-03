@@ -7,6 +7,16 @@ calc_pretrainer_RMSE <- function(){
     readr::write_tsv('fig_3/in/glm_uncal_rmses.tsv')
 }
 
+calc_pretrainer_ALL_RMSE <- function(){
+  # manual download from https://drive.google.com/drive/folders/188tY64FV9dS8nGyx_QFfGRJSclGjcCiL
+  files <- dir('~/Downloads/pre-training data/')
+  nhd_ids <- sapply(files, FUN = function(x) strsplit(x, '[_]')[[1]][2], USE.NAMES = FALSE)
+  pred_obs <- bind_rows(lapply(nhd_ids, prep_ALL_pred_obs))
+  compute_RMSEs(pred_obs) %>%
+    readr::write_tsv('fig_3/in/glm_uncal_[ALL_obs]_rmses.tsv')
+}
+
+
 compute_RMSEs <- function(pred_obs) {
 
   results <- pred_obs %>%
@@ -18,6 +28,49 @@ compute_RMSEs <- function(pred_obs) {
       rmse = if(all(is.na(pred))) NA else sqrt(mean((pred - obs)^2, na.rm=TRUE)))
 
   return(results)
+}
+
+prep_ALL_pred_obs <- function(nhd_id='10596466') {
+
+  message(nhd_id)
+
+  nhdid <- nhd_id
+  data_path <- "fig_3/yeti_sync"
+
+
+  obs_test <- readr::read_csv(sprintf('%s/nhd_%s_test_all_profiles.csv', data_path, nhd_id)) %>%
+    select(date = DateTime, depth = Depth, temp)
+
+  obs_train <- readr::read_csv(sprintf('%s/nhd_%s_train_all_profiles.csv', data_path, nhd_id)) %>%
+    select(date = DateTime, depth = Depth, temp)
+
+  obs <- rbind(obs_test, obs_train)
+  glm_preds <- feather::read_feather(sprintf('%s/nhd_%s_temperatures.feather', '~/Downloads/pre-training data', nhd_id)) %>%
+    mutate(date = as.Date(DateTime)) %>%
+    select(-DateTime, -ice) %>%
+    gather(depth_code, temp, -date) %>%
+    mutate(depth = as.numeric(substring(depth_code, 6))) %>%
+    select(date, depth, temp) %>%
+    filter(date %in% obs$date)
+
+  pred_obs <- bind_rows(lapply(unique(obs$date), function(dt) {
+    pred_1d <- filter(glm_preds, date == dt)
+
+    obs_1d <- filter(obs, date == dt) %>%
+      rename(obs = temp)
+
+    tryCatch({
+      if(nrow(pred_1d) == 0) stop(sprintf('no predictions on %s', dt))
+      if(min(pred_1d$depth) != 0) warning(sprintf('no GLM prediction at 0m on %s', dt))
+      mutate(obs_1d, pred = approx(x=pred_1d$depth, y=pred_1d$temp, xout=depth, rule=1)$y)
+    }, error=function(e) {
+      message(sprintf('approx failed for %s on %s: %s', nhd_id, dt, e$message))
+      mutate(obs_1d, pred = NA)
+    })
+  }))
+
+  pred_obs %>%
+    mutate(nhd_id = nhd_id)
 }
 
 prep_pred_obs <- function(nhd_id='10596466') {
@@ -210,6 +263,81 @@ plot_calibrated_figure_3 <- function(){
   axis(1, at = c(-100, 1, 2, 3, 4, 1e10), labels = c("", "Process-", "Process-", "Deep", "Processs-Guided", ""),  tck = -0.01, cex.axis = 1.5, lwd = 1.5)
   par(mai = c(0,0,0,0), mgp = c(2, 1.5,0))
   axis(1, at = c(-100, 1, 2, 3, 4, 1e10), labels = c("", expression("Based"['uncal']), "Based", "Learning","Deep Learning", ""), tck = NA, cex.axis = 1.5, lwd = NA)
+
+  dev.off()
+}
+
+plot_PGDTL_CAUHSI <- function(){
+
+  library(dplyr)
+  library(readr)
+  library(tidyr)
+
+
+
+  jared_pgdtl <- readr::read_csv('~/Downloads/68 Lakes Transfer Learning Results - Sheet1 (1).csv')  %>% #'fig_3/in/glm_uncal_vs_PGDL_rmses.csv'
+    mutate(Ens = as.numeric(`RMSE On All Target Lake Observations`),
+           Src_1 = as.numeric(`1st source lake model rmse`),
+           Src_2 = as.numeric(`2nd source lake model rmse`),
+           Src_3 = as.numeric(`3rd source lake model rmse`),
+           nhd_id = paste0('nhd_', `target lake`)) %>% slice(1:68) %>%
+    select(Ens, Src_1, Src_2, Src_3, nhd_id)
+
+
+  glm_rmse <- readr::read_tsv('fig_3/in/glm_uncal_[ALL_obs]_rmses.tsv') %>%
+    rename(PB_uncal = rmse) %>%
+    mutate(nhd_id = paste0('nhd_', as.character(nhd_id))) %>%
+    select(nhd_id, PB_uncal)
+
+  plot_data <- left_join(jared_pgdtl, glm_rmse, by = "nhd_id")
+
+  n_sims <- nrow(plot_data)
+
+
+  png(filename = 'figures/jared_PGDTL_rmse_cauhsi.png', width = 7, height = 7, units = 'in', res = 200)
+
+  par(omi = c(0.6,0,0.1,0.2), mai = c(0.2,0.8,0,0), las = 1, mgp = c(2.2,0.8,0))
+
+  ylim <- c(5.5, 0.5)
+  xlim <- c(0.7, 5.5)
+
+  positions <- list(PB_uncal = 1,
+                    Src_1 = 2,
+                    Src_2 = 3,
+                    Src_3 = 4,
+                    Ens = 5)
+
+  plot(NA, NA, xlim = xlim, ylim = ylim,
+       ylab = 'Test RMSE (°C)', axes = FALSE, xaxs = 'i', yaxs = 'i', cex.lab = 1.5)
+  library(beanplot)
+  bean_w <- 0.65
+  plot_data <- plot_data %>% select(-nhd_id)
+
+  beanplot(plot_data$PB_uncal, plot_data$Src_1, plot_data$Src_2, plot_data$Src_3, plot_data$Ens, maxwidth = bean_w, what=c(0,1,0,0), log = "", add = TRUE,
+           axes = F, border = NA, at = c(positions$PB_uncal, positions$Src_1, positions$Src_2, positions$Src_3, positions$Ens), col = list('grey65','#3896D3','#3896D3','#3896D3','#7570b3'))
+
+  med_w <- 0.4
+  ind_w <- 0.03
+  for (x_bin in 1:ncol(plot_data)){
+    mod_name <- names(plot_data)[x_bin]
+    segments(x0 = positions[[mod_name]]-ind_w, x1 = positions[[mod_name]]+ind_w, y0 = plot_data[[mod_name]], col = 'black')
+    #segments(x0 = positions[[mod_name]]-ind_w/2, x1 = positions[[mod_name]]+ind_w/2, y0 = plot_data[[mod_name]], col = 'white')
+    segments(x0 = positions[[mod_name]]-med_w/2, x1 = positions[[mod_name]]+med_w/2, y0 = median(plot_data[[mod_name]], na.rm = TRUE), col = 'black', lwd = 2)
+  }
+
+
+  axis(2, at = seq(0,10), las = 1, tck = -0.01, cex.axis = 1.5, lwd = 1.5)
+
+  # axis(1, at = c(-100, positions$PB_uncal, positions$PB_10, positions$PB_all, positions$DL_10, positions$DL_all, positions$PGDL_10, positions$PGDL_all, 1e10),
+  #      labels = c("", expression("PB"['0']), expression("PB"['10']), expression("PB"['all']),
+  #                 expression("DL"['10']), expression("DL"['all']),
+  #                 expression("PGDL"['10']), expression("PGDL"['all']), ""), tck = -0.01)
+
+  #par(mai = c(0,0,0,0), mgp = c(2, 1.5,0))
+  axis(1, at = c(-100, 1, 2, 3, 4, 5, 1e10), labels = c("", "Process-", "PGDTL", "PGDTL", "PGDTL", "PGDTL", ""),  tck = -0.01, cex.axis = 1.5, lwd = 1.5)
+  par(mai = c(0,0,0,0), mgp = c(2, 1.5,0))
+  axis(1, at = c(-100, 1, 2, 3, 4, 5, 1e10), labels = c("", expression("Based"['uncal']),
+                                                        expression("Src"['lake 1']), expression("Src"['lake 2']), expression("Src"['lake 3']), "Ensemble", ""), tck = NA, cex.axis = 1.5, lwd = NA)
 
   dev.off()
 }
