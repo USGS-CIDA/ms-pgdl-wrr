@@ -3,50 +3,7 @@ title: >-
 
 build-environment: Multiple computer systems were used to generate these data, including linux, OSX. The open source language R was used on all systems, as well as the open-source model GLM.
 
-attributes:
-  -
-    attr-label: Thermal metrics
-    attr-def: Various temperature metrics for lakes summarized at the annual scale
-    attr-defs: >-
-      Thermal metrics: A large-scale database of modeled contemporary and future water temperature data for 10,774 Michigan, Minnesota and Wisconsin Lakes
-    data-min: NA
-    data-max: NA
-    data-units: NA
-  -
-    attr-label: Spatial data
-    attr-def: Shapefile and attributes for the 10,774 lakes
-    attr-defs: >-
-      Spatial data: A large-scale database of modeled contemporary and future water temperature data for 10,774 Michigan, Minnesota and Wisconsin Lakes
-    data-min: NA
-    data-max: NA
-    data-units: NA
-  -
-    attr-label: Temperature data
-    attr-def: water temperatures at each daily timestep for each lake at various depths
-    attr-defs: >-
-      Temperature data: A large-scale database of modeled contemporary and future water temperature data for 10,774 Michigan, Minnesota and Wisconsin Lakes
-    data-min: NA
-    data-max: NA
-    data-units: NA
-  -
-    attr-label: Model drivers
-    attr-def: timeseries drivers for running the lake models in this data release
-    attr-defs: >-
-      Model drivers: A large-scale database of modeled contemporary and future water temperature data for 10,774 Michigan, Minnesota and Wisconsin Lakes
-    data-min: NA
-    data-max: NA
-    data-units: NA
-  -
-    attr-label: Model configuration
-    attr-def: configuration instructions for individual models
-    attr-defs: >-
-      Model configuration: A large-scale database of modeled contemporary and future water temperature data for 10,774 Michigan, Minnesota and Wisconsin Lakes
-    data-min: NA
-    data-max: NA
-    data-units: NA
-
-
-process-date: 20160624
+process-date: !expr format(Sys.time(),'%Y%m%d')
 indirect-spatial: U.S.A.
 latitude-res: 0.1
 longitude-res: 0.1

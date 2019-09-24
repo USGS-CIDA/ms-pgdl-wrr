@@ -8,15 +8,25 @@ packages:
   - readr
   - httr
   - rgdal
+  - stringr
+  - glmtools
   - sp
+  - RJSONIO
 
 sources:
   - src/spatial_utils.R
+  - src/file_utils.R
 
 targets:
   all:
     depends:
       - out/release.xml
+      - out/spatial.xml
+      - out/spatial.zip
+      - out/inputs.xml
+      - out/input_files.zip
+      - out/glm_config.xml
+      - out/glm_config.json
 
   lake_ids:
     command: read_csv("in/model_lake_ids.csv")
@@ -33,6 +43,16 @@ targets:
   release_text:
     command: yaml.load_file("in/text_release.yml")
 
+  inputs_text:
+    command: yaml.load_file("in/text_drivers.yml")
+
+  glm_config_text:
+    command: yaml.load_file("in/text_GLM_config.yml")
+
+  spatial_text:
+    command: >
+      list(title = I('Spatial data: Process-guided deep learning predictions of lake water temperature'))
+
   lakes_metadata:
     command: as.attr_list("in/model_lakes_attrs.csv")
 
@@ -40,4 +60,23 @@ targets:
     command: extract_feature(modeled_lakes)
 
   out/release.xml:
-    command: render(filename = target_name, generic_text, release_text, lakes_metadata, spatial_metadata)
+    command: render(filename = target_name, generic_text, release_text, spatial_metadata)
+
+  out/spatial.xml:
+    command: render(filename = target_name, generic_text, spatial_text, lakes_metadata, spatial_metadata)
+
+  out/spatial.zip:
+    command: sp_to_zip(target_name, modeled_lakes)
+
+  out/inputs.xml:
+    command: render(filename = target_name, generic_text, inputs_text, spatial_metadata)
+
+  out/input_files.zip:
+    command: bundle_meteo_files(target_name, lake_ids, pattern = I('_meteo.csv'))
+
+  out/glm_config.xml:
+    command: render(filename = target_name, generic_text, glm_config_text, spatial_metadata)
+
+  out/glm_config.json:
+    command: bundle_nml_files(target_name, lake_ids, pattern = I('_nml.nml'))
+
