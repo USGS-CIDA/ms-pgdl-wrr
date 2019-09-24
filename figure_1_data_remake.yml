@@ -1,0 +1,79 @@
+packages:
+  - readr
+  - feather
+  - scipiper
+  - stringr
+  - dplyr
+
+target_default: fig_1_files
+
+# see way files were created in jread-usgs/lake-temperature-model-prep/6_drivers/src/local_meteo_utils.R@local_drivers
+
+sources:
+  - fig_1/src/test_train_utils.R
+  - fig_1/src/task_utils.R
+
+targets:
+  fig_1_files:
+    depends:
+      - fig_1/out/fig_1_yeti_jobs.csv
+
+  me_train_files:
+    command: convert_train_move_hash(file_dir = I("fig_1/yeti_sync"),
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_01/mendota_training_002profiles_experiment_01.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_01/mendota_training_010profiles_experiment_01.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_01/mendota_training_050profiles_experiment_01.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_01/mendota_training_100profiles_experiment_01.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_01/mendota_training_500profiles_experiment_01.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_01/mendota_training_980profiles_experiment_01.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_02/mendota_training_002profiles_experiment_02.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_02/mendota_training_010profiles_experiment_02.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_02/mendota_training_050profiles_experiment_02.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_02/mendota_training_100profiles_experiment_02.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_02/mendota_training_500profiles_experiment_02.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_02/mendota_training_980profiles_experiment_02.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_03/mendota_training_002profiles_experiment_03.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_03/mendota_training_010profiles_experiment_03.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_03/mendota_training_050profiles_experiment_03.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_03/mendota_training_100profiles_experiment_03.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_03/mendota_training_500profiles_experiment_03.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_03/mendota_training_980profiles_experiment_03.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_04/mendota_training_002profiles_experiment_04.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_04/mendota_training_010profiles_experiment_04.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_04/mendota_training_050profiles_experiment_04.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_04/mendota_training_100profiles_experiment_04.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_04/mendota_training_500profiles_experiment_04.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_04/mendota_training_980profiles_experiment_04.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_05/mendota_training_002profiles_experiment_05.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_05/mendota_training_010profiles_experiment_05.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_05/mendota_training_050profiles_experiment_05.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_05/mendota_training_100profiles_experiment_05.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_05/mendota_training_500profiles_experiment_05.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_05/mendota_training_980profiles_experiment_05.feather")
+
+  me_test_files:
+    command: convert_test_move_hash(file_dir = I("fig_1/yeti_sync"),
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_01/mendota_sparse_test_experiment_01.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_02/mendota_sparse_test_experiment_02.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_03/mendota_sparse_test_experiment_03.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_04/mendota_sparse_test_experiment_04.feather",
+      "../lake_modeling/data_imports/mendota_sparse_experiments/experiment_05/mendota_sparse_test_experiment_05.feather")
+
+  train_files:
+    command: collapse_dot_names(me_train_files)
+
+  test_files:
+    command: collapse_dot_names(me_test_files)
+
+  fig_1/yeti_sync/me_meteo.csv:
+    command: file.copy("fig_2/in/mendota_local_meteo.csv", to = target_name)
+
+  fig_1/yeti_sync/me_nml.nml:
+    command: file.copy("fig_3/yeti_sync/nhd_13293262_nml.nml", to = target_name)
+
+  fig_1/out/fig_1_yeti_jobs.csv:
+    command: create_fig1_job_table(target_name,
+      train_files,
+      test_files,
+      'fig_1/yeti_sync/me_meteo.csv',
+      'fig_1/yeti_sync/me_nml.nml')
