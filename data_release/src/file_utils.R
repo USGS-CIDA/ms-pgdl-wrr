@@ -21,6 +21,77 @@ get_file_matches <- function(lake_ids, pattern, dir = "../fig_3/yeti_sync"){
   return(files)
 }
 
+site_id_from_file <- function(filename){
+  filename <- basename(filename)
+  paste(strsplit(filename,'[_]')[[1]][1:2], collapse = '_')
+}
+
+exper_n_from_file <- function(filename){
+  filename <- basename(filename)
+  tail(strsplit(filename,'[_]')[[1]],1) %>% strsplit('[.]') %>% .[[1]] %>% .[1] %>% as.numeric
+}
+
+exper_id_from_file <- function(filename){
+  filename <- basename(filename)
+  splits <- strsplit(filename,'[_]')[[1]]
+  if (length(splits) == 6 & all(splits[1:2] == c('me','train'))){
+    'similar'
+  } else {
+    splits[2]
+  }
+}
+
+prof_n_from_file <- function(filename){
+  filename <- basename(filename)
+  splits <- strsplit(filename,'[_]')[[1]]
+  if (length(splits) == 6){
+    as.numeric(splits[3])
+  } else {
+    as.numeric(splits[4])
+  }
+
+}
+
+sb_replace_files <- function(sb_id, ...){
+  item_replace_files(sb_id, files = c(...))
+}
+
+merge_obs_files <- function(filename, lake_ids, pattern, dir = "../fig_3/yeti_sync"){
+  files <- get_file_matches(lake_ids, pattern, dir)
+  out <- data.frame(site_id = c(), DateTime = c(), Depth = c(), temp = c(), stringsAsFactors = FALSE)
+
+
+  for (file in files){
+    data <- read_csv(file.path(dir, file), col_types = 'Ddd') %>%
+      mutate(site_id = site_id_from_file(file)) %>% select(site_id, everything())
+    out <- rbind(out, data)
+  }
+
+  write_csv(out, path = filename)
+
+}
+
+merge_single_lake_obs_files <- function(filename, pattern, dir, exper_id){
+
+  files <- data.frame(filename = dir(dir), stringsAsFactors = FALSE) %>%
+    filter(stringr::str_detect(string = filename, pattern = pattern)) %>%
+    pull(filename)
+
+  out <- data.frame(DateTime = c(), Depth = c(), temp = c(), exper_n = c(), exper_id = c(), stringsAsFactors = FALSE)
+
+  for (file in files){
+
+    data <- read_csv(file.path(dir, file), col_types = 'Ddd') %>%
+      mutate(exper_n = exper_n_from_file(file),
+             exper_id = exper_id_from_file(file),
+             prof_n = prof_n_from_file(file)) %>%
+      mutate(exper_id = paste0(exper_id, "_", prof_n)) %>% select(-prof_n)
+    out <- rbind(out, data)
+  }
+  write_csv(out, path = filename)
+
+}
+
 bundle_nml_files <- function(json_filename, lake_ids, pattern, dir = "../fig_3/yeti_sync"){
   files <- get_file_matches(lake_ids, pattern, dir)
 

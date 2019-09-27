@@ -16,7 +16,7 @@
         <origin>Michael Steinbach</origin>
         <origin>Vipin Kumar</origin>
         <pubdate>2019</pubdate>
-        <title>GLM configuration: Process-guided deep learning predictions of lake water temperature</title>
+        <title>Training data: Process-guided deep learning predictions of lake water temperature</title>
         <geoform>text files</geoform>
         <onlink>http://dx.doi.org/10.5066/P9AQPIVD</onlink>
         <lworkcit>
@@ -40,7 +40,7 @@
       </citeinfo>
     </citation>
     <descript>
-      <abstract>Climate change has been shown to influence lake temperatures in different ways. To better understand the diversity of lake responses to climate change and give managers tools to manage individual lakes, we focused on improving prediction accuracy for daily water temperature profiles in 68 lakes in Minnesota and Wisconsin during 1980-2018. This data set contains the following parameters: glm_setup, morphometry, time, output, init_profiles, meteorology, bird_model, inflow, outflow, snowice, which are defined below.</abstract>
+      <abstract>Climate change has been shown to influence lake temperatures in different ways. To better understand the diversity of lake responses to climate change and give managers tools to manage individual lakes, we focused on improving prediction accuracy for daily water temperature profiles in 68 lakes in Minnesota and Wisconsin during 1980-2018. This data set contains the following parameters: which are defined below.</abstract>
       <purpose>Fisheries biology, limnological research, and climate science.</purpose>
     </descript>
     <timeperd>
@@ -128,17 +128,7 @@
       </cntinfo>
     </ptcontac>
     <datacred>This study was funded by the Department of the Interior Northeast Climate Adaptation Science Center, the United States Geological Survey National Climate This research used resources of the Core Science Analytics and Synthesis Advanced Research Computing program at the U.S. Geological Survey.</datacred>
-    <native>Multiple computer systems were used to generate these data, including linux, OSX. The open source language R was used on all systems, as well as the open-source model GLM.</native>
-    <crossref>
-      <citeinfo>
-        <origin>Matthey R. Hipsey</origin>
-        <origin>Louise C. Bruce</origin>
-        <origin>David P. Hamilton</origin>
-        <pubdate>2013</pubdate>
-        <title>GLM General Lake Model: Model Overview and User Information</title>
-        <onlink>http://aed.see.uwa.edu.au/research/models/GLM/index.html</onlink>
-      </citeinfo>
-    </crossref>
+    <native/>
   </idinfo>
   <dataqual>
     <attracc>
@@ -157,12 +147,12 @@
     <lineage>
       <procstep>
         <procdesc>At the core of the modeling framework is a lake hydrodynamic model that uses inputs of lake-specific properties and local meteorology to estimate water temperature. Our chosen model is the open source, General Lake Model (GLM) version 2.2.0. GLM is a one-dimensional dynamical model which simplifies lakes using a vertical approximation, where horizontal variability is ignored. GLM uses a Lagrangian approach to layer structure where layers can split and combine based on changing vertical gradients. GLM is a modern, implementation of other one-dimensional models. We used GLM to run individual lake simulations according to the processes described in Winslow et al. 2017. Outputs for water temperature were extracted at various depths and written or summarized to the files included in this set of data. The glmtools R package was used for this processing.</procdesc>
-        <procdate>20160624</procdate>
+        <procdate/>
       </procstep>
     </lineage>
   </dataqual>
   <spdoinfo>
-    <indspref>U.S.A.</indspref>
+    <indspref/>
     <direct>Point</direct>
     <ptvctinf>
       <sdtsterm>
@@ -174,8 +164,8 @@
   <spref>
     <horizsys>
       <geograph>
-        <latres>0.1</latres>
-        <longres>0.1</longres>
+        <latres/>
+        <longres/>
         <geogunit>Decimal degrees</geogunit>
       </geograph>
       <geodetic>
@@ -189,130 +179,10 @@
   <eainfo>
     <detailed>
       <enttyp>
-        <enttypl>Model configuration details</enttypl>
-        <enttypd>Model configurations for running the General Lake Model (Hipsey et al. 2013) for each lake, for each driver type. The value for "lake_name" in the "morphometry" field is the mapping for "site_id" for the other datasets included in this release.</enttypd>
+        <enttypl/>
+        <enttypd/>
         <enttypds>Producer Defined</enttypds>
       </enttyp>
-      <attr>
-        <attrlabl>glm_setup</attrlabl>
-        <attrdef>parameters for setting up the General Lake Model and defining constants</attrdef>
-        <attrdefs>Hipsey et al. 2013</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>morphometry</attrlabl>
-        <attrdef>parameters describing the depth/area relationship of the lake for the General Lake Model</attrdef>
-        <attrdefs>Hipsey et al. 2013</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>time</attrlabl>
-        <attrdef>parameters describing the time period and frequency of model runs for the General Lake Model</attrdef>
-        <attrdefs>Hipsey et al. 2013</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>output</attrlabl>
-        <attrdef>parameters describing how the outputs of model runs from the General Lake Model are written</attrdef>
-        <attrdefs>Hipsey et al. 2013</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>init_profiles</attrlabl>
-        <attrdef>parameters describing General Lake Model initial conditions</attrdef>
-        <attrdefs>Hipsey et al. 2013</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>meteorology</attrlabl>
-        <attrdef>parameters describing time series drivers of General Lake Model runs</attrdef>
-        <attrdefs>Hipsey et al. 2013</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>bird_model</attrlabl>
-        <attrdef>parameters describing the use (if applicable) of the Bird model for General Lake Model runs</attrdef>
-        <attrdefs>Hipsey et al. 2013</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>inflow</attrlabl>
-        <attrdef>parameters describing inflows to the General Lake Model</attrdef>
-        <attrdefs>Hipsey et al. 2013</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>outflow</attrlabl>
-        <attrdef>parameters describing outflows from the General Lake Model</attrdef>
-        <attrdefs>Hipsey et al. 2013</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>snowice</attrlabl>
-        <attrdef>parameters describing how snow and ice dynamics are calculated by the General Lake Model</attrdef>
-        <attrdefs>Hipsey et al. 2013</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
     </detailed>
   </eainfo>
   <distinfo>
@@ -338,7 +208,7 @@
     <stdorder>
       <digform>
         <digtinfo>
-          <formname>JSON (JavaScript Object Notation) formatted text files</formname>
+          <formname/>
           <formvern>none</formvern>
         </digtinfo>
         <digtopt>

@@ -89,9 +89,7 @@ latitude-res: 0.1
 longitude-res: 0.1
 data-name: Model configuration details
 data-description: >-
-  Model configurations for running the General Lake Model (Hipsey et al. 2013) for each lake, for each driver type. There are seven files that share identical formatting.
-  Six files correspond to downscaled Global Circulation Models (Notaro et al. 2016), and one (NLDAS) are results from contemporary (1979-2015) meterology.
-  Each file contains the same attributes (described above). NLDAS drivers (NLDAS_model_config.json) are described in
-  Mitchell et al. 2004. The remaining six files are driven with models described in Notaro et al. 2015. The value for "lake_name" in the "morphometry"
+  Model configurations for running the General Lake Model (Hipsey et al. 2013) for each lake, for each driver type.
+  The value for "lake_name" in the "morphometry"
   field is the mapping for "site_id" for the other datasets included in this release.
 file-format: JSON (JavaScript Object Notation) formatted text files

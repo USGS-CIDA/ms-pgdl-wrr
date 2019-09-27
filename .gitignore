@@ -3,6 +3,8 @@
 *.tsv
 *.npy
 *.png
+*.zip
+*.json
 .Rproj.user
 .spyproject
 *__pycache__

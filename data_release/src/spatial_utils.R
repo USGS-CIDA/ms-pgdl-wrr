@@ -17,3 +17,8 @@ subset_save_winslow <- function(lake_ids){
   out <- out[out$site_id %in% lake_ids$site_id, 1]
   return(out)
 }
+
+
+subset_spatial <- function(sp_object, site_id){
+  sp_object[sp_object$site_id == site_id, ]
+}

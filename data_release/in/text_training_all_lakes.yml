@@ -1,0 +1,44 @@
+title: >-
+  All lakes historical training data: Process-guided deep learning predictions of lake water temperature
+
+
+abstract: >-
+  Observed water temperatures from 1980-2018 were compiled for 68 lakes in Minnesota and Wisconsin (USA). These data were used
+  as training data for process-guided deep learning models and deep learning models, and calibration data for process-based models.
+  The data are formatted as a single csv (comma separated values) file with attributes corresponding to the unique combination of
+  lake identifier, time, and depth. Data came from a variety of sources, including the Water Quality Portal,
+  the North Temperate Lakes Long-Term Ecological Research Project, and digitized temperature
+  records from the MN Department of Natural Resources.
+
+
+attributes:
+  -
+    attr-label: site_id
+    attr-def: identifier for lake
+    attr-defs: nhd_ID
+    data-min: NA
+    data-max: NA
+    data-units: NA
+  -
+    attr-label: DateTime
+    attr-def: Date of temperature measurement
+    attr-defs: NA
+    data-min: NA
+    data-max: NA
+    data-units: NA
+  -
+    attr-label: Depth
+    attr-def: Depth of temperature measurement below water surface
+    attr-defs: NA
+    data-min: 0
+    data-max: NA
+    data-units: meters
+  -
+    attr-label: temp
+    attr-def: Water temperature
+    attr-defs: NA
+    data-min: NA
+    data-max: NA
+    data-units: degrees C
+
+file-format: a single comma delimited file
