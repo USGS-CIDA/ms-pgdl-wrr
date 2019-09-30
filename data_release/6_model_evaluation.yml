@@ -1,0 +1,36 @@
+target_default: 6_model_evaluation
+
+packages:
+  - yaml
+  - whisker
+  - dplyr
+  - tidyr
+  - meddle
+  - readr
+  - feather
+  - httr
+  - rgdal
+  - stringr
+  - glmtools
+  - sp
+  - RJSONIO
+  - sbtools
+  - RcppCNPy
+  - purrr
+
+sources:
+  - src/file_utils.R
+  - src/model_eval_utils.R
+
+targets:
+  6_model_evaluation:
+    depends:
+      - out/sp_test.csv
+      - out/sp_RMSE.csv
+
+  out/sp_test.csv:
+    command: merge_single_lake_test_files(target_name, pattern = I('sp_[a-z]+_test'), dir = I("../fig_2/yeti_sync/"))
+
+  out/sp_RMSE.csv:
+    command: calculate_RMSE(target_name, test_file = "out/sp_test.csv",
+      "out/sp_season_predict_pb.csv")
