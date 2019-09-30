@@ -1,0 +1,60 @@
+target_default: 1_spatial
+
+packages:
+  - yaml
+  - whisker
+  - dplyr
+  - tidyr
+  - meddle
+  - readr
+  - feather
+  - httr
+  - rgdal
+  - stringr
+  - glmtools
+  - sp
+
+
+sources:
+  - src/spatial_utils.R
+  - src/file_utils.R
+
+targets:
+  1_spatial:
+    depends:
+      - out/spatial.zip
+
+
+  lake_ids:
+    command: read_csv("in/model_lake_ids.csv")
+
+  modeled_lakes:
+    command: subset_save_winslow(lake_ids)
+
+  in/model_lakes_attrs.csv:
+    command: attribute_skeleton(modeled_lakes, attr.file = target_name)
+
+  lakes_metadata:
+    command: as.attr_list("in/model_lakes_attrs.csv")
+
+  spatial_text:
+    command: >
+      list(title = I('Spatial data: Process-guided deep learning predictions of lake water temperature'))
+
+  mendota_lake:
+    command: subset_spatial(modeled_lakes, site_id = I('nhd_13293262'))
+
+  sparkling_lake:
+    command: subset_spatial(modeled_lakes, site_id = I('nhd_13344210'))
+
+  me_spatial_metadata:
+    command: extract_feature(mendota_lake)
+
+  sp_spatial_metadata:
+    command: extract_feature(sparkling_lake)
+
+  spatial_metadata:
+    command: extract_feature(modeled_lakes)
+
+  out/spatial.zip:
+    command: sp_to_zip(target_name, modeled_lakes)

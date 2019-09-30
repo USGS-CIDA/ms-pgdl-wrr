@@ -1,0 +1,62 @@
+
+target_default: 4_model_training
+
+
+packages:
+  - yaml
+  - whisker
+  - dplyr
+  - tidyr
+  - meddle
+  - readr
+  - httr
+  - rgdal
+  - stringr
+  - glmtools
+
+
+sources:
+  - src/spatial_utils.R
+  - src/file_utils.R
+
+targets:
+  4_model_training:
+    depends:
+      - out/all_lakes_historical_training.csv
+
+
+  out/all_lakes_historical_training.csv:
+    command: merge_obs_files(target_name, lake_ids, pattern = I('_train_all_profiles.csv'))
+
+  out/me_season_training.csv:
+    command: merge_single_lake_obs_files(target_name, pattern = I('me_season_train_500_profiles'), dir = I("../fig_2/yeti_sync/"))
+
+  out/sp_season_training.csv:
+    command: merge_single_lake_obs_files(target_name, pattern = I('sp_season_train_500_profiles'), dir = I("../fig_2/yeti_sync/"))
+
+  out/me_year_training.csv:
+    command: merge_single_lake_obs_files(target_name, pattern = I('me_year_train_500_profiles'), dir = I("../fig_2/yeti_sync/"))
+
+  out/sp_year_training.csv:
+    command: merge_single_lake_obs_files(target_name, pattern = I('sp_year_train_500_profiles'), dir = I("../fig_2/yeti_sync/"))
+
+  out/sp_similar_training.csv:
+    command: merge_single_lake_obs_files(target_name, pattern = I('sp_similar_train_500_profiles'), dir = I("../fig_2/yeti_sync/"))
+
+  out/me_similar_training.csv:
+    command: merge_single_lake_obs_files(target_name, pattern = I('me_train_[0159]'), dir = I("../fig_1/yeti_sync/"))
+
+  me_training_text:
+    command: >
+      list(title = I('Lake Mendota detailed  training data: Process-guided deep learning predictions of lake water temperature'))
+
+  sp_training_text:
+    command: >
+      list(title = I('Sparkling Lake detailed training data: Process-guided deep learning predictions of lake water temperature'))
+
+  all_lakes_historical_training_text:
+    command: yaml.load_file('in/text_training_all_lakes.yml')
+
+  training_text:
+    command: >
+      list(title = I('Training data: Process-guided deep learning predictions of lake water temperature'))

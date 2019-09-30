@@ -10,6 +10,26 @@ bundle_meteo_files <- function(zip_filename, lake_ids, pattern, dir = "../fig_3/
 
 }
 
+combine_glm_feather_other <- function(fileout, min_date, ...){
+  feather_files <- c(...)
+  n_prof = 500
+
+  data <- purrr::map(feather_files, function(x) {
+    file_splits <- basename(x) %>% strsplit('[_]') %>% .[[1]]
+    # get "season" from "me_season_500_profiles_experiment_01_temperatures.feather":
+    test_exp <- file_splits[2]
+    # get 1 from "PGRNN_mendota_season_exp1.npy":
+    exp_n <- tail(file_splits, 2) %>% head(1) %>% as.numeric()
+
+    feather::read_feather(x) %>%
+      select(-ice, date = DateTime) %>%
+      mutate(date = as.Date(date), exper_n = exp_n, exper_id = sprintf("%s_%s", test_exp, n_prof)) %>%
+      filter(date > min_date)
+  }) %>% reduce(rbind)
+
+  write_csv(data, path = fileout)
+}
+
 load_npy_df <- function(filepath){
   npyLoad(filepath) %>% t() %>% as.data.frame() %>%
     mutate(date = seq(as.Date("2009-04-02"), length.out = 3185, by = 'days')) %>%
@@ -36,6 +56,7 @@ combine_XJ_npy_similar <- function(fileout, n_depths, ...){
 
   write_csv(data, path = fileout)
 }
+
 
 combine_XJ_npy_other <- function(fileout, n_depths, ...){
   npy_files <- c(...)
