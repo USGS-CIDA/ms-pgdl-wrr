@@ -10,6 +10,28 @@ bundle_meteo_files <- function(zip_filename, lake_ids, pattern, dir = "../fig_3/
 
 }
 
+combine_XJ_npy_similar <- function(fileout, n_depths, ...){
+  npy_files <- c(...)
+
+  dir_path <- dirname(npy_files) %>% unique()
+  file_names <- basename(npy_files)
+  data <- purrr::map(file_names, function(x) {
+    # get 2 from "02.npy":
+    n_prof <- strsplit(x, '[_]') %>% .[[1]] %>% .[4] %>%
+      strsplit('[.]') %>% .[[1]] %>% .[1] %>% as.numeric()
+    # get 1 from "exp1":
+    exp_n <- strsplit(x, '[_]') %>% .[[1]] %>% .[3] %>% str_remove('[^0-9.]+')
+
+    npyLoad(file.path(dir_path, x)) %>% t() %>% as.data.frame() %>%
+      setNames(paste0('temp_',seq(0, length.out = n_depths, by = 0.5))) %>%
+      mutate(date = seq(as.Date("2009-04-02"), length.out = 3185, by = 'days')) %>%
+      select(date, everything()) %>%
+      mutate(exper_n = exp_n, exper_id = sprintf("similar_%s", n_prof))
+    }) %>% reduce(rbind)
+
+  write_csv(data, path = fileout)
+}
+
 get_file_matches <- function(lake_ids, pattern, dir = "../fig_3/yeti_sync"){
   files <- data.frame(filename = dir(dir), stringsAsFactors = FALSE) %>%
     filter(stringr::str_detect(string = filename, pattern = pattern)) %>%
