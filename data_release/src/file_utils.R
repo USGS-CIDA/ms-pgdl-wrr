@@ -10,11 +10,18 @@ bundle_meteo_files <- function(zip_filename, lake_ids, pattern, dir = "../fig_3/
 
 }
 
+load_npy_df <- function(filepath){
+  npyLoad(filepath) %>% t() %>% as.data.frame() %>%
+    mutate(date = seq(as.Date("2009-04-02"), length.out = 3185, by = 'days')) %>%
+    select(date, everything())
+}
+
 combine_XJ_npy_similar <- function(fileout, n_depths, ...){
   npy_files <- c(...)
 
   dir_path <- dirname(npy_files) %>% unique()
   file_names <- basename(npy_files)
+  test_exp <- 'similar'
   data <- purrr::map(file_names, function(x) {
     # get 2 from "02.npy":
     n_prof <- strsplit(x, '[_]') %>% .[[1]] %>% .[4] %>%
@@ -22,12 +29,36 @@ combine_XJ_npy_similar <- function(fileout, n_depths, ...){
     # get 1 from "exp1":
     exp_n <- strsplit(x, '[_]') %>% .[[1]] %>% .[3] %>% str_remove('[^0-9.]+')
 
-    npyLoad(file.path(dir_path, x)) %>% t() %>% as.data.frame() %>%
-      setNames(paste0('temp_',seq(0, length.out = n_depths, by = 0.5))) %>%
-      mutate(date = seq(as.Date("2009-04-02"), length.out = 3185, by = 'days')) %>%
-      select(date, everything()) %>%
-      mutate(exper_n = exp_n, exper_id = sprintf("similar_%s", n_prof))
+    load_npy_df(file.path(dir_path, x)) %>%
+      setNames(c("date", paste0('temp_',seq(0, length.out = n_depths, by = 0.5)))) %>%
+      mutate(exper_n = exp_n, exper_id = sprintf("%s_%s", test_exp, n_prof))
     }) %>% reduce(rbind)
+
+  write_csv(data, path = fileout)
+}
+
+combine_XJ_npy_other <- function(fileout, n_depths, ...){
+  npy_files <- c(...)
+
+  dir_path <- dirname(npy_files) %>% unique()
+  file_names <- basename(npy_files)
+  n_prof = 500
+  data <- purrr::map(file_names, function(x) {
+    file_splits <- strsplit(x, '[_]') %>% .[[1]]
+    # get "season" from "PGRNN_mendota_season_exp1.npy" & "PGRNN_season_sparkling_exp2.npy":
+    if ('mendota' %in% file_splits){
+      test_exp <- file_splits[3]
+    } else {
+      test_exp <- file_splits[2]
+    }
+
+    # get 1 from "PGRNN_mendota_season_exp1.npy":
+    exp_n <- file_splits[4] %>% str_remove('[^0-9.]+')
+
+    load_npy_df(file.path(dir_path, x)) %>%
+      setNames(c("date", paste0('temp_',seq(0, length.out = n_depths, by = 0.5)))) %>%
+      mutate(exper_n = exp_n, exper_id = sprintf("%s_%s", test_exp, n_prof))
+  }) %>% reduce(rbind)
 
   write_csv(data, path = fileout)
 }
