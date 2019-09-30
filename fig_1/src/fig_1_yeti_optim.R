@@ -10,6 +10,21 @@ run_optim_glm <- function(driver_file, nml_file, train_file, test_file, exper_id
     write_csv(paste0('out/fig_1/', exper_id, "_results.csv"))
 }
 
+
+export_temp <- function(filepath, nml_file, sim_path){
+
+  glm_nml <- read_nml(nml_file)
+  lake_depth <- get_nml_value(glm_nml, arg_name = 'lake_depth')
+  export_depths <- seq(0, lake_depth, by = 0.5)
+
+  temp_data <- get_temp(sim_path, reference = 'surface', z_out = export_depths)
+  model_out <- get_var(sim_path, var_name = 'hice') %>%
+    mutate(ice = hice > 0) %>% select(-hice) %>%
+    left_join(temp_data, ., by = 'DateTime')
+  feather::write_feather(model_out, filepath)
+
+}
+
 optim_multilake_glm <- function(driver_file, nml_file, train_file, test_file, sim_dir, glm_nix_dir){
 
   nhd_id <- basename(driver_file) %>% strsplit('[_]') %>% .[[1]] %>% .[2] %>% sprintf('nhd_%s', .)
@@ -42,6 +57,9 @@ optim_multilake_glm <- function(driver_file, nml_file, train_file, test_file, si
                                         test_filepath,
                                         metric = 'water.temperature')
   results$nhd_id <- nhd_id
+
+  export_temp(filepath = paste0('out/fig_1/', exper_id, "_temperatures.feather"), nml_file, sim_path = sprintf('%s/output.nc', sim_dir))
+
   unlink(sim_dir, recursive = TRUE)
 
   return(results)
@@ -126,8 +144,8 @@ dir.create(sim_dir, recursive = TRUE)
 # copy glm exe and use the copy for each sim:
 glm_nix_dir <- file.path(sim_dir, 'glm_nix')
 dir.create(glm_nix_dir)
-file.copy(system.file('exec/nixglm', package='GLMr'), file.path(glm_nix_dir, 'glm_nix_exe'))
-file.copy(system.file('extbin/nixGLM', package='GLMr'), glm_nix_dir, recursive = TRUE)
+file.copy(system.file('exec/nixglm', package='GLMr'), file.path(glm_nix_dir, 'glm_nix_exe'), overwrite = TRUE)
+file.copy(system.file('extbin/nixGLM', package='GLMr'), glm_nix_dir, recursive = TRUE, overwrite = TRUE)
 
 glm_nix_full_dir <- glm_nix_dir
 run_optim_glm(driver_file, nml_file, train_file, test_file, exper_id, sim_dir, glm_nix_full_dir)
