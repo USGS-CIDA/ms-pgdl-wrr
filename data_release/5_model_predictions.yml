@@ -31,6 +31,7 @@ targets:
       - out/sp_year_predict_pb.csv
       - out/me_year_predict_pb.csv
       - out/sp_similar_predict_pb.csv
+      - out/me_similar_predict_pb.csv
 
   # ----- FIGURE SPARSE --------
   # convert "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp3_02.npy" into
@@ -95,6 +96,18 @@ targets:
       "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/RNN_mendota_exp5_50.npy",
       "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/RNN_mendota_exp5_500.npy",
       "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/RNN_mendota_exp5_980.npy")
+
+      # ***** MORE NEEDED WHEN DONE ON YETI ******
+  out/me_similar_predict_pb.csv:
+    command: combine_glm_feather_similar(target_name, min_date = I("2009-04-02"),
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_002_profiles_experiment_01_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_010_profiles_experiment_01_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_500_profiles_experiment_01_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_500_profiles_experiment_02_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_500_profiles_experiment_03_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_500_profiles_experiment_04_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_500_profiles_experiment_05_temperatures.feather")
+
 
   # ----- FIGURE OUT OF BOUNDS --------
   out/sp_season_predict_pb.csv:

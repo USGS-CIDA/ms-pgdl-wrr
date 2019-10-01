@@ -29,6 +29,8 @@ targets:
     depends:
       - out/sp_test.csv
       - out/sp_RMSE.csv
+      - out/me_test.csv
+      - out/me_RMSE.csv
 
   out/sp_test.csv:
     command: merge_single_lake_test_files(target_name, pattern = I('sp_[a-z]+_test'), dir = I("../fig_2/yeti_sync/"))
@@ -46,3 +48,19 @@ targets:
       "out/sp_season_predict_pgdl.csv",
       "out/sp_similar_predict_pgdl.csv",
       "out/sp_year_predict_pgdl.csv")
+
+  out/me_test.csv:
+    command: merge_single_lake_test_files(target_name, pattern = I('me_[a-z]+_test'), dir = I("../fig_2/yeti_sync/"))
+
+  out/me_RMSE.csv:
+    command: calculate_RMSE(target_name, test_file = "out/me_test.csv",
+      "out/me_year_predict_pb.csv",
+      "out/me_year_predict_dl.csv",
+      "out/me_year_predict_pgdl.csv",
+      "out/me_season_predict_pb.csv",
+      "out/me_season_predict_dl.csv",
+      "out/me_season_predict_pgdl.csv",
+      "out/me_similar_predict_dl.csv",
+      "out/me_similar_predict_pgdl.csv",
+      "out/me_similar_predict_pb.csv") # need to add "similar" for pb for rest of YETI files
+

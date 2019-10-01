@@ -8,10 +8,10 @@ plot_data_sparsity <- function(){
   par(omi = c(0,0,0.05,0.05), mai = c(1,1,0,0), las = 1, mgp = c(2,.5,0), cex = 1.5)
 
   plot(NA, NA, xlim = c(2, 1000), ylim = c(4.7, 0.75),
-       ylab = 'Test RMSE (°C)', xlab = "Training temperature profiles (#)", log = 'x', axes = FALSE)
+       ylab = "", xlab = "", log = 'x', axes = FALSE) #'Test RMSE (°C)' "Training temperature profiles (#)"
 
-  axis(1, at = c(-100,2, 10, 50, 100, 500, 980, 1e10), labels = c("", 2, 10, 50, 100, 500, 980, ""), tck = -0.01)
-  axis(2, at = seq(0,10), las = 1, tck = -0.01)
+  # axis(1, at = c(-100,2, 10, 50, 100, 500, 980, 1e10), labels = c("", 2, 10, 50, 100, 500, 980, ""), tck = -0.01)
+  # axis(2, at = seq(0,10), las = 1, tck = -0.01)
 
   pgrnn_offsets <- c(0.15, 0.5, 3, 7, 20, 30)
   rnn_offsets <- -pgrnn_offsets
@@ -66,6 +66,7 @@ plot_data_sparsity <- function(){
   points(rnn_mean$x, rnn_mean$y, col = '#d95f02', pch = 22, bg = 'white', lwd = 2.5, cex = 1.5)
   # lines(pgto_mean$x, pgto_mean$y, col = '#7570b3', lty = 'dashed')
   # points(pgto_mean$x, pgto_mean$y, col = '#7570b3', pch = 23, bg = 'grey65', lwd = 2.5, cex = 1.5)
+
   lines(pg_mean$x, pg_mean$y, col = '#7570b3', lty = 'dashed')
   points(pg_mean$x, pg_mean$y, col = '#7570b3', pch = 23, bg = 'white', lwd = 2.5, cex = 1.5)
 
@@ -77,7 +78,7 @@ plot_data_sparsity <- function(){
   message('GLM_500: ', round(tail(glm_mean$y,2)[1], 2), ' RNN_500:', round(tail(rnn_mean$y,2)[1], 2))
   message('GLM_100: ', round(tail(glm_mean$y,3)[1], 2), ' RNN_100:', round(tail(rnn_mean$y,3)[1], 2))
 
-  message('GLM_2: ', round(head(glm_mean$y,1), 2), ' PGDL_2: ', round(head(pg_mean$y,1), 2))
+  # message('GLM_2: ', round(head(glm_mean$y,1), 2), ' PGDL_2: ', round(head(pg_mean$y,1), 2))
 
   points(2.2, 0.79, col = '#7570b3', pch = 23, bg = 'white', lwd = 2.5, cex = 1.5)
   text(2.3, 0.80, 'Process-Guided Deep Learning', pos = 4, cex = 1.1)

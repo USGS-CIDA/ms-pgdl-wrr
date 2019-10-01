@@ -30,6 +30,27 @@ combine_glm_feather_other <- function(fileout, min_date, ...){
   write_csv(data, path = fileout)
 }
 
+combine_glm_feather_similar <- function(fileout, min_date, ...){
+  feather_files <- c(...)
+  test_exp <- "similar"
+
+  data <- purrr::map(feather_files, function(x) {
+    file_splits <- basename(x) %>% strsplit('[_]') %>% .[[1]]
+    # get 2 from "me_002_profiles_experiment_01_temperatures.feather":
+    n_prof <- file_splits[2] %>% as.numeric()
+    # get 1 from "me_002_profiles_experiment_01_temperatures.feather":
+    exp_n <- file_splits[5] %>% as.numeric()
+
+    feather::read_feather(x) %>%
+      select(-ice, date = DateTime) %>%
+      mutate(date = as.Date(date), exper_n = exp_n, exper_id = sprintf("%s_%s", test_exp, n_prof)) %>%
+      filter(date > min_date)
+  }) %>% reduce(rbind)
+
+  write_csv(data, path = fileout)
+
+}
+
 load_npy_df <- function(filepath){
   npyLoad(filepath) %>% t() %>% as.data.frame() %>%
     mutate(date = seq(as.Date("2009-04-02"), length.out = 3185, by = 'days')) %>%
