@@ -74,7 +74,7 @@ combine_XJ_npy_other <- function(fileout, n_depths, ...){
     }
 
     # get 1 from "PGRNN_mendota_season_exp1.npy":
-    exp_n <- file_splits[4] %>% str_remove('[^0-9.]+')
+    exp_n <- file_splits[4] %>% strsplit('[.]') %>% .[[1]] %>% .[1] %>%  str_remove('[^0-9.]+')
 
     load_npy_df(file.path(dir_path, x)) %>%
       setNames(c("date", paste0('temp_',seq(0, length.out = n_depths, by = 0.5)))) %>%
@@ -105,7 +105,7 @@ exper_n_from_file <- function(filename){
   tail(strsplit(filename,'[_]')[[1]],1) %>% strsplit('[.]') %>% .[[1]] %>% .[1] %>% as.numeric
 }
 
-exper_id_from_file <- function(filename){
+exper_type_from_file <- function(filename){
   filename <- basename(filename)
   splits <- strsplit(filename,'[_]')[[1]]
   if (length(splits) == 6 & all(splits[1:2] == c('me','train'))){
@@ -160,7 +160,7 @@ merge_single_lake_test_files <- function(filename, pattern, dir){
 
     read_csv(file.path(dir, x), col_types = 'Ddd') %>%
       rename(date = DateTime, depth = Depth) %>%
-      mutate(exper_n = exp_n, exper_id = test_exp) # add exper_n and exper_id
+      mutate(exper_n = exp_n, exper_type = test_exp) # add exper_n and exper_type
   }) %>% purrr::reduce(rbind)
 
   write_csv(data, path = filename)
@@ -177,9 +177,9 @@ merge_single_lake_obs_files <- function(filename, pattern, dir, exper_id){
 
     data <- read_csv(file.path(dir, file), col_types = 'Ddd') %>%
       mutate(exper_n = exper_n_from_file(file),
-             exper_id = exper_id_from_file(file),
+             exper_type = exper_type_from_file(file),
              prof_n = prof_n_from_file(file)) %>%
-      mutate(exper_id = paste0(exper_id, "_", prof_n)) %>% select(-prof_n)
+      mutate(exper_id = paste0(exper_type, "_", prof_n)) %>% select(-prof_n, -exper_type)
     out <- rbind(out, data)
   }
   write_csv(out, path = filename)
