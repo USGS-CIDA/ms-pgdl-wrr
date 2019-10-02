@@ -11,6 +11,15 @@ import tensorflow as tf
 import random
 import pandas as pd
 import feather
+import argparse
+import os
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--data_path', default='fig_1/tmp/inputs_ready')
+parser.add_argument('--restore_path', default='fig_1/tmp/model_pretrained')
+parser.add_argument('--save_path', default='')
+args = parser.parse_args()
+print(args)
 
 random.seed(9001)
 
@@ -360,17 +369,17 @@ train_op = optimizer.apply_gradients(zip(grads, tvars))
 
 
 # load data ---------------------------------------------------------------
-x_full = np.load('processed_features.npy')
-x_raw_full = np.load('features.npy')
-diag_full = np.load('diag.npy')
+x_full = np.load(os.path.join(args.data_path, 'processed_features.npy'))
+x_raw_full = np.load(os.path.join(args.data_path, 'features.npy'))
+diag_full = np.load(os.path.join(args.data_path, 'diag.npy'))
 
 phy_full = np.concatenate((x_raw_full[:,:,:-2],diag_full),axis=2)
 
 
 # training and testing ------------------------------------------------------
-new_dates = np.load('dates.npy')
+new_dates = np.load(os.path.join(args.data_path, 'dates.npy'), allow_pickle=True)
 
-train_data = feather.read_dataframe('../experiment_01/mendota_training_980profiles_experiment_01.feather')
+train_data = feather.read_dataframe(os.path.join(args.data_path, 'mendota_training_980profiles_experiment_01.feather'))
 #train_data.columns
 
 tr_date = train_data.values[:,0]
@@ -393,7 +402,7 @@ for i in range(new_dates.shape[0]):
         if k>=tr_date.shape[0]:
             break
     
-test_data = feather.read_dataframe('../experiment_01/mendota_test_experiment_01.feather')
+test_data = feather.read_dataframe(os.path.join(args.data_path, 'mendota_sparse_test_experiment_01.feather'))
 #test_data.columns
 
 te_date = test_data.values[:,0]
@@ -442,17 +451,16 @@ p_f = p_train
 # finish loading data --------------------------------------------------------
 
 #total_batch = int(x_train.shape[0]/batch_size)
-merr = 20
-metr = 20
-ploss=10000
-using_pretrained=1
+# merr = 20
+# metr = 20
+# ploss=10000
 
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
-    # if using pretrained model
-    if using_pretrained==1:
-        saver.restore(sess, "./pretrained_model.ckpt")
 
+    # If using pretrained model, reload it now
+    #if args.restore_path != '':
+    #    saver.restore(sess, os.path.join(args.restore_path, 'pretrained_model.ckpt'))
         
     for epoch in range(epochs):
 #        
@@ -477,5 +485,8 @@ with tf.Session() as sess:
         
     loss_te,prd = sess.run([r_cost,pred], feed_dict = {x: x_train, y: y_test, m: m_test, bt_sz: 50*N_sec})
                 
-    print("Loss_te " + \
-                      "{:.4f}".format(loss_te) )
+    print("Loss_te " + "{:.4f}".format(loss_te) )
+    
+    if args.save_path != '':
+        saver.save(sess, os.path.join(args.save_path, "trained_model.ckpt"))
+
