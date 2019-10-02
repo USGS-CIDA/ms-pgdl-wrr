@@ -10,9 +10,9 @@ create_historical_predict_plan <- function(lake_ids){
     command = function(task_name, step_name, ...) {
       id_only <- strsplit(task_name, '[_]')[[1]][2]
       sprintf("combine_jared_feathers(target_name,
-                '../fig_3/in/%sPGRNN_output_trial0.feather',
-                '../fig_3/in/%sPGRNN_output_trial1.feather',
-                '../fig_3/in/%sPGRNN_output_trial2.feather')", id_only, id_only, id_only)
+      '../fig_3/in/%sPGRNN_output_trial0.feather',
+      '../fig_3/in/%sPGRNN_output_trial1.feather',
+      '../fig_3/in/%sPGRNN_output_trial2.feather')", id_only, id_only, id_only)
     }
   )
   dl_predict <- create_task_step(
@@ -24,9 +24,9 @@ create_historical_predict_plan <- function(lake_ids){
     command = function(task_name, step_name, ...) {
       id_only <- strsplit(task_name, '[_]')[[1]][2]
       sprintf("combine_jared_feathers(target_name,
-                '../fig_3/in/%sRNN_output_trial0.feather',
-                '../fig_3/in/%sRNN_output_trial1.feather',
-                '../fig_3/in/%sRNN_output_trial2.feather')", id_only, id_only, id_only)
+      '../fig_3/in/%sRNN_output_trial0.feather',
+      '../fig_3/in/%sRNN_output_trial1.feather',
+      '../fig_3/in/%sRNN_output_trial2.feather')", id_only, id_only, id_only)
     }
   )
 
@@ -38,7 +38,7 @@ create_historical_predict_plan <- function(lake_ids){
 
     command = function(task_name, step_name, ...) {
       sprintf("glm_feather_to_csv(target_name,
-                '../yeti_in/fig_3/%s_all_profiles_temperatures.feather')", task_name)
+      '../yeti_in/fig_3/%s_all_profiles_temperatures.feather')", task_name)
     }
   )
 

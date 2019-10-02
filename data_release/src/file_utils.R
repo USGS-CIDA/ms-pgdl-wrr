@@ -10,6 +10,39 @@ bundle_meteo_files <- function(zip_filename, lake_ids, pattern, dir = "../fig_3/
 
 }
 
+combine_jared_feathers <- function(fileout, ...){
+
+  feather_files <- c(...)
+  file_names <- basename(feather_files)
+
+  dir_path <- dirname(feather_files) %>% unique()
+
+  test_exp <- 'historical'
+  n_prof <- 'all_train'
+  data <- purrr::map(file_names, function(x) {
+    file_splits <- strsplit(x, '[_]')[[1]]
+
+    # get 1 from "trial0" (since we're 1 indexed)
+    exp_n <- file_splits[3] %>% strsplit('[.]') %>% .[[1]] %>% .[1] %>%
+      str_remove('[^0-9.]+') %>% as.numeric() %>% {.+1}
+    # rename and adjust depths
+
+    load_npy_df(file.path(dir_path, x)) %>%
+      setNames(c("date", paste0('temp_',seq(0, length.out = n_depths, by = 0.5)))) %>%
+      mutate(exper_n = exp_n, exper_id = sprintf("%s_%s", test_exp, n_prof))
+  }) %>% reduce(rbind)
+
+  write_csv(data, path = fileout)
+
+
+  mutate(exper_n = exp_n, exper_id = sprintf("%s_%s", test_exp, n_prof))
+  browser()
+}
+
+glm_feather_to_csv <- function(fileout, ...){
+  browser()
+}
+
 combine_glm_feather_other <- function(fileout, min_date, ...){
   feather_files <- c(...)
   n_prof = 500

@@ -36,7 +36,7 @@ targets:
       - out/me_year_predict_pb.csv
       - out/sp_similar_predict_pb.csv
       - out/me_similar_predict_pb.csv
-      - out/historical_pred_files.yml
+      - out/historical_predictions.ind
 
   # ----- FIGURE SPARSE --------
   # convert "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp3_02.npy" into
