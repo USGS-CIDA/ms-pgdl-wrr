@@ -20,7 +20,7 @@ calc_pretrainer_ALL_RMSE <- function(){
 compute_RMSEs <- function(pred_obs) {
 
   results <- pred_obs %>%
-    group_by(nhd_id) %>%
+    dplyr::group_by(nhd_id) %>%
     summarize(
       obs_removed = length(which(is.na(pred))),
       shallowest_removed = if(any(is.na(pred))) min(depth[is.na(pred)]) else NA,

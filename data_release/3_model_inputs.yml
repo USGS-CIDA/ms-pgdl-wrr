@@ -1,0 +1,34 @@
+
+target_default: 3_model_inputs
+
+include:
+  - 2_model_config.yml
+
+packages:
+  - yaml
+  - whisker
+  - dplyr
+  - tidyr
+  - meddle
+  - readr
+  - httr
+  - rgdal
+  - stringr
+  - glmtools
+
+
+sources:
+  - src/spatial_utils.R
+  - src/file_utils.R
+
+targets:
+  3_model_inputs:
+    depends:
+      - out/meteo_inputs.zip
+
+
+  out/meteo_inputs.zip:
+    command: bundle_meteo_files(target_name, lake_ids, pattern = I('_meteo.csv'))
+
+  inputs_text:
+    command: yaml.load_file("in/text_drivers.yml")

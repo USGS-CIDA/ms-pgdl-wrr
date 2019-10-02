@@ -180,8 +180,11 @@ combine_to_job_table <- function(target_name, ...){
            test_file = get_x_file(site_id, '_test_'),
            nml_file = get_x_file(site_id, '_nml.'),
            meteo_file = get_x_file(site_id, '_meteo.'),
-           exper_id = get_exper_id(site_id, train_file)) %>%
+           exper_id = get_exper_id(site_id, train_file),
+           nchar_train = nchar(train_file)) %>%
+    dplyr::arrange(nchar_train) %>%
     select(site_id, nml_file, meteo_file, exper_id, train_file, test_file) %>%
+
     readr::write_csv(target_name)
 
 }

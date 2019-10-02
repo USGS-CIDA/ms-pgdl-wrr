@@ -1,0 +1,272 @@
+target_default: 5_model_predictions
+
+include:
+  - 3_model_inputs.yml
+
+packages:
+  - yaml
+  - whisker
+  - dplyr
+  - tidyr
+  - meddle
+  - readr
+  - feather
+  - httr
+  - rgdal
+  - stringr
+  - glmtools
+  - sp
+  - RJSONIO
+  - sbtools
+  - RcppCNPy
+  - purrr
+
+sources:
+  - src/spatial_utils.R
+  - src/file_utils.R
+  - src/task_utils.R
+
+targets:
+  5_model_predictions:
+    depends:
+      - out/me_similar_predict_pgdl.csv
+      - out/sp_season_predict_pb.csv
+      - out/me_season_predict_pb.csv
+      - out/sp_year_predict_pb.csv
+      - out/me_year_predict_pb.csv
+      - out/sp_similar_predict_pb.csv
+      - out/me_similar_predict_pb.csv
+      - out/historical_predictions.ind
+
+  # ----- FIGURE SPARSE --------
+  # convert "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp3_02.npy" into
+  # "me_similar_predict_pgdl.csv" with added columns for exper_n = int, exper_id = "similar_%s" n_profiles
+  out/me_similar_predict_pgdl.csv:
+    command: combine_XJ_npy_similar(target_name, n_depths = 50,
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp1_02.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp1_10.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp1_100.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp1_50.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp1_500.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp1_980.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp2_02.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp2_10.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp2_100.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp2_50.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp2_500.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp2_980.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp3_02.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp3_10.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp3_100.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp3_50.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp3_500.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp3_980.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp4_02.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp4_10.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp4_100.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp4_50.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp4_500.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp4_980.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp5_02.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp5_10.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp5_100.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp5_50.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp5_500.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp5_980.npy")
+
+  out/me_similar_predict_dl.csv:
+    command: combine_XJ_npy_similar(target_name, n_depths = 50,
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/RNN_mendota_exp1_10.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/RNN_mendota_exp1_100.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/RNN_mendota_exp1_50.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/RNN_mendota_exp1_500.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/RNN_mendota_exp1_980.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/RNN_mendota_exp2_10.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/RNN_mendota_exp2_100.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/RNN_mendota_exp2_50.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/RNN_mendota_exp2_500.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/RNN_mendota_exp2_980.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/RNN_mendota_exp3_10.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/RNN_mendota_exp3_100.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/RNN_mendota_exp3_50.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/RNN_mendota_exp3_500.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/RNN_mendota_exp3_980.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/RNN_mendota_exp4_10.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/RNN_mendota_exp4_100.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/RNN_mendota_exp4_50.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/RNN_mendota_exp4_500.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/RNN_mendota_exp4_980.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/RNN_mendota_exp5_10.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/RNN_mendota_exp5_100.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/RNN_mendota_exp5_50.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/RNN_mendota_exp5_500.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/RNN_mendota_exp5_980.npy")
+
+      # ***** MORE NEEDED WHEN DONE ON YETI ******, #"/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_100_profiles_experiment_05_temperatures.feather",
+  out/me_similar_predict_pb.csv:
+    command: combine_glm_feather_similar(target_name, min_date = I("2009-04-02"),
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_002_profiles_experiment_01_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_002_profiles_experiment_02_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_002_profiles_experiment_03_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_002_profiles_experiment_04_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_002_profiles_experiment_05_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_010_profiles_experiment_01_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_010_profiles_experiment_02_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_010_profiles_experiment_03_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_010_profiles_experiment_04_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_010_profiles_experiment_05_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_050_profiles_experiment_01_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_050_profiles_experiment_02_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_050_profiles_experiment_03_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_050_profiles_experiment_04_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_050_profiles_experiment_05_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_100_profiles_experiment_01_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_100_profiles_experiment_02_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_100_profiles_experiment_03_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_100_profiles_experiment_04_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_100_profiles_experiment_05_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_500_profiles_experiment_01_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_500_profiles_experiment_02_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_500_profiles_experiment_03_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_500_profiles_experiment_04_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_500_profiles_experiment_05_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_980_profiles_experiment_01_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_980_profiles_experiment_02_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_980_profiles_experiment_03_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_980_profiles_experiment_04_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_1/me_980_profiles_experiment_05_temperatures.feather")
+
+
+  # ----- FIGURE OUT OF BOUNDS --------
+  out/sp_season_predict_pb.csv:
+    command: combine_glm_feather_other(target_name, min_date = I("2009-04-02"),
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_2/sp_season_500_profiles_experiment_01_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_2/sp_season_500_profiles_experiment_02_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_2/sp_season_500_profiles_experiment_03_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_2/sp_season_500_profiles_experiment_04_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_2/sp_season_500_profiles_experiment_05_temperatures.feather")
+
+  out/me_season_predict_pb.csv:
+    command: combine_glm_feather_other(target_name, min_date = I("2009-04-02"),
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_2/me_season_500_profiles_experiment_01_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_2/me_season_500_profiles_experiment_02_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_2/me_season_500_profiles_experiment_03_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_2/me_season_500_profiles_experiment_04_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_2/me_season_500_profiles_experiment_05_temperatures.feather")
+
+  out/me_season_predict_pgdl.csv:
+    command: combine_XJ_npy_other(target_name, n_depths = 50,
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/PGRNN_mendota_season_exp1.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/PGRNN_mendota_season_exp2.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/PGRNN_mendota_season_exp3.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/PGRNN_mendota_season_exp4.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/PGRNN_mendota_season_exp5.npy")
+
+  out/me_season_predict_dl.csv:
+    command: combine_XJ_npy_other(target_name, n_depths = 50,
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/RNN_mendota_season_exp1.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/RNN_mendota_season_exp2.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/RNN_mendota_season_exp3.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/RNN_mendota_season_exp4.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/RNN_mendota_season_exp5.npy")
+
+  out/sp_similar_predict_pb.csv:
+    command: combine_glm_feather_other(target_name, min_date = I("2009-04-02"),
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_2/sp_similar_500_profiles_experiment_01_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_2/sp_similar_500_profiles_experiment_02_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_2/sp_similar_500_profiles_experiment_03_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_2/sp_similar_500_profiles_experiment_04_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_2/sp_similar_500_profiles_experiment_05_temperatures.feather")
+
+  out/sp_year_predict_pb.csv:
+    command: combine_glm_feather_other(target_name, min_date = I("2009-04-02"),
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_2/sp_year_500_profiles_experiment_01_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_2/sp_year_500_profiles_experiment_02_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_2/sp_year_500_profiles_experiment_03_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_2/sp_year_500_profiles_experiment_04_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_2/sp_year_500_profiles_experiment_05_temperatures.feather")
+
+  out/me_year_predict_pb.csv:
+    command: combine_glm_feather_other(target_name, min_date = I("2009-04-02"),
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_2/me_year_500_profiles_experiment_01_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_2/me_year_500_profiles_experiment_02_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_2/me_year_500_profiles_experiment_03_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_2/me_year_500_profiles_experiment_04_temperatures.feather",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/yeti_in/fig_2/me_year_500_profiles_experiment_05_temperatures.feather")
+
+  out/me_year_predict_pgdl.csv:
+    command: combine_XJ_npy_other(target_name, n_depths = 50,
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/PGRNN_mendota_year_exp1.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/PGRNN_mendota_year_exp2.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/PGRNN_mendota_year_exp3.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/PGRNN_mendota_year_exp4.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/PGRNN_mendota_year_exp5.npy")
+
+  out/me_year_predict_dl.csv:
+    command: combine_XJ_npy_other(target_name, n_depths = 50,
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/RNN_mendota_year_exp1.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/RNN_mendota_year_exp2.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/RNN_mendota_year_exp3.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/RNN_mendota_year_exp4.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/RNN_mendota_year_exp5.npy")
+
+  out/sp_similar_predict_pgdl.csv:
+    command: combine_XJ_npy_other(target_name, n_depths = 37,
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/PGRNN_similar_sparkling_exp1.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/PGRNN_similar_sparkling_exp2.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/PGRNN_similar_sparkling_exp3.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/PGRNN_similar_sparkling_exp4.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/PGRNN_similar_sparkling_exp5.npy")
+
+  out/sp_similar_predict_dl.csv:
+    command: combine_XJ_npy_other(target_name, n_depths = 37,
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/RNN_similar_sparkling_exp1.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/RNN_similar_sparkling_exp2.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/RNN_similar_sparkling_exp3.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/RNN_similar_sparkling_exp4.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/RNN_similar_sparkling_exp5.npy")
+
+  out/sp_season_predict_pgdl.csv:
+    command: combine_XJ_npy_other(target_name, n_depths = 37,
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/PGRNN_season_sparkling_exp1.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/PGRNN_season_sparkling_exp2.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/PGRNN_season_sparkling_exp3.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/PGRNN_season_sparkling_exp4.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/PGRNN_season_sparkling_exp5.npy")
+
+  out/sp_season_predict_dl.csv:
+    command: combine_XJ_npy_other(target_name, n_depths = 37,
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/RNN_season_sparkling_exp1.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/RNN_season_sparkling_exp2.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/RNN_season_sparkling_exp3.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/RNN_season_sparkling_exp4.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/RNN_season_sparkling_exp5.npy")
+
+  out/sp_year_predict_pgdl.csv:
+    command: combine_XJ_npy_other(target_name, n_depths = 37,
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/PGRNN_year_sparkling_exp1.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/PGRNN_year_sparkling_exp2.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/PGRNN_year_sparkling_exp3.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/PGRNN_year_sparkling_exp4.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/PGRNN_year_sparkling_exp5.npy")
+
+  out/sp_year_predict_dl.csv:
+    command: combine_XJ_npy_other(target_name, n_depths = 37,
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/RNN_year_sparkling_exp1.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/RNN_year_sparkling_exp2.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/RNN_year_sparkling_exp3.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/RNN_year_sparkling_exp4.npy",
+      "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/RNN_year_sparkling_exp5.npy")
+
+  historical_predict_plan:
+    command: create_historical_predict_plan(lake_ids)
+
+  5_historical_predictions_tasks.yml:
+    command: create_historical_predict_makefile(target_name, historical_predict_plan,
+      final_targets = I('out/historical_predictions.ind'))
+
+  out/historical_predictions.ind:
+    command: scmake(I('historical_predictions.ind_promise'), remake_file = '5_historical_predictions_tasks.yml')
+
+
+

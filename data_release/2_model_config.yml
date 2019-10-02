@@ -1,0 +1,36 @@
+
+include: 1_spatial.yml
+
+target_default: 2_model_config
+
+packages:
+  - yaml
+  - whisker
+  - dplyr
+  - tidyr
+  - meddle
+  - readr
+  - feather
+  - httr
+  - rgdal
+  - stringr
+  - glmtools
+  - sp
+
+
+sources:
+  - src/spatial_utils.R
+  - src/file_utils.R
+
+targets:
+  2_model_config:
+    depends:
+      - out/glm_config.json
+
+
+  out/glm_config.json:
+    command: bundle_nml_files(target_name, lake_ids, pattern = I('_nml.nml'))
+
+
+  glm_config_text:
+    command: yaml.load_file("in/text_GLM_config.yml")

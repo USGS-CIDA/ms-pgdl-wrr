@@ -1,4 +1,9 @@
 
+include:
+  - 3_model_inputs.yml
+  - 4_model_training.yml
+  - 6_model_evaluation.yml
+
 packages:
   - yaml
   - whisker
@@ -6,6 +11,7 @@ packages:
   - tidyr
   - meddle
   - readr
+  - feather
   - httr
   - rgdal
   - stringr
@@ -13,6 +19,8 @@ packages:
   - sp
   - RJSONIO
   - sbtools
+  - RcppCNPy
+  - purrr
 
 sources:
   - src/spatial_utils.R
@@ -29,16 +37,9 @@ targets:
       - train_68_sb_id
       - train_sp_sb_id
       - train_me_sb_id
+      - predict_me_sb_id
+      - predict_sp_sb_id
 
-
-  lake_ids:
-    command: read_csv("in/model_lake_ids.csv")
-
-  modeled_lakes:
-    command: subset_save_winslow(lake_ids)
-
-  in/model_lakes_attrs.csv:
-    command: attribute_skeleton(modeled_lakes, attr.file = target_name)
 
   generic_text:
     command: yaml.load_file("in/text_SHARED.yml")
@@ -46,69 +47,18 @@ targets:
   release_text:
     command: yaml.load_file("in/text_release.yml")
 
-  inputs_text:
-    command: yaml.load_file("in/text_drivers.yml")
-
-  glm_config_text:
-    command: yaml.load_file("in/text_GLM_config.yml")
-
-  spatial_text:
-    command: >
-      list(title = I('Spatial data: Process-guided deep learning predictions of lake water temperature'))
-
-  training_text:
-    command: >
-      list(title = I('Training data: Process-guided deep learning predictions of lake water temperature'))
-
-  me_training_text:
-    command: >
-      list(title = I('Lake Mendota detailed  training data: Process-guided deep learning predictions of lake water temperature'))
-
-  sp_training_text:
-    command: >
-      list(title = I('Sparkling Lake detailed training data: Process-guided deep learning predictions of lake water temperature'))
-
-  all_lakes_historical_training_text:
-    command: yaml.load_file('in/text_training_all_lakes.yml')
-
-  lakes_metadata:
-    command: as.attr_list("in/model_lakes_attrs.csv")
-
-  mendota_lake:
-    command: subset_spatial(modeled_lakes, site_id = I('nhd_13293262'))
-
-  sparkling_lake:
-    command: subset_spatial(modeled_lakes, site_id = I('nhd_13344210'))
-
-  me_spatial_metadata:
-    command: extract_feature(mendota_lake)
-
-  sp_spatial_metadata:
-    command: extract_feature(sparkling_lake)
-
-  spatial_metadata:
-    command: extract_feature(modeled_lakes)
-
   out/release.xml:
     command: render(filename = target_name, generic_text, release_text, spatial_metadata)
 
   out/spatial.xml:
     command: render(filename = target_name, generic_text, spatial_text, lakes_metadata, spatial_metadata)
 
-  out/spatial.zip:
-    command: sp_to_zip(target_name, modeled_lakes)
-
   out/inputs.xml:
     command: render(filename = target_name, generic_text, inputs_text, spatial_metadata)
-
-  out/meteo_inputs.zip:
-    command: bundle_meteo_files(target_name, lake_ids, pattern = I('_meteo.csv'))
 
   out/glm_config.xml:
     command: render(filename = target_name, generic_text, glm_config_text, spatial_metadata)
 
-  out/glm_config.json:
-    command: bundle_nml_files(target_name, lake_ids, pattern = I('_nml.nml'))
 
   out/training.xml:
     command: render(filename = target_name, generic_text, training_text, spatial_metadata)
@@ -121,27 +71,6 @@ targets:
 
   out/training_all_historical.xml:
     command: render(filename = target_name, generic_text, all_lakes_historical_training_text, spatial_metadata)
-
-  out/all_lakes_historical_training.csv:
-    command: merge_obs_files(target_name, lake_ids, pattern = I('_train_all_profiles.csv'))
-
-  out/me_season_training.csv:
-    command: merge_single_lake_obs_files(target_name, pattern = I('me_season_train_500_profiles'), dir = I("../fig_2/yeti_sync/"))
-
-  out/sp_season_training.csv:
-    command: merge_single_lake_obs_files(target_name, pattern = I('sp_season_train_500_profiles'), dir = I("../fig_2/yeti_sync/"))
-
-  out/me_year_training.csv:
-    command: merge_single_lake_obs_files(target_name, pattern = I('me_year_train_500_profiles'), dir = I("../fig_2/yeti_sync/"))
-
-  out/sp_year_training.csv:
-    command: merge_single_lake_obs_files(target_name, pattern = I('sp_year_train_500_profiles'), dir = I("../fig_2/yeti_sync/"))
-
-  out/sp_similar_training.csv:
-    command: merge_single_lake_obs_files(target_name, pattern = I('sp_similar_train_500_profiles'), dir = I("../fig_2/yeti_sync/"))
-
-  out/me_similar_training.csv:
-    command: merge_single_lake_obs_files(target_name, pattern = I('me_train_[0159]'), dir = I("../fig_1/yeti_sync/"))
 
   parent_sb_id:
     command: sb_replace_files(I('5d88ea50e4b0c4f70d0ab3c0'), 'out/release.xml')
@@ -159,10 +88,49 @@ targets:
     command: sb_replace_files(I('5d8a47bce4b0c4f70d0ae61f'), 'out/training_all_historical.xml', 'out/all_lakes_historical_training.csv')
 
   train_sp_sb_id:
-    command: sb_replace_files(I('5d8a4752e4b0c4f70d0ae61a'), 'out/training_sparkling.xml', 'out/sp_season_training.csv', 'out/sp_similar_training.csv', 'out/sp_year_training.csv')
+    command: sb_replace_files(I('5d8a4752e4b0c4f70d0ae61a'),
+      'out/training_sparkling.xml',
+      'out/sp_season_training.csv',
+      'out/sp_similar_training.csv',
+      'out/sp_year_training.csv')
 
   train_me_sb_id:
-    command: sb_replace_files(I('5d8a837fe4b0c4f70d0ae8ac'), 'out/training_mendota.xml', 'out/me_season_training.csv', 'out/me_similar_training.csv', 'out/me_year_training.csv')
+    command: sb_replace_files(I('5d8a837fe4b0c4f70d0ae8ac'),
+      'out/training_mendota.xml',
+      'out/me_season_training.csv',
+      'out/me_similar_training.csv',
+      'out/me_year_training.csv')
+
+  # need me_predict .xml written and added...
+  predict_me_sb_id:
+    command: sb_replace_files(I('5d915cb2e4b0c4f70d0ce523'),
+      'out/me_similar_predict_pgdl.csv',
+      'out/me_similar_predict_dl.csv',
+      'out/me_season_predict_pb.csv',
+      'out/me_season_predict_pgdl.csv',
+      'out/me_season_predict_dl.csv',
+      'out/me_year_predict_pb.csv',
+      'out/me_year_predict_pgdl.csv',
+      'out/me_year_predict_dl.csv')
+
+  # need me_predict .xml written and added...
+  predict_sp_sb_id:
+    command: sb_replace_files(I('5d915cc6e4b0c4f70d0ce525'),
+      'out/sp_similar_predict_pb.csv',
+      'out/sp_similar_predict_pgdl.csv',
+      'out/sp_similar_predict_dl.csv',
+      'out/sp_season_predict_pb.csv',
+      'out/sp_season_predict_pgdl.csv',
+      'out/sp_season_predict_dl.csv',
+      'out/sp_year_predict_pb.csv',
+      'out/sp_year_predict_pgdl.csv',
+      'out/sp_year_predict_dl.csv')
 
   spatial_sb_id:
     command: sb_replace_files(I('5d89d8e3e4b0c4f70d0ae4dc'), 'out/spatial.xml', 'out/spatial.zip')
+
+  evaluation_sb_id:
+    command: sb_replace_files(I('5d925023e4b0c4f70d0d0594')) # and metadata...
+
+  evaluation_sp_sb_id:
+    command: sb_replace_files(I('5d92507be4b0c4f70d0d059b'))

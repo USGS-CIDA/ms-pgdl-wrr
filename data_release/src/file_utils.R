@@ -10,6 +10,134 @@ bundle_meteo_files <- function(zip_filename, lake_ids, pattern, dir = "../fig_3/
 
 }
 
+combine_jared_feathers <- function(fileout, ...){
+
+  feather_files <- c(...)
+  file_names <- basename(feather_files)
+
+  dir_path <- dirname(feather_files) %>% unique()
+
+  test_exp <- 'historical'
+  n_prof <- 'all_train'
+  data <- purrr::map(file_names, function(x) {
+    file_splits <- strsplit(x, '[_]')[[1]]
+
+    # get 1 from "trial0" (since we're 1 indexed)
+    exp_n <- file_splits[3] %>% strsplit('[.]') %>% .[[1]] %>% .[1] %>%
+      str_remove('[^0-9.]+') %>% as.numeric() %>% {.+1}
+    # rename and adjust depths
+
+    load_npy_df(file.path(dir_path, x)) %>%
+      setNames(c("date", paste0('temp_',seq(0, length.out = n_depths, by = 0.5)))) %>%
+      mutate(exper_n = exp_n, exper_id = sprintf("%s_%s", test_exp, n_prof))
+  }) %>% reduce(rbind)
+
+  write_csv(data, path = fileout)
+
+
+  mutate(exper_n = exp_n, exper_id = sprintf("%s_%s", test_exp, n_prof))
+  browser()
+}
+
+glm_feather_to_csv <- function(fileout, ...){
+  browser()
+}
+
+combine_glm_feather_other <- function(fileout, min_date, ...){
+  feather_files <- c(...)
+  n_prof = 500
+
+  data <- purrr::map(feather_files, function(x) {
+    file_splits <- basename(x) %>% strsplit('[_]') %>% .[[1]]
+    # get "season" from "me_season_500_profiles_experiment_01_temperatures.feather":
+    test_exp <- file_splits[2]
+    # get 1 from "PGRNN_mendota_season_exp1.npy":
+    exp_n <- tail(file_splits, 2) %>% head(1) %>% as.numeric()
+
+    feather::read_feather(x) %>%
+      select(-ice, date = DateTime) %>%
+      mutate(date = as.Date(date), exper_n = exp_n, exper_id = sprintf("%s_%s", test_exp, n_prof)) %>%
+      filter(date > min_date)
+  }) %>% reduce(rbind)
+
+  write_csv(data, path = fileout)
+}
+
+combine_glm_feather_similar <- function(fileout, min_date, ...){
+  feather_files <- c(...)
+  test_exp <- "similar"
+
+  data <- purrr::map(feather_files, function(x) {
+    file_splits <- basename(x) %>% strsplit('[_]') %>% .[[1]]
+    # get 2 from "me_002_profiles_experiment_01_temperatures.feather":
+    n_prof <- file_splits[2] %>% as.numeric()
+    # get 1 from "me_002_profiles_experiment_01_temperatures.feather":
+    exp_n <- file_splits[5] %>% as.numeric()
+
+    feather::read_feather(x) %>%
+      select(-ice, date = DateTime) %>%
+      mutate(date = as.Date(date), exper_n = exp_n, exper_id = sprintf("%s_%s", test_exp, n_prof)) %>%
+      filter(date > min_date)
+  }) %>% reduce(rbind)
+
+  write_csv(data, path = fileout)
+
+}
+
+load_npy_df <- function(filepath){
+  npyLoad(filepath) %>% t() %>% as.data.frame() %>%
+    mutate(date = seq(as.Date("2009-04-02"), length.out = 3185, by = 'days')) %>%
+    select(date, everything())
+}
+
+combine_XJ_npy_similar <- function(fileout, n_depths, ...){
+  npy_files <- c(...)
+
+  dir_path <- dirname(npy_files) %>% unique()
+  file_names <- basename(npy_files)
+  test_exp <- 'similar'
+  data <- purrr::map(file_names, function(x) {
+    # get 2 from "02.npy":
+    n_prof <- strsplit(x, '[_]') %>% .[[1]] %>% .[4] %>%
+      strsplit('[.]') %>% .[[1]] %>% .[1] %>% as.numeric()
+    # get 1 from "exp1":
+    exp_n <- strsplit(x, '[_]') %>% .[[1]] %>% .[3] %>% str_remove('[^0-9.]+')
+
+    load_npy_df(file.path(dir_path, x)) %>%
+      setNames(c("date", paste0('temp_',seq(0, length.out = n_depths, by = 0.5)))) %>%
+      mutate(exper_n = exp_n, exper_id = sprintf("%s_%s", test_exp, n_prof))
+    }) %>% reduce(rbind)
+
+  write_csv(data, path = fileout)
+}
+
+
+combine_XJ_npy_other <- function(fileout, n_depths, ...){
+  npy_files <- c(...)
+
+  dir_path <- dirname(npy_files) %>% unique()
+  file_names <- basename(npy_files)
+  n_prof = 500
+  data <- purrr::map(file_names, function(x) {
+    file_splits <- strsplit(x, '[_]') %>% .[[1]]
+    # get "season" from "PGRNN_mendota_season_exp1.npy" & "PGRNN_season_sparkling_exp2.npy":
+    if ('mendota' %in% file_splits){
+      test_exp <- file_splits[3]
+    } else {
+      test_exp <- file_splits[2]
+    }
+
+    # get 1 from "PGRNN_mendota_season_exp1.npy":
+    exp_n <- file_splits[4] %>% strsplit('[.]') %>% .[[1]] %>% .[1] %>%  str_remove('[^0-9.]+')
+
+    load_npy_df(file.path(dir_path, x)) %>%
+      setNames(c("date", paste0('temp_',seq(0, length.out = n_depths, by = 0.5)))) %>%
+      mutate(exper_n = exp_n, exper_id = sprintf("%s_%s", test_exp, n_prof))
+  }) %>% reduce(rbind)
+
+  write_csv(data, path = fileout)
+}
+
 get_file_matches <- function(lake_ids, pattern, dir = "../fig_3/yeti_sync"){
   files <- data.frame(filename = dir(dir), stringsAsFactors = FALSE) %>%
     filter(stringr::str_detect(string = filename, pattern = pattern)) %>%
@@ -31,7 +159,7 @@ exper_n_from_file <- function(filename){
   tail(strsplit(filename,'[_]')[[1]],1) %>% strsplit('[.]') %>% .[[1]] %>% .[1] %>% as.numeric
 }
 
-exper_id_from_file <- function(filename){
+exper_type_from_file <- function(filename){
   filename <- basename(filename)
   splits <- strsplit(filename,'[_]')[[1]]
   if (length(splits) == 6 & all(splits[1:2] == c('me','train'))){
@@ -70,7 +198,27 @@ merge_obs_files <- function(filename, lake_ids, pattern, dir = "../fig_3/yeti_sy
   write_csv(out, path = filename)
 
 }
+merge_single_lake_test_files <- function(filename, pattern, dir){
+  files <- data.frame(filename = dir(dir), stringsAsFactors = FALSE) %>%
+    filter(stringr::str_detect(string = filename, pattern = pattern)) %>%
+    pull(filename)
 
+
+  data <- purrr::map(files, function(x) {
+    # "sp_similar_test_experiment_03.csv":
+    file_splits <- strsplit(x, '[_]')[[1]]
+    # get "similar" from "sp_similar_test_experiment_03.csv"
+    test_exp <- file_splits[2]
+    # get 5 from "05.csv":
+    exp_n <- tail(file_splits, 1) %>% strsplit('[.]') %>% .[[1]] %>% .[1] %>% as.numeric()
+
+    read_csv(file.path(dir, x), col_types = 'Ddd') %>%
+      rename(date = DateTime, depth = Depth) %>%
+      mutate(exper_n = exp_n, exper_type = test_exp) # add exper_n and exper_type
+  }) %>% purrr::reduce(rbind)
+
+  write_csv(data, path = filename)
+}
 merge_single_lake_obs_files <- function(filename, pattern, dir, exper_id){
 
   files <- data.frame(filename = dir(dir), stringsAsFactors = FALSE) %>%
@@ -83,9 +231,9 @@ merge_single_lake_obs_files <- function(filename, pattern, dir, exper_id){
 
     data <- read_csv(file.path(dir, file), col_types = 'Ddd') %>%
       mutate(exper_n = exper_n_from_file(file),
-             exper_id = exper_id_from_file(file),
+             exper_type = exper_type_from_file(file),
              prof_n = prof_n_from_file(file)) %>%
-      mutate(exper_id = paste0(exper_id, "_", prof_n)) %>% select(-prof_n)
+      mutate(exper_id = paste0(exper_type, "_", prof_n)) %>% select(-prof_n, -exper_type)
     out <- rbind(out, data)
   }
   write_csv(out, path = filename)
