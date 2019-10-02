@@ -1,5 +1,8 @@
 target_default: 5_model_predictions
 
+include:
+  - 3_model_inputs.yml
+
 packages:
   - yaml
   - whisker
@@ -21,6 +24,7 @@ packages:
 sources:
   - src/spatial_utils.R
   - src/file_utils.R
+  - src/task_utils.R
 
 targets:
   5_model_predictions:
@@ -32,6 +36,7 @@ targets:
       - out/me_year_predict_pb.csv
       - out/sp_similar_predict_pb.csv
       - out/me_similar_predict_pb.csv
+      - out/historical_pred_files.yml
 
   # ----- FIGURE SPARSE --------
   # convert "/Users/jread/Documents/R/ms-pgdl-wrr/fig_1/in/PGRNN_mendota_exp3_02.npy" into
@@ -252,3 +257,16 @@ targets:
       "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/RNN_year_sparkling_exp3.npy",
       "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/RNN_year_sparkling_exp4.npy",
       "/Users/jread/Documents/R/ms-pgdl-wrr/fig_2/in/RNN_year_sparkling_exp5.npy")
+
+  historical_predict_plan:
+    command: create_historical_predict_plan(lake_ids)
+
+  5_historical_predictions_tasks.yml:
+    command: create_historical_predict_makefile(target_name, historical_predict_plan,
+      final_targets = I('out/historical_predictions.ind'))
+
+  out/historical_predictions.ind:
+    command: scmake(I('historical_predictions.ind_promise'), remake_file = '5_historical_predictions_tasks.yml')
+
+
+
