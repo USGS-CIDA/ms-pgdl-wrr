@@ -1,6 +1,5 @@
 
 include:
-  - 3_model_inputs.yml
   - 4_model_training.yml
   - 6_model_evaluation.yml
 

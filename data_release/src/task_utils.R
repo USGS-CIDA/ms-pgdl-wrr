@@ -30,8 +30,20 @@ create_historical_predict_plan <- function(lake_ids){
     }
   )
 
+  pb0_predict <- create_task_step(
+    step_name = 'predict_pb0',
+    target_name = function(task_name, step_name, ...) {
+      sprintf('out/%s_%s.csv', task_name, step_name)
+    },
+
+    command = function(task_name, step_name, ...) {
+      sprintf("glm_feather_to_csv(target_name,
+      '../fig_3/in/%s_temperatures.feather')", task_name)
+    }
+  )
+
   pb_predict <- create_task_step(
-    step_name = 'predict_db',
+    step_name = 'predict_pb',
     target_name = function(task_name, step_name, ...) {
       sprintf('out/%s_%s.csv', task_name, step_name)
     },
@@ -42,7 +54,7 @@ create_historical_predict_plan <- function(lake_ids){
     }
   )
 
-  create_task_plan(lake_ids$site_id, list(pgdl_predict, dl_predict, pb_predict), add_complete = FALSE)
+  create_task_plan(lake_ids$site_id, list(pgdl_predict, dl_predict, pb0_predict, pb_predict), add_complete = FALSE)
 }
 
 create_historical_predict_makefile <- function(makefile, task_plan, final_targets){

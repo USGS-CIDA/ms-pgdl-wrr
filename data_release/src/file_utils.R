@@ -18,29 +18,40 @@ combine_jared_feathers <- function(fileout, ...){
   dir_path <- dirname(feather_files) %>% unique()
 
   test_exp <- 'historical'
-  n_prof <- 'all_train'
+  n_prof <- 'all'
+
   data <- purrr::map(file_names, function(x) {
     file_splits <- strsplit(x, '[_]')[[1]]
 
     # get 1 from "trial0" (since we're 1 indexed)
     exp_n <- file_splits[3] %>% strsplit('[.]') %>% .[[1]] %>% .[1] %>%
       str_remove('[^0-9.]+') %>% as.numeric() %>% {.+1}
-    # rename and adjust depths
+    # get "nhd_10596466" from "10596466PGRNN"
+    lake_id <- file_splits[1] %>% str_remove('[^0-9.]+') %>% paste0('nhd_', .)
 
-    load_npy_df(file.path(dir_path, x)) %>%
-      setNames(c("date", paste0('temp_',seq(0, length.out = n_depths, by = 0.5)))) %>%
+
+    data <- feather::read_feather(file.path(dir_path, x)) %>%
+      mutate(date = as.Date(lubridate::ceiling_date(date, 'days')))
+    n_depths <- ncol(data) - 1
+    # rename and adjust depths
+    data %>% setNames(c("date", paste0('temp_',seq(0, length.out = n_depths, by = 0.5)))) %>%
+      filter(!is.na(temp_0)) %>% # files start w/ NAs??
       mutate(exper_n = exp_n, exper_id = sprintf("%s_%s", test_exp, n_prof))
   }) %>% reduce(rbind)
 
   write_csv(data, path = fileout)
-
-
-  mutate(exper_n = exp_n, exper_id = sprintf("%s_%s", test_exp, n_prof))
-  browser()
 }
 
 glm_feather_to_csv <- function(fileout, ...){
-  browser()
+  feather_file <- c(...)
+  test_exp <- 'historical'
+  n_prof <- 'all'
+  exp_n <- 1
+  feather::read_feather(feather_file) %>%
+    select(-ice, date = DateTime) %>%
+    mutate(date = as.Date(lubridate::ceiling_date(date, 'days')),
+           exper_n = exp_n, exper_id = sprintf("%s_%s", test_exp, n_prof)) %>%
+    write_csv(path = fileout)
 }
 
 combine_glm_feather_other <- function(fileout, min_date, ...){
@@ -56,7 +67,7 @@ combine_glm_feather_other <- function(fileout, min_date, ...){
 
     feather::read_feather(x) %>%
       select(-ice, date = DateTime) %>%
-      mutate(date = as.Date(date), exper_n = exp_n, exper_id = sprintf("%s_%s", test_exp, n_prof)) %>%
+      mutate(date = as.Date(lubridate::ceiling_date(date, 'days')), exper_n = exp_n, exper_id = sprintf("%s_%s", test_exp, n_prof)) %>%
       filter(date > min_date)
   }) %>% reduce(rbind)
 
@@ -198,6 +209,29 @@ merge_obs_files <- function(filename, lake_ids, pattern, dir = "../fig_3/yeti_sy
   write_csv(out, path = filename)
 
 }
+
+
+merge_multi_lake_test_files <- function(filename, pattern, dir){
+  files <- data.frame(filename = dir(dir), stringsAsFactors = FALSE) %>%
+    filter(stringr::str_detect(string = filename, pattern = pattern)) %>%
+    pull(filename)
+
+  # need lake name, "all" (for n_profiles) or equivalent
+  data <- purrr::map(files, function(x) {
+
+    "nhd_1099136_test_all_profiles.csv"
+    file_splits <- strsplit(x, '[_]')[[1]]
+    # get "nhd_1099136"
+    lake_id <- paste0(file_splits[1], '_', file_splits[2])
+
+    read_csv(file.path(dir, x), col_types = 'Ddd') %>%
+      rename(date = DateTime, depth = Depth) %>%
+      mutate(site_id = lake_id, exper_type = "historical") # add exper_n and exper_type
+  }) %>% purrr::reduce(rbind)
+
+  write_csv(data, path = filename)
+}
+
 merge_single_lake_test_files <- function(filename, pattern, dir){
   files <- data.frame(filename = dir(dir), stringsAsFactors = FALSE) %>%
     filter(stringr::str_detect(string = filename, pattern = pattern)) %>%
