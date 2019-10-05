@@ -16,7 +16,7 @@
         <origin>Michael Steinbach</origin>
         <origin>Vipin Kumar</origin>
         <pubdate>2019</pubdate>
-        <title>Model inputs: Process-guided deep learning predictions of lake water temperature</title>
+        <title>Lake Mendota detailed inputs: Process-guided deep learning predictions of lake water temperature</title>
         <geoform>text files</geoform>
         <onlink>http://dx.doi.org/10.5066/P9AQPIVD</onlink>
         <lworkcit>
@@ -58,10 +58,10 @@
     </status>
     <spdom>
       <bounding>
-        <westbc>-94.2609062307949</westbc>
-        <eastbc>-87.9475441739278</eastbc>
-        <northbc>48.6427837911633</northbc>
-        <southbc>42.5692312672573</southbc>
+        <westbc>-89.4836545048768</westbc>
+        <eastbc>-89.3674075050573</eastbc>
+        <northbc>43.1520341996861</northbc>
+        <southbc>43.0771195331357</southbc>
       </bounding>
     </spdom>
     <keywords>
@@ -90,17 +90,8 @@
       </place>
       <place>
         <placekt>U.S. Department of Commerce, 1987, Codes for the identification of the States, the District of Columbia and the outlying areas of the United States, and associated areas (Federal Information Processing Standard 5-2): Washington, D. C., NIST</placekt>
-        <placekey>Minnesota</placekey>
-        <placekey>MN</placekey>
-      </place>
-      <place>
-        <placekt>U.S. Department of Commerce, 1987, Codes for the identification of the States, the District of Columbia and the outlying areas of the United States, and associated areas (Federal Information Processing Standard 5-2): Washington, D. C., NIST</placekt>
         <placekey>Wisconsin</placekey>
         <placekey>WI</placekey>
-      </place>
-      <place>
-        <placekt>none</placekt>
-        <placekey>Minnesota</placekey>
       </place>
       <place>
         <placekt>none</placekt>
@@ -196,7 +187,7 @@
     <ptvctinf>
       <sdtsterm>
         <sdtstype>G-polygon</sdtstype>
-        <ptvctcnt>68</ptvctcnt>
+        <ptvctcnt>1</ptvctcnt>
       </sdtsterm>
     </ptvctinf>
   </spdoinfo>

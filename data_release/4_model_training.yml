@@ -48,7 +48,7 @@ targets:
 
   me_training_text:
     command: >
-      list(title = I('Lake Mendota detailed  training data: Process-guided deep learning predictions of lake water temperature'))
+      list(title = I('Lake Mendota detailed training data: Process-guided deep learning predictions of lake water temperature'))
 
   sp_training_text:
     command: >
