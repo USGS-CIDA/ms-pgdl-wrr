@@ -25,7 +25,15 @@ targets:
   3_model_inputs:
     depends:
       - out/meteo_inputs.zip
+      - out/mendota_meteo.csv
+      - out/sparkling_meteo.csv
 
+
+  out/mendota_meteo.csv:
+    command: file.copy('../fig_1/yeti_sync/me_meteo.csv', to = target_name)
+
+  out/sparkling_meteo.csv:
+    command: file.copy('../fig_2/yeti_sync/sp_meteo.csv', to = target_name)
 
   out/meteo_inputs.zip:
     command: bundle_meteo_files(target_name, lake_ids, pattern = I('_meteo.csv'))

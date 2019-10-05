@@ -54,6 +54,14 @@ glm_feather_to_csv <- function(fileout, ...){
     write_csv(path = fileout)
 }
 
+convert_glm_to_csv <- function(fileout, min_date, filepath){
+  feather::read_feather(filepath) %>%
+    select(-ice, date = DateTime) %>%
+    mutate(date = as.Date(lubridate::ceiling_date(date, 'days'))) %>%
+    filter(date > min_date) %>%
+    write_csv(path = fileout)
+}
+
 combine_glm_feather_other <- function(fileout, min_date, ...){
   feather_files <- c(...)
   n_prof = 500

@@ -30,7 +30,9 @@ targets:
   5_model_predictions:
     depends:
       - out/me_similar_predict_pgdl.csv
+      - out/me_predict_pb0.csv
       - out/sp_season_predict_pb.csv
+      - out/sp_predict_pb0.csv
       - out/me_season_predict_pb.csv
       - out/sp_year_predict_pb.csv
       - out/me_year_predict_pb.csv
@@ -264,6 +266,14 @@ targets:
   5_historical_predictions_tasks.yml:
     command: create_historical_predict_makefile(target_name, historical_predict_plan,
       final_targets = I('out/historical_predictions.ind'))
+
+  out/me_predict_pb0.csv:
+    command: convert_glm_to_csv(target_name, min_date = I("1980-04-02"),
+      "/Users/jread/Documents/R/lake_modeling/data_imports/mendota_experiments/Mendota_temperatures.feather")
+
+  out/sp_predict_pb0.csv:
+    command: convert_glm_to_csv(target_name, min_date = I("1980-04-02"),
+      "/Users/jread/Documents/R/lake_modeling/data_imports/sparkling_experiments/Sparkling_temperatures_fixed.feather")
 
   out/historical_predictions.ind:
     command: scmake(I('historical_predictions.ind_promise'), remake_file = '5_historical_predictions_tasks.yml')
