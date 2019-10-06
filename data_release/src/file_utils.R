@@ -199,9 +199,48 @@ prof_n_from_file <- function(filename){
 
 }
 
-sb_replace_files <- function(sb_id, ...){
-  item_replace_files(sb_id, files = c(...))
+sb_replace_files <- function(sb_id, ..., file_hash){
+
+  hashed_filenames <- c()
+  if (!missing(file_hash)){
+    hashed_filenames <- yaml.load_file(file_hash) %>% names
+    for (file in hashed_filenames){
+      item_replace_files(sb_id, files = file)
+    }
+  }
+  files <- c(...)
+  if (length(files) > 0){
+    item_replace_files(sb_id, files = files)
+  }
+
 }
+
+zip_grouped_hashed_files <- function(hash_filename, hashed_files, group_by, suffix_with){
+
+  # since the `zip()` function seems to only work by getting into the dir of the files to be zipped, we'll reset dir on exit:
+  cdir <- getwd()
+  on.exit(setwd(cdir))
+
+  file_info <- data.frame(hashed_filenames = names(yaml.load_file(hashed_files)), stringsAsFactors = FALSE) %>%
+    mutate(group_name = str_extract(hashed_filenames, group_by), # we'll assume the zipped files go in the same dir as the hash_filename:
+           out_filename = file.path(dirname(hash_filename), sprintf('%s%s.zip', group_name, suffix_with)))
+
+  # for each output zip file, group and compress the corresponding files, regardless of what dirs they are in
+  zipped_files_out <- purrr::map(unique(file_info$out_filename), function(x){
+
+    filepaths_to_zip <- filter(file_info, out_filename == x) %>% pull(hashed_filenames)
+    dir_out <- dirname(filepaths_to_zip) %>% unique()
+
+    # will break if we are trying to combine files that are in different directories. Should work if we mix dirs as long as there aren't differences from within the groups:
+    stopifnot(length(dir_out) == 1)
+    setwd(file.path(cdir, dir_out))
+    zip(file.path(cdir, x), files = basename(filepaths_to_zip))
+    setwd(cdir)
+    return(x)
+  }) %>% purrr::reduce(c) %>%
+    sc_indicate(ind_file = hash_filename, data_file = .) # write a hash file that points to each zip file. We'll use this later when uploading each zip file.
+}
+
 
 merge_obs_files <- function(filename, lake_ids, pattern, dir = "../fig_3/yeti_sync"){
   files <- get_file_matches(lake_ids, pattern, dir)

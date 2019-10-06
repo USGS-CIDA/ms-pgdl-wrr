@@ -67,7 +67,7 @@ targets:
 
   out/all_RMSE.csv:
     command: calculate_hist_RMSE(target_name, test_file = "out/all_test.csv",
-      pred_ind = "out/historical_predictions.ind")
+      pred_ind = "tmp/historical_predictions.ind")
 
   a68_evaluation_text:
     command: >

@@ -53,14 +53,4 @@ targets:
     command: >
       list(title = I('Lake Mendota detailed inputs: Process-guided deep learning predictions of lake water temperature'))
 
-# update to use specific inputs_text
-  out/68_inputs.xml:
-    command: render(filename = target_name, generic_text, inputs_text, a68_inputs_text, spatial_metadata)
 
-  # update to use specific inputs_text
-  out/sp_inputs.xml:
-    command: render(filename = target_name, generic_text, inputs_text, sp_inputs_text, spatial_metadata)
-
-  # update to use specific inputs_text
-  out/me_inputs.xml:
-    command: render(filename = target_name, generic_text, inputs_text, me_inputs_text, me_spatial_metadata)

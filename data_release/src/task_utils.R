@@ -4,7 +4,7 @@ create_historical_predict_plan <- function(lake_ids){
   pgdl_predict <- create_task_step(
     step_name = 'predict_pgdl',
     target_name = function(task_name, step_name, ...) {
-      sprintf('out/%s_%s.csv', task_name, step_name)
+      sprintf('tmp/%s_%s.csv', task_name, step_name)
     },
 
     command = function(task_name, step_name, ...) {
@@ -18,7 +18,7 @@ create_historical_predict_plan <- function(lake_ids){
   dl_predict <- create_task_step(
     step_name = 'predict_dl',
     target_name = function(task_name, step_name, ...) {
-      sprintf('out/%s_%s.csv', task_name, step_name)
+      sprintf('tmp/%s_%s.csv', task_name, step_name)
     },
 
     command = function(task_name, step_name, ...) {
@@ -33,7 +33,7 @@ create_historical_predict_plan <- function(lake_ids){
   pb0_predict <- create_task_step(
     step_name = 'predict_pb0',
     target_name = function(task_name, step_name, ...) {
-      sprintf('out/%s_%s.csv', task_name, step_name)
+      sprintf('tmp/%s_%s.csv', task_name, step_name)
     },
 
     command = function(task_name, step_name, ...) {
@@ -45,7 +45,7 @@ create_historical_predict_plan <- function(lake_ids){
   pb_predict <- create_task_step(
     step_name = 'predict_pb',
     target_name = function(task_name, step_name, ...) {
-      sprintf('out/%s_%s.csv', task_name, step_name)
+      sprintf('tmp/%s_%s.csv', task_name, step_name)
     },
 
     command = function(task_name, step_name, ...) {

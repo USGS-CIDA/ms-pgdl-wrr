@@ -58,10 +58,10 @@
     </status>
     <spdom>
       <bounding>
-        <westbc>-94.2609062307949</westbc>
-        <eastbc>-87.9475441739278</eastbc>
-        <northbc>48.6427837911633</northbc>
-        <southbc>42.5692312672573</southbc>
+        <westbc>-89.7037723045351</westbc>
+        <eastbc>-89.6957319045477</eastbc>
+        <northbc>46.0152963952417</northbc>
+        <southbc>46.002272195262</southbc>
       </bounding>
     </spdom>
     <keywords>
@@ -90,17 +90,8 @@
       </place>
       <place>
         <placekt>U.S. Department of Commerce, 1987, Codes for the identification of the States, the District of Columbia and the outlying areas of the United States, and associated areas (Federal Information Processing Standard 5-2): Washington, D. C., NIST</placekt>
-        <placekey>Minnesota</placekey>
-        <placekey>MN</placekey>
-      </place>
-      <place>
-        <placekt>U.S. Department of Commerce, 1987, Codes for the identification of the States, the District of Columbia and the outlying areas of the United States, and associated areas (Federal Information Processing Standard 5-2): Washington, D. C., NIST</placekt>
         <placekey>Wisconsin</placekey>
         <placekey>WI</placekey>
-      </place>
-      <place>
-        <placekt>none</placekt>
-        <placekey>Minnesota</placekey>
       </place>
       <place>
         <placekt>none</placekt>
@@ -157,7 +148,7 @@
     <ptvctinf>
       <sdtsterm>
         <sdtstype>G-polygon</sdtstype>
-        <ptvctcnt>68</ptvctcnt>
+        <ptvctcnt>1</ptvctcnt>
       </sdtsterm>
     </ptvctinf>
   </spdoinfo>
