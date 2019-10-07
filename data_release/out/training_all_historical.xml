@@ -16,7 +16,7 @@
         <origin>Michael Steinbach</origin>
         <origin>Vipin Kumar</origin>
         <pubdate>2019</pubdate>
-        <title>All lakes historical training data: Process-guided deep learning predictions of lake water temperature</title>
+        <title/>
         <geoform>text files</geoform>
         <onlink>http://dx.doi.org/10.5066/P9AQPIVD</onlink>
         <lworkcit>
@@ -40,7 +40,7 @@
       </citeinfo>
     </citation>
     <descript>
-      <abstract>Observed water temperatures from 1980-2018 were compiled for 68 lakes in Minnesota and Wisconsin (USA). These data were used as training data for process-guided deep learning models and deep learning models, and calibration data for process-based models. The data are formatted as a single csv (comma separated values) file with attributes corresponding to the unique combination of lake identifier, time, and depth. Data came from a variety of sources, including the Water Quality Portal, the North Temperate Lakes Long-Term Ecological Research Project, and digitized temperature records from the MN Department of Natural Resources. This data set contains the following parameters: site_id, DateTime, Depth, temp, which are defined below.</abstract>
+      <abstract>Climate change has been shown to influence lake temperatures in different ways. To better understand the diversity of lake responses to climate change and give managers tools to manage individual lakes, we focused on improving prediction accuracy for daily water temperature profiles in 68 lakes in Minnesota and Wisconsin during 1980-2018. This data set contains the following parameters: which are defined below.</abstract>
       <purpose>Fisheries biology, limnological research, and climate science.</purpose>
     </descript>
     <timeperd>
@@ -183,54 +183,6 @@
         <enttypd/>
         <enttypds>Producer Defined</enttypds>
       </enttyp>
-      <attr>
-        <attrlabl>site_id</attrlabl>
-        <attrdef>identifier for lake</attrdef>
-        <attrdefs>nhd_ID</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>DateTime</attrlabl>
-        <attrdef>Date of temperature measurement</attrdef>
-        <attrdefs>NA</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>Depth</attrlabl>
-        <attrdef>Depth of temperature measurement below water surface</attrdef>
-        <attrdefs>NA</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>0</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>meters</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>temp</attrlabl>
-        <attrdef>Water temperature</attrdef>
-        <attrdefs>NA</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>degrees C</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
     </detailed>
   </eainfo>
   <distinfo>
@@ -256,7 +208,7 @@
     <stdorder>
       <digform>
         <digtinfo>
-          <formname>a single comma delimited file</formname>
+          <formname/>
           <formvern>none</formvern>
         </digtinfo>
         <digtopt>
@@ -273,7 +225,7 @@
     </stdorder>
   </distinfo>
   <metainfo>
-    <metd>20191005</metd>
+    <metd>20191007</metd>
     <metc>
       <cntinfo>
         <cntperp>

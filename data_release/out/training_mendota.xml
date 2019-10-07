@@ -16,7 +16,7 @@
         <origin>Michael Steinbach</origin>
         <origin>Vipin Kumar</origin>
         <pubdate>2019</pubdate>
-        <title>Lake Mendota detailed training data: Process-guided deep learning predictions of lake water temperature</title>
+        <title/>
         <geoform>text files</geoform>
         <onlink>http://dx.doi.org/10.5066/P9AQPIVD</onlink>
         <lworkcit>
@@ -216,7 +216,7 @@
     </stdorder>
   </distinfo>
   <metainfo>
-    <metd>20191005</metd>
+    <metd>20191007</metd>
     <metc>
       <cntinfo>
         <cntperp>

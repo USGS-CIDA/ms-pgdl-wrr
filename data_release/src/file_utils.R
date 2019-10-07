@@ -62,6 +62,26 @@ convert_glm_to_csv <- function(fileout, min_date, filepath){
     write_csv(path = fileout)
 }
 
+zip_ice <- function(zip_filename, ...){
+
+  cdir <- getwd()
+  on.exit(setwd(cdir))
+  files <- c(...)
+
+
+  setwd(unique(dirname(files)))
+  zip(file.path(cdir, zip_filename), files = basename(files))
+  setwd(cdir)
+}
+
+ice_from_GLM_feather <- function(fileout, min_date, filepath){
+  feather::read_feather(filepath) %>%
+    select(date = DateTime, ice) %>%
+    mutate(date = as.Date(lubridate::ceiling_date(date, 'days'))) %>%
+    filter(date > min_date) %>%
+    write_csv(path = fileout)
+}
+
 combine_glm_feather_other <- function(fileout, min_date, ...){
   feather_files <- c(...)
   n_prof = 500
@@ -215,6 +235,12 @@ sb_replace_files <- function(sb_id, ..., file_hash){
 
 }
 
+ice_from_diagnostic <- function(fileout, diag_feather){
+  read_feather(diag_feather) %>% mutate(date = as.Date(lubridate::ceiling_date(time, 'days'))) %>%
+    mutate(ice = Vol.Black.Ice > 0) %>% select(date, ice) %>%
+    write_csv(path = fileout)
+}
+
 zip_grouped_hashed_files <- function(hash_filename, hashed_files, group_by, suffix_with){
 
   # since the `zip()` function seems to only work by getting into the dir of the files to be zipped, we'll reset dir on exit:
@@ -300,6 +326,7 @@ merge_single_lake_test_files <- function(filename, pattern, dir){
 
   write_csv(data, path = filename)
 }
+
 merge_single_lake_obs_files <- function(filename, pattern, dir, exper_id){
 
   files <- data.frame(filename = dir(dir), stringsAsFactors = FALSE) %>%

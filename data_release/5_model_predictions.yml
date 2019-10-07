@@ -262,11 +262,11 @@ targets:
 
   out/me_predict_pb0.csv:
     command: convert_glm_to_csv(target_name, min_date = I("1980-04-02"),
-      "/Users/jread/Documents/R/lake_modeling/data_imports/mendota_experiments/Mendota_temperatures.feather")
+      "in/Mendota_temperatures.feather")
 
   out/sp_predict_pb0.csv:
     command: convert_glm_to_csv(target_name, min_date = I("1980-04-02"),
-      "/Users/jread/Documents/R/lake_modeling/data_imports/sparkling_experiments/Sparkling_temperatures_fixed.feather")
+      "in/Sparkling_temperatures.feather")
 
   historical_predict_plan:
     command: create_historical_predict_plan(lake_ids)

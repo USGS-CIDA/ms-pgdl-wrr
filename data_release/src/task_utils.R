@@ -1,3 +1,18 @@
+create_ice_plan <- function(lake_ids){
+  pb0_ice <- create_task_step(
+    step_name = 'ice_flag',
+    target_name = function(task_name, step_name, ...) {
+      sprintf('tmp/%s_%s.csv', task_name, step_name)
+    },
+
+    command = function(task_name, step_name, ...) {
+      sprintf("ice_from_GLM_feather(target_name, min_date = I('1980-04-02'),
+      '../fig_3/in/%s_temperatures.feather')", task_name)
+    }
+  )
+  create_task_plan(lake_ids$site_id, list(pb0_ice), add_complete = FALSE)
+}
+
 create_historical_predict_plan <- function(lake_ids){
 
 
@@ -65,4 +80,15 @@ create_historical_predict_makefile <- function(makefile, task_plan, final_target
   create_task_makefile(task_plan, makefile, include = include,
                        packages = packages, sources = sources,
                        final_targets = final_targets)
+}
+
+create_ice_makefile <- function(makefile, task_plan, final_targets, finalize_funs){
+  include <- "3_model_inputs.yml"
+  packages <- c('dplyr','feather')
+  sources <- 'src/task_utils.R'
+
+  create_task_makefile(task_plan, makefile, include = include,
+                       packages = packages, sources = sources,
+                       final_targets = final_targets,
+                       finalize_funs = finalize_funs)
 }
