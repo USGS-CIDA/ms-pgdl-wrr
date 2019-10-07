@@ -8,7 +8,7 @@ packages:
   - whisker
   - dplyr
   - tidyr
-  - meddle
+  - meddle # at least v0.0.8
   - readr
   - feather
   - httr
@@ -47,35 +47,29 @@ targets:
       - evaluation_me_sb_id
 
 
-  generic_text:
-    command: yaml.load_file("in/text_SHARED.yml")
-
-  release_text:
-    command: yaml.load_file("in/text_release.yml")
-
   out/release.xml:
-    command: render(filename = target_name, generic_text, release_text, spatial_metadata)
+    command: render(filename = target_name, "in/text_SHARED.yml", "in/text_release.yml", spatial_metadata)
 
   out/spatial.xml:
-    command: render(filename = target_name, generic_text, spatial_text, lakes_metadata, spatial_metadata)
+    command: render(filename = target_name, "in/text_SHARED.yml", spatial_text, lakes_metadata, spatial_metadata)
 
   out/inputs.xml:
-    command: render(filename = target_name, generic_text, inputs_text, spatial_metadata)
+    command: render(filename = target_name, "in/text_SHARED.yml", inputs_text, spatial_metadata)
 
   out/glm_config.xml:
-    command: render(filename = target_name, generic_text, glm_config_text, spatial_metadata)
+    command: render(filename = target_name, "in/text_SHARED.yml", glm_config_text, spatial_metadata)
 
   out/training.xml:
-    command: render(filename = target_name, generic_text, training_text, spatial_metadata)
+    command: render(filename = target_name, "in/text_SHARED.yml", training_text, spatial_metadata)
 
   out/training_mendota.xml:
-    command: render(filename = target_name, generic_text, me_training_text, me_spatial_metadata)
+    command: render(filename = target_name, "in/text_SHARED.yml", 'in/text_me_training.yml', me_spatial_metadata)
 
   out/training_sparkling.xml:
-    command: render(filename = target_name, generic_text, sp_training_text, sp_spatial_metadata)
+    command: render(filename = target_name, "in/text_SHARED.yml", 'in/text_sp_training.yml', sp_spatial_metadata)
 
   out/training_all_historical.xml:
-    command: render(filename = target_name, generic_text, all_lakes_historical_training_text, spatial_metadata)
+    command: render(filename = target_name, "in/text_SHARED.yml", 'in/text_68_training.yml', spatial_metadata)
 
   parent_sb_id:
     command: sb_replace_files(I('5d88ea50e4b0c4f70d0ab3c0'), 'out/release.xml')
@@ -144,36 +138,65 @@ targets:
       'out/sp_predict_pb0.csv')
 
 
-# update to use specific eval_text
   out/68_evaluation.xml:
-    command: render(filename = target_name, generic_text, a68_evaluation_text, spatial_metadata)
-# update to use specific eval_text
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      "in/text_68_evaluation.yml",
+      spatial_metadata)
+
   out/sp_evaluation.xml:
-    command: render(filename = target_name, generic_text, sp_evaluation_text, sp_spatial_metadata)
-# update to use specific eval_text
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      "in/text_sp_evaluation.yml",
+      sp_spatial_metadata)
+
   out/me_evaluation.xml:
-    command: render(filename = target_name, generic_text, me_evaluation_text, me_spatial_metadata)
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      "in/text_me_evaluation.yml",
+      me_spatial_metadata)
 
   out/sp_prediction.xml:
-    command: render(filename = target_name, generic_text, sp_prediction_text, sp_spatial_metadata)
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      sp_prediction_text,
+      sp_spatial_metadata)
 
   out/me_prediction.xml:
-    command: render(filename = target_name, generic_text, me_prediction_text, me_spatial_metadata)
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      me_prediction_text,
+      me_spatial_metadata)
 
   out/68_prediction.xml:
-    command: render(filename = target_name, generic_text, a68_prediction_text, spatial_metadata)
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      a68_prediction_text,
+      spatial_metadata)
 
   # update to use specific inputs_text
   out/68_inputs.xml:
-    command: render(filename = target_name, generic_text, inputs_text, a68_inputs_text, spatial_metadata)
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      "in/text_drivers.yml",
+      a68_inputs_text,
+      spatial_metadata)
 
   # update to use specific inputs_text
   out/sp_inputs.xml:
-    command: render(filename = target_name, generic_text, inputs_text, sp_inputs_text, spatial_metadata)
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      "in/text_drivers.yml",
+      sp_inputs_text,
+      spatial_metadata)
 
   # update to use specific inputs_text
   out/me_inputs.xml:
-    command: render(filename = target_name, generic_text, inputs_text, me_inputs_text, me_spatial_metadata)
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      "in/text_drivers.yml",
+      me_inputs_text,
+      me_spatial_metadata)
 
   evaluation_68_sb_id:
     command: sb_replace_files(I('5d925048e4b0c4f70d0d0596'),
