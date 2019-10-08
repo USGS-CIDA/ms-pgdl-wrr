@@ -4,7 +4,7 @@ fig1_pgdl_lim <- readr::read_csv('~/Downloads/revision_Figure_1_results - Sheet1
   rename(exper_n = Experiment, rmse = `Test RMSE`) %>% select(exper_n, exper_id, exper_model, rmse)
 
 readr::read_csv('~/Downloads/revision_Figure_2_results - Sheet1.csv', col_types = 'ccidd') %>%
-  filter(!is.na(Model), Model == 'PGRNN', str_detect(Experiment, '[a-z]+_[0-9]+_mendota')) %>%
+  filter(!is.na(Model), Model == 'PGRNN', str_detect(Experiment, '[a-z]+_[0-9]+_mendota'), !str_detect(Experiment, 'similar_')) %>%
   mutate(exper_model = 'pgdl_lim', exper_info = str_extract(Experiment, '[a-z]+_[0-9]+'),
          exper_type = str_extract(exper_info, '[a-z]+'),
          exper_n = as.numeric(str_extract(exper_info, '[0-9]$')),
