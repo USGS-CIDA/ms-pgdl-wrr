@@ -61,6 +61,9 @@ targets:
       "out/me_similar_predict_pgdl.csv",
       "out/me_similar_predict_pb.csv") # need to add "similar" for pb for rest of YETI files
 
+  out/me_RMSE_limited_training.csv:
+    command: file.copy('../fig_4/in/me_RMSE_limited_training.csv', to = target_name)
+
   out/all_test.csv:
     command: merge_multi_lake_test_files(target_name,
       pattern = I("nhd_[0-9]+_test_all_profiles.csv"), dir = I("../fig_3/yeti_sync/"))

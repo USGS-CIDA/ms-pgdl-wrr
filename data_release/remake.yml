@@ -216,7 +216,7 @@ targets:
 
   evaluation_me_sb_id:
     command: sb_replace_files(I('5d925066e4b0c4f70d0d0599'),
-      'out/me_evaluation.xml', 'out/me_test.csv', 'out/me_RMSE.csv')
+      'out/me_evaluation.xml', 'out/me_test.csv', 'out/me_RMSE_limited_training.csv', 'out/me_RMSE.csv')
 
   prediction_68_sb_id:
     command: sb_replace_files(I('5d915c8ee4b0c4f70d0ce520'),
