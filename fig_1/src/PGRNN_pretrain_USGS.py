@@ -9,25 +9,29 @@ from __future__ import print_function, division
 import numpy as np
 import tensorflow as tf
 import random
-#import scipy.io
-#import datetime
-#from datetime import date
-#from sklearn.metrics import roc_auc_score
+import os
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--data_path', default='fig_1/tmp/mendota/pretrain/inputs/ready')
+parser.add_argument('--save_path', default='fig_1/tmp/mendota/pretrain/model')
+args = parser.parse_args()
+print(args)
 
 tf.reset_default_graph()
 random.seed(9001)
 
-''' Declare constants '''
-learning_rate = 0.01
-epochs = 300 #40 #100
-#batch_size = 200
-state_size = 21 #7 
+''' Declare constant hyperparameters '''
+learning_rate = 0.006
+epochs = 4 #400
+state_size = 21
 input_size = 9
 phy_size = 10
-npic = 16
-n_steps = int(5295/npic) # cut it to 16 pieces #43 #12 #46 
+n_steps = 353
 n_classes = 1 
-N_sec = (npic-1)*2+1
+N_sec = 17
+elam = 0.005
+ec_threshold = 24
 
 ''' Build Graph '''
 # Graph input/output
@@ -53,12 +57,6 @@ X=x
 lstm_cell = tf.contrib.rnn.BasicLSTMCell(state_size, forget_bias=1.0) 
 
 state_series_x, current_state_x = tf.nn.dynamic_rnn(lstm_cell, X, dtype=tf.float32) #46*(500*7)
-#state_series_x, current_state_x = tf.nn.dynamic_rnn(lstm_cell, x, dtype=tf.float32)
-# generate context vector and latent outputs for each time step
-#w_c = tf.get_variable('w_c',[state_size, hidden_size], tf.float32,
-#                                 tf.random_normal_initializer(stddev=0.02))
-#w_h = tf.get_variable('w_h',[state_size, hidden_size], tf.float32,
-#                                 tf.random_normal_initializer(stddev=0.02))
 w_fin = tf.get_variable('w_fin',[state_size, n_classes], tf.float32,
                                  tf.random_normal_initializer(stddev=0.02))
 #b_p = tf.get_variable('b_p',[state_size],  tf.float32,
@@ -179,6 +177,7 @@ def calculate_ec_loss(inputs, outputs, phys, depth_areas, n_depths, ec_threshold
         #actual ice
 #        print(diff_vec)
 #        print(phys)
+        # phys columns 9 is 'Has.Black.Ice'
         tmp_mask = 1-phys[start_index+1,1:-1,9] #(phys[start_index+1,:,9] == 0)
 #        print(tmp_mask)
 #        print(diff_vec)
@@ -378,13 +377,8 @@ pred_u = tf.reshape(pred_u,[-1,n_steps])
 
 
 unsup_phys_data = tf.placeholder("float", [None, n_steps, phy_size]) #tf.float32
-depth_areas = np.array([39865825,38308175,38308175,35178625,35178625,33403850,31530150,31530150,30154150,30154150,29022000,
-                        29022000,28063625,28063625,27501875,26744500,26744500,26084050,26084050,25310550,24685650,24685650,
-                        23789125,23789125,22829450,22829450,21563875,21563875,20081675,18989925,18989925,17240525,17240525,
-                        15659325,14100275,14100275,12271400,12271400,9962525,9962525,7777250,7777250,5956775,4039800,4039800,
-                        2560125,2560125,820925,820925,216125])
-n_depths = 50
-ec_threshold = 24
+depth_areas = np.load(os.path.join(args.data_path, 'depth_areas.npy'))
+n_depths = depth_areas.size
 
 
 unsup_loss,a,b,c = calculate_ec_loss(unsup_inputs,
@@ -397,7 +391,6 @@ unsup_loss,a,b,c = calculate_ec_loss(unsup_inputs,
 
 
 #plam = 0.15
-elam = 0.005
 cost = r_cost + elam*unsup_loss#+plam*plos+plam*plos_u
 
 #cost = tf.reduce_mean(tf.nn.(labels = y, logits = pred)) # + l2 # Softmax loss
@@ -414,26 +407,27 @@ train_op = optimizer.apply_gradients(zip(grads, tvars))
 
 
 # load data ---------------------------------------------------------------
-x_full = np.load('./processed_features.npy')
-x_raw_full = np.load('./features.npy')
-diag_full = np.load('./diag.npy')
+x_full = np.load(os.path.join(args.data_path, 'processed_features.npy'))
+x_raw_full = np.load(os.path.join(args.data_path, 'features.npy'))
+diag_full = np.load(os.path.join(args.data_path, 'diag.npy'))
 
+# ['DOY', 'depth', 'ShortWave', 'LongWave', 'AirTemp', 'RelHum', 'WindSpeed', 'Daily.Qe', 'Daily.Qh', 'Has.Black.Ice']
 phy_full = np.concatenate((x_raw_full[:,:,:-2],diag_full),axis=2)
 
-label = np.load('./labels.npy')
+label = np.load(os.path.join(args.data_path, 'labels.npy'))
 mask = np.ones([label.shape[0],label.shape[1]])*1.0
 
 
+data_chunk_size = int(np.load(os.path.join(args.data_path, 'data_chunk_size.npy')))
+x_tr_1 = x_full[:,:data_chunk_size,:]
+y_tr_1 = label[:,:data_chunk_size]
+p_tr_1 = phy_full[:,:data_chunk_size,:]
+m_tr_1 = mask[:,:data_chunk_size]
 
-x_tr_1 = x_full[:,:5295,:]
-y_tr_1 = label[:,:5295]
-p_tr_1 = phy_full[:,:5295,:]
-m_tr_1 = mask[:,:5295]
-
-x_tr_2 = x_full[:,5295:10590,:]
-y_tr_2 = label[:,5295:10590]
-p_tr_2 = phy_full[:,5295:10590,:]
-m_tr_2 = mask[:,5295:10590]
+x_tr_2 = x_full[:,data_chunk_size:(data_chunk_size*2),:]
+y_tr_2 = label[:,data_chunk_size:(data_chunk_size*2)]
+p_tr_2 = phy_full[:,data_chunk_size:(data_chunk_size*2),:]
+m_tr_2 = mask[:,data_chunk_size:(data_chunk_size*2)]
 
 
 
@@ -494,6 +488,7 @@ with tf.Session() as sess:
               "{:.4f}".format(loss) + ", Rc= " + \
               "{:.4f}".format(rc) + ", Ec= " + \
               "{:.4f}".format(ec))
+
         _, loss,rc,ec = sess.run(
                 [train_op, cost,r_cost,unsup_loss],
                 feed_dict = {
@@ -510,7 +505,7 @@ with tf.Session() as sess:
               "{:.4f}".format(loss) + ", Rc= " + \
               "{:.4f}".format(rc) + ", Ec= " + \
               "{:.4f}".format(ec) )
-            
-    save_path = saver.save(sess, "./pretrained_model.ckpt")
-    print("Model saved in path: %s" % save_path)
+
+    if args.save_path != '':
+        saver.save(sess, os.path.join(args.save_path, "pretrained_model.ckpt"))
         
