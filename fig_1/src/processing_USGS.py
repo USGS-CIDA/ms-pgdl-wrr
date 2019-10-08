@@ -5,27 +5,64 @@ Created on Thu Dec  6 10:45:53 2018
 @author: jiaxx
 """
 
+# if needed, install sciencebasepy:
+# pip install sciencebasepy
+# conda install requests
+
 import pandas as pd
 import numpy as np
+import argparse
+import os
 
-feat = pd.read_feather('../mendota_meteo.feather')
-glm = pd.read_feather('../Generic_GLM_Mendota_temperatures.feather')
+parser = argparse.ArgumentParser()
+parser.add_argument('--lake_name', choices=['mendota', 'sparkling'])
+parser.add_argument('--met_file')
+parser.add_argument('--glm_file')
+parser.add_argument('--ice_file')
+parser.add_argument('--processed_path')
+args = parser.parse_args()
 
-feat.columns
-feat.values
-feat.values.shape
+# hard code and save some depth-area relationship and other lake-specific tidbits
+if(args.lake_name == 'mendota'):
+    depth_areas = np.array([
+        39865825,38308175,38308175,35178625,35178625,33403850,31530150,31530150,30154150,30154150,29022000,
+        29022000,28063625,28063625,27501875,26744500,26744500,26084050,26084050,25310550,24685650,24685650,
+        23789125,23789125,22829450,22829450,21563875,21563875,20081675,18989925,18989925,17240525,17240525,
+        15659325,14100275,14100275,12271400,12271400,9962525,9962525,7777250,7777250,5956775,4039800,4039800,
+        2560125,2560125,820925,820925,216125])
+    data_chunk_size = 5295 # size of half the dates that occur before the test period
+    t_steps = 3185
+elif(args.lake_name == 'sparkling'):
+    depth_areas = np.array([
+        637641.569, 637641.569, 592095.7426, 592095.7426, 546549.9163, 546549.9163, 546549.9163, 501004.0899,
+        501004.0899, 501004.0899, 455458.2636, 455458.2636, 409912.4372, 409912.4372, 409912.4372, 364366.6109,
+        364366.6109, 318820.7845, 318820.7845, 318820.7845, 273274.9581, 273274.9581, 273274.9581, 227729.1318,
+        227729.1318, 182183.3054, 182183.3054, 182183.3054, 136637.4791, 136637.4791, 136637.4791, 91091.65271,
+        91091.65271, 45545.82636, 45545.82636, 45545.82636, 0])
+    data_chunk_size = 5478
+    t_steps = 3185 #?????
+n_depths = depth_areas.size
+np.save(os.path.join(args.processed_path, 'depth_areas.npy'), depth_areas)
+np.save(os.path.join(args.processed_path, 'data_chunk_size.npy'), data_chunk_size)
 
+# Read data files
+feat = pd.read_csv(args.met_file)
+glm = pd.read_csv(args.glm_file)
 
-# create x_full, x_raw_full, diag_full, label(glm) 
-x_raw_full = feat.values[1:,1:]
-new_dates = feat.values[1:,0]
-np.save('dates.npy',new_dates)
+# Truncate feat to dates with glm predictions and vice versa
+feat = feat.merge(glm[['date']], left_on='time', right_on='date').drop('date', axis=1)
+glm = glm.merge(feat[['time']], left_on='date', right_on='time').drop('time', axis=1)
+
+# create dates, x_full, x_raw_full, diag_full, label(glm)
+x_raw_full = feat.drop('time', axis=1).values # ['ShortWave', 'LongWave', 'AirTemp', 'RelHum', 'WindSpeed', 'Rain', 'Snow']
+new_dates = feat[['time']].values[:,0]
+np.save(os.path.join(args.processed_path, 'dates.npy'), new_dates)
 
 
 n_steps = x_raw_full.shape[0]
 
 import datetime
-format = "%Y-%m-%d %H:%M:%S"
+format = "%Y-%m-%d"
 
 doy = np.zeros([n_steps,1])
 for i in range(n_steps):
@@ -34,31 +71,31 @@ for i in range(n_steps):
     doy[i,0] = tt.tm_yday
     
   
-n_depths = 50    
-x_raw_full = np.concatenate([doy,np.zeros([n_steps,1]),x_raw_full],axis=1)
-x_raw_full = np.tile(x_raw_full,[n_depths,1,1])
+x_raw_full = np.concatenate([doy,np.zeros([n_steps,1]),x_raw_full],axis=1) # ['DOY', 'depth', 'ShortWave', 'LongWave', 'AirTemp', 'RelHum', 'WindSpeed', 'Rain', 'Snow']
+x_raw_full = np.tile(x_raw_full,[n_depths,1,1]) # add depth replicates as prepended first dimension
 
 for i in range(n_depths):
-    x_raw_full[i,:,1] = i*0.5
+    x_raw_full[i,:,1] = i*0.5 # fill in the depth column as depth in m (0, 0.5, 1, ..., (n_depths-1)/2)
 
+# copy into matrix, still with columns ['DOY', 'depth', 'ShortWave', 'LongWave', 'AirTemp', 'RelHum', 'WindSpeed', 'Rain', 'Snow']
 x_raw_full_new = np.zeros([x_raw_full.shape[0],x_raw_full.shape[1],x_raw_full.shape[2]],dtype=np.float64)
 for i in range(x_raw_full.shape[0]):
     for j in range(x_raw_full.shape[1]):
         for k in range(x_raw_full.shape[2]):
             x_raw_full_new[i,j,k] = x_raw_full[i,j,k]
             
-np.save('features.npy',x_raw_full_new)
-x_raw_full = np.load('features.npy')
+np.save(os.path.join(args.processed_path, 'features.npy'),x_raw_full_new)
+x_raw_full = np.load(os.path.join(args.processed_path, 'features.npy'))
 
 # standardize features
 from sklearn import preprocessing
 x_full = preprocessing.scale(np.reshape(x_raw_full,[n_depths*n_steps,x_raw_full.shape[-1]]))
 x_full = np.reshape(x_full,[n_depths,n_steps,x_full.shape[-1]])
-np.save('processed_features.npy',x_full)
+np.save(os.path.join(args.processed_path, 'processed_features.npy'),x_full)
 
 
 # label_glm 
-glm_new = glm.values[:,1:]
+glm_new = glm.drop('date', axis=1).values
 glm_new = np.transpose(glm_new)
 
 labels = np.zeros([n_depths,n_steps],dtype=np.float64)
@@ -66,63 +103,17 @@ for i in range(n_depths):
     for j in range(n_steps):
         labels[i,j] = glm_new[i,j]
 
-np.save('labels.npy',labels)
+np.save(os.path.join(args.processed_path, 'labels.npy'), labels)
 
 
 # phy files ------------------------------------------------------------
-diag_all = pd.read_feather('../Generic_GLM_Mendota_diagnostics.feather')
-diag_all.columns
-
-idx = [-11,-10,3]
-diag_sel = diag_all.values[:,idx]
-diag_sel[:,2] = diag_sel[:,2]>0
-diag_sel = np.tile(diag_sel,[n_depths,1,1])
-
+diag_all = pd.read_csv(args.ice_file)
+diag_merged = diag_all.merge(feat, how='right', left_on='date', right_on='time')[['ice']].values
 
 diag = np.zeros([n_depths, n_steps, 3], dtype=np.float64)
-
 for i in range(n_depths):
     for j in range(n_steps):
-        diag[i,j,:] = diag_sel[i,j,:]
-np.save('diag.npy',diag)
+        diag[i,j,2] = diag_merged[j,0]
+np.save(os.path.join(args.processed_path, 'diag.npy'),diag) # ['ignored', 'ignored', 'ice']
 
-
-#
-#
-## debugging -----------------------
-#
-#import matplotlib.pyplot as plt  
-#olen= 1800
-#d_sel = 20
-#x = range(olen)
-##y1 = glm.values[:olen,d_sel+1]
-#y1 = labels[d_sel,:olen,]
-##y2 = label_o[d_sel,10592:10592+olen]
-#plt.plot(x,y1)
-##plt.plot(x,y2)
-#
-#
-#f_sel = 8
-#x = range(olen)
-#y1 = x_raw_full[d_sel,:olen,f_sel]
-##y2 = x_raw_full_o[d_sel,10592:10592+olen,f_sel]
-#plt.plot(x,y1)
-##plt.plot(x,y2)
-#
-#
-#x = range(olen)
-#y1 = obs_tr[d_sel,:olen]
-##y1 = obs_te[d_sel,:olen]
-##y2 = label_o[d_sel,10592:10592+olen]
-#y2 = obs_o[d_sel,10592:10592+olen]
-#plt.plot(x,y1)
-#plt.plot(x,y2)
-#
-#
-## end debugging ---------------------
-
-
-
-
-
-
+print("Processed data are in %s" % args.processed_path)
