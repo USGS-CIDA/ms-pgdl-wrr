@@ -30,6 +30,7 @@ targets:
       - out/sp_RMSE.csv
       - out/me_RMSE.csv
       - out/all_RMSE.csv
+      - out/me_RMSE_limited_training.csv
 
   out/sp_test.csv:
     command: merge_single_lake_test_files(target_name, pattern = I('sp_[a-z]+_test'), dir = I("../fig_2/yeti_sync/"))

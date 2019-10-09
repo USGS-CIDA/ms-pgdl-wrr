@@ -1,7 +1,5 @@
 plot_seasons_years_sparsity <- function(){
   library(dplyr)
-
-  library(dplyr)
   library(readr)
   library(stringr)
 
