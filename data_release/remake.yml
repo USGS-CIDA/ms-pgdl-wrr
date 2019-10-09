@@ -48,6 +48,23 @@ targets:
       - evaluation_me_sb_id
 
 
+  all_xml:
+    depends:
+      - out/release.xml
+      - out/spatial.xml
+      - out/inputs.xml
+      - out/glm_config.xml
+      - out/training.xml
+      - out/training_mendota.xml
+      - out/training_sparkling.xml
+      - out/training_all_historical.xml
+      - out/68_evaluation.xml
+      - out/sp_evaluation.xml
+      - out/me_evaluation.xml
+      - out/sp_prediction.xml
+      - out/me_prediction.xml
+      - out/68_prediction.xml
+
   out/release.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
@@ -99,34 +116,31 @@ targets:
   out/68_evaluation.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
-      "in/text_SHARED_evaluation.yml",
       "in/text_68_evaluation.yml",
       spatial_metadata)
 
   out/sp_evaluation.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
-      "in/text_SHARED_evaluation.yml",
       "in/text_sp_evaluation.yml",
       sp_spatial_metadata)
 
   out/me_evaluation.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
-      "in/text_SHARED_evaluation.yml",
       "in/text_me_evaluation.yml",
       me_spatial_metadata)
 
   out/sp_prediction.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
-      sp_prediction_text,
+      "in/text_sp_prediction.yml",
       sp_spatial_metadata)
 
   out/me_prediction.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
-      me_prediction_text,
+      "in/text_me_prediction.yml",
       me_spatial_metadata)
 
   out/68_prediction.xml:

@@ -23,6 +23,12 @@ targets:
   4_model_training:
     depends:
       - out/all_lakes_historical_training.csv
+      - out/me_season_training.csv
+      - out/sp_season_training.csv
+      - out/me_year_training.csv
+      - out/sp_year_training.csv
+      - out/sp_similar_training.csv
+      - out/me_similar_training.csv
 
 
   out/all_lakes_historical_training.csv:

@@ -1,4 +1,4 @@
-authors: ["Jordan S. Read", "Xiaowei Jia", "Jared Willard", "Alison P. Appling", "Jacob A. Zwart","Samantha K. Oliver","Anuj Karpatne","Gretchen J.A. Hansen", "Paul C. Hanson","William Watkins","Michael Steinbach","Vipin Kumar"]
+authors: ["Jordan S. Read", "Xiaowei Jia", "Jared Willard", "Alison P. Appling", "Jacob A. Zwart","Samantha K. Oliver","Anuj Karpatne","Gretchen J.A. Hansen", "Paul C. Hanson","William Watkins", "Michael Steinbach","Vipin Kumar"]
 pubdate: 2019
 doi: http://dx.doi.org/10.5066/P9AQPIVD
 abstract: >-
@@ -8,7 +8,7 @@ abstract: >-
 # ----associated publication----
 larger-cites:
   -
-    authors: ["Jordan S. Read", "Xiaowei Jia", "Jared Willard", "Alison P. Appling", "Jacob A. Zwart","Samantha K. Oliver","Anuj Karpatne","Gretchen J.A. Hansen", "Paul C. Hanson","William Watkins","Michael Steinbach","Vipin Kumar"]
+    authors: ["Jordan S. Read", "Xiaowei Jia", "Jared Willard", "Alison P. Appling", "Jacob A. Zwart","Samantha K. Oliver","Anuj Karpatne","Gretchen J.A. Hansen", "Paul C. Hanson", "William Watkins", "Michael Steinbach","Vipin Kumar"]
     title: >-
       Process-guided deep learning predictions of lake water temperature
     pubdate: 2019
@@ -22,11 +22,14 @@ themekeywords: ["water","temperate lakes","reservoirs","modeling","climate chang
 usage-rules: >-
   These data are subject to change and are not citable until reviewed and approved for official publication by the USGS
 
+descgeog: "Lake polygons as defined by the national hydrography dataset medium resolution"
+data-publisher: U.S. Geological Survey
+
 # ----contacts----
 contact-person: Jordan S. Read
 contact-phone: 608-821-3922
 contact-email: jread@usgs.gov
-contact-position: Ecologist
+contact-position: Research Civil Engineer
 contact-address: "8505 Research Way"
 contact-city: Middleton
 contact-state: WI
@@ -43,6 +46,7 @@ metadata-state: WI
 metadata-zip: 53562
 metadata-date: !expr format(Sys.time(),'%Y%m%d')
 
+accur-test: No formal attribute accuracy tests were conducted.
 funding-credits: >-
   This study was funded by the Department of the Interior
   Northeast Climate Adaptation Science Center, the United States Geological Survey National Climate

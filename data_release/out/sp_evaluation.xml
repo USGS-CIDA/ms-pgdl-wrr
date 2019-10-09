@@ -17,7 +17,11 @@
         <origin>Vipin Kumar</origin>
         <pubdate>2019</pubdate>
         <title>Sparkling Lake detailed evaluation data: Test data and model performance as RMSE</title>
-        <geoform>text files</geoform>
+        <geoform/>
+        <pubinfo>
+          <pubplace>Online (digital release)</pubplace>
+          <publish>U.S. Geological Survey</publish>
+        </pubinfo>
         <onlink>http://dx.doi.org/10.5066/P9AQPIVD</onlink>
         <lworkcit>
           <citeinfo>
@@ -40,7 +44,7 @@
       </citeinfo>
     </citation>
     <descript>
-      <abstract>Climate change has been shown to influence lake temperatures in different ways. To better understand the diversity of lake responses to climate change and give managers tools to manage individual lakes, we focused on improving prediction accuracy for daily water temperature profiles in 68 lakes in Minnesota and Wisconsin during 1980-2018. This data set contains the following parameters: time, date, which are defined below.</abstract>
+      <abstract>Climate change has been shown to influence lake temperatures in different ways. To better understand the diversity of lake responses to climate change and give managers tools to manage individual lakes, we focused on improving prediction accuracy for daily water temperature profiles in 68 lakes in Minnesota and Wisconsin during 1980-2018.</abstract>
       <purpose>Fisheries biology, limnological research, and climate science.</purpose>
     </descript>
     <timeperd>
@@ -57,6 +61,7 @@
       <update>none planned</update>
     </status>
     <spdom>
+      <descgeog>Lake polygons as defined by the national hydrography dataset medium resolution</descgeog>
       <bounding>
         <westbc>-89.7037723045351</westbc>
         <eastbc>-89.6957319045477</eastbc>
@@ -82,9 +87,7 @@
         <themekey>012</themekey>
       </theme>
       <place>
-        <placekt>Department of Commerce, 1995, Countries, Dependencies, Areas of Special Sovereignty, and 
-                  Their Principal Administrative Divisions,  Federal Information Processing Standard (FIPS) 10-4, 
-                  Washington, D.C., National Institute of Standards and Technology</placekt>
+        <placekt>Department of Commerce, 1995, Countries, Dependencies, Areas of Special Sovereignty, and Their Principal Administrative Divisions,  Federal Information Processing Standard (FIPS) 10-4, Washington, D.C., National Institute of Standards and Technology</placekt>
         <placekey>United States</placekey>
         <placekey>US</placekey>
       </place>
@@ -92,10 +95,6 @@
         <placekt>U.S. Department of Commerce, 1987, Codes for the identification of the States, the District of Columbia and the outlying areas of the United States, and associated areas (Federal Information Processing Standard 5-2): Washington, D. C., NIST</placekt>
         <placekey>Wisconsin</placekey>
         <placekey>WI</placekey>
-      </place>
-      <place>
-        <placekt>none</placekt>
-        <placekey>Wisconsin</placekey>
       </place>
     </keywords>
     <accconst>none</accconst>
@@ -106,9 +105,10 @@
           <cntper>Jordan S. Read</cntper>
           <cntorg>U.S. Geological Survey</cntorg>
         </cntperp>
+        <cntpos>Research Civil Engineer</cntpos>
         <cntaddr>
           <addrtype>Mailing and Physical</addrtype>
-          <address>8551 Research Way</address>
+          <address>8505 Research Way</address>
           <city>Middleton</city>
           <state>WI</state>
           <postal>53562</postal>
@@ -125,14 +125,14 @@
     <attracc>
       <attraccr>No formal attribute accuracy tests were conducted.</attraccr>
     </attracc>
-    <logic>not applicable</logic>
-    <complete>not applicable</complete>
+    <logic>Not applicable</logic>
+    <complete>Not applicable</complete>
     <posacc>
       <horizpa>
-        <horizpar>A formal accuracy assessment of the horizontal positional information in the data set has not been conducted.</horizpar>
+        <horizpar>A formal accuracy assessment of the horizontal positional information in the dataset was not conducted.</horizpar>
       </horizpa>
       <vertacc>
-        <vertaccr>A formal accuracy assessment of the vertical positional information in the data set has either not been conducted, or is not applicable.</vertaccr>
+        <vertaccr>A formal accuracy assessment of the vertical positional information in the dataset was not conducted.</vertaccr>
       </vertacc>
     </posacc>
     <lineage>
@@ -170,12 +170,67 @@
   <eainfo>
     <detailed>
       <enttyp>
-        <enttypl/>
-        <enttypd/>
+        <enttypl>sp_RMSE.csv</enttypl>
+        <enttypd>Sparkling Lake model evaluations</enttypd>
         <enttypds>Producer Defined</enttypds>
       </enttyp>
       <attr>
-        <attrlabl>time</attrlabl>
+        <attrlabl>exper_n</attrlabl>
+        <attrdef>experiment or trial number</attrdef>
+        <attrdefs>This data release</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>1</rdommin>
+            <rdommax>3</rdommax>
+            <attrunit>NA</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>exper_id</attrlabl>
+        <attrdef>Type of experiment run and number of training profiles used: 'experiment_profiles'</attrdef>
+        <attrdefs>This data release</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>NA</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>NA</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>model_type</attrlabl>
+        <attrdef>Type of model used, 'pgdl','dl','pb', or 'pb0'</attrdef>
+        <attrdefs>This data release</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>NA</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>NA</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>rmse</attrlabl>
+        <attrdef>Root Mean Squared Error between predicted and observed temperatures</attrdef>
+        <attrdefs>This data release</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>Inf</rdommax>
+            <attrunit>degrees C</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+    </detailed>
+    <detailed>
+      <enttyp>
+        <enttypl>sp_test.csv</enttypl>
+        <enttypd>Temperature observations used for Sparkling Lake test data to evaluate model performance</enttypd>
+        <enttypds>Producer Defined</enttypds>
+      </enttyp>
+      <attr>
+        <attrlabl>date</attrlabl>
         <attrdef>Calendar date</attrdef>
         <attrdefs>NA</attrdefs>
         <attrdomv>
@@ -187,8 +242,44 @@
         </attrdomv>
       </attr>
       <attr>
-        <attrlabl>date</attrlabl>
-        <attrdef>Calendar date (for ice flags file)</attrdef>
+        <attrlabl>depth</attrlabl>
+        <attrdef>depth from the water surface</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>meters</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>temp</attrlabl>
+        <attrdef>Water temperature</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>NA</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>degrees C</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>exper_n</attrlabl>
+        <attrdef>experiment number</attrdef>
+        <attrdefs>This data release</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>1</rdommin>
+            <rdommax>5</rdommax>
+            <attrunit>NA</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>exper_type</attrlabl>
+        <attrdef>Type of experiment run 'season', 'similar', or 'year'</attrdef>
         <attrdefs>NA</attrdefs>
         <attrdomv>
           <rdom>
@@ -203,17 +294,17 @@
   <distinfo>
     <distrib>
       <cntinfo>
-        <cntperp>
-          <cntper>Jordan S. Read</cntper>
-          <cntorg>U.S. Geological Survey - ScienceBase</cntorg>
-        </cntperp>
+        <cntorgp>
+          <cntorg>U.S. Geological Survey</cntorg>
+          <cntper>GS ScienceBase</cntper>
+        </cntorgp>
         <cntaddr>
-          <addrtype>Mailing and Physical</addrtype>
+          <addrtype>mailing address</addrtype>
           <address>Denver Federal Center, Building 810, Mail Stop 302</address>
           <city>Denver</city>
           <state>CO</state>
           <postal>80255</postal>
-          <country>U.S.A.</country>
+          <country>United States</country>
         </cntaddr>
         <cntvoice>1-888-275-8747</cntvoice>
         <cntemail>sciencebase@usgs.gov</cntemail>
@@ -224,7 +315,6 @@
       <digform>
         <digtinfo>
           <formname/>
-          <formvern>none</formvern>
         </digtinfo>
         <digtopt>
           <onlinopt>
@@ -247,7 +337,7 @@
           <cntper>Jordan S. Read</cntper>
           <cntorg>U.S. Geological Survey</cntorg>
         </cntperp>
-        <cntpos>Data Chief</cntpos>
+        <cntpos>Research Civil Engineer</cntpos>
         <cntaddr>
           <addrtype>Mailing and Physical</addrtype>
           <address>8505 Research Way</address>
@@ -257,7 +347,7 @@
           <country>U.S.A.</country>
         </cntaddr>
         <cntvoice>608-821-3922</cntvoice>
-        <cntfax>608 821-3817</cntfax>
+        <cntfax>608-821-3817</cntfax>
         <cntemail>jread@usgs.gov</cntemail>
       </cntinfo>
     </metc>

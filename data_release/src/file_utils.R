@@ -2,12 +2,21 @@ bundle_meteo_files <- function(zip_filename, lake_ids, pattern, dir = "../fig_3/
   cdir <- getwd()
   on.exit(setwd(cdir))
   files <- get_file_matches(lake_ids, pattern, dir)
+  for (file in files){
+    read_csv(file.path(dir, file), col_types = 'Dddddddd') %>%
+      rename(date = time) %>% write_csv(file.path(tempdir(), file))
+  }
 
 
-  setwd(dir)
+  setwd(tempdir())
   zip(file.path(cdir, zip_filename), files = files)
   setwd(cdir)
 
+}
+
+rewrite_meteo <- function(filein, fileout){
+  read_csv(filein, col_types = 'Dddddddd') %>%
+    rename(date = time) %>% write_csv(fileout)
 }
 
 combine_jared_feathers <- function(fileout, ...){
@@ -275,11 +284,12 @@ zip_grouped_hashed_files <- function(hash_filename, hashed_files, group_by, suff
 
 merge_obs_files <- function(filename, lake_ids, pattern, dir = "../fig_3/yeti_sync"){
   files <- get_file_matches(lake_ids, pattern, dir)
-  out <- data.frame(site_id = c(), DateTime = c(), Depth = c(), temp = c(), stringsAsFactors = FALSE)
+  out <- data.frame(site_id = c(), date = c(), depth = c(), temp = c(), stringsAsFactors = FALSE)
 
 
   for (file in files){
     data <- read_csv(file.path(dir, file), col_types = 'Ddd') %>%
+      rename(date = DateTime, depth = Depth) %>%
       mutate(site_id = site_id_from_file(file)) %>% select(site_id, everything())
     out <- rbind(out, data)
   }
@@ -338,11 +348,12 @@ merge_single_lake_obs_files <- function(filename, pattern, dir, exper_id){
     filter(stringr::str_detect(string = filename, pattern = pattern)) %>%
     pull(filename)
 
-  out <- data.frame(DateTime = c(), Depth = c(), temp = c(), exper_n = c(), exper_id = c(), stringsAsFactors = FALSE)
+  out <- data.frame(date = c(), depth = c(), temp = c(), exper_n = c(), exper_id = c(), stringsAsFactors = FALSE)
 
   for (file in files){
 
     data <- read_csv(file.path(dir, file), col_types = 'Ddd') %>%
+      rename(date = DateTime, depth = Depth) %>%
       mutate(exper_n = exper_n_from_file(file),
              exper_type = exper_type_from_file(file),
              prof_n = prof_n_from_file(file)) %>%

@@ -282,14 +282,6 @@ targets:
     command: zip_grouped_hashed_files(target_name, hashed_files = 'tmp/historical_predictions.ind',
       group_by = I("nhd_[0-9]+"), suffix_with = I('_predict'))
 
-  me_prediction_text:
-    command: >
-      list(title = I('Lake Mendota detailed prediction data: Process-guided deep learning predictions of lake water temperature'))
-
-  sp_prediction_text:
-    command: >
-      list(title = I('Sparling Lake detailed prediction data: Process-guided deep learning predictions of lake water temperature'))
-
   a68_prediction_text:
     command: >
       list(title = I('All lakes historical prediction data: Process-guided deep learning predictions of lake water temperature'))

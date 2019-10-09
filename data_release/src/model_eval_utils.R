@@ -105,22 +105,22 @@ calculate_RMSE <- function(filename, test_file, ...){
   test_data <- read_csv(test_file)
   # test data has a field for "exper_n" which is the experiment number the test corresponds to `experiment_0{n}` in the prediction output files
   # test data also has a field for "exper_typ" which lines up with things like "season" "similar" or "year" from the prediction file name
-  # each "predict_file" will have an RMSE, an exper_n, an exper_id, a exper_model ("pgdl","dl",or "pb") and other stats like num dropped and num used
+  # each "predict_file" will have an RMSE, an exper_n, an exper_id, a model_type ("pgdl","dl",or "pb") and other stats like num dropped and num used
 
   predict_files <- c(...)
 
   data <- purrr::map(predict_files, function(x) {
     # "out/sp_season_predict_pb.csv":
     file_splits <- basename(x) %>% strsplit('[_]') %>% .[[1]]
-    exper_model <- tail(file_splits, 1) %>%  strsplit('[.]') %>% .[[1]] %>% head(1)
+    model_type <- tail(file_splits, 1) %>%  strsplit('[.]') %>% .[[1]] %>% head(1)
 
     read_csv(x) %>%
       gather(depth_code, temp, -date, -exper_n, -exper_id) %>%
-      mutate(depth = as.numeric(substring(depth_code, 6)), exper_model = exper_model) %>%
-      select(date, depth, pred = temp, exper_n, exper_id, exper_model) %>% arrange(date)
+      mutate(depth = as.numeric(substring(depth_code, 6)), model_type = model_type) %>%
+      select(date, depth, pred = temp, exper_n, exper_id, model_type) %>% arrange(date)
   }) %>% purrr::reduce(rbind)
 
-  rmse <- data %>% group_by(exper_n, exper_id, exper_model) %>%
+  rmse <- data %>% group_by(exper_n, exper_id, model_type) %>%
     summarize(rmse = as.rmse(date, depth, pred, exper_n, exper_id, test_data = test_data))
 
   write_csv(rmse, path = filename)

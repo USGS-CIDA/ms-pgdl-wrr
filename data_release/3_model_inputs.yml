@@ -32,7 +32,7 @@ targets:
 
 
   out/mendota_meteo.csv:
-    command: file.copy('../fig_1/yeti_sync/me_meteo.csv', to = target_name)
+    command: rewrite_meteo('../fig_1/yeti_sync/me_meteo.csv', target_name)
 
   out/mendota_pretrainer_ice_flags.csv:
     command: ice_from_GLM_feather(target_name, min_date = I("1980-04-02"),
@@ -43,7 +43,7 @@ targets:
       "in/Sparkling_temperatures.feather")
 
   out/sparkling_meteo.csv:
-    command: file.copy('../fig_2/yeti_sync/sp_meteo.csv', to = target_name)
+    command: rewrite_meteo('../fig_2/yeti_sync/sp_meteo.csv', target_name)
 
   out/68_lakes_meteo.zip:
     command: bundle_meteo_files(target_name, lake_ids, pattern = I('_meteo.csv'))

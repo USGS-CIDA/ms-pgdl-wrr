@@ -1,3 +1,124 @@
 title: >-
   Sparkling Lake detailed training data: Process-guided deep learning predictions of lake water temperature
 
+entities:
+  -
+    data-name: sp_season_training.csv
+    data-description: Sparkling Lake model training data for 'season' out-of-bounds modeling
+    attributes:
+    -
+      attr-label: date
+      attr-def: Calendar date
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: depth
+      attr-def: depth from the water surface
+      attr-defs: NA
+      data-min: 0
+      data-max: NA
+      data-units: meters
+    -
+      attr-label: temp
+      attr-def: Water temperature
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: degrees C
+    -
+      attr-label: exper_n
+      attr-def: experiment number
+      attr-defs: This data release
+      data-min: 1
+      data-max: 5
+      data-units: NA
+    -
+      attr-label: exper_id
+      attr-def: >-
+        Type of experiment run and number of training profiles used: "experiment_profiles"
+      attr-defs: This data release
+      data-min: NA
+      data-max: NA
+      data-units: NA
+  -
+    data-name: sp_similar_training.csv
+    data-description: Sparkling Lake model training data for 'similar' data sparsity modeling
+    attributes:
+    -
+      attr-label: date
+      attr-def: Calendar date
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: depth
+      attr-def: depth from the water surface
+      attr-defs: NA
+      data-min: 0
+      data-max: NA
+      data-units: meters
+    -
+      attr-label: temp
+      attr-def: Water temperature
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: degrees C
+    -
+      attr-label: exper_n
+      attr-def: experiment number
+      attr-defs: This data release
+      data-min: 1
+      data-max: 5
+      data-units: NA
+    -
+      attr-label: exper_id
+      attr-def: >-
+        Type of experiment run and number of training profiles used: "experiment_profiles"
+      attr-defs: This data release
+      data-min: NA
+      data-max: NA
+      data-units: NA
+  -
+    data-name: me_year_training.csv
+    data-description: Sparkling Lake model training data for 'similar' data sparsity modeling
+    attributes:
+    -
+      attr-label: date
+      attr-def: Calendar date
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: depth
+      attr-def: depth from the water surface
+      attr-defs: NA
+      data-min: 0
+      data-max: NA
+      data-units: meters
+    -
+      attr-label: temp
+      attr-def: Water temperature
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: degrees C
+    -
+      attr-label: exper_n
+      attr-def: experiment number
+      attr-defs: This data release
+      data-min: 1
+      data-max: 5
+      data-units: NA
+    -
+      attr-label: exper_id
+      attr-def: >-
+        Type of experiment run and number of training profiles used: "experiment_profiles"
+      attr-defs: This data release
+      data-min: NA
+      data-max: NA
+      data-units: NA
