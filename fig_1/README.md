@@ -99,7 +99,7 @@ import pandas as pd
 
 # read, subset, and write the training data for a single experiment
 train_obs = pd.read_csv(train_obs_file)
-train_obs_similar_980_1 = train_obs[(train_obs['exper_id'] == 'similar_980') & (train_obs['exper_n'] == 1)].reset_index()[['DateTime','Depth','temp']]
+train_obs_similar_980_1 = train_obs[(train_obs['exper_id'] == 'similar_980') & (train_obs['exper_n'] == 1)].reset_index()[['date','depth','temp']]
 train_obs_similar_980_1.to_feather(os.path.join(train_inputs_path, 'labels_train.feather'))
 
 # read, subset, and write the testing data for a single experiment

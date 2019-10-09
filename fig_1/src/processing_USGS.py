@@ -50,17 +50,17 @@ glm = pd.read_csv(args.glm_file)
 
 # Truncate to the training or testing period
 if args.phase == 'pretrain':
-    feat = feat[pd.to_datetime(feat['time'].values) <= pd.to_datetime('2009-04-01')]
+    feat = feat[pd.to_datetime(feat['date'].values) <= pd.to_datetime('2009-04-01')]
 elif args.phase == 'train':
-    feat = feat[pd.to_datetime(feat['time'].values) > pd.to_datetime('2009-04-01')]
+    feat = feat[pd.to_datetime(feat['date'].values) > pd.to_datetime('2009-04-01')]
 
 # Truncate feat to dates with glm predictions and vice versa
-feat = feat.merge(glm[['date']], left_on='time', right_on='date').drop('date', axis=1)
-glm = glm.merge(feat[['time']], left_on='date', right_on='time').drop('time', axis=1)
+feat = feat.merge(glm[['date']], on='date')
+glm = glm.merge(feat[['date']], on='date')
 
 # create dates, x_full, x_raw_full, diag_full, label(glm)
-x_raw_full = feat.drop('time', axis=1).values # ['ShortWave', 'LongWave', 'AirTemp', 'RelHum', 'WindSpeed', 'Rain', 'Snow']
-new_dates = feat[['time']].values[:,0]
+x_raw_full = feat.drop('date', axis=1).values # ['ShortWave', 'LongWave', 'AirTemp', 'RelHum', 'WindSpeed', 'Rain', 'Snow']
+new_dates = feat[['date']].values[:,0]
 np.save(os.path.join(args.processed_path, 'dates.npy'), new_dates)
 
 
@@ -113,7 +113,7 @@ np.save(os.path.join(args.processed_path, 'labels_pretrain.npy'), labels)
 
 # phy files ------------------------------------------------------------
 diag_all = pd.read_csv(args.ice_file)
-diag_merged = diag_all.merge(feat, how='right', left_on='date', right_on='time')[['ice']].values
+diag_merged = diag_all.merge(feat, how='right', on='date')[['ice']].values
 
 diag = np.zeros([n_depths, n_steps, 3], dtype=np.float64)
 for i in range(n_depths):
