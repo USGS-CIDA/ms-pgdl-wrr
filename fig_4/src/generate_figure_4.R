@@ -1,23 +1,4 @@
 
-fig1_pgdl_lim <- readr::read_csv('~/Downloads/revision_Figure_1_results - Sheet1 (1).csv', col_types = 'ciidd') %>% filter(!is.na(Model), Model == 'PGRNN') %>%
-  mutate(exper_model = 'pgdl_lim', exper_id = sprintf('similar_%s', n_profiles)) %>%
-  rename(exper_n = Experiment, rmse = `Test RMSE`) %>% select(exper_n, exper_id, exper_model, rmse)
-
-
-# **** we've got some with season and some with seasons...
-readr::read_csv('~/Downloads/revision_Figure_2_results - Sheet1.csv', col_types = 'ccidd') %>%
-  filter(!is.na(Model), Model == 'PGRNN', str_detect(Experiment, '[a-z]+_[0-9]+_mendota'), !str_detect(Experiment, 'similar_')) %>%
-  mutate(exper_model = 'pgdl_lim', exper_info = str_extract(Experiment, '[a-z]+_[0-9]+'),
-         exper_type = str_extract(exper_info, '[a-z]+'),
-         exper_n = as.numeric(str_extract(exper_info, '[0-9]$')),
-         exper_id = sprintf('%s_%s', exper_type, n_profiles)) %>%
-  rename(rmse = `Test RMSE`) %>% select(exper_n, exper_id, exper_model, rmse) %>%
-  rbind(fig1_pgdl_lim) %>%
-  write_csv('fig_4/in/me_RMSE_limited_training.csv')
-
-
-
-
 plot_figure_4 <- function(){
   library(dplyr)
   library(readr)
@@ -27,9 +8,9 @@ plot_figure_4 <- function(){
     filter(exper_model == 'pgdl') %>%
     rbind(readr::read_csv('data_release/out/me_RMSE_limited_training.csv', col_types = 'iccd'))
 
-  #
-  #   png(filename = 'figures/figure_4_wrr.png', width = 8, height = 4.5, units = 'in', res = 200)
-  #   par(omi = c(0,0,0.05,0.05), mai = c(0.3,0.75,0,0), las = 1, mgp = c(2.5,.5,0), cex = 1)
+
+    png(filename = 'figures/figure_4_wrr.png', width = 8, height = 4.5, units = 'in', res = 200)
+    par(omi = c(0,0,0.05,0.05), mai = c(0.3,0.75,0,0), las = 1, mgp = c(2.5,.5,0), cex = 1)
 
 
 
