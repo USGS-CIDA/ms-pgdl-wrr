@@ -15,6 +15,7 @@ import argparse
 import os
 
 parser = argparse.ArgumentParser()
+parser.add_argument('--phase', choices=['pretrain', 'train'])
 parser.add_argument('--lake_name', choices=['mendota', 'sparkling'])
 parser.add_argument('--met_file')
 parser.add_argument('--glm_file')
@@ -23,16 +24,15 @@ parser.add_argument('--processed_path')
 args = parser.parse_args()
 
 # hard code and save some depth-area relationship and other lake-specific tidbits
-if(args.lake_name == 'mendota'):
+if args.lake_name == 'mendota':
     depth_areas = np.array([
         39865825,38308175,38308175,35178625,35178625,33403850,31530150,31530150,30154150,30154150,29022000,
         29022000,28063625,28063625,27501875,26744500,26744500,26084050,26084050,25310550,24685650,24685650,
         23789125,23789125,22829450,22829450,21563875,21563875,20081675,18989925,18989925,17240525,17240525,
         15659325,14100275,14100275,12271400,12271400,9962525,9962525,7777250,7777250,5956775,4039800,4039800,
         2560125,2560125,820925,820925,216125])
-    data_chunk_size = 5295 # size of half the dates that occur before the test period
-    t_steps = 3185
-elif(args.lake_name == 'sparkling'):
+    data_chunk_size = 5295 # size of half the dates in the training period
+elif args.lake_name == 'sparkling':
     depth_areas = np.array([
         637641.569, 637641.569, 592095.7426, 592095.7426, 546549.9163, 546549.9163, 546549.9163, 501004.0899,
         501004.0899, 501004.0899, 455458.2636, 455458.2636, 409912.4372, 409912.4372, 409912.4372, 364366.6109,
@@ -40,7 +40,6 @@ elif(args.lake_name == 'sparkling'):
         227729.1318, 182183.3054, 182183.3054, 182183.3054, 136637.4791, 136637.4791, 136637.4791, 91091.65271,
         91091.65271, 45545.82636, 45545.82636, 45545.82636, 0])
     data_chunk_size = 5478
-    t_steps = 3185 #?????
 n_depths = depth_areas.size
 np.save(os.path.join(args.processed_path, 'depth_areas.npy'), depth_areas)
 np.save(os.path.join(args.processed_path, 'data_chunk_size.npy'), data_chunk_size)
@@ -48,6 +47,12 @@ np.save(os.path.join(args.processed_path, 'data_chunk_size.npy'), data_chunk_siz
 # Read data files
 feat = pd.read_csv(args.met_file)
 glm = pd.read_csv(args.glm_file)
+
+# Truncate to the training or testing period
+if args.phase == 'pretrain':
+    feat = feat[pd.to_datetime(feat['time'].values) <= pd.to_datetime('2009-04-01')]
+elif args.phase == 'train':
+    feat = feat[pd.to_datetime(feat['time'].values) > pd.to_datetime('2009-04-01')]
 
 # Truncate feat to dates with glm predictions and vice versa
 feat = feat.merge(glm[['date']], left_on='time', right_on='date').drop('date', axis=1)
@@ -103,7 +108,7 @@ for i in range(n_depths):
     for j in range(n_steps):
         labels[i,j] = glm_new[i,j]
 
-np.save(os.path.join(args.processed_path, 'labels.npy'), labels)
+np.save(os.path.join(args.processed_path, 'labels_pretrain.npy'), labels)
 
 
 # phy files ------------------------------------------------------------

@@ -23,7 +23,7 @@ random.seed(9001)
 
 ''' Declare constant hyperparameters '''
 learning_rate = 0.006
-epochs = 4 #400
+epochs = 2 #400
 state_size = 21
 input_size = 9
 phy_size = 10
@@ -414,7 +414,7 @@ diag_full = np.load(os.path.join(args.data_path, 'diag.npy'))
 # ['DOY', 'depth', 'ShortWave', 'LongWave', 'AirTemp', 'RelHum', 'WindSpeed', 'Daily.Qe', 'Daily.Qh', 'Has.Black.Ice']
 phy_full = np.concatenate((x_raw_full[:,:,:-2],diag_full),axis=2)
 
-label = np.load(os.path.join(args.data_path, 'labels.npy'))
+label = np.load(os.path.join(args.data_path, 'labels_pretrain.npy'))
 mask = np.ones([label.shape[0],label.shape[1]])*1.0
 
 
