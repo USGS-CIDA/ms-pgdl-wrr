@@ -1,5 +1,5 @@
 title: >-
-  Model inputs: Process-guided deep learning predictions of lake water temperature
+  Model inputs: Daily timeseries of meteorological inputs and ice flags
 cross-cites:
   -
     authors: ['Kenneth E. Mitchell','Dag Lohmann','Paul R. Houser','Eric F. Wood','John C. Schaake','Alan Robock','Brian A. Cosgrove','Justin Sheffield','Qingyun Duan','Lifeng Luo','R. Wayne Higgins','Rachel T. Pinker','J. Dan Tarpley','Dennis P. Lettenmaier','Curtis H. Marshall','Jared K. Entin','Ming Pan','Wei Shi','Victor Koren','Jesse Meng','Bruce H. Ramsay','Andrew A. Bailey']
@@ -8,16 +8,23 @@ cross-cites:
     pubdate: 2004
     link: http://dx.doi.org/10.1029/2003JD003823
   -
-    authors: ['Matthey R. Hipsey','Louise C. Bruce', 'David P. Hamilton']
+    authors: ['Matthew R. Hipsey', 'Louise C. Bruce', 'Casper Boon', 'Brendan Busch', 'Cayelan C. Carey', 'David P. Hamilton', 'Paul C. Hanson', 'Jordan S. Read', 'Eduardo de Sousa', 'Michael Weber', 'Luke A. Winslow']
     title: >-
-      GLM General Lake Model: Model Overview and User Information
-    pubdate: 2013
-    link: http://aed.see.uwa.edu.au/research/models/GLM/index.html
+      A General Lake Model (GLM 3.0) for linking with high-frequency sensor data from the Global Lake Ecological Observatory Network (GLEON).
+    pubdate: 2019
+    link: https://doi.org/10.5194/gmd-12-473-2019
 
 attributes:
   -
     attr-label: time
     attr-def: Calendar date
+    attr-defs: NA
+    data-min: NA
+    data-max: NA
+    data-units: NA
+  -
+    attr-label: date
+    attr-def: Calendar date (for ice flags file)
     attr-defs: NA
     data-min: NA
     data-max: NA
@@ -72,6 +79,13 @@ attributes:
     data-min: 0
     data-max: NA
     data-units: m day^-1
+  -
+    attr-label: ice
+    attr-def: Flag for predicted ice cover from default GLM configuration
+    attr-defs: NA
+    data-min: 0
+    data-max: 1
+    data-units: NA
 
 build-environment: Multiple computer systems were used to generate these data, including linux, OSX. The open source language R was used on all systems, as well as the open-source model GLM.
 

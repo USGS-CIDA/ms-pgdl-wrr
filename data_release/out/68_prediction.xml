@@ -16,7 +16,7 @@
         <origin>Michael Steinbach</origin>
         <origin>Vipin Kumar</origin>
         <pubdate>2019</pubdate>
-        <title>Lake Mendota detailed training data: Process-guided deep learning predictions of lake water temperature</title>
+        <title>All lakes historical prediction data: Process-guided deep learning predictions of lake water temperature</title>
         <geoform/>
         <pubinfo>
           <pubplace>Online (digital release)</pubplace>
@@ -63,10 +63,10 @@
     <spdom>
       <descgeog>Lake polygons as defined by the national hydrography dataset medium resolution</descgeog>
       <bounding>
-        <westbc>-89.4836545048768</westbc>
-        <eastbc>-89.3674075050573</eastbc>
-        <northbc>43.1520341996861</northbc>
-        <southbc>43.0771195331357</southbc>
+        <westbc>-94.2609062307949</westbc>
+        <eastbc>-87.9475441739278</eastbc>
+        <northbc>48.6427837911633</northbc>
+        <southbc>42.5692312672573</southbc>
       </bounding>
     </spdom>
     <keywords>
@@ -93,6 +93,8 @@
       </place>
       <place>
         <placekt>U.S. Department of Commerce, 1987, Codes for the identification of the States, the District of Columbia and the outlying areas of the United States, and associated areas (Federal Information Processing Standard 5-2): Washington, D. C., NIST</placekt>
+        <placekey>Minnesota</placekey>
+        <placekey>MN</placekey>
         <placekey>Wisconsin</placekey>
         <placekey>WI</placekey>
       </place>
@@ -148,7 +150,7 @@
     <ptvctinf>
       <sdtsterm>
         <sdtstype>G-polygon</sdtstype>
-        <ptvctcnt>1</ptvctcnt>
+        <ptvctcnt>68</ptvctcnt>
       </sdtsterm>
     </ptvctinf>
   </spdoinfo>
@@ -168,208 +170,7 @@
     </horizsys>
   </spref>
   <eainfo>
-    <detailed>
-      <enttyp>
-        <enttypl>me_season_training.csv</enttypl>
-        <enttypd>Lake Mendota model training data for 'season' out-of-bounds modeling</enttypd>
-        <enttypds>Producer Defined</enttypds>
-      </enttyp>
-      <attr>
-        <attrlabl>date</attrlabl>
-        <attrdef>Calendar date</attrdef>
-        <attrdefs>NA</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>depth</attrlabl>
-        <attrdef>depth from the water surface</attrdef>
-        <attrdefs>NA</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>0</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>meters</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>temp</attrlabl>
-        <attrdef>Water temperature</attrdef>
-        <attrdefs>NA</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>degrees C</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>exper_n</attrlabl>
-        <attrdef>experiment number</attrdef>
-        <attrdefs>This data release</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>1</rdommin>
-            <rdommax>5</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>exper_id</attrlabl>
-        <attrdef>Type of experiment run and number of training profiles used: "experiment_profiles"</attrdef>
-        <attrdefs>This data release</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-    </detailed>
-    <detailed>
-      <enttyp>
-        <enttypl>me_similar_training.csv</enttypl>
-        <enttypd>Lake Mendota model training data for 'similar' data sparsity modeling</enttypd>
-        <enttypds>Producer Defined</enttypds>
-      </enttyp>
-      <attr>
-        <attrlabl>date</attrlabl>
-        <attrdef>Calendar date</attrdef>
-        <attrdefs>NA</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>depth</attrlabl>
-        <attrdef>depth from the water surface</attrdef>
-        <attrdefs>NA</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>0</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>meters</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>temp</attrlabl>
-        <attrdef>Water temperature</attrdef>
-        <attrdefs>NA</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>degrees C</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>exper_n</attrlabl>
-        <attrdef>experiment number</attrdef>
-        <attrdefs>This data release</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>1</rdommin>
-            <rdommax>5</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>exper_id</attrlabl>
-        <attrdef>Type of experiment run and number of training profiles used: "experiment_profiles"</attrdef>
-        <attrdefs>This data release</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-    </detailed>
-    <detailed>
-      <enttyp>
-        <enttypl>me_year_training.csv</enttypl>
-        <enttypd>Lake Mendota model training data for 'similar' data sparsity modeling</enttypd>
-        <enttypds>Producer Defined</enttypds>
-      </enttyp>
-      <attr>
-        <attrlabl>date</attrlabl>
-        <attrdef>Calendar date</attrdef>
-        <attrdefs>NA</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>depth</attrlabl>
-        <attrdef>depth from the water surface</attrdef>
-        <attrdefs>NA</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>0</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>meters</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>temp</attrlabl>
-        <attrdef>Water temperature</attrdef>
-        <attrdefs>NA</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>degrees C</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>exper_n</attrlabl>
-        <attrdef>experiment number</attrdef>
-        <attrdefs>This data release</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>1</rdommin>
-            <rdommax>5</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>exper_id</attrlabl>
-        <attrdef>Type of experiment run and number of training profiles used: "experiment_profiles"</attrdef>
-        <attrdefs>This data release</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-    </detailed>
-  </eainfo>
+      </eainfo>
   <distinfo>
     <distrib>
       <cntinfo>

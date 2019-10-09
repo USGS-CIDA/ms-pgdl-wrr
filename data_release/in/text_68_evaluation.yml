@@ -1,0 +1,89 @@
+title: >-
+  All lakes historical evaluation data: Test data and model performance as RMSE
+
+entities:
+  -
+    data-name: all_RMSE.csv
+    data-description: Multi-lake model evaluation results
+    attributes:
+    -
+      attr-label: exper_n
+      attr-def: experiment or trial number
+      attr-defs: This data release
+      data-min: 1
+      data-max: 3
+      data-units: NA
+    -
+      attr-label: exper_id
+      attr-def: >-
+        Type of experiment run and number of training profiles used: "experiment_profiles"
+      attr-defs: This data release
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: site_id
+      attr-def: >-
+        Lake identification number for this dataset. Is the Prmnn_I prefixed with source, as "nhd_{Prmnn_I}"
+      attr-defs: >-
+        http://nhd.usgs.gov/; Winslow et al. 2016
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: model_type
+      attr-def: Type of model used, 'pgdl','dl','pb', or 'pb0'
+      attr-defs: This data release
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: rmse
+      attr-def: Root Mean Squared Error between predicted and observed temperatures
+      attr-defs: This data release
+      data-min: 0
+      data-max: Inf
+      data-units: degrees C
+  -
+    data-name: all_test.csv
+    data-description: Temperature observations used for test data to evaluate model performance
+    attributes:
+    -
+      attr-label: date
+      attr-def: Calendar date
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: depth
+      attr-def: depth from the water surface
+      attr-defs: NA
+      data-min: 0
+      data-max: NA
+      data-units: meters
+    -
+      attr-label: temp
+      attr-def: Water temperature
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: degrees C
+    -
+      attr-label: site_id
+      attr-def: >-
+        Lake identification number for this dataset. Is the Prmnn_I prefixed with source, as "nhd_{Prmnn_I}"
+      attr-defs: >-
+        http://nhd.usgs.gov/; Winslow et al. 2016
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: exper_type
+      attr-def: Type of experiment run
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: NA
+
+
