@@ -16,7 +16,7 @@
         <origin>Michael Steinbach</origin>
         <origin>Vipin Kumar</origin>
         <pubdate>2019</pubdate>
-        <title/>
+        <title>All lakes historical evaluation data: Test data and model performance as RMSE</title>
         <geoform>text files</geoform>
         <onlink>http://dx.doi.org/10.5066/P9AQPIVD</onlink>
         <lworkcit>
@@ -40,7 +40,7 @@
       </citeinfo>
     </citation>
     <descript>
-      <abstract>Climate change has been shown to influence lake temperatures in different ways. To better understand the diversity of lake responses to climate change and give managers tools to manage individual lakes, we focused on improving prediction accuracy for daily water temperature profiles in 68 lakes in Minnesota and Wisconsin during 1980-2018. This data set contains the following parameters: which are defined below.</abstract>
+      <abstract>Climate change has been shown to influence lake temperatures in different ways. To better understand the diversity of lake responses to climate change and give managers tools to manage individual lakes, we focused on improving prediction accuracy for daily water temperature profiles in 68 lakes in Minnesota and Wisconsin during 1980-2018. This data set contains the following parameters: time, date, which are defined below.</abstract>
       <purpose>Fisheries biology, limnological research, and climate science.</purpose>
     </descript>
     <timeperd>
@@ -183,6 +183,30 @@
         <enttypd/>
         <enttypds>Producer Defined</enttypds>
       </enttyp>
+      <attr>
+        <attrlabl>time</attrlabl>
+        <attrdef>Calendar date</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>NA</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>NA</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>date</attrlabl>
+        <attrdef>Calendar date (for ice flags file)</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>NA</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>NA</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
     </detailed>
   </eainfo>
   <distinfo>
@@ -225,7 +249,7 @@
     </stdorder>
   </distinfo>
   <metainfo>
-    <metd>20191007</metd>
+    <metd>20191009</metd>
     <metc>
       <cntinfo>
         <cntperp>

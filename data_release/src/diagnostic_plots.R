@@ -7,15 +7,19 @@ jared_pgdl <- readr::read_csv('~/Downloads/Comparing Stopping Conditions - Sheet
          nhd_id = paste0('nhd_', nhd_id)) %>% slice(1:68) %>%
   select(nhd_id, PGDL_old = PGDL_all, DL_old = DL_all)
 
-d = read_csv('out/all_RMSE.csv') %>% rename(nhd_id = site_id) %>%
+d = read_csv('data_release/out/all_RMSE.csv') %>% rename(nhd_id = site_id) %>%
   filter(model_type == 'dl') %>% group_by(nhd_id, exper_id) %>%
   summarize(DL_new = mean(rmse)) %>% left_join(jared_pgdl)
 
-d2 <- read_csv('out/all_RMSE.csv') %>% rename(nhd_id = site_id) %>%
+d2 <- read_csv('data_release/out/all_RMSE.csv') %>% rename(nhd_id = site_id) %>%
   filter(model_type == 'pgdl') %>% group_by(nhd_id, exper_id) %>%
-  summarize(PGDL_new = mean(rmse)) %>% left_join(d) %>%
-  select(-exper_id)# %>%
-  #write_csv('~/Downloads/jared_RMSE_new_calcs_10-04-2019.csv')
+  summarize(PGDL_new = mean(rmse), PGDL_new_max = max(rmse), PGDL_new_min = min(rmse), PGDL_range = PGDL_new_max-PGDL_new_min) %>%
+  left_join(d) %>%
+  select(-exper_id) %>% mutate(col = case_when(
+    PGDL_old >= PGDL_new_min & PGDL_old <= PGDL_new_max ~ 'black',
+    TRUE ~ 'red')
+  )
+
 png(filename = '~/Downloads/figure_4_diagnostic_RNN.png', width =10, height = 24, units = 'in', res = 200)
 par(omi = c(0.6,0,0.05,0.05), mai = c(0,1.6,0,0), las = 1, tck = -0.01, cex = 1.5)
 plot(c(NA,0), c(NA,NA), xlim = c(0.7, 2.3), ylim = c(3.3, 0.99), ylab = 'Test RMSE (°C)', xlab = '', axes = FALSE)
@@ -33,19 +37,31 @@ dev.off()
 
 png(filename = '~/Downloads/figure_4_diagnostic_PGRNN.png', width =10, height = 24, units = 'in', res = 200)
 par(omi = c(0.6,0,0.05,0.05), mai = c(0,1.6,0,0), las = 1, tck = -0.01, cex = 1.5)
-plot(c(NA,0), c(NA,NA), xlim = c(0.7, 2.3), ylim = c(3.3, 0.99), ylab = 'Test RMSE (°C)', xlab = '', axes = FALSE)
+plot(c(NA,0), c(NA,NA), xlim = c(0.7, 2.3), ylim = c(2.8, 0.97), ylab = 'Test RMSE (°C)', xlab = '', axes = FALSE)
 
 axis(side = 2, at = seq(0, 10, by = 0.25))
 axis(side = 1, at = c(1,2), c('PGDL_old', 'PGDL_new'))
 box()
 
-segments(x0 = rep(1,68), x1 = rep(2, 68), y0 = d2$PGDL_old, y1 = d2$PGDL_new, lwd = 1.5)
-points(x = rep(1, nrow(d)), y = d2$PGDL_old, pch = 16, col = 'black', cex = 0.6)
-text(x = 1, y = d2$PGDL_old, labels =d2$nhd_id, cex = 0.8, pos = 2)
-points(x = rep(2, nrow(d)), y = d2$PGDL_new, pch = 16, col = 'black', cex = 0.5)
-text(x = 2, y = d2$PGDL_new, labels = d2$nhd_id, cex = 0.8, pos = 4)
+segments(x0 = rep(1,68), x1 = rep(2, 68), y0 = d2$PGDL_old, y1 = d2$PGDL_new, lwd = 1.5, col = d2$col)
+points(x = rep(1, nrow(d2)), y = d2$PGDL_old, pch = 16, col = d2$col, cex = 0.6)
+text(x = 1, y = d2$PGDL_old, labels =d2$nhd_id, cex = 0.8, pos = 2, col = d2$col)
+points(x = rep(2, nrow(d2)), y = d2$PGDL_new, pch = 16, col = d2$col, cex = 0.5)
+text(x = 2, y = d2$PGDL_new, labels = d2$nhd_id, cex = 0.8, pos = 4, col = d2$col)
 dev.off()
 
+png(filename = '~/Downloads/figure_4b_diagnostic_PGRNN.png', width =10, height = 10, units = 'in', res = 200)
+plot(c(NA,0), c(NA,NA), xlim = c(0.7, 2.8), ylim = c(0.7, 2.8), ylab = 'PGDL_new test RMSE (°C)',
+     xlab = 'PGDL_new test RMSE (°C)', axes = FALSE)
+axis(side = 2, at = seq(0, 10, by = 0.5))
+axis(side = 1, at = seq(0, 10, by = 0.5))
+box()
+
+
+abline(0,1)
+segments(d2$PGDL_old, x1 = d2$PGDL_old, y0 = d2$PGDL_new_min, y1 = d2$PGDL_new_max, col = d2$col)
+points(d2$PGDL_old, d2$PGDL_new, col = d2$col, pch = 21, bg = 'white')
+dev.off()
 
 fig_2_old_data <- readr::read_csv('~/Downloads/revision_Figure_1_results - Sheet1.csv') %>%
   rename(old_rmse = `Test RMSE`, exper_n = Experiment, exper_model = Model) %>% select(-`Train RMSE`) %>%
@@ -57,7 +73,7 @@ fig_2_old_data <- readr::read_csv('~/Downloads/revision_Figure_1_results - Sheet
   ))
 
 
-fig_2 = read_csv('out/me_RMSE.csv') %>% rowwise() %>% mutate(n_profiles = {as.numeric(strsplit(exper_id, '[_]')[[1]][2])}) %>%
+fig_2 = read_csv('data_release/out/me_RMSE.csv') %>% rowwise() %>% mutate(n_profiles = {as.numeric(strsplit(exper_id, '[_]')[[1]][2])}) %>%
   ungroup() %>% filter(substr(exper_id, start = 1, stop = 7) == 'similar') %>% select(-exper_id) %>% rename(new_rmse = rmse) %>%
   left_join(fig_2_old_data, by = c('exper_model','exper_n','n_profiles')) %>%
   mutate(col = case_when(
@@ -150,7 +166,7 @@ fig_3_old_data <- readr::read_csv('~/Downloads/revision_Figure_2_results - Sheet
     exper_type == 'similar' ~ 'similar'
   ), exper_n = {as.numeric(strsplit(exper_n, '[_]')[[1]][2])}) %>% ungroup() %>% select(exper_n, exper_model, old_rmse, exper_type, lake_id)
 
-fig_3 <- purrr::map(c('out/sp_RMSE.csv', 'out/me_RMSE.csv'), function(x) {
+fig_3 <- purrr::map(c('data_release/out/sp_RMSE.csv', 'out/me_RMSE.csv'), function(x) {
   lake_id <- strsplit(basename(x), '[_]')[[1]][1]
   read_csv(x) %>% filter(!exper_id %in% c('similar_2', 'similar_10', 'similar_50', 'similar_100', 'similar_980')) %>% rowwise() %>% mutate(exper_type = {strsplit(exper_id, '[_]')[[1]][1]}) %>%
     ungroup() %>% select(-exper_id) %>% rename(new_rmse = rmse) %>% mutate(lake_id = lake_id)

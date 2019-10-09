@@ -20,6 +20,7 @@ packages:
   - sbtools
   - RcppCNPy
   - purrr
+  - dssecrets
 
 sources:
   - src/spatial_utils.R
@@ -48,44 +49,71 @@ targets:
 
 
   out/release.xml:
-    command: render(filename = target_name, "in/text_SHARED.yml", "in/text_release.yml", spatial_metadata)
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      "in/text_release.yml",
+      spatial_metadata)
 
   out/spatial.xml:
-    command: render(filename = target_name, "in/text_SHARED.yml", spatial_text, lakes_metadata, spatial_metadata)
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      "in/text_spatial.yml",
+      spatial_metadata)
 
   out/inputs.xml:
-    command: render(filename = target_name, "in/text_SHARED.yml", "in/text_drivers.yml", spatial_metadata)
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      "in/text_drivers.yml",
+      spatial_metadata)
 
   out/glm_config.xml:
-    command: render(filename = target_name, "in/text_SHARED.yml", glm_config_text, spatial_metadata)
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      glm_config_text,
+      spatial_metadata)
 
   out/training.xml:
-    command: render(filename = target_name, "in/text_SHARED.yml", training_text, spatial_metadata)
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      training_text,
+      spatial_metadata)
 
   out/training_mendota.xml:
-    command: render(filename = target_name, "in/text_SHARED.yml", 'in/text_me_training.yml', me_spatial_metadata)
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      "in/text_me_training.yml",
+      me_spatial_metadata)
 
   out/training_sparkling.xml:
-    command: render(filename = target_name, "in/text_SHARED.yml", 'in/text_sp_training.yml', sp_spatial_metadata)
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      "in/text_sp_training.yml",
+      sp_spatial_metadata)
 
   out/training_all_historical.xml:
-    command: render(filename = target_name, "in/text_SHARED.yml", 'in/text_68_training.yml', spatial_metadata)
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      "in/text_68_training.yml",
+      spatial_metadata)
 
   out/68_evaluation.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
+      "in/text_SHARED_evaluation.yml",
       "in/text_68_evaluation.yml",
       spatial_metadata)
 
   out/sp_evaluation.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
+      "in/text_SHARED_evaluation.yml",
       "in/text_sp_evaluation.yml",
       sp_spatial_metadata)
 
   out/me_evaluation.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
+      "in/text_SHARED_evaluation.yml",
       "in/text_me_evaluation.yml",
       me_spatial_metadata)
 
@@ -121,7 +149,7 @@ targets:
       "in/text_SHARED.yml",
       "in/text_drivers.yml",
       sp_inputs_text,
-      spatial_metadata)
+      sp_spatial_metadata)
 
   # update to use specific inputs_text
   out/me_inputs.xml:
@@ -132,13 +160,17 @@ targets:
       me_spatial_metadata)
 
   parent_sb_id:
-    command: sb_replace_files(I('5d88ea50e4b0c4f70d0ab3c0'), 'out/release.xml')
+    command: sb_replace_files(I('5d88ea50e4b0c4f70d0ab3c0'),
+      'out/release.xml')
 
   config_sb_id:
-    command: sb_replace_files(I('5d8a2257e4b0c4f70d0ae513'), 'out/glm_config.xml', 'out/glm_config.json')
+    command: sb_replace_files(I('5d8a2257e4b0c4f70d0ae513'),
+      'out/glm_config.xml',
+      'out/glm_config.json')
 
   inputs_sb_id:
-    command: sb_replace_files(I('5d89d90ce4b0c4f70d0ae4df'), 'out/inputs.xml')
+    command: sb_replace_files(I('5d89d90ce4b0c4f70d0ae4df'),
+      'out/inputs.xml')
 
   inputs_sp_id:
     command: sb_replace_files(I('5d98e0dbe4b0c4f70d1186f3'),
@@ -159,10 +191,13 @@ targets:
       'out/68_pretrainer_ice_flags.zip')
 
   train_parent_sb_id:
-    command: sb_replace_files(I('5d8a42e3e4b0c4f70d0ae5fd'), 'out/training.xml')
+    command: sb_replace_files(I('5d8a42e3e4b0c4f70d0ae5fd'),
+      'out/training.xml')
 
   train_68_sb_id:
-    command: sb_replace_files(I('5d8a47bce4b0c4f70d0ae61f'), 'out/training_all_historical.xml', 'out/all_lakes_historical_training.csv')
+    command: sb_replace_files(I('5d8a47bce4b0c4f70d0ae61f'),
+      'out/training_all_historical.xml',
+      'out/all_lakes_historical_training.csv')
 
   train_sp_sb_id:
     command: sb_replace_files(I('5d8a4752e4b0c4f70d0ae61a'),
@@ -208,19 +243,29 @@ targets:
 
   evaluation_68_sb_id:
     command: sb_replace_files(I('5d925048e4b0c4f70d0d0596'),
-      'out/68_evaluation.xml', 'out/all_test.csv', 'out/all_RMSE.csv')
+      'out/68_evaluation.xml',
+      'out/all_test.csv',
+      'out/all_RMSE.csv')
 
   evaluation_sp_sb_id:
     command: sb_replace_files(I('5d92507be4b0c4f70d0d059b'),
-      'out/sp_evaluation.xml', 'out/sp_test.csv', 'out/sp_RMSE.csv')
+      'out/sp_evaluation.xml',
+      'out/sp_test.csv',
+      'out/sp_RMSE.csv')
 
   evaluation_me_sb_id:
     command: sb_replace_files(I('5d925066e4b0c4f70d0d0599'),
-      'out/me_evaluation.xml', 'out/me_test.csv', 'out/me_RMSE_limited_training.csv', 'out/me_RMSE.csv')
+      'out/me_evaluation.xml',
+      'out/me_test.csv',
+      'out/me_RMSE_limited_training.csv',
+      'out/me_RMSE.csv')
 
   prediction_68_sb_id:
     command: sb_replace_files(I('5d915c8ee4b0c4f70d0ce520'),
-      'out/68_prediction.xml', file_hash = 'out/zipped_historical_predictions.ind')
+      'out/68_prediction.xml',
+      file_hash = 'out/zipped_historical_predictions.ind')
 
   spatial_sb_id:
-    command: sb_replace_files(I('5d89d8e3e4b0c4f70d0ae4dc'), 'out/spatial.xml', 'out/spatial.zip')
+    command: sb_replace_files(I('5d89d8e3e4b0c4f70d0ae4dc'),
+      'out/spatial.xml',
+      'out/spatial.zip')

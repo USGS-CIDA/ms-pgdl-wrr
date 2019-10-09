@@ -40,7 +40,7 @@
       </citeinfo>
     </citation>
     <descript>
-      <abstract>Climate change has been shown to influence lake temperatures in different ways. To better understand the diversity of lake responses to climate change and give managers tools to manage individual lakes, we focused on improving prediction accuracy for daily water temperature profiles in 68 lakes in Minnesota and Wisconsin during 1980-2018. This data set contains the following parameters: which are defined below.</abstract>
+      <abstract>Climate change has been shown to influence lake temperatures in different ways. To better understand the diversity of lake responses to climate change and give managers tools to manage individual lakes, we focused on improving prediction accuracy for daily water temperature profiles in 68 lakes in Minnesota and Wisconsin during 1980-2018. This data set contains the following parameters: time, date, ShortWave, LongWave, AirTemp, RelHum, WindSpeed, Rain, Snow, ice, which are defined below.</abstract>
       <purpose>Fisheries biology, limnological research, and climate science.</purpose>
     </descript>
     <timeperd>
@@ -128,7 +128,54 @@
       </cntinfo>
     </ptcontac>
     <datacred>This study was funded by the Department of the Interior Northeast Climate Adaptation Science Center, the United States Geological Survey National Climate This research used resources of the Core Science Analytics and Synthesis Advanced Research Computing program at the U.S. Geological Survey.</datacred>
-    <native/>
+    <native>Multiple computer systems were used to generate these data, including linux, OSX. The open source language R was used on all systems, as well as the open-source model GLM.</native>
+    <crossref>
+      <citeinfo>
+        <origin>Kenneth E. Mitchell</origin>
+        <origin>Dag Lohmann</origin>
+        <origin>Paul R. Houser</origin>
+        <origin>Eric F. Wood</origin>
+        <origin>John C. Schaake</origin>
+        <origin>Alan Robock</origin>
+        <origin>Brian A. Cosgrove</origin>
+        <origin>Justin Sheffield</origin>
+        <origin>Qingyun Duan</origin>
+        <origin>Lifeng Luo</origin>
+        <origin>R. Wayne Higgins</origin>
+        <origin>Rachel T. Pinker</origin>
+        <origin>J. Dan Tarpley</origin>
+        <origin>Dennis P. Lettenmaier</origin>
+        <origin>Curtis H. Marshall</origin>
+        <origin>Jared K. Entin</origin>
+        <origin>Ming Pan</origin>
+        <origin>Wei Shi</origin>
+        <origin>Victor Koren</origin>
+        <origin>Jesse Meng</origin>
+        <origin>Bruce H. Ramsay</origin>
+        <origin>Andrew A. Bailey</origin>
+        <pubdate>2004</pubdate>
+        <title>The multi-institution North American Land Data Assimilation System (NLDAS): Utilizing multiple GCIP products and partners in a continental distributed hydrological modeling system</title>
+        <onlink>http://dx.doi.org/10.1029/2003JD003823</onlink>
+      </citeinfo>
+    </crossref>
+    <crossref>
+      <citeinfo>
+        <origin>Matthew R. Hipsey</origin>
+        <origin>Louise C. Bruce</origin>
+        <origin>Casper Boon</origin>
+        <origin>Brendan Busch</origin>
+        <origin>Cayelan C. Carey</origin>
+        <origin>David P. Hamilton</origin>
+        <origin>Paul C. Hanson</origin>
+        <origin>Jordan S. Read</origin>
+        <origin>Eduardo de Sousa</origin>
+        <origin>Michael Weber</origin>
+        <origin>Luke A. Winslow</origin>
+        <pubdate>2019</pubdate>
+        <title>A General Lake Model (GLM 3.0) for linking with high-frequency sensor data from the Global Lake Ecological Observatory Network (GLEON).</title>
+        <onlink>https://doi.org/10.5194/gmd-12-473-2019</onlink>
+      </citeinfo>
+    </crossref>
   </idinfo>
   <dataqual>
     <attracc>
@@ -147,12 +194,12 @@
     <lineage>
       <procstep>
         <procdesc>At the core of the modeling framework is a lake hydrodynamic model that uses inputs of lake-specific properties and local meteorology to estimate water temperature. Our chosen model is the open source, General Lake Model (GLM) version 2.2.0. GLM is a one-dimensional dynamical model which simplifies lakes using a vertical approximation, where horizontal variability is ignored. GLM uses a Lagrangian approach to layer structure where layers can split and combine based on changing vertical gradients. GLM is a modern, implementation of other one-dimensional models. We used GLM to run individual lake simulations according to the processes described in Winslow et al. 2017. Outputs for water temperature were extracted at various depths and written or summarized to the files included in this set of data. The glmtools R package was used for this processing.</procdesc>
-        <procdate/>
+        <procdate>20191009</procdate>
       </procstep>
     </lineage>
   </dataqual>
   <spdoinfo>
-    <indspref/>
+    <indspref>U.S.A.</indspref>
     <direct>Point</direct>
     <ptvctinf>
       <sdtsterm>
@@ -164,8 +211,8 @@
   <spref>
     <horizsys>
       <geograph>
-        <latres/>
-        <longres/>
+        <latres>0.1</latres>
+        <longres>0.1</longres>
         <geogunit>Decimal degrees</geogunit>
       </geograph>
       <geodetic>
@@ -179,10 +226,130 @@
   <eainfo>
     <detailed>
       <enttyp>
-        <enttypl/>
-        <enttypd/>
+        <enttypl>thermal metrics</enttypl>
+        <enttypd>Drivers indexed by lake used to drive lake models. NLDAS drivers are contemporary (1980-2018) meterology. Each folder contains a driver for each study lake, and has identical attributes (described above). NLDAS drivers (NLDAS.zip) are described in Mitchell et al. 2004.</enttypd>
         <enttypds>Producer Defined</enttypds>
       </enttyp>
+      <attr>
+        <attrlabl>time</attrlabl>
+        <attrdef>Calendar date</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>NA</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>NA</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>date</attrlabl>
+        <attrdef>Calendar date (for ice flags file)</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>NA</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>NA</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>ShortWave</attrlabl>
+        <attrdef>Daily average incoming shortwave radiation</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>W m^-2</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>LongWave</attrlabl>
+        <attrdef>Daily average incoming longwave radiation</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>NA</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>W m^-2</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>AirTemp</attrlabl>
+        <attrdef>Daily average air temperature</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>NA</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>degrees C</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>RelHum</attrlabl>
+        <attrdef>Daily average relative humidity</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>100</rdommax>
+            <attrunit>%</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>WindSpeed</attrlabl>
+        <attrdef>Daily average windspeed</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>m s^-1</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Rain</attrlabl>
+        <attrdef>Daily cumulative precipitation as rain</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>m day^-1</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Snow</attrlabl>
+        <attrdef>Daily cumulative precipitation as snow</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>m day^-1</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>ice</attrlabl>
+        <attrdef>Flag for predicted ice cover from default GLM configuration</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>1</rdommax>
+            <attrunit>NA</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
     </detailed>
   </eainfo>
   <distinfo>
@@ -208,7 +375,7 @@
     <stdorder>
       <digform>
         <digtinfo>
-          <formname/>
+          <formname>Separate comma separated text files zipped into a single file</formname>
           <formvern>none</formvern>
         </digtinfo>
         <digtopt>
@@ -225,7 +392,7 @@
     </stdorder>
   </distinfo>
   <metainfo>
-    <metd>20191007</metd>
+    <metd>20191009</metd>
     <metc>
       <cntinfo>
         <cntperp>

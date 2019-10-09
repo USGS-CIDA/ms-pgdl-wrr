@@ -31,16 +31,6 @@ targets:
   modeled_lakes:
     command: subset_save_winslow(lake_ids)
 
-  in/model_lakes_attrs.csv:
-    command: attribute_skeleton(modeled_lakes, attr.file = target_name)
-
-  lakes_metadata:
-    command: as.attr_list("in/model_lakes_attrs.csv")
-
-  spatial_text:
-    command: >
-      list(title = I('Spatial data: Process-guided deep learning predictions of lake water temperature'))
-
   mendota_lake:
     command: subset_spatial(modeled_lakes, site_id = I('nhd_13293262'))
 

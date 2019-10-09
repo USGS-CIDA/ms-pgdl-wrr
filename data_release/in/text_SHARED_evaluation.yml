@@ -1,0 +1,15 @@
+attributes:
+  -
+    attr-label: time
+    attr-def: Calendar date
+    attr-defs: NA
+    data-min: NA
+    data-max: NA
+    data-units: NA
+  -
+    attr-label: date
+    attr-def: Calendar date (for ice flags file)
+    attr-defs: NA
+    data-min: NA
+    data-max: NA
+    data-units: NA
