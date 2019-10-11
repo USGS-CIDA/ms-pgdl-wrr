@@ -27,8 +27,8 @@ abstract: >-
   </ul>
   <li><a href="https://www.sciencebase.gov/catalog/item/5d925023e4b0c4f70d0d0594">Model evaluation</a> - test data and overall assessment of model performance</li>
   <ul>
-    <li>a. <a href="https://www.sciencebase.gov/catalog/item/5d925066e4b0c4f70d0d0599">Lake Mendota evaluation</a> - Tables with 1 row per date, a column for predicted temperature at each depth, and experiment metadata (10 comma-delimited files)</li>
-    <li>b. <a href="https://www.sciencebase.gov/catalog/item/5d92507be4b0c4f70d0d059b">Sparkling Lake evaluation</a> - Tables with 1 row per date, a column for predicted temperature at each depth, and experiment metadata (10 comma-delimited files)</li>
+    <li>a. <a href="https://www.sciencebase.gov/catalog/item/5d925066e4b0c4f70d0d0599">Lake Mendota evaluation</a> - Tables with 1 row per date, a column for predicted temperature at each depth, and experiment metadata (3 comma-delimited files)</li>
+    <li>b. <a href="https://www.sciencebase.gov/catalog/item/5d92507be4b0c4f70d0d059b">Sparkling Lake evaluation</a> - Tables with 1 row per date, a column for predicted temperature at each depth, and experiment metadata (2 comma-delimited files)</li>
     <li>c. <a href="https://www.sciencebase.gov/catalog/item/5d925048e4b0c4f70d0d0596">Historical evaluation for 68 lakes</a> - Tables with 1 row per date and depth, with the corresponding observed water temperature (4 comma-delimited files for each lake compressed into 68 zip files)</li>
   </ul>
   </ol>
