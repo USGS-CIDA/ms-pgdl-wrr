@@ -1,5 +1,5 @@
 title: >-
-  Lake Mendota detailed prediction data: Process-guided deep learning predictions of lake water temperature
+  Process-guided deep learning water temperature predictions: 5a Lake Mendota detailed prediction data
 
 build-environment: >-
   PB; process-based predictions were generated with the following open source tools available in the R programming language (R version 3.5.0 (2018-04-23)).\n

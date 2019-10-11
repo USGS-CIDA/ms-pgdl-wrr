@@ -1,5 +1,5 @@
 title: >-
-  Spatial data: GIS polygon data for the 68 lakes included in this study
+  Process-guided deep learning water temperature predictions: 1 Spatial data (GIS polygons for 68 lakes)
 
 cross-cites:
   -
@@ -15,16 +15,21 @@ cross-cites:
     pubdate: 2016
     link: http://dx.doi.org/10.5066/F7DV1H10
 
-attributes:
+entities:
   -
-    attr-label: site_id
-    attr-def: >-
-      Lake identification number for this dataset. Is the Prmnn_I prefixed with source, as "nhd_{Prmnn_I}"
-    attr-defs: >-
-      http://nhd.usgs.gov/; Winslow et al. 2016
-    data-min: NA
-    data-max: NA
-    data-units: NA
+    data-name: spatial.zip
+    data-description: GIS polygon data for the 68 lakes included in this study
+    attributes:
+    -
+      attr-label: site_id
+      attr-def: >-
+        Lake identification number for this dataset. Is the Prmnn_I prefixed with source, as "nhd_{Prmnn_I}"
+      attr-defs: >-
+        http://nhd.usgs.gov/; Winslow et al. 2016
+      data-min: NA
+      data-max: NA
+      data-units: NA
+
 
 data-name: Polygons for study lakes
 data-description: Shapefile of study lakes included in this data release.

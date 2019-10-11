@@ -1,6 +1,42 @@
 title: >-
   Data release: Process-guided deep learning predictions of lake water temperature
 
+abstract: >-
+  <p>Climate change has been shown to influence lake temperatures in different ways. To better understand the diversity of lake responses to climate change and give managers tools to manage individual lakes,
+  we focused on improving prediction accuracy for daily water temperature profiles in 68 lakes in Minnesota and Wisconsin during 1980-2018.
+  <br/>The data are organized into these items:</p><ol>
+  <li><a href="https://www.sciencebase.gov/catalog/item/5d89d8e3e4b0c4f70d0ae4dc">Spatial data</a> - One shapefile of polygons for all 68 lakes in this study (.shp, .shx, .dbf, and .prj files)</li>
+  <li><a href="https://www.sciencebase.gov/catalog/item/5d8a2257e4b0c4f70d0ae513">Model configurations</a> - Model parameters and metadata used to configure models (1 JSON file, with metadata for each of 68 lakes, indexed by "site_id")</li>
+  <li><a href="https://www.sciencebase.gov/catalog/item/5d89d90ce4b0c4f70d0ae4df">Model inputs</a> - Data formatted as model inputs for predicting temperature</li>
+  <ul>
+    <li>a. <a href="https://www.sciencebase.gov/catalog/item/5d98e0c4e4b0c4f70d1186f1">Lake Mendota model inputs</a> - Tables with 1 row per timestep for weather data and ice flags (2 comma-delimited files)</li>
+    <li>b. <a href="https://www.sciencebase.gov/catalog/item/5d98e0dbe4b0c4f70d1186f3">Sparkling Lake model inputs</a> - Tables with 1 row per timestep for weather data and ice flags (2 comma-delimited files)</li>
+    <li>c. <a href="https://www.sciencebase.gov/catalog/item/5d98e0a3e4b0c4f70d1186ee">Historical model inputs for 68 lakes</a> - Tables with 1 row per timestep for weather data and ice flags, with two files for each lake (138 comma-delimited files, compressed into 2 zip files)</li>
+  </ul>
+  <li><a href="https://www.sciencebase.gov/catalog/item/5d8a42e3e4b0c4f70d0ae5fd">Training data</a> - Data used to train or calibrate predictive models</li>
+  <ul>
+    <li>a. <a href="https://www.sciencebase.gov/catalog/item/5d98e0c4e4b0c4f70d1186f1">Lake Mendota training data</a> - Tables with 1 row per date and depth, with the corresponding observed water temperature (3 comma-delimited files)</li>
+    <li>b. <a href="https://www.sciencebase.gov/catalog/item/5d8a4752e4b0c4f70d0ae61a">Sparkling Lake training data</a> - Tables with 1 row per date and depth, with the corresponding observed water temperature (3 comma-delimited files)</li>
+    <li>c. <a href="https://www.sciencebase.gov/catalog/item/5d8a47bce4b0c4f70d0ae61f">Historical training data for 68 lakes</a> - Tables with 1 row per date, depth, and site_id, with the corresponding observed water temperature (1 comma-delimited file)</li>
+  </ul>
+  <li><a href="https://www.sciencebase.gov/catalog/item/59eb9ba6e4b0026a55ffe37f">Prediction data</a> - Predictions from PGDL, DL, and PB models</li>
+  <ul>
+    <li>a. <a href="https://www.sciencebase.gov/catalog/item/5d915cb2e4b0c4f70d0ce523">Lake Mendota predictions</a> - Tables with 1 row per date, a column for predicted temperature at each depth, and experiment metadata (10 comma-delimited files)</li>
+    <li>b. <a href="https://www.sciencebase.gov/catalog/item/5d915cc6e4b0c4f70d0ce525">Sparkling Lake predictions</a> - Tables with 1 row per date, a column for predicted temperature at each depth, and experiment metadata (10 comma-delimited files)</li>
+    <li>c. <a href="https://www.sciencebase.gov/catalog/item/5d915c8ee4b0c4f70d0ce520">Historical predictions for 68 lakes</a> - Tables with 1 row per date and depth, with the corresponding observed water temperature (4 comma-delimited files for each lake compressed into 68 zip files)</li>
+  </ul>
+  <li><a href="https://www.sciencebase.gov/catalog/item/5d925023e4b0c4f70d0d0594">Model evaluation</a> - test data and overall assessment of model performance</li>
+  <ul>
+    <li>a. <a href="https://www.sciencebase.gov/catalog/item/5d925066e4b0c4f70d0d0599">Lake Mendota evaluation</a> - Tables with 1 row per date, a column for predicted temperature at each depth, and experiment metadata (10 comma-delimited files)</li>
+    <li>b. <a href="https://www.sciencebase.gov/catalog/item/5d92507be4b0c4f70d0d059b">Sparkling Lake evaluation</a> - Tables with 1 row per date, a column for predicted temperature at each depth, and experiment metadata (10 comma-delimited files)</li>
+    <li>c. <a href="https://www.sciencebase.gov/catalog/item/5d925048e4b0c4f70d0d0596">Historical evaluation for 68 lakes</a> - Tables with 1 row per date and depth, with the corresponding observed water temperature (4 comma-delimited files for each lake compressed into 68 zip files)</li>
+  </ul>
+  </ol>
+  <p>******* UPDATE THIS****** This work was funded by the USGS Powell Center (Working Group title: "Continental-scale overview of stream primary productivity, its links to water quality, and consequences for aquatic carbon biogeochemistry"). Additional financial support came from the USGS NAWQA program and Office of Water Information. NSF grants DEB-1146283 and EF1442501 partially supported ROH. The USGS Wisconsin Modeling Center provided access to the HTCondor cluster for generating metabolism estimates.</p>
+
+    <ul>
+
+  </ul>
 build-environment: Multiple computer systems were used to generate these data, including linux, OSX. The open source language R was used on all systems, as well as the open-source model GLM.
 
 process-date: !expr format(Sys.time(),'%Y%m%d')

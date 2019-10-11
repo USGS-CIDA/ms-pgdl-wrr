@@ -1,5 +1,5 @@
 title: >-
-  Model inputs: Daily timeseries of meteorological inputs and ice flags
+  Process-guided deep learning water temperature predictions: 3 Model inputs (meteorological inputs and ice flags)
 cross-cites:
   -
     authors: ['Kenneth E. Mitchell','Dag Lohmann','Paul R. Houser','Eric F. Wood','John C. Schaake','Alan Robock','Brian A. Cosgrove','Justin Sheffield','Qingyun Duan','Lifeng Luo','R. Wayne Higgins','Rachel T. Pinker','J. Dan Tarpley','Dennis P. Lettenmaier','Curtis H. Marshall','Jared K. Entin','Ming Pan','Wei Shi','Victor Koren','Jesse Meng','Bruce H. Ramsay','Andrew A. Bailey']
