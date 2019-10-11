@@ -16,8 +16,8 @@
         <origin>Michael Steinbach</origin>
         <origin>Vipin Kumar</origin>
         <pubdate>2019</pubdate>
-        <title>Process-based model configurations: Lake-specific metadata and default parameter values for the General Lake Model</title>
-        <geoform>JSON (JavaScript Object Notation) formatted text file</geoform>
+        <title>Data release: Process-guided deep learning predictions of lake water temperature</title>
+        <geoform>parent data item for released data products</geoform>
         <pubinfo>
           <pubplace>Online (digital release)</pubplace>
           <publish>U.S. Geological Survey</publish>
@@ -44,7 +44,27 @@
       </citeinfo>
     </citation>
     <descript>
-      <abstract>Climate change has been shown to influence lake temperatures in different ways. To better understand the diversity of lake responses to climate change and give managers tools to manage individual lakes, we focused on improving prediction accuracy for daily water temperature profiles in 68 lakes in Minnesota and Wisconsin during 1980-2018.</abstract>
+      <abstract>&lt;p&gt;Climate change has been shown to influence lake temperatures in different ways. To better understand the diversity of lake responses to climate change and give managers tools to manage individual lakes, we focused on improving prediction accuracy for daily water temperature profiles in 68 lakes in Minnesota and Wisconsin during 1980-2018. &lt;br/&gt;The data are organized into these items:&lt;/p&gt;&lt;ol&gt; &lt;li&gt;&lt;a href="https://www.sciencebase.gov/catalog/item/5d89d8e3e4b0c4f70d0ae4dc"&gt;Spatial data&lt;/a&gt; - One shapefile of polygons for all 68 lakes in this study (.shp, .shx, .dbf, and .prj files)&lt;/li&gt; &lt;li&gt;&lt;a href="https://www.sciencebase.gov/catalog/item/5d8a2257e4b0c4f70d0ae513"&gt;Model configurations&lt;/a&gt; - Model parameters and metadata used to configure models (1 JSON file, with metadata for each of 68 lakes, indexed by "site_id")&lt;/li&gt; &lt;li&gt;&lt;a href="https://www.sciencebase.gov/catalog/item/5d89d90ce4b0c4f70d0ae4df"&gt;Model inputs&lt;/a&gt; - Data formatted as model inputs for predicting temperature&lt;/li&gt; &lt;ul&gt;
+  &lt;li&gt;a. &lt;a href="https://www.sciencebase.gov/catalog/item/5d98e0c4e4b0c4f70d1186f1"&gt;Lake Mendota model inputs&lt;/a&gt; - Tables with 1 row per timestep for weather data and ice flags (2 comma-delimited files)&lt;/li&gt;
+  &lt;li&gt;b. &lt;a href="https://www.sciencebase.gov/catalog/item/5d98e0dbe4b0c4f70d1186f3"&gt;Sparkling Lake model inputs&lt;/a&gt; - Tables with 1 row per timestep for weather data and ice flags (2 comma-delimited files)&lt;/li&gt;
+  &lt;li&gt;c. &lt;a href="https://www.sciencebase.gov/catalog/item/5d98e0a3e4b0c4f70d1186ee"&gt;Historical model inputs for 68 lakes&lt;/a&gt; - Tables with 1 row per timestep for weather data and ice flags, with two files for each lake (138 comma-delimited files, compressed into 2 zip files)&lt;/li&gt;
+&lt;/ul&gt; &lt;li&gt;&lt;a href="https://www.sciencebase.gov/catalog/item/5d8a42e3e4b0c4f70d0ae5fd"&gt;Training data&lt;/a&gt; - Data used to train or calibrate predictive models&lt;/li&gt; &lt;ul&gt;
+  &lt;li&gt;a. &lt;a href="https://www.sciencebase.gov/catalog/item/5d98e0c4e4b0c4f70d1186f1"&gt;Lake Mendota training data&lt;/a&gt; - Tables with 1 row per date and depth, with the corresponding observed water temperature (3 comma-delimited files)&lt;/li&gt;
+  &lt;li&gt;b. &lt;a href="https://www.sciencebase.gov/catalog/item/5d8a4752e4b0c4f70d0ae61a"&gt;Sparkling Lake training data&lt;/a&gt; - Tables with 1 row per date and depth, with the corresponding observed water temperature (3 comma-delimited files)&lt;/li&gt;
+  &lt;li&gt;c. &lt;a href="https://www.sciencebase.gov/catalog/item/5d8a47bce4b0c4f70d0ae61f"&gt;Historical training data for 68 lakes&lt;/a&gt; - Tables with 1 row per date, depth, and site_id, with the corresponding observed water temperature (1 comma-delimited file)&lt;/li&gt;
+&lt;/ul&gt; &lt;li&gt;&lt;a href="https://www.sciencebase.gov/catalog/item/59eb9ba6e4b0026a55ffe37f"&gt;Prediction data&lt;/a&gt; - Predictions from PGDL, DL, and PB models&lt;/li&gt; &lt;ul&gt;
+  &lt;li&gt;a. &lt;a href="https://www.sciencebase.gov/catalog/item/5d915cb2e4b0c4f70d0ce523"&gt;Lake Mendota predictions&lt;/a&gt; - Tables with 1 row per date, a column for predicted temperature at each depth, and experiment metadata (10 comma-delimited files)&lt;/li&gt;
+  &lt;li&gt;b. &lt;a href="https://www.sciencebase.gov/catalog/item/5d915cc6e4b0c4f70d0ce525"&gt;Sparkling Lake predictions&lt;/a&gt; - Tables with 1 row per date, a column for predicted temperature at each depth, and experiment metadata (10 comma-delimited files)&lt;/li&gt;
+  &lt;li&gt;c. &lt;a href="https://www.sciencebase.gov/catalog/item/5d915c8ee4b0c4f70d0ce520"&gt;Historical predictions for 68 lakes&lt;/a&gt; - Tables with 1 row per date and depth, with the corresponding observed water temperature (4 comma-delimited files for each lake compressed into 68 zip files)&lt;/li&gt;
+&lt;/ul&gt; &lt;li&gt;&lt;a href="https://www.sciencebase.gov/catalog/item/5d925023e4b0c4f70d0d0594"&gt;Model evaluation&lt;/a&gt; - test data and overall assessment of model performance&lt;/li&gt; &lt;ul&gt;
+  &lt;li&gt;a. &lt;a href="https://www.sciencebase.gov/catalog/item/5d925066e4b0c4f70d0d0599"&gt;Lake Mendota evaluation&lt;/a&gt; - Tables with 1 row per date, a column for predicted temperature at each depth, and experiment metadata (10 comma-delimited files)&lt;/li&gt;
+  &lt;li&gt;b. &lt;a href="https://www.sciencebase.gov/catalog/item/5d92507be4b0c4f70d0d059b"&gt;Sparkling Lake evaluation&lt;/a&gt; - Tables with 1 row per date, a column for predicted temperature at each depth, and experiment metadata (10 comma-delimited files)&lt;/li&gt;
+  &lt;li&gt;c. &lt;a href="https://www.sciencebase.gov/catalog/item/5d925048e4b0c4f70d0d0596"&gt;Historical evaluation for 68 lakes&lt;/a&gt; - Tables with 1 row per date and depth, with the corresponding observed water temperature (4 comma-delimited files for each lake compressed into 68 zip files)&lt;/li&gt;
+&lt;/ul&gt; &lt;/ol&gt; &lt;p&gt;******* UPDATE THIS****** This work was funded by the USGS Powell Center (Working Group title: "Continental-scale overview of stream primary productivity, its links to water quality, and consequences for aquatic carbon biogeochemistry"). Additional financial support came from the USGS NAWQA program and Office of Water Information. NSF grants DEB-1146283 and EF1442501 partially supported ROH. The USGS Wisconsin Modeling Center provided access to the HTCondor cluster for generating metabolism estimates.&lt;/p&gt;
+
+  &lt;ul&gt;
+
+&lt;/ul&gt;</abstract>
       <purpose>Fisheries biology, limnological research, and climate science.</purpose>
     </descript>
     <timeperd>
@@ -121,35 +141,7 @@
       </cntinfo>
     </ptcontac>
     <datacred>This study was funded by the Department of the Interior Northeast Climate Adaptation Science Center, the United States Geological Survey National Climate This research used resources of the Core Science Analytics and Synthesis Advanced Research Computing program at the U.S. Geological Survey.</datacred>
-    <native>This dataset was generated using open source tools available in the R programming language (R version 3.6.1 (2019-07-05)). The computing platform for generating data and metadata was x86_64-apple-darwin15.6.0. R packages loaded into this environment: purrr, version: 0.3.2; RcppCNPy, version: 0.2.10; sbtools, version: 1.1.7; RJSONIO, version: 1.3-1.2; glmtools, version: 0.16.0; rLakeAnalyzer, version: 1.11.4.1; GLMr, version: 3.1.16; stringr, version: 1.4.0; rgdal, version: 1.4-4; sp, version: 1.3-1; httr, version: 1.4.1; feather, version: 0.3.4; readr, version: 1.3.1; meddle, version: 0.0.8; mapdata, version: 2.3.0; maps, version: 3.3.0; tidyr, version: 0.8.0; dplyr, version: 0.8.3; whisker, version: 0.4; yaml, version: 2.2.0; scipiper, version: 0.0.16.</native>
-    <crossref>
-      <citeinfo>
-        <origin>Matthew R. Hipsey</origin>
-        <origin>Louise C. Bruce</origin>
-        <origin>Casper Boon</origin>
-        <origin>Brendan Busch</origin>
-        <origin>Cayelan C. Carey</origin>
-        <origin>David P. Hamilton</origin>
-        <origin>Paul C. Hanson</origin>
-        <origin>Jordan S. Read</origin>
-        <origin>Eduardo de Sousa</origin>
-        <origin>Michael Weber</origin>
-        <origin>Luke A. Winslow</origin>
-        <pubdate>2019</pubdate>
-        <title>A General Lake Model (GLM 3.0) for linking with high-frequency sensor data from the Global Lake Ecological Observatory Network (GLEON).</title>
-        <onlink>https://doi.org/10.5194/gmd-12-473-2019</onlink>
-      </citeinfo>
-    </crossref>
-    <crossref>
-      <citeinfo>
-        <origin>Luke A. Winslow</origin>
-        <origin>Gretchen J.A. Hansen</origin>
-        <origin>Jordan S. Read</origin>
-        <pubdate>2016</pubdate>
-        <title>Data release: A large-scale database of modeled contemporary and future water temperature data for 10,774 Michigan, Minnesota and Wisconsin Lakes</title>
-        <onlink>http://dx.doi.org/10.5066/F7DV1H10</onlink>
-      </citeinfo>
-    </crossref>
+    <native>Multiple computer systems were used to generate these data, including linux, OSX. The open source language R was used on all systems, as well as the open-source model GLM.</native>
   </idinfo>
   <dataqual>
     <attracc>
@@ -168,7 +160,7 @@
     <lineage>
       <procstep>
         <procdesc>At the core of the modeling framework is a lake hydrodynamic model that uses inputs of lake-specific properties and local meteorology to estimate water temperature. Our chosen model is the open source, General Lake Model (GLM) version 2.2.0. GLM is a one-dimensional dynamical model which simplifies lakes using a vertical approximation, where horizontal variability is ignored. GLM uses a Lagrangian approach to layer structure where layers can split and combine based on changing vertical gradients. GLM is a modern, implementation of other one-dimensional models. We used GLM to run individual lake simulations according to the processes described in Winslow et al. 2017. Outputs for water temperature were extracted at various depths and written or summarized to the files included in this set of data. The glmtools R package was used for this processing.</procdesc>
-        <procdate>20190706</procdate>
+        <procdate>20191011</procdate>
       </procstep>
     </lineage>
   </dataqual>
@@ -222,7 +214,7 @@
     <stdorder>
       <digform>
         <digtinfo>
-          <formname>JSON (JavaScript Object Notation) formatted text file</formname>
+          <formname>parent data item for released data products</formname>
         </digtinfo>
         <digtopt>
           <onlinopt>
@@ -238,7 +230,7 @@
     </stdorder>
   </distinfo>
   <metainfo>
-    <metd>20191009</metd>
+    <metd>20191011</metd>
     <metc>
       <cntinfo>
         <cntperp>

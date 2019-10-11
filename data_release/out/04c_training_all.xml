@@ -16,8 +16,8 @@
         <origin>Michael Steinbach</origin>
         <origin>Vipin Kumar</origin>
         <pubdate>2019</pubdate>
-        <title>All lakes historical evaluation data: Test data and model performance as RMSE</title>
-        <geoform/>
+        <title>Process-guided deep learning water temperature predictions: 4c All lakes historical training data</title>
+        <geoform>a single comma delimited file</geoform>
         <pubinfo>
           <pubplace>Online (digital release)</pubplace>
           <publish>U.S. Geological Survey</publish>
@@ -44,7 +44,7 @@
       </citeinfo>
     </citation>
     <descript>
-      <abstract>Climate change has been shown to influence lake temperatures in different ways. To better understand the diversity of lake responses to climate change and give managers tools to manage individual lakes, we focused on improving prediction accuracy for daily water temperature profiles in 68 lakes in Minnesota and Wisconsin during 1980-2018.</abstract>
+      <abstract>Observed water temperatures from 1980-2018 were compiled for 68 lakes in Minnesota and Wisconsin (USA). These data were used as training data for process-guided deep learning models and deep learning models, and calibration data for process-based models. The data are formatted as a single csv (comma separated values) file with attributes corresponding to the unique combination of lake identifier, time, and depth. Data came from a variety of sources, including the Water Quality Portal, the North Temperate Lakes Long-Term Ecological Research Project, and digitized temperature records from the MN Department of Natural Resources.</abstract>
       <purpose>Fisheries biology, limnological research, and climate science.</purpose>
     </descript>
     <timeperd>
@@ -170,141 +170,7 @@
     </horizsys>
   </spref>
   <eainfo>
-    <detailed>
-      <enttyp>
-        <enttypl>all_RMSE.csv</enttypl>
-        <enttypd>Multi-lake model evaluation results</enttypd>
-        <enttypds>Producer Defined</enttypds>
-      </enttyp>
-      <attr>
-        <attrlabl>exper_n</attrlabl>
-        <attrdef>experiment or trial number</attrdef>
-        <attrdefs>This data release</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>1</rdommin>
-            <rdommax>3</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>exper_id</attrlabl>
-        <attrdef>Type of experiment run and number of training profiles used: "experiment_profiles"</attrdef>
-        <attrdefs>This data release</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>site_id</attrlabl>
-        <attrdef>Lake identification number for this dataset. Is the Prmnn_I prefixed with source, as "nhd_{Prmnn_I}"</attrdef>
-        <attrdefs>http://nhd.usgs.gov/; Winslow et al. 2016</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>model_type</attrlabl>
-        <attrdef>Type of model used, 'pgdl','dl','pb', or 'pb0'</attrdef>
-        <attrdefs>This data release</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>rmse</attrlabl>
-        <attrdef>Root Mean Squared Error between predicted and observed temperatures</attrdef>
-        <attrdefs>This data release</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>0</rdommin>
-            <rdommax>Inf</rdommax>
-            <attrunit>degrees C</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-    </detailed>
-    <detailed>
-      <enttyp>
-        <enttypl>all_test.csv</enttypl>
-        <enttypd>Temperature observations used for test data to evaluate model performance</enttypd>
-        <enttypds>Producer Defined</enttypds>
-      </enttyp>
-      <attr>
-        <attrlabl>date</attrlabl>
-        <attrdef>Calendar date</attrdef>
-        <attrdefs>NA</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>depth</attrlabl>
-        <attrdef>depth from the water surface</attrdef>
-        <attrdefs>NA</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>0</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>meters</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>temp</attrlabl>
-        <attrdef>Water temperature</attrdef>
-        <attrdefs>NA</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>degrees C</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>site_id</attrlabl>
-        <attrdef>Lake identification number for this dataset. Is the Prmnn_I prefixed with source, as "nhd_{Prmnn_I}"</attrdef>
-        <attrdefs>http://nhd.usgs.gov/; Winslow et al. 2016</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>exper_type</attrlabl>
-        <attrdef>Type of experiment run</attrdef>
-        <attrdefs>NA</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-    </detailed>
-  </eainfo>
+      </eainfo>
   <distinfo>
     <distrib>
       <cntinfo>
@@ -328,7 +194,7 @@
     <stdorder>
       <digform>
         <digtinfo>
-          <formname/>
+          <formname>a single comma delimited file</formname>
         </digtinfo>
         <digtopt>
           <onlinopt>
@@ -344,7 +210,7 @@
     </stdorder>
   </distinfo>
   <metainfo>
-    <metd>20191009</metd>
+    <metd>20191011</metd>
     <metc>
       <cntinfo>
         <cntperp>

@@ -16,8 +16,8 @@
         <origin>Michael Steinbach</origin>
         <origin>Vipin Kumar</origin>
         <pubdate>2019</pubdate>
-        <title>Lake Mendota detailed inputs: Process-guided deep learning predictions of lake water temperature</title>
-        <geoform>Separate comma separated text files zipped into a single file</geoform>
+        <title>Process-guided deep learning water temperature predictions: 4a Lake Mendota detailed training data</title>
+        <geoform/>
         <pubinfo>
           <pubplace>Online (digital release)</pubplace>
           <publish>U.S. Geological Survey</publish>
@@ -119,54 +119,7 @@
       </cntinfo>
     </ptcontac>
     <datacred>This study was funded by the Department of the Interior Northeast Climate Adaptation Science Center, the United States Geological Survey National Climate This research used resources of the Core Science Analytics and Synthesis Advanced Research Computing program at the U.S. Geological Survey.</datacred>
-    <native>Multiple computer systems were used to generate these data, including linux, OSX. The open source language R was used on all systems, as well as the open-source model GLM.</native>
-    <crossref>
-      <citeinfo>
-        <origin>Kenneth E. Mitchell</origin>
-        <origin>Dag Lohmann</origin>
-        <origin>Paul R. Houser</origin>
-        <origin>Eric F. Wood</origin>
-        <origin>John C. Schaake</origin>
-        <origin>Alan Robock</origin>
-        <origin>Brian A. Cosgrove</origin>
-        <origin>Justin Sheffield</origin>
-        <origin>Qingyun Duan</origin>
-        <origin>Lifeng Luo</origin>
-        <origin>R. Wayne Higgins</origin>
-        <origin>Rachel T. Pinker</origin>
-        <origin>J. Dan Tarpley</origin>
-        <origin>Dennis P. Lettenmaier</origin>
-        <origin>Curtis H. Marshall</origin>
-        <origin>Jared K. Entin</origin>
-        <origin>Ming Pan</origin>
-        <origin>Wei Shi</origin>
-        <origin>Victor Koren</origin>
-        <origin>Jesse Meng</origin>
-        <origin>Bruce H. Ramsay</origin>
-        <origin>Andrew A. Bailey</origin>
-        <pubdate>2004</pubdate>
-        <title>The multi-institution North American Land Data Assimilation System (NLDAS): Utilizing multiple GCIP products and partners in a continental distributed hydrological modeling system</title>
-        <onlink>http://dx.doi.org/10.1029/2003JD003823</onlink>
-      </citeinfo>
-    </crossref>
-    <crossref>
-      <citeinfo>
-        <origin>Matthew R. Hipsey</origin>
-        <origin>Louise C. Bruce</origin>
-        <origin>Casper Boon</origin>
-        <origin>Brendan Busch</origin>
-        <origin>Cayelan C. Carey</origin>
-        <origin>David P. Hamilton</origin>
-        <origin>Paul C. Hanson</origin>
-        <origin>Jordan S. Read</origin>
-        <origin>Eduardo de Sousa</origin>
-        <origin>Michael Weber</origin>
-        <origin>Luke A. Winslow</origin>
-        <pubdate>2019</pubdate>
-        <title>A General Lake Model (GLM 3.0) for linking with high-frequency sensor data from the Global Lake Ecological Observatory Network (GLEON).</title>
-        <onlink>https://doi.org/10.5194/gmd-12-473-2019</onlink>
-      </citeinfo>
-    </crossref>
+    <native/>
   </idinfo>
   <dataqual>
     <attracc>
@@ -185,12 +138,12 @@
     <lineage>
       <procstep>
         <procdesc>At the core of the modeling framework is a lake hydrodynamic model that uses inputs of lake-specific properties and local meteorology to estimate water temperature. Our chosen model is the open source, General Lake Model (GLM) version 2.2.0. GLM is a one-dimensional dynamical model which simplifies lakes using a vertical approximation, where horizontal variability is ignored. GLM uses a Lagrangian approach to layer structure where layers can split and combine based on changing vertical gradients. GLM is a modern, implementation of other one-dimensional models. We used GLM to run individual lake simulations according to the processes described in Winslow et al. 2017. Outputs for water temperature were extracted at various depths and written or summarized to the files included in this set of data. The glmtools R package was used for this processing.</procdesc>
-        <procdate>20191009</procdate>
+        <procdate/>
       </procstep>
     </lineage>
   </dataqual>
   <spdoinfo>
-    <indspref>U.S.A.</indspref>
+    <indspref/>
     <direct>Point</direct>
     <ptvctinf>
       <sdtsterm>
@@ -202,8 +155,8 @@
   <spref>
     <horizsys>
       <geograph>
-        <latres>0.1</latres>
-        <longres>0.1</longres>
+        <latres/>
+        <longres/>
         <geogunit>Decimal degrees</geogunit>
       </geograph>
       <geodetic>
@@ -215,7 +168,208 @@
     </horizsys>
   </spref>
   <eainfo>
-      </eainfo>
+    <detailed>
+      <enttyp>
+        <enttypl>me_season_training.csv</enttypl>
+        <enttypd>Lake Mendota model training data for 'season' out-of-bounds modeling</enttypd>
+        <enttypds>Producer Defined</enttypds>
+      </enttyp>
+      <attr>
+        <attrlabl>date</attrlabl>
+        <attrdef>Calendar date</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>NA</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>NA</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>depth</attrlabl>
+        <attrdef>depth from the water surface</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>meters</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>temp</attrlabl>
+        <attrdef>Water temperature</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>NA</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>degrees C</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>exper_n</attrlabl>
+        <attrdef>experiment number</attrdef>
+        <attrdefs>This data release</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>1</rdommin>
+            <rdommax>5</rdommax>
+            <attrunit>NA</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>exper_id</attrlabl>
+        <attrdef>Type of experiment run and number of training profiles used: "experiment_profiles"</attrdef>
+        <attrdefs>This data release</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>NA</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>NA</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+    </detailed>
+    <detailed>
+      <enttyp>
+        <enttypl>me_similar_training.csv</enttypl>
+        <enttypd>Lake Mendota model training data for 'similar' data sparsity modeling</enttypd>
+        <enttypds>Producer Defined</enttypds>
+      </enttyp>
+      <attr>
+        <attrlabl>date</attrlabl>
+        <attrdef>Calendar date</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>NA</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>NA</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>depth</attrlabl>
+        <attrdef>depth from the water surface</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>meters</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>temp</attrlabl>
+        <attrdef>Water temperature</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>NA</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>degrees C</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>exper_n</attrlabl>
+        <attrdef>experiment number</attrdef>
+        <attrdefs>This data release</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>1</rdommin>
+            <rdommax>5</rdommax>
+            <attrunit>NA</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>exper_id</attrlabl>
+        <attrdef>Type of experiment run and number of training profiles used: "experiment_profiles"</attrdef>
+        <attrdefs>This data release</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>NA</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>NA</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+    </detailed>
+    <detailed>
+      <enttyp>
+        <enttypl>me_year_training.csv</enttypl>
+        <enttypd>Lake Mendota model training data for 'similar' data sparsity modeling</enttypd>
+        <enttypds>Producer Defined</enttypds>
+      </enttyp>
+      <attr>
+        <attrlabl>date</attrlabl>
+        <attrdef>Calendar date</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>NA</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>NA</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>depth</attrlabl>
+        <attrdef>depth from the water surface</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>meters</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>temp</attrlabl>
+        <attrdef>Water temperature</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>NA</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>degrees C</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>exper_n</attrlabl>
+        <attrdef>experiment number</attrdef>
+        <attrdefs>This data release</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>1</rdommin>
+            <rdommax>5</rdommax>
+            <attrunit>NA</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>exper_id</attrlabl>
+        <attrdef>Type of experiment run and number of training profiles used: "experiment_profiles"</attrdef>
+        <attrdefs>This data release</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>NA</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>NA</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+    </detailed>
+  </eainfo>
   <distinfo>
     <distrib>
       <cntinfo>
@@ -239,7 +393,7 @@
     <stdorder>
       <digform>
         <digtinfo>
-          <formname>Separate comma separated text files zipped into a single file</formname>
+          <formname/>
         </digtinfo>
         <digtopt>
           <onlinopt>
@@ -255,7 +409,7 @@
     </stdorder>
   </distinfo>
   <metainfo>
-    <metd>20191009</metd>
+    <metd>20191011</metd>
     <metc>
       <cntinfo>
         <cntperp>

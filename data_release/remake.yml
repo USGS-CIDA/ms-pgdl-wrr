@@ -75,25 +75,25 @@ targets:
   out/00_parent.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
-      "in/text_release.yml",
+      "in/text_00_parent.yml",
       spatial_metadata)
 
   out/01_spatial.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
-      "in/text_spatial.yml",
+      "in/text_01_spatial.yml",
       spatial_metadata)
 
   out/03_inputs.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
-      "in/text_drivers.yml",
+      "in/text_03_inputs.yml",
       spatial_metadata)
 
   out/02_config.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
-      glm_config_text,
+      "in/text_02_config.yml",
       spatial_metadata)
 
   out/04_training.xml:
@@ -111,37 +111,37 @@ targets:
   out/04a_training_me.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
-      "in/text_me_training.yml",
+      "in/text_04a_training_me.yml",
       me_spatial_metadata)
 
   out/04b_training_sp.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
-      "in/text_sp_training.yml",
+      "in/text_04b_training_sp.yml",
       sp_spatial_metadata)
 
   out/04c_training_all.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
-      "in/text_68_training.yml",
+      "in/text_04c_training_all.yml",
       spatial_metadata)
 
   out/06c_evaluation_all.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
-      "in/text_68_evaluation.yml",
+      "in/text_06c_evaluation_all.yml",
       spatial_metadata)
 
   out/06b_evaluation_sp.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
-      "in/text_sp_evaluation.yml",
+      "in/text_06b_evaluation_sp.yml",
       sp_spatial_metadata)
 
   out/06a_evaluation_me.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
-      "in/text_me_evaluation.yml",
+      "in/text_06a_evaluation_me.yml",
       me_spatial_metadata)
 
   out/05_prediction.xml:
@@ -153,42 +153,42 @@ targets:
   out/05b_prediction_sp.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
-      "in/text_sp_prediction.yml",
+      "in/text_05b_prediction_sp.yml",
       sp_spatial_metadata)
 
   out/05a_prediction_me.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
-      "in/text_me_prediction.yml",
+      "in/text_05a_prediction_me.yml",
       me_spatial_metadata)
 
   out/05c_prediction_all.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
-      a68_prediction_text,
+      "in/text_05a_prediction_me.yml",
       spatial_metadata)
 
   # update to use specific inputs_text
-  out/68_inputs.xml:
+  out/03c_inputs_all.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
-      "in/text_drivers.yml",
+      "in/text_03_inputs.yml",
       a68_inputs_text,
       spatial_metadata)
 
   # update to use specific inputs_text
-  out/sp_inputs.xml:
+  out/03b_inputs_sp.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
-      "in/text_drivers.yml",
+      "in/text_03_inputs.yml",
       sp_inputs_text,
       sp_spatial_metadata)
 
   # update to use specific inputs_text
-  out/me_inputs.xml:
+  out/03a_inputs_me.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
-      "in/text_drivers.yml",
+      "in/text_03_inputs.yml",
       me_inputs_text,
       me_spatial_metadata)
 
@@ -207,19 +207,19 @@ targets:
 
   inputs_sp_id:
     command: sb_replace_files(I('5d98e0dbe4b0c4f70d1186f3'),
-      'out/sp_inputs.xml',
+      'out/03b_inputs_sp.xml',
       'out/sparkling_meteo.csv',
       'out/sparkling_pretrainer_ice_flags.csv')
 
   inputs_me_id:
     command: sb_replace_files(I('5d98e0c4e4b0c4f70d1186f1'),
-      'out/me_inputs.xml',
+      'out/03a_inputs_me.xml',
       'out/mendota_meteo.csv',
       'out/mendota_pretrainer_ice_flags.csv')
 
   inputs_68_id:
     command: sb_replace_files(I('5d98e0a3e4b0c4f70d1186ee'),
-      'out/68_inputs.xml',
+      'out/03c_inputs_all.xml',
       'out/68_lakes_meteo.zip',
       'out/68_pretrainer_ice_flags.zip')
 

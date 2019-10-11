@@ -16,7 +16,7 @@
         <origin>Michael Steinbach</origin>
         <origin>Vipin Kumar</origin>
         <pubdate>2019</pubdate>
-        <title>Training data: Process-guided deep learning predictions of lake water temperature</title>
+        <title>Process-guided deep learning water temperature predictions: 6 Model evaluation (test data and RMSE)</title>
         <geoform/>
         <pubinfo>
           <pubplace>Online (digital release)</pubplace>
@@ -210,7 +210,7 @@
     </stdorder>
   </distinfo>
   <metainfo>
-    <metd>20191009</metd>
+    <metd>20191011</metd>
     <metc>
       <cntinfo>
         <cntperp>

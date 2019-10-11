@@ -16,7 +16,7 @@
         <origin>Michael Steinbach</origin>
         <origin>Vipin Kumar</origin>
         <pubdate>2019</pubdate>
-        <title>Lake Mendota detailed evaluation data: Test data and model performance as RMSE</title>
+        <title>Process-guided deep learning water temperature predictions: 6a Lake Mendota detailed evaluation data</title>
         <geoform/>
         <pubinfo>
           <pubplace>Online (digital release)</pubplace>
@@ -385,7 +385,7 @@
     </stdorder>
   </distinfo>
   <metainfo>
-    <metd>20191009</metd>
+    <metd>20191011</metd>
     <metc>
       <cntinfo>
         <cntperp>

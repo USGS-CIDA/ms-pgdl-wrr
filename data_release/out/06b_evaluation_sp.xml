@@ -16,7 +16,7 @@
         <origin>Michael Steinbach</origin>
         <origin>Vipin Kumar</origin>
         <pubdate>2019</pubdate>
-        <title>Sparkling Lake detailed training data: Process-guided deep learning predictions of lake water temperature</title>
+        <title>Process-guided deep learning water temperature predictions: 6b Sparkling Lake detailed evaluation data</title>
         <geoform/>
         <pubinfo>
           <pubplace>Online (digital release)</pubplace>
@@ -170,75 +170,63 @@
   <eainfo>
     <detailed>
       <enttyp>
-        <enttypl>sp_season_training.csv</enttypl>
-        <enttypd>Sparkling Lake model training data for 'season' out-of-bounds modeling</enttypd>
+        <enttypl>sp_RMSE.csv</enttypl>
+        <enttypd>Sparkling Lake model evaluations</enttypd>
         <enttypds>Producer Defined</enttypds>
       </enttyp>
       <attr>
-        <attrlabl>date</attrlabl>
-        <attrdef>Calendar date</attrdef>
-        <attrdefs>NA</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>depth</attrlabl>
-        <attrdef>depth from the water surface</attrdef>
-        <attrdefs>NA</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>0</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>meters</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>temp</attrlabl>
-        <attrdef>Water temperature</attrdef>
-        <attrdefs>NA</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>degrees C</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
         <attrlabl>exper_n</attrlabl>
-        <attrdef>experiment number</attrdef>
+        <attrdef>experiment or trial number</attrdef>
         <attrdefs>This data release</attrdefs>
         <attrdomv>
           <rdom>
             <rdommin>1</rdommin>
-            <rdommax>5</rdommax>
+            <rdommax>3</rdommax>
             <attrunit>NA</attrunit>
           </rdom>
         </attrdomv>
       </attr>
       <attr>
         <attrlabl>exper_id</attrlabl>
-        <attrdef>Type of experiment run and number of training profiles used: "experiment_profiles"</attrdef>
+        <attrdef>Type of experiment run and number of training profiles used: 'experiment_profiles'</attrdef>
         <attrdefs>This data release</attrdefs>
         <attrdomv>
           <rdom>
             <rdommin>NA</rdommin>
             <rdommax>NA</rdommax>
             <attrunit>NA</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>model_type</attrlabl>
+        <attrdef>Type of model used, 'pgdl','dl','pb', or 'pb0'</attrdef>
+        <attrdefs>This data release</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>NA</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>NA</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>rmse</attrlabl>
+        <attrdef>Root Mean Squared Error between predicted and observed temperatures</attrdef>
+        <attrdefs>This data release</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>Inf</rdommax>
+            <attrunit>degrees C</attrunit>
           </rdom>
         </attrdomv>
       </attr>
     </detailed>
     <detailed>
       <enttyp>
-        <enttypl>sp_similar_training.csv</enttypl>
-        <enttypd>Sparkling Lake model training data for 'similar' data sparsity modeling</enttypd>
+        <enttypl>sp_test.csv</enttypl>
+        <enttypd>Temperature observations used for Sparkling Lake test data to evaluate model performance</enttypd>
         <enttypds>Producer Defined</enttypds>
       </enttyp>
       <attr>
@@ -290,76 +278,9 @@
         </attrdomv>
       </attr>
       <attr>
-        <attrlabl>exper_id</attrlabl>
-        <attrdef>Type of experiment run and number of training profiles used: "experiment_profiles"</attrdef>
-        <attrdefs>This data release</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-    </detailed>
-    <detailed>
-      <enttyp>
-        <enttypl>me_year_training.csv</enttypl>
-        <enttypd>Sparkling Lake model training data for 'similar' data sparsity modeling</enttypd>
-        <enttypds>Producer Defined</enttypds>
-      </enttyp>
-      <attr>
-        <attrlabl>date</attrlabl>
-        <attrdef>Calendar date</attrdef>
+        <attrlabl>exper_type</attrlabl>
+        <attrdef>Type of experiment run 'season', 'similar', or 'year'</attrdef>
         <attrdefs>NA</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>depth</attrlabl>
-        <attrdef>depth from the water surface</attrdef>
-        <attrdefs>NA</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>0</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>meters</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>temp</attrlabl>
-        <attrdef>Water temperature</attrdef>
-        <attrdefs>NA</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>NA</rdommin>
-            <rdommax>NA</rdommax>
-            <attrunit>degrees C</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>exper_n</attrlabl>
-        <attrdef>experiment number</attrdef>
-        <attrdefs>This data release</attrdefs>
-        <attrdomv>
-          <rdom>
-            <rdommin>1</rdommin>
-            <rdommax>5</rdommax>
-            <attrunit>NA</attrunit>
-          </rdom>
-        </attrdomv>
-      </attr>
-      <attr>
-        <attrlabl>exper_id</attrlabl>
-        <attrdef>Type of experiment run and number of training profiles used: "experiment_profiles"</attrdef>
-        <attrdefs>This data release</attrdefs>
         <attrdomv>
           <rdom>
             <rdommin>NA</rdommin>
@@ -409,7 +330,7 @@
     </stdorder>
   </distinfo>
   <metainfo>
-    <metd>20191009</metd>
+    <metd>20191011</metd>
     <metc>
       <cntinfo>
         <cntperp>
