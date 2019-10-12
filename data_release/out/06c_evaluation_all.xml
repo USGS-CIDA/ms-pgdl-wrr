@@ -44,7 +44,7 @@
       </citeinfo>
     </citation>
     <descript>
-      <abstract>Climate change has been shown to influence lake temperatures in different ways. To better understand the diversity of lake responses to climate change and give managers tools to manage individual lakes, we focused on improving prediction accuracy for daily water temperature profiles in 68 lakes in Minnesota and Wisconsin during 1980-2018.</abstract>
+      <abstract>This dataset includes evaluation data ("test" data) and performance metrics for water temperature predictions from multiple modeling frameworks. Process-Based (PB) models were configured and calibrated with training data to reduce root-mean squared error. Uncalibrated models used default configurations (PB0; see Winslow et al. 2016 for details) and no parameters were adjusted according to model fit with observations. Deep Learning (DL) models were Long Short-Term Memory artificial recurrent neural network models which used training data to adjust model structure and weights for temperature predictions (Jia et al. 2019). Process-Guided Deep Learning (PGDL) models were DL models with an added physical constraint for energy conservation as a loss term. These models were pre-trained with uncalibrated Process-Based model outputs (PB0) before training on actual temperature observations. Performance was measured as root-mean squared errors relative to temperature observations during the test period. Test data include compiled water temperature data from a variety of sources, including the Water Quality Portal (Read et al. 2017), the North Temperate Lakes Long-TERM Ecological Research Program (https://lter.limnology.wisc.edu/), the Minnesota department of Natural Resources, and the Global Lake Ecological Observatory Network (gleon.org). This dataset is part of a larger data release of lake temperature model inputs and outputs for 68 lakes in the U.S. states of Minnesota and Wisconsin (http://dx.doi.org/10.5066/P9AQPIVD).</abstract>
       <purpose>Fisheries biology, limnological research, and climate science.</purpose>
     </descript>
     <timeperd>
@@ -125,7 +125,65 @@
       </cntinfo>
     </ptcontac>
     <datacred>This study was funded by the Department of the Interior Northeast Climate Adaptation Science Center, the United States Geological Survey National Climate This research used resources of the Core Science Analytics and Synthesis Advanced Research Computing program at the U.S. Geological Survey.</datacred>
-    <native/>
+    <native>This dataset was generated using open source tools available in the R programming language (R version 3.6.1 (2019-07-05)). The computing platform for generating data and metadata was x86_64-apple-darwin15.6.0. R packages loaded into this environment: lakeattributes, version: 0.10.2; readr, version: 1.3.1; feather, version: 0.3.4; scipiper, version: 0.0.16; tidyr, version: 0.8.0; dplyr, version: 0.8.3.</native>
+    <crossref>
+      <citeinfo>
+        <origin>Matthew R. Hipsey</origin>
+        <origin>Louise C. Bruce</origin>
+        <origin>Casper Boon</origin>
+        <origin>Brendan Busch</origin>
+        <origin>Cayelan C. Carey</origin>
+        <origin>David P. Hamilton</origin>
+        <origin>Paul C. Hanson</origin>
+        <origin>Jordan S. Read</origin>
+        <origin>Eduardo de Sousa</origin>
+        <origin>Michael Weber</origin>
+        <origin>Luke A. Winslow</origin>
+        <pubdate>2019</pubdate>
+        <title>A General Lake Model (GLM 3.0) for linking with high-frequency sensor data from the Global Lake Ecological Observatory Network (GLEON).</title>
+        <onlink>https://doi.org/10.5194/gmd-12-473-2019</onlink>
+      </citeinfo>
+    </crossref>
+    <crossref>
+      <citeinfo>
+        <origin>Luke A. Winslow</origin>
+        <origin>Gretchen J.A. Hansen</origin>
+        <origin>Jordan S. Read</origin>
+        <pubdate>2016</pubdate>
+        <title>Data release: A large-scale database of modeled contemporary and future water temperature data for 10,774 Michigan, Minnesota and Wisconsin Lakes</title>
+        <onlink>http://dx.doi.org/10.5066/F7DV1H10</onlink>
+      </citeinfo>
+    </crossref>
+    <crossref>
+      <citeinfo>
+        <origin>Xiaowei Jia</origin>
+        <origin>Jared Willard</origin>
+        <origin>Anuj Karpatne</origin>
+        <origin>Jordan S. Read</origin>
+        <origin>Jacob A. Zwart</origin>
+        <origin>Michael Steinbach</origin>
+        <origin>Vipin Kumar</origin>
+        <pubdate>2019</pubdate>
+        <title>Physics Guided RNNs for Modeling Dynamical Systems: A Case Study in Simulating Lake Temperature Profiles. Retrieved from https://arxiv.org/abs/1810.13075v2</title>
+        <onlink>https://arxiv.org/pdf/1810.02880.pdf</onlink>
+      </citeinfo>
+    </crossref>
+    <crossref>
+      <citeinfo>
+        <origin>Emily K. Read</origin>
+        <origin>Lindsay Carr</origin>
+        <origin>Laura De Cicco</origin>
+        <origin>Hilary A. Dugan</origin>
+        <origin>Paul C. Hanson</origin>
+        <origin>Julia A. Hart</origin>
+        <origin>James Kreft</origin>
+        <origin>Jordan S. Read</origin>
+        <origin>Luke A. Winslow</origin>
+        <pubdate>2017</pubdate>
+        <title>Water quality data for national‐scale aquatic research: The Water Quality Portal</title>
+        <onlink>https://doi.org/10.1002/2016WR019993</onlink>
+      </citeinfo>
+    </crossref>
   </idinfo>
   <dataqual>
     <attracc>

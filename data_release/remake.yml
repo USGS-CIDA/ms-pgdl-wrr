@@ -182,18 +182,21 @@ targets:
   out/06a_evaluation_me.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
+      "in/text_06_evaluation.yml",
       "in/text_06a_evaluation_me.yml",
       me_spatial_metadata)
 
   out/06b_evaluation_sp.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
+      "in/text_06_evaluation.yml",
       "in/text_06b_evaluation_sp.yml",
       sp_spatial_metadata)
 
   out/06c_evaluation_all.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
+      "in/text_06_evaluation.yml",
       "in/text_06c_evaluation_all.yml",
       spatial_metadata)
 
