@@ -1,0 +1,112 @@
+title: >-
+  Process-guided deep learning water temperature predictions: 2 Model configurations (lake metadata and parameter values)
+
+abstract: >-
+  This dataset provides model specifications used to estimate water temperature from a process-based model (Hipsey et al. 2019).
+  The format is a single JSON file indexed for each lake based on the "site_id".
+  This dataset is part of a larger data release of lake temperature model inputs and outputs for 68 lakes in the U.S.
+  states of Minnesota and Wisconsin (http://dx.doi.org/10.5066/P9AQPIVD).
+cross-cites:
+  -
+    authors: ['Matthew R. Hipsey', 'Louise C. Bruce', 'Casper Boon', 'Brendan Busch', 'Cayelan C. Carey', 'David P. Hamilton', 'Paul C. Hanson', 'Jordan S. Read', 'Eduardo de Sousa', 'Michael Weber', 'Luke A. Winslow']
+    title: >-
+      A General Lake Model (GLM 3.0) for linking with high-frequency sensor data from the Global Lake Ecological Observatory Network (GLEON).
+    pubdate: 2019
+    link: https://doi.org/10.5194/gmd-12-473-2019
+  -
+    authors: ['Luke A. Winslow','Gretchen J.A. Hansen','Jordan S. Read']
+    title: >-
+      Data release: A large-scale database of modeled contemporary and future water temperature data for 10,774 Michigan, Minnesota and Wisconsin Lakes
+    pubdate: 2016
+    link: http://dx.doi.org/10.5066/F7DV1H10
+
+entities:
+  -
+    data-name: glm_config.json
+    data-description: A JSON file containing parameters for each of 68 lakes in this study
+    attributes:
+    -
+      attr-label: glm_setup
+      attr-def: parameters for setting up the General Lake Model and defining constants
+      attr-defs: Hipsey et al. 2019
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: morphometry
+      attr-def: parameters describing the depth/area relationship of the lake for the General Lake Model
+      attr-defs: Hipsey et al. 2019
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: time
+      attr-def: parameters describing the time period and frequency of model runs for the General Lake Model
+      attr-defs: Hipsey et al. 2019
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: output
+      attr-def: parameters describing how the outputs of model runs from the General Lake Model are written
+      attr-defs: Hipsey et al. 2019
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: init_profiles
+      attr-def: parameters describing General Lake Model initial conditions
+      attr-defs: Hipsey et al. 2019
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: meteorology
+      attr-def: parameters describing time series drivers of General Lake Model runs
+      attr-defs: Hipsey et al. 2019
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: bird_model
+      attr-def: parameters describing the use (if applicable) of the Bird model for General Lake Model runs
+      attr-defs: Hipsey et al. 2019
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: inflow
+      attr-def: parameters describing inflows to the General Lake Model
+      attr-defs: Hipsey et al. 2019
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: outflow
+      attr-def: parameters describing outflows from the General Lake Model
+      attr-defs: Hipsey et al. 2019
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: snowice
+      attr-def: parameters describing how snow and ice dynamics are calculated by the General Lake Model
+      attr-defs: Hipsey et al. 2019
+      data-min: NA
+      data-max: NA
+      data-units: NA
+
+build-environment: >-
+  This dataset was generated using open source tools available in the R programming language (R version 3.6.1 (2019-07-05)).
+  The computing platform for generating data and metadata was x86_64-apple-darwin15.6.0.
+  R packages loaded into this environment: purrr, version: 0.3.2; RcppCNPy, version: 0.2.10; sbtools, version: 1.1.7; RJSONIO, version: 1.3-1.2; glmtools, version: 0.16.0; rLakeAnalyzer, version: 1.11.4.1; GLMr, version: 3.1.16; stringr, version: 1.4.0; rgdal, version: 1.4-4; sp, version: 1.3-1; httr, version: 1.4.1; feather, version: 0.3.4; readr, version: 1.3.1; meddle, version: 0.0.8; mapdata, version: 2.3.0; maps, version: 3.3.0; tidyr, version: 0.8.0; dplyr, version: 0.8.3; whisker, version: 0.4; yaml, version: 2.2.0; scipiper, version: 0.0.16.
+
+process-date: 20190706
+indirect-spatial: U.S.A.
+latitude-res: 0.1
+longitude-res: 0.1
+data-name: Model configuration details
+data-description: >-
+  Model configurations for running the General Lake Model (Hipsey et al. 2019) version 2 for each lake.
+  The value for "lake_name" in the "morphometry" field is the mapping for "site_id" for the other datasets included in this release.
+file-format: JSON (JavaScript Object Notation) formatted text file

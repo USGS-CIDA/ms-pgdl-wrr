@@ -54,4 +54,4 @@ targets:
 
   training_text:
     command: >
-      list(title = I('Training data: Process-guided deep learning predictions of lake water temperature'))
+      list(title = I('Process-guided deep learning water temperature predictions: 4 Training data'))

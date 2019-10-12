@@ -1,0 +1,86 @@
+title: >-
+  Process-guided deep learning water temperature predictions: 6b Sparkling Lake detailed evaluation data
+
+abstract: >-
+  This dataset includes "test data" compiled water temperature data from an instrumented buoy on Sparkling Lake, WI and
+  discrete (manually sampled) water temperature records from North Temperate Lakes Long-TERM Ecological Research Program (NTL-LTER; https://lter.limnology.wisc.edu/).
+  The buoy is supported by both the Global Lake Ecological Observatory Network (gleon.org) and the NTL-LTER. The dataset
+  also includes Sparkling Lake model erformance as measured as root-mean squared errors relative to temperature observations during the test period.
+  This dataset is part of a larger data release of lake temperature model inputs and outputs for 68 lakes in the U.S.
+  states of Minnesota and Wisconsin (http://dx.doi.org/10.5066/P9AQPIVD).
+
+entities:
+  -
+    data-name: sp_RMSE.csv
+    data-description: Sparkling Lake model evaluations
+    attributes:
+    -
+      attr-label: exper_n
+      attr-def: experiment or trial number
+      attr-defs: This data release
+      data-min: 1
+      data-max: 3
+      data-units: NA
+    -
+      attr-label: exper_id
+      attr-def: >-
+        Type of experiment run and number of training profiles used: 'experiment_profiles'
+      attr-defs: This data release
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: model_type
+      attr-def: Type of model used, 'pgdl','dl','pb', or 'pb0'
+      attr-defs: This data release
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: rmse
+      attr-def: Root Mean Squared Error between predicted and observed temperatures
+      attr-defs: This data release
+      data-min: 0
+      data-max: Inf
+      data-units: degrees C
+  -
+    data-name: sp_test.csv
+    data-description: Temperature observations used for Sparkling Lake test data to evaluate model performance
+    attributes:
+    -
+      attr-label: date
+      attr-def: Calendar date
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: depth
+      attr-def: depth from the water surface
+      attr-defs: NA
+      data-min: 0
+      data-max: NA
+      data-units: meters
+    -
+      attr-label: temp
+      attr-def: Water temperature
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: degrees C
+    -
+      attr-label: exper_n
+      attr-def: experiment number
+      attr-defs: This data release
+      data-min: 1
+      data-max: 5
+      data-units: NA
+    -
+      attr-label: exper_type
+      attr-def: Type of experiment run 'season', 'similar', or 'year'
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: NA
+
+

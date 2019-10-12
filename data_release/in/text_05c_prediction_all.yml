@@ -1,0 +1,147 @@
+title: >-
+  Process-guided deep learning water temperature predictions: 5c All lakes historical prediction data
+
+
+abstract: >-
+  Multiple modeling frameworks were used to predict daily temperatures at 0.5m depth intervals for a set of diverse lakes in the U.S.
+  states of Minnesota and Wisconsin. Process-Based (PB) models were configured and calibrated with training data to reduce root-mean squared error.
+  Uncalibrated models used default configurations (PB0; see Winslow et al. 2016 for details) and no parameters were adjusted according to model fit with observations.
+  Deep Learning (DL) models were Long Short-Term Memory artificial recurrent neural network models which used training data to adjust model structure and weights for temperature predictions (Jia et al. 2019).
+  Process-Guided Deep Learning (PGDL) models were DL models with an added physical constraint for energy conservation as a loss term. These models were pre-trained with
+  uncalibrated Process-Based model outputs (PB0) before training on actual temperature observations. Zip files for each lake contain four files,
+  one for each of PB, PB0, DL, and PGDL.
+
+
+entities:
+  -
+    data-name: nhd_{ID}_predict_pb.csv
+    data-description: Calibrated process-based model predictions during historical conditions
+    attributes:
+    -
+      attr-label: date
+      attr-def: Calendar date
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: temp_z
+      attr-def: temperature at depth 'z' in meters
+      attr-defs: This data release; there are multiple columns that use this format to specify temperature at different depths
+      data-min: NA
+      data-max: NA
+      data-units: degrees C
+    -
+      attr-label: exper_n
+      attr-def: experiment number
+      attr-defs: This data release
+      data-min: 1
+      data-max: 5
+      data-units: NA
+    -
+      attr-label: exper_id
+      attr-def: >-
+        Type of experiment run and number of training profiles used: 'experiment_profiles'
+      attr-defs: This data release
+      data-min: NA
+      data-max: NA
+      data-units: NA
+  -
+    data-name: nhd_{ID}_predict_pb0.csv
+    data-description: Unalibrated process-based model predictions during historical conditions
+    attributes:
+    -
+      attr-label: date
+      attr-def: Calendar date
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: temp_z
+      attr-def: temperature at depth 'z' in meters
+      attr-defs: This data release; there are multiple columns that use this format to specify temperature at different depths
+      data-min: NA
+      data-max: NA
+      data-units: degrees C
+    -
+      attr-label: exper_n
+      attr-def: experiment number
+      attr-defs: This data release
+      data-min: 1
+      data-max: 5
+      data-units: NA
+    -
+      attr-label: exper_id
+      attr-def: >-
+        Type of experiment run and number of training profiles used: 'experiment_profiles'
+      attr-defs: This data release
+      data-min: NA
+      data-max: NA
+      data-units: NA
+  -
+    data-name: nhd_{ID}_predict_dl.csv
+    data-description: Deep learning model predictions during historical conditions
+    attributes:
+    -
+      attr-label: date
+      attr-def: Calendar date
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: temp_z
+      attr-def: temperature at depth 'z' in meters
+      attr-defs: This data release; there are multiple columns that use this format to specify temperature at different depths
+      data-min: NA
+      data-max: NA
+      data-units: degrees C
+    -
+      attr-label: exper_n
+      attr-def: experiment number
+      attr-defs: This data release
+      data-min: 1
+      data-max: 5
+      data-units: NA
+    -
+      attr-label: exper_id
+      attr-def: >-
+        Type of experiment run and number of training profiles used: 'experiment_profiles'
+      attr-defs: This data release
+      data-min: NA
+      data-max: NA
+      data-units: NA
+  -
+    data-name: nhd_{ID}_predict_pgdl.csv
+    data-description: Process-guided deep learning model predictions during historical conditions
+    attributes:
+    -
+      attr-label: date
+      attr-def: Calendar date
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: temp_z
+      attr-def: temperature at depth 'z' in meters
+      attr-defs: This data release; there are multiple columns that use this format to specify temperature at different depths
+      data-min: NA
+      data-max: NA
+      data-units: degrees C
+    -
+      attr-label: exper_n
+      attr-def: experiment number
+      attr-defs: This data release
+      data-min: 1
+      data-max: 5
+      data-units: NA
+    -
+      attr-label: exper_id
+      attr-def: >-
+        Type of experiment run and number of training profiles used: 'experiment_profiles'
+      attr-defs: This data release
+      data-min: NA
+      data-max: NA
+      data-units: NA

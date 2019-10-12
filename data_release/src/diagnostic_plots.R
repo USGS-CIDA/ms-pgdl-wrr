@@ -241,3 +241,16 @@ for (type in c('similar','year','season')){
 dev.off()
 
 
+files <- data.frame(files = dir('../fig_3/in'), stringsAsFactors = FALSE) %>%
+  filter(str_detect(files, 'nhd_[0-9]+_temperatures.feather')) %>% pull(files)
+cdir <- getwd()
+setwd('../fig_3/in')
+zip(zipfile = "~/Desktop/share/glm_calibrated_outputs.zip", files)
+setwd(cdir)
+
+
+#re-write these to zip
+lakes <- remake::make("modeled_lakes") %>% sf::st_as_sf() %>% sf::st_transform(2811) %>%
+  mutate(perim = lwgeom::st_perimeter_2d(geometry), area = sf::st_area(geometry), circle_perim = 2*pi*sqrt(area/pi),
+         SDF = perim/circle_perim) %>% sf::st_drop_geometry() %>% rowwise() %>% mutate(canopy_height = mda.lakes::getCanopy(site_id)) %>% ungroup() %>% select(site_id, SDF, canopy_height) %>%
+  feather::write_feather('~/Desktop/share/jared_metadata_10_10.feather')

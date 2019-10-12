@@ -31,6 +31,3 @@ targets:
   out/glm_config.json:
     command: bundle_nml_files(target_name, lake_ids, pattern = I('_nml.nml'))
 
-
-  glm_config_text:
-    command: yaml.load_file("in/text_GLM_config.yml")

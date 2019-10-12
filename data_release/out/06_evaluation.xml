@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <idinfo>
+    <citation>
+      <citeinfo>
+        <origin>Jordan S. Read</origin>
+        <origin>Xiaowei Jia</origin>
+        <origin>Jared Willard</origin>
+        <origin>Alison P. Appling</origin>
+        <origin>Jacob A. Zwart</origin>
+        <origin>Samantha K. Oliver</origin>
+        <origin>Anuj Karpatne</origin>
+        <origin>Gretchen J.A. Hansen</origin>
+        <origin>Paul C. Hanson</origin>
+        <origin>William Watkins</origin>
+        <origin>Michael Steinbach</origin>
+        <origin>Vipin Kumar</origin>
+        <pubdate>2019</pubdate>
+        <title>Process-guided deep learning water temperature predictions: 6 Model evaluation (test data and RMSE)</title>
+        <geoform/>
+        <pubinfo>
+          <pubplace>Online (digital release)</pubplace>
+          <publish>U.S. Geological Survey</publish>
+        </pubinfo>
+        <onlink>http://dx.doi.org/10.5066/P9AQPIVD</onlink>
+        <lworkcit>
+          <citeinfo>
+            <origin>Jordan S. Read</origin>
+            <origin>Xiaowei Jia</origin>
+            <origin>Jared Willard</origin>
+            <origin>Alison P. Appling</origin>
+            <origin>Jacob A. Zwart</origin>
+            <origin>Samantha K. Oliver</origin>
+            <origin>Anuj Karpatne</origin>
+            <origin>Gretchen J.A. Hansen</origin>
+            <origin>Paul C. Hanson</origin>
+            <origin>William Watkins</origin>
+            <origin>Michael Steinbach</origin>
+            <origin>Vipin Kumar</origin>
+            <pubdate>2019</pubdate>
+            <title>Process-guided deep learning predictions of lake water temperature</title>
+          </citeinfo>
+        </lworkcit>
+      </citeinfo>
+    </citation>
+    <descript>
+      <abstract>This dataset includes evaluation data ("test" data) and performance metrics for water temperature predictions from multiple modeling frameworks. Process-Based (PB) models were configured and calibrated with training data to reduce root-mean squared error. Uncalibrated models used default configurations (PB0; see Winslow et al. 2016 for details) and no parameters were adjusted according to model fit with observations. Deep Learning (DL) models were Long Short-Term Memory artificial recurrent neural network models which used training data to adjust model structure and weights for temperature predictions (Jia et al. 2019). Process-Guided Deep Learning (PGDL) models were DL models with an added physical constraint for energy conservation as a loss term. These models were pre-trained with uncalibrated Process-Based model outputs (PB0) before training on actual temperature observations. Performance was measured as root-mean squared errors relative to temperature observations during the test period. Test data include compiled water temperature data from a variety of sources, including the Water Quality Portal (Read et al. 2017), the North Temperate Lakes Long-TERM Ecological Research Program (https://lter.limnology.wisc.edu/), the Minnesota department of Natural Resources, and the Global Lake Ecological Observatory Network (gleon.org). This dataset is part of a larger data release of lake temperature model inputs and outputs for 68 lakes in the U.S. states of Minnesota and Wisconsin (http://dx.doi.org/10.5066/P9AQPIVD).</abstract>
+      <purpose>Fisheries biology, limnological research, and climate science.</purpose>
+    </descript>
+    <timeperd>
+      <timeinfo>
+        <rngdates>
+          <begdate>19800401</begdate>
+          <enddate>20181231</enddate>
+        </rngdates>
+      </timeinfo>
+      <current>model estimates</current>
+    </timeperd>
+    <status>
+      <progress>Complete</progress>
+      <update>none planned</update>
+    </status>
+    <spdom>
+      <descgeog>Lake polygons as defined by the national hydrography dataset medium resolution</descgeog>
+      <bounding>
+        <westbc>-94.2609062307949</westbc>
+        <eastbc>-87.9475441739278</eastbc>
+        <northbc>48.6427837911633</northbc>
+        <southbc>42.5692312672573</southbc>
+      </bounding>
+    </spdom>
+    <keywords>
+      <theme>
+        <themekt>none</themekt>
+        <themekey>machine learning</themekey>
+        <themekey>deep learning</themekey>
+        <themekey>hybrid modeling</themekey>
+        <themekey>water</themekey>
+        <themekey>temperature</themekey>
+        <themekey>temperate lakes</themekey>
+        <themekey>reservoirs</themekey>
+        <themekey>modeling</themekey>
+        <themekey>climate change</themekey>
+        <themekey>thermal profiles</themekey>
+      </theme>
+      <theme>
+        <themekt>ISO 19115 Topic Category</themekt>
+        <themekey>environment</themekey>
+        <themekey>inlandWaters</themekey>
+        <themekey>007</themekey>
+        <themekey>012</themekey>
+      </theme>
+      <place>
+        <placekt>Department of Commerce, 1995, Countries, Dependencies, Areas of Special Sovereignty, and Their Principal Administrative Divisions,  Federal Information Processing Standard (FIPS) 10-4, Washington, D.C., National Institute of Standards and Technology</placekt>
+        <placekey>United States</placekey>
+        <placekey>US</placekey>
+      </place>
+      <place>
+        <placekt>U.S. Department of Commerce, 1987, Codes for the identification of the States, the District of Columbia and the outlying areas of the United States, and associated areas (Federal Information Processing Standard 5-2): Washington, D. C., NIST</placekt>
+        <placekey>Minnesota</placekey>
+        <placekey>MN</placekey>
+        <placekey>Wisconsin</placekey>
+        <placekey>WI</placekey>
+      </place>
+    </keywords>
+    <accconst>none</accconst>
+    <useconst>These data are subject to change and are not citable until reviewed and approved for official publication by the USGS</useconst>
+    <ptcontac>
+      <cntinfo>
+        <cntperp>
+          <cntper>Jordan S. Read</cntper>
+          <cntorg>U.S. Geological Survey</cntorg>
+        </cntperp>
+        <cntpos>Research Civil Engineer</cntpos>
+        <cntaddr>
+          <addrtype>Mailing and Physical</addrtype>
+          <address>8505 Research Way</address>
+          <city>Middleton</city>
+          <state>WI</state>
+          <postal>53562</postal>
+          <country>U.S.A.</country>
+        </cntaddr>
+        <cntvoice>608-821-3922</cntvoice>
+        <cntemail>jread@usgs.gov</cntemail>
+      </cntinfo>
+    </ptcontac>
+    <datacred>This study was funded by the Department of the Interior Northeast Climate Adaptation Science Center, the United States Geological Survey National Climate This research used resources of the Core Science Analytics and Synthesis Advanced Research Computing program at the U.S. Geological Survey.</datacred>
+    <native>This dataset was generated using open source tools available in the R programming language (R version 3.6.1 (2019-07-05)). The computing platform for generating data and metadata was x86_64-apple-darwin15.6.0. R packages loaded into this environment: lakeattributes, version: 0.10.2; readr, version: 1.3.1; feather, version: 0.3.4; scipiper, version: 0.0.16; tidyr, version: 0.8.0; dplyr, version: 0.8.3.</native>
+    <crossref>
+      <citeinfo>
+        <origin>Matthew R. Hipsey</origin>
+        <origin>Louise C. Bruce</origin>
+        <origin>Casper Boon</origin>
+        <origin>Brendan Busch</origin>
+        <origin>Cayelan C. Carey</origin>
+        <origin>David P. Hamilton</origin>
+        <origin>Paul C. Hanson</origin>
+        <origin>Jordan S. Read</origin>
+        <origin>Eduardo de Sousa</origin>
+        <origin>Michael Weber</origin>
+        <origin>Luke A. Winslow</origin>
+        <pubdate>2019</pubdate>
+        <title>A General Lake Model (GLM 3.0) for linking with high-frequency sensor data from the Global Lake Ecological Observatory Network (GLEON).</title>
+        <onlink>https://doi.org/10.5194/gmd-12-473-2019</onlink>
+      </citeinfo>
+    </crossref>
+    <crossref>
+      <citeinfo>
+        <origin>Luke A. Winslow</origin>
+        <origin>Gretchen J.A. Hansen</origin>
+        <origin>Jordan S. Read</origin>
+        <pubdate>2016</pubdate>
+        <title>Data release: A large-scale database of modeled contemporary and future water temperature data for 10,774 Michigan, Minnesota and Wisconsin Lakes</title>
+        <onlink>http://dx.doi.org/10.5066/F7DV1H10</onlink>
+      </citeinfo>
+    </crossref>
+    <crossref>
+      <citeinfo>
+        <origin>Xiaowei Jia</origin>
+        <origin>Jared Willard</origin>
+        <origin>Anuj Karpatne</origin>
+        <origin>Jordan S. Read</origin>
+        <origin>Jacob A. Zwart</origin>
+        <origin>Michael Steinbach</origin>
+        <origin>Vipin Kumar</origin>
+        <pubdate>2019</pubdate>
+        <title>Physics Guided RNNs for Modeling Dynamical Systems: A Case Study in Simulating Lake Temperature Profiles. Retrieved from https://arxiv.org/abs/1810.13075v2</title>
+        <onlink>https://arxiv.org/pdf/1810.02880.pdf</onlink>
+      </citeinfo>
+    </crossref>
+    <crossref>
+      <citeinfo>
+        <origin>Emily K. Read</origin>
+        <origin>Lindsay Carr</origin>
+        <origin>Laura De Cicco</origin>
+        <origin>Hilary A. Dugan</origin>
+        <origin>Paul C. Hanson</origin>
+        <origin>Julia A. Hart</origin>
+        <origin>James Kreft</origin>
+        <origin>Jordan S. Read</origin>
+        <origin>Luke A. Winslow</origin>
+        <pubdate>2017</pubdate>
+        <title>Water quality data for national‐scale aquatic research: The Water Quality Portal</title>
+        <onlink>https://doi.org/10.1002/2016WR019993</onlink>
+      </citeinfo>
+    </crossref>
+  </idinfo>
+  <dataqual>
+    <attracc>
+      <attraccr>No formal attribute accuracy tests were conducted.</attraccr>
+    </attracc>
+    <logic>Not applicable</logic>
+    <complete>Not applicable</complete>
+    <posacc>
+      <horizpa>
+        <horizpar>A formal accuracy assessment of the horizontal positional information in the dataset was not conducted.</horizpar>
+      </horizpa>
+      <vertacc>
+        <vertaccr>A formal accuracy assessment of the vertical positional information in the dataset was not conducted.</vertaccr>
+      </vertacc>
+    </posacc>
+    <lineage>
+      <procstep>
+        <procdesc>At the core of the modeling framework is a lake hydrodynamic model that uses inputs of lake-specific properties and local meteorology to estimate water temperature. Our chosen model is the open source, General Lake Model (GLM) version 2. GLM is a one-dimensional dynamical model which simplifies lakes using a vertical approximation, where horizontal variability is ignored. GLM uses a Lagrangian approach to layer structure where layers can split and combine based on changing vertical gradients. GLM is a modern, implementation of other one-dimensional models. We used GLM to run individual lake simulations according to the processes described in Winslow et al. 2017. Outputs for water temperature were extracted at various depths and written or summarized to the files included in this set of data. The glmtools R package was used for this processing.</procdesc>
+        <procdate/>
+      </procstep>
+    </lineage>
+  </dataqual>
+  <spdoinfo>
+    <indspref/>
+    <direct>Point</direct>
+    <ptvctinf>
+      <sdtsterm>
+        <sdtstype>G-polygon</sdtstype>
+        <ptvctcnt>68</ptvctcnt>
+      </sdtsterm>
+    </ptvctinf>
+  </spdoinfo>
+  <spref>
+    <horizsys>
+      <geograph>
+        <latres/>
+        <longres/>
+        <geogunit>Decimal degrees</geogunit>
+      </geograph>
+      <geodetic>
+        <horizdn>North American Datum of 1983</horizdn>
+        <ellips>Geodetic Reference System 80</ellips>
+        <semiaxis>6378137.0</semiaxis>
+        <denflat>298.257</denflat>
+      </geodetic>
+    </horizsys>
+  </spref>
+  <eainfo>
+      </eainfo>
+  <distinfo>
+    <distrib>
+      <cntinfo>
+        <cntorgp>
+          <cntorg>U.S. Geological Survey</cntorg>
+          <cntper>GS ScienceBase</cntper>
+        </cntorgp>
+        <cntaddr>
+          <addrtype>mailing address</addrtype>
+          <address>Denver Federal Center, Building 810, Mail Stop 302</address>
+          <city>Denver</city>
+          <state>CO</state>
+          <postal>80255</postal>
+          <country>United States</country>
+        </cntaddr>
+        <cntvoice>1-888-275-8747</cntvoice>
+        <cntemail>sciencebase@usgs.gov</cntemail>
+      </cntinfo>
+    </distrib>
+    <distliab>Unless otherwise stated, all data, metadata and related materials are considered to satisfy the quality standards relative to the purpose for which the data were collected. Although these data and associated metadata have been reviewed for accuracy and completeness and approved for release by the U.S. Geological Survey (USGS), no warranty expressed or implied is made regarding the display or utility of the data on any other system or for general or scientific purposes, nor shall the act of distribution constitute any such warranty.</distliab>
+    <stdorder>
+      <digform>
+        <digtinfo>
+          <formname/>
+        </digtinfo>
+        <digtopt>
+          <onlinopt>
+            <computer>
+              <networka>
+                <networkr>http://dx.doi.org/10.5066/P9AQPIVD</networkr>
+              </networka>
+            </computer>
+          </onlinopt>
+        </digtopt>
+      </digform>
+      <fees>None</fees>
+    </stdorder>
+  </distinfo>
+  <metainfo>
+    <metd>20191012</metd>
+    <metc>
+      <cntinfo>
+        <cntperp>
+          <cntper>Jordan S. Read</cntper>
+          <cntorg>U.S. Geological Survey</cntorg>
+        </cntperp>
+        <cntpos>Research Civil Engineer</cntpos>
+        <cntaddr>
+          <addrtype>Mailing and Physical</addrtype>
+          <address>8505 Research Way</address>
+          <city>Middleton</city>
+          <state>WI</state>
+          <postal>53562</postal>
+          <country>U.S.A.</country>
+        </cntaddr>
+        <cntvoice>608-821-3922</cntvoice>
+        <cntfax>608-821-3817</cntfax>
+        <cntemail>jread@usgs.gov</cntemail>
+      </cntinfo>
+    </metc>
+    <metstdn>FGDC Biological Data Profile of the Content Standard for Digital Geospatial Metadata</metstdn>
+    <metstdv>FGDC-STD-001.1-1999</metstdv>
+  </metainfo>
+</metadata>
