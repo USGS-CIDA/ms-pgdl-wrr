@@ -9,22 +9,30 @@ from __future__ import print_function, division
 import numpy as np
 import tensorflow as tf
 import random
-import pandas as pd
 import feather
+import argparse
+import os
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--data_path', default='fig_1/tmp/mendota/train/inputs')
+parser.add_argument('--restore_path', default='fig_1/tmp/mendota/pretrain/model')
+parser.add_argument('--save_path', default='fig_1/tmp/mendota/train/model')
+args = parser.parse_args()
+print(args)
 
 random.seed(9001)
 
 ''' Declare constant hyperparameters '''
 learning_rate = 0.005
-epochs = 400 #40 #100
-state_size = 21 #7 
+epochs = 2 #400
+state_size = 21
 input_size = 9
 phy_size = 10
-npic = 9
-n_steps = int(3185/npic) # cut it to 16 pieces #43 #12 #46 
+n_steps = 353
 n_classes = 1 
-N_sec = (npic-1)*2+1
+N_sec = 17
 elam = 0.005
+ec_threshold = 24
 
 ''' Build Graph '''
 # Graph input/output
@@ -326,13 +334,8 @@ pred_u = tf.reshape(pred_u,[-1,n_steps])
 
 
 unsup_phys_data = tf.placeholder("float", [None, n_steps, phy_size]) #tf.float32
-depth_areas = np.array([39865825,38308175,38308175,35178625,35178625,33403850,31530150,31530150,30154150,30154150,29022000,
-                        29022000,28063625,28063625,27501875,26744500,26744500,26084050,26084050,25310550,24685650,24685650,
-                        23789125,23789125,22829450,22829450,21563875,21563875,20081675,18989925,18989925,17240525,17240525,
-                        15659325,14100275,14100275,12271400,12271400,9962525,9962525,7777250,7777250,5956775,4039800,4039800,
-                        2560125,2560125,820925,820925,216125])
-n_depths = 50
-ec_threshold = 24
+depth_areas = np.load(os.path.join(args.data_path, 'depth_areas.npy'))
+n_depths = depth_areas.size
 
 
 unsup_loss,a,b,c = calculate_ec_loss(unsup_inputs,
@@ -360,24 +363,23 @@ train_op = optimizer.apply_gradients(zip(grads, tvars))
 
 
 # load data ---------------------------------------------------------------
-x_full = np.load('processed_features.npy')
-x_raw_full = np.load('features.npy')
-diag_full = np.load('diag.npy')
+x_full = np.load(os.path.join(args.data_path, 'processed_features.npy'))
+x_raw_full = np.load(os.path.join(args.data_path, 'features.npy'))
+diag_full = np.load(os.path.join(args.data_path, 'diag.npy'))
 
 phy_full = np.concatenate((x_raw_full[:,:,:-2],diag_full),axis=2)
 
 
 # training and testing ------------------------------------------------------
-new_dates = np.load('dates.npy')
+new_dates = np.load(os.path.join(args.data_path, 'dates.npy'), allow_pickle=True)
 
-train_data = feather.read_dataframe('../experiment_01/mendota_training_980profiles_experiment_01.feather')
-#train_data.columns
+train_data = feather.read_dataframe(os.path.join(args.data_path, 'labels_train.feather'))
 
 tr_date = train_data.values[:,0]
 tr_depth = train_data.values[:,1]
 tr_temp = train_data.values[:,2]
 
-t_steps = 3185
+t_steps = x_raw_full.shape[1]
 m_tr = np.zeros([n_depths,t_steps])
 obs_tr = np.zeros([n_depths,t_steps])
 k=0
@@ -393,8 +395,7 @@ for i in range(new_dates.shape[0]):
         if k>=tr_date.shape[0]:
             break
     
-test_data = feather.read_dataframe('../experiment_01/mendota_test_experiment_01.feather')
-#test_data.columns
+test_data = feather.read_dataframe(os.path.join(args.data_path, 'labels_test.feather'))
 
 te_date = test_data.values[:,0]
 te_depth = test_data.values[:,1]
@@ -418,23 +419,23 @@ for i in range(new_dates.shape[0]):
             break
 
 
-x_train = np.zeros([50*N_sec,n_steps,input_size])
-y_train = np.zeros([50*N_sec,n_steps])
-p_train = np.zeros([50*N_sec,n_steps,phy_size])
-m_train = np.zeros([50*N_sec,n_steps])
-y_test = np.zeros([50*N_sec,n_steps])
-m_test = np.zeros([50*N_sec,n_steps])
+x_train = np.zeros([n_depths*N_sec,n_steps,input_size])
+y_train = np.zeros([n_depths*N_sec,n_steps])
+p_train = np.zeros([n_depths*N_sec,n_steps,phy_size])
+m_train = np.zeros([n_depths*N_sec,n_steps])
+y_test = np.zeros([n_depths*N_sec,n_steps])
+m_test = np.zeros([n_depths*N_sec,n_steps])
 
 
 
 for i in range(1,N_sec+1):
-    x_train[(i-1)*50:i*50,:,:]=x_full[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2),:]
-    y_train[(i-1)*50:i*50,:]=obs_tr[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2)]
-    p_train[(i-1)*50:i*50,:,:]=phy_full[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2),:]
-    m_train[(i-1)*50:i*50,:]=m_tr[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2)]
+    x_train[(i-1)*n_depths:i*n_depths,:,:]=x_full[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2),:]
+    y_train[(i-1)*n_depths:i*n_depths,:]=obs_tr[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2)]
+    p_train[(i-1)*n_depths:i*n_depths,:,:]=phy_full[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2),:]
+    m_train[(i-1)*n_depths:i*n_depths,:]=m_tr[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2)]
     
-    y_test[(i-1)*50:i*50,:]=obs_te[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2)]
-    m_test[(i-1)*50:i*50,:]=m_te[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2)]
+    y_test[(i-1)*n_depths:i*n_depths,:]=obs_te[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2)]
+    m_test[(i-1)*n_depths:i*n_depths,:]=m_te[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2)]
 
 
 x_f = x_train
@@ -442,17 +443,16 @@ p_f = p_train
 # finish loading data --------------------------------------------------------
 
 #total_batch = int(x_train.shape[0]/batch_size)
-merr = 20
-metr = 20
-ploss=10000
-using_pretrained=1
+# merr = 20
+# metr = 20
+# ploss=10000
 
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
-    # if using pretrained model
-    if using_pretrained==1:
-        saver.restore(sess, "./pretrained_model.ckpt")
 
+    # If using pretrained model, reload it now
+    if args.restore_path != '':
+        saver.restore(sess, os.path.join(args.restore_path, 'pretrained_model.ckpt'))
         
     for epoch in range(epochs):
 #        
@@ -465,7 +465,7 @@ with tf.Session() as sess:
                         m: m_train,
                         unsup_inputs: x_f,
                         unsup_phys_data: p_f,
-                        bt_sz: 50*N_sec
+                        bt_sz: n_depths*N_sec
             })
         
         if epoch%1==0:
@@ -475,7 +475,10 @@ with tf.Session() as sess:
               "{:.4f}".format(ec))
         
         
-    loss_te,prd = sess.run([r_cost,pred], feed_dict = {x: x_train, y: y_test, m: m_test, bt_sz: 50*N_sec})
+    loss_te,prd = sess.run([r_cost,pred], feed_dict = {x: x_train, y: y_test, m: m_test, bt_sz: n_depths*N_sec})
                 
-    print("Loss_te " + \
-                      "{:.4f}".format(loss_te) )
+    print("Loss_te " + "{:.4f}".format(loss_te) )
+    
+    if args.save_path != '':
+        saver.save(sess, os.path.join(args.save_path, "trained_model.ckpt"))
+

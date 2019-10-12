@@ -9,28 +9,29 @@ from __future__ import print_function, division
 import numpy as np
 import tensorflow as tf
 import random
-import pandas as pd
-import feather
-#import scipy.io
-#import datetime
-#from datetime import date
-#from sklearn.metrics import roc_auc_score
+import os
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--data_path', default='fig_1/tmp/mendota/pretrain/inputs/ready')
+parser.add_argument('--save_path', default='fig_1/tmp/mendota/pretrain/model')
+args = parser.parse_args()
+print(args)
 
 tf.reset_default_graph()
 random.seed(9001)
 
-''' Declare constants '''
-learning_rate = 0.005
-epochs = 400 #40 #100
-#batch_size = 200
-hidden_size = 20
-state_size = 21 #7 
+''' Declare constant hyperparameters '''
+learning_rate = 0.006
+epochs = 2 #400
+state_size = 21
 input_size = 9
 phy_size = 10
-npic = 9
-n_steps = int(3185/npic) # cut it to 16 pieces #43 #12 #46 
+n_steps = 353
 n_classes = 1 
-N_sec = (npic-1)*2+1
+N_sec = 17
+elam = 0.005
+ec_threshold = 24
 
 ''' Build Graph '''
 # Graph input/output
@@ -56,12 +57,6 @@ X=x
 lstm_cell = tf.contrib.rnn.BasicLSTMCell(state_size, forget_bias=1.0) 
 
 state_series_x, current_state_x = tf.nn.dynamic_rnn(lstm_cell, X, dtype=tf.float32) #46*(500*7)
-#state_series_x, current_state_x = tf.nn.dynamic_rnn(lstm_cell, x, dtype=tf.float32)
-# generate context vector and latent outputs for each time step
-#w_c = tf.get_variable('w_c',[state_size, hidden_size], tf.float32,
-#                                 tf.random_normal_initializer(stddev=0.02))
-#w_h = tf.get_variable('w_h',[state_size, hidden_size], tf.float32,
-#                                 tf.random_normal_initializer(stddev=0.02))
 w_fin = tf.get_variable('w_fin',[state_size, n_classes], tf.float32,
                                  tf.random_normal_initializer(stddev=0.02))
 #b_p = tf.get_variable('b_p',[state_size],  tf.float32,
@@ -83,6 +78,7 @@ pred = tf.stack(pred,axis=1)
 pred_s = tf.reshape(pred,[-1,1])
 y_s = tf.reshape(y,[-1,1])
 m_s = tf.reshape(m,[-1,1])
+
 
 #cost = tf.sqrt(reduce_mean(tf.square(tf.substract())))
 r_cost = tf.sqrt(tf.reduce_sum(tf.square(tf.multiply((pred_s-y_s),m_s)))/tf.reduce_sum(m_s))
@@ -181,6 +177,7 @@ def calculate_ec_loss(inputs, outputs, phys, depth_areas, n_depths, ec_threshold
         #actual ice
 #        print(diff_vec)
 #        print(phys)
+        # phys columns 9 is 'Has.Black.Ice'
         tmp_mask = 1-phys[start_index+1,1:-1,9] #(phys[start_index+1,:,9] == 0)
 #        print(tmp_mask)
 #        print(diff_vec)
@@ -310,7 +307,8 @@ def calculate_vapour_pressure_saturated(temp):
     # print(torch.pow(10, (9.28603523 - (2332.37885/(temp+273.15)))))
 
     #Converted pow function to exp function workaround pytorch not having autograd implemented for pow
-    exponent = (9.28603523 - (2332.37885/(temp+273.15))*np.log(10))
+#    exponent = (9.28603523 - (2332.37885/(temp+273.15))*np.log(10))
+    exponent = (9.28603523 - (2332.37885/(temp+273.15)))*np.log(10)
     return tf.exp(exponent)
 
 def calculate_wind_speed_10m(ws, ref_height=2.):
@@ -379,13 +377,8 @@ pred_u = tf.reshape(pred_u,[-1,n_steps])
 
 
 unsup_phys_data = tf.placeholder("float", [None, n_steps, phy_size]) #tf.float32
-depth_areas = np.array([39865825,38308175,38308175,35178625,35178625,33403850,31530150,31530150,30154150,30154150,29022000,
-                        29022000,28063625,28063625,27501875,26744500,26744500,26084050,26084050,25310550,24685650,24685650,
-                        23789125,23789125,22829450,22829450,21563875,21563875,20081675,18989925,18989925,17240525,17240525,
-                        15659325,14100275,14100275,12271400,12271400,9962525,9962525,7777250,7777250,5956775,4039800,4039800,
-                        2560125,2560125,820925,820925,216125])
-n_depths = 50
-ec_threshold = 24
+depth_areas = np.load(os.path.join(args.data_path, 'depth_areas.npy'))
+n_depths = depth_areas.size
 
 
 unsup_loss,a,b,c = calculate_ec_loss(unsup_inputs,
@@ -397,8 +390,7 @@ unsup_loss,a,b,c = calculate_ec_loss(unsup_inputs,
                                        combine_days=1)
 
 
-plam = 0.15
-elam = 0.005
+#plam = 0.15
 cost = r_cost + elam*unsup_loss#+plam*plos+plam*plos_u
 
 #cost = tf.reduce_mean(tf.nn.(labels = y, logits = pred)) # + l2 # Softmax loss
@@ -406,116 +398,86 @@ cost = r_cost + elam*unsup_loss#+plam*plos+plam*plos_u
 tvars = tf.trainable_variables()
 for i in tvars:
     print(i)
-saver = tf.train.Saver(max_to_keep=3)
 grads = tf.gradients(cost, tvars)
+
+saver = tf.train.Saver(max_to_keep=5)
+
 optimizer = tf.train.AdamOptimizer(learning_rate)
 train_op = optimizer.apply_gradients(zip(grads, tvars))
 
 
 # load data ---------------------------------------------------------------
-x_full = np.load('processed_features.npy')
-x_raw_full = np.load('features.npy')
-diag_full = np.load('diag.npy')
+x_full = np.load(os.path.join(args.data_path, 'processed_features.npy'))
+x_raw_full = np.load(os.path.join(args.data_path, 'features.npy'))
+diag_full = np.load(os.path.join(args.data_path, 'diag.npy'))
 
+# ['DOY', 'depth', 'ShortWave', 'LongWave', 'AirTemp', 'RelHum', 'WindSpeed', 'Daily.Qe', 'Daily.Qh', 'Has.Black.Ice']
 phy_full = np.concatenate((x_raw_full[:,:,:-2],diag_full),axis=2)
 
-
-# training and testing ------------------------------------------------------
-new_dates = np.load('dates.npy')
-
-train_data = feather.read_dataframe('../experiment_04/mendota_training_980profiles_experiment_04.feather')
-#train_data.columns
-
-tr_date = train_data.values[:,0]
-tr_depth = train_data.values[:,1]
-tr_temp = train_data.values[:,2]
-
-t_steps = 3185
-m_tr = np.zeros([n_depths,t_steps])
-obs_tr = np.zeros([n_depths,t_steps])
-k=0
-#dd = 0
-for i in range(new_dates.shape[0]):
-    if k>=tr_date.shape[0]:
-        break
-    while new_dates[i]==tr_date[k]:
-        d = min(int(tr_depth[k]/0.5),n_depths-1)
-        m_tr[d,i]=1
-        obs_tr[d,i]=tr_temp[k]
-        k+=1
-        if k>=tr_date.shape[0]:
-            break
-    
-test_data = feather.read_dataframe('../experiment_04/mendota_test_experiment_04.feather')
-#test_data.columns
-
-te_date = test_data.values[:,0]
-te_depth = test_data.values[:,1]
-te_temp = test_data.values[:,2]
-
-m_te = np.zeros([n_depths,t_steps])
-obs_te = np.zeros([n_depths,t_steps])
-k=0
-#dd = 0
-for i in range(new_dates.shape[0]):
-    if k>=te_date.shape[0]:
-        break
-    while new_dates[i]==te_date[k]:
-        d = min(int(te_depth[k]/0.5),n_depths-1)
-#        if m_te[d,i]==1:
-#            print(d,te_depth[k])
-        m_te[d,i]=1
-        obs_te[d,i]=te_temp[k]
-        k+=1
-        if k>=te_date.shape[0]:
-            break
+label = np.load(os.path.join(args.data_path, 'labels_pretrain.npy'))
+mask = np.ones([label.shape[0],label.shape[1]])*1.0
 
 
-x_train = np.zeros([50*N_sec,n_steps,input_size])
-y_train = np.zeros([50*N_sec,n_steps])
-p_train = np.zeros([50*N_sec,n_steps,phy_size])
-m_train = np.zeros([50*N_sec,n_steps])
-y_test = np.zeros([50*N_sec,n_steps])
-m_test = np.zeros([50*N_sec,n_steps])
+data_chunk_size = int(np.load(os.path.join(args.data_path, 'data_chunk_size.npy')))
+x_tr_1 = x_full[:,:data_chunk_size,:]
+y_tr_1 = label[:,:data_chunk_size]
+p_tr_1 = phy_full[:,:data_chunk_size,:]
+m_tr_1 = mask[:,:data_chunk_size]
+
+x_tr_2 = x_full[:,data_chunk_size:(data_chunk_size*2),:]
+y_tr_2 = label[:,data_chunk_size:(data_chunk_size*2)]
+p_tr_2 = phy_full[:,data_chunk_size:(data_chunk_size*2),:]
+m_tr_2 = mask[:,data_chunk_size:(data_chunk_size*2)]
+
+
+
+x_train_1 = np.zeros([50*N_sec,n_steps,input_size])
+y_train_1 = np.zeros([50*N_sec,n_steps])
+p_train_1 = np.zeros([50*N_sec,n_steps,phy_size])
+m_train_1 = np.zeros([50*N_sec,n_steps])
+
+x_train_2 = np.zeros([50*N_sec,n_steps,input_size])
+y_train_2 = np.zeros([50*N_sec,n_steps])
+p_train_2 = np.zeros([50*N_sec,n_steps,phy_size])
+m_train_2 = np.zeros([50*N_sec,n_steps])
 
 
 
 for i in range(1,N_sec+1):
-    x_train[(i-1)*50:i*50,:,:]=x_full[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2),:]
-    y_train[(i-1)*50:i*50,:]=obs_tr[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2)]
-    p_train[(i-1)*50:i*50,:,:]=phy_full[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2),:]
-    m_train[(i-1)*50:i*50,:]=m_tr[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2)]
-    
-    y_test[(i-1)*50:i*50,:]=obs_te[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2)]
-    m_test[(i-1)*50:i*50,:]=m_te[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2)]
+    x_train_1[(i-1)*50:i*50,:,:]=x_tr_1[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2),:]
+    y_train_1[(i-1)*50:i*50,:]=y_tr_1[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2)]
+    p_train_1[(i-1)*50:i*50,:,:]=p_tr_1[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2),:]
+    m_train_1[(i-1)*50:i*50,:]=m_tr_1[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2)]
+    x_train_2[(i-1)*50:i*50,:,:]=x_tr_2[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2),:]
+    y_train_2[(i-1)*50:i*50,:]=y_tr_2[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2)]
+    p_train_2[(i-1)*50:i*50,:,:]=p_tr_2[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2),:]
+    m_train_2[(i-1)*50:i*50,:]=m_tr_2[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2)]
 
 
-x_f = x_train
-p_f = p_train
+x_f = np.concatenate((x_train_1,x_train_2),axis=0)
+p_f = np.concatenate((p_train_1,p_train_2),axis=0)
 # finish loading data --------------------------------------------------------
 
+
+
+
 #total_batch = int(x_train.shape[0]/batch_size)
-merr = 20
-metr = 20
+merr = 10
 ploss=10000
-using_pretrained=1
 
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
-    # if using pretrained model
-    if using_pretrained==1:
-        saver.restore(sess, "./pretrained_model/model400_b.ckpt")
-
+    
         
     for epoch in range(epochs):
 #        
 #        for i in range(total_batch - 1): # better code?
-        _, loss,rc,ec,aa,bb,cc,prd1 = sess.run(
-                [train_op, cost,r_cost,unsup_loss,a,b,c,pred],
+        _, loss,rc,ec,aa,bb,cc = sess.run(
+                [train_op, cost,r_cost,unsup_loss,a,b,c],
                 feed_dict = {
-                        x: x_train,
-                        y: y_train,
-                        m: m_train,
+                        x: x_train_1,
+                        y: y_train_1,
+                        m: m_train_1,
                         unsup_inputs: x_f,
                         unsup_phys_data: p_f,
                         bt_sz: 50*N_sec
@@ -526,38 +488,24 @@ with tf.Session() as sess:
               "{:.4f}".format(loss) + ", Rc= " + \
               "{:.4f}".format(rc) + ", Ec= " + \
               "{:.4f}".format(ec))
-        
-        
-        if epoch>30:
-            loss_te,prd = sess.run([r_cost,pred], feed_dict = {x: x_train, y: y_test, m: m_test, bt_sz: 50*N_sec})
-            
-            if merr>loss_te:
-                merr=loss_te
-                metr=rc
-                np.save('prd_ECp_exp4_980.npy',prd)
-#                save_path = saver.save(sess, "./model"+str(epoch)+"_EC_mendota.ckpt") #mendota2 is just a different trial
-#                print("Model saved in path: %s" % save_path)
-##                np.save('pred_EC_mendota.npy',prd)
-#                np.save('pred_EC_mendota_tr1.npy',prd1)
-#                np.save('pred_EC_mendota_tr2.npy',prd2)
-#               
 
- ## calculate phy-loss
-#                ploss = 0
-#                prd_f = prd
-#                prd_d = 1000*(1-(prd+288.9414)*((prd-3.9863)**2)/(508929.2*(prd+68.12963))) # density
-#                for k in range(51*npic-1):
-#                    if (k+1)%51!=0:
-#                        dif = np.reshape((prd_d[k,:,:]-prd_d[k+1,:,:]>0),[1,n_steps])
-#                        dif = np.maximum(np.zeros([1,n_steps]),dif)
-#                        ploss = ploss+np.sum(dif)
-#                ploss = ploss/n_steps/npic/50
-                
-            print("Loss_te " + \
-                  "{:.4f}".format(loss_te) + " Min_loss_te " + \
-                  "{:.4f}".format(merr) + " Min_loss_tr " + \
-                  "{:.4f}".format(metr)) #+ " Phy_loss " + \
-#                  "{:.4f}".format(ploss) ) 
-#            if ploss<0.0001:
-#                    break
+        _, loss,rc,ec = sess.run(
+                [train_op, cost,r_cost,unsup_loss],
+                feed_dict = {
+                        x: x_train_2,
+                        y: y_train_2,
+                        m: m_train_2,
+                        unsup_inputs: x_f,
+                        unsup_phys_data: p_f,
+                        bt_sz: 50*N_sec
+            })
+        
+        if epoch%1==0:
+            print("Step " + str(epoch) + ", BatLoss= " + \
+              "{:.4f}".format(loss) + ", Rc= " + \
+              "{:.4f}".format(rc) + ", Ec= " + \
+              "{:.4f}".format(ec) )
 
+    if args.save_path != '':
+        saver.save(sess, os.path.join(args.save_path, "pretrained_model.ckpt"))
+        
