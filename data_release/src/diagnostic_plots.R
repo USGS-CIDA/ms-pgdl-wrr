@@ -254,10 +254,3 @@ lakes <- remake::make("modeled_lakes") %>% sf::st_as_sf() %>% sf::st_transform(2
   mutate(perim = lwgeom::st_perimeter_2d(geometry), area = sf::st_area(geometry), circle_perim = 2*pi*sqrt(area/pi),
          SDF = perim/circle_perim) %>% sf::st_drop_geometry() %>% rowwise() %>% mutate(canopy_height = mda.lakes::getCanopy(site_id)) %>% ungroup() %>% select(site_id, SDF, canopy_height) %>%
   feather::write_feather('~/Desktop/share/jared_metadata_10_10.feather')
-
-
-
-perim	<-	getPerim(WBIC)
-area	<-	getArea(WBIC)
-circle.perim	<-	2*pi*sqrt(area/pi)
-SDF	<-	perim/circle.perim
