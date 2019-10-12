@@ -52,7 +52,7 @@
   &lt;li&gt;a. &lt;a href="https://www.sciencebase.gov/catalog/item/5d98e0c4e4b0c4f70d1186f1"&gt;Lake Mendota training data&lt;/a&gt; - Tables with 1 row per date and depth, with the corresponding observed water temperature (3 comma-delimited files)&lt;/li&gt;
   &lt;li&gt;b. &lt;a href="https://www.sciencebase.gov/catalog/item/5d8a4752e4b0c4f70d0ae61a"&gt;Sparkling Lake training data&lt;/a&gt; - Tables with 1 row per date and depth, with the corresponding observed water temperature (3 comma-delimited files)&lt;/li&gt;
   &lt;li&gt;c. &lt;a href="https://www.sciencebase.gov/catalog/item/5d8a47bce4b0c4f70d0ae61f"&gt;Historical training data for 68 lakes&lt;/a&gt; - Tables with 1 row per date, depth, and site_id, with the corresponding observed water temperature (1 comma-delimited file)&lt;/li&gt;
-&lt;/ul&gt; &lt;li&gt;&lt;a href="https://www.sciencebase.gov/catalog/item/59eb9ba6e4b0026a55ffe37f"&gt;Prediction data&lt;/a&gt; - Predictions from PGDL, DL, and PB models&lt;/li&gt; &lt;ul&gt;
+&lt;/ul&gt; &lt;li&gt;&lt;a href="https://www.sciencebase.gov/catalog/item/5d915c5de4b0c4f70d0ce51e"&gt;Prediction data&lt;/a&gt; - Predictions from PGDL, DL, and PB models&lt;/li&gt; &lt;ul&gt;
   &lt;li&gt;a. &lt;a href="https://www.sciencebase.gov/catalog/item/5d915cb2e4b0c4f70d0ce523"&gt;Lake Mendota predictions&lt;/a&gt; - Tables with 1 row per date, a column for predicted temperature at each depth, and experiment metadata (10 comma-delimited files)&lt;/li&gt;
   &lt;li&gt;b. &lt;a href="https://www.sciencebase.gov/catalog/item/5d915cc6e4b0c4f70d0ce525"&gt;Sparkling Lake predictions&lt;/a&gt; - Tables with 1 row per date, a column for predicted temperature at each depth, and experiment metadata (10 comma-delimited files)&lt;/li&gt;
   &lt;li&gt;c. &lt;a href="https://www.sciencebase.gov/catalog/item/5d915c8ee4b0c4f70d0ce520"&gt;Historical predictions for 68 lakes&lt;/a&gt; - Tables with 1 row per date and depth, with the corresponding observed water temperature (4 comma-delimited files for each lake compressed into 68 zip files)&lt;/li&gt;
@@ -60,11 +60,7 @@
   &lt;li&gt;a. &lt;a href="https://www.sciencebase.gov/catalog/item/5d925066e4b0c4f70d0d0599"&gt;Lake Mendota evaluation&lt;/a&gt; - Tables with 1 row per date, a column for predicted temperature at each depth, and experiment metadata (3 comma-delimited files)&lt;/li&gt;
   &lt;li&gt;b. &lt;a href="https://www.sciencebase.gov/catalog/item/5d92507be4b0c4f70d0d059b"&gt;Sparkling Lake evaluation&lt;/a&gt; - Tables with 1 row per date, a column for predicted temperature at each depth, and experiment metadata (2 comma-delimited files)&lt;/li&gt;
   &lt;li&gt;c. &lt;a href="https://www.sciencebase.gov/catalog/item/5d925048e4b0c4f70d0d0596"&gt;Historical evaluation for 68 lakes&lt;/a&gt; - Tables with 1 row per date and depth, with the corresponding observed water temperature (4 comma-delimited files for each lake compressed into 68 zip files)&lt;/li&gt;
-&lt;/ul&gt; &lt;/ol&gt; &lt;p&gt;******* UPDATE THIS****** This work was funded by the USGS Powell Center (Working Group title: "Continental-scale overview of stream primary productivity, its links to water quality, and consequences for aquatic carbon biogeochemistry"). Additional financial support came from the USGS NAWQA program and Office of Water Information. NSF grants DEB-1146283 and EF1442501 partially supported ROH. The USGS Wisconsin Modeling Center provided access to the HTCondor cluster for generating metabolism estimates.&lt;/p&gt;
-
-  &lt;ul&gt;
-
-&lt;/ul&gt;</abstract>
+&lt;/ul&gt; &lt;/ol&gt; &lt;p&gt;This research was funded by the Department of the Interior Northeast and North Central Climate Adaptation Science Centers, a Midwest Glacial Lakes Fish Habitat Partnership grant through F&amp;WS, an NSF Expedition in Computing Grant 1029711 to the University of Minnesota, a postdoctoral fellowship awarded to J Zwart under NSF EAR-PF-1725386, as well as a seed grant from the Digital Technology Center at the University of Minnesota. Access to computing facilities was provided by the University of Minnesota Supercomputing Institute and USGS Advanced Research Computing, USGS Yeti Supercomputer (https://doi.org/10.5066/F7D798MJ). We thank North Temperate Lakes Long-Term Ecological Research (NSF DEB-1440297) and Global Lake Ecological Observatory Network (NSF #1702991).&lt;/p&gt;</abstract>
       <purpose>Fisheries biology, limnological research, and climate science.</purpose>
     </descript>
     <timeperd>
@@ -92,7 +88,11 @@
     <keywords>
       <theme>
         <themekt>none</themekt>
+        <themekey>machine learning</themekey>
+        <themekey>deep learning</themekey>
+        <themekey>hybrid modeling</themekey>
         <themekey>water</themekey>
+        <themekey>temperature</themekey>
         <themekey>temperate lakes</themekey>
         <themekey>reservoirs</themekey>
         <themekey>modeling</themekey>
@@ -141,7 +141,7 @@
       </cntinfo>
     </ptcontac>
     <datacred>This study was funded by the Department of the Interior Northeast Climate Adaptation Science Center, the United States Geological Survey National Climate This research used resources of the Core Science Analytics and Synthesis Advanced Research Computing program at the U.S. Geological Survey.</datacred>
-    <native>Multiple computer systems were used to generate these data, including linux, OSX. The open source language R was used on all systems, as well as the open-source model GLM.</native>
+    <native>Multiple computer systems were used to generate these data, including linux, OSX. The open source languages R and Python were used on all systems.</native>
   </idinfo>
   <dataqual>
     <attracc>
@@ -159,8 +159,8 @@
     </posacc>
     <lineage>
       <procstep>
-        <procdesc>At the core of the modeling framework is a lake hydrodynamic model that uses inputs of lake-specific properties and local meteorology to estimate water temperature. Our chosen model is the open source, General Lake Model (GLM) version 2.2.0. GLM is a one-dimensional dynamical model which simplifies lakes using a vertical approximation, where horizontal variability is ignored. GLM uses a Lagrangian approach to layer structure where layers can split and combine based on changing vertical gradients. GLM is a modern, implementation of other one-dimensional models. We used GLM to run individual lake simulations according to the processes described in Winslow et al. 2017. Outputs for water temperature were extracted at various depths and written or summarized to the files included in this set of data. The glmtools R package was used for this processing.</procdesc>
-        <procdate>20191011</procdate>
+        <procdesc>At the core of the modeling framework is a lake hydrodynamic model that uses inputs of lake-specific properties and local meteorology to estimate water temperature. Our chosen model is the open source, General Lake Model (GLM) version 2. GLM is a one-dimensional dynamical model which simplifies lakes using a vertical approximation, where horizontal variability is ignored. GLM uses a Lagrangian approach to layer structure where layers can split and combine based on changing vertical gradients. GLM is a modern, implementation of other one-dimensional models. We used GLM to run individual lake simulations according to the processes described in Winslow et al. 2017. Outputs for water temperature were extracted at various depths and written or summarized to the files included in this set of data. The glmtools R package was used for this processing.</procdesc>
+        <procdate>20191012</procdate>
       </procstep>
     </lineage>
   </dataqual>
@@ -230,7 +230,7 @@
     </stdorder>
   </distinfo>
   <metainfo>
-    <metd>20191011</metd>
+    <metd>20191012</metd>
     <metc>
       <cntinfo>
         <cntperp>

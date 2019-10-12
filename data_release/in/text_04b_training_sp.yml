@@ -1,6 +1,13 @@
 title: >-
   Process-guided deep learning water temperature predictions: 4b Sparkling Lake detailed training data
 
+abstract: >-
+  This dataset includes compiled water temperature data from an instrumented buoy on Sparkling Lake, WI and
+  discrete (manually sampled) water temperature records from North Temperate Lakes Long-TERM Ecological Research Program (NTL-LTER; https://lter.limnology.wisc.edu/).
+  The buoy is supported by both the Global Lake Ecological Observatory Network (gleon.org) and the NTL-LTER.
+  This dataset is part of a larger data release of lake temperature model inputs and outputs for 68 lakes in the U.S.
+  states of Minnesota and Wisconsin (http://dx.doi.org/10.5066/P9AQPIVD).
+
 entities:
   -
     data-name: sp_season_training.csv

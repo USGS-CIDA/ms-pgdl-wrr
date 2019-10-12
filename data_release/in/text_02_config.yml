@@ -1,5 +1,11 @@
 title: >-
   Process-guided deep learning water temperature predictions: 2 Model configurations (lake metadata and parameter values)
+
+abstract: >-
+  This dataset provides model specifications used to estimate water temperature from a process-based model (Hipsey et al. 2019).
+  The format is a single JSON file indexed for each lake based on the "site_id".
+  This dataset is part of a larger data release of lake temperature model inputs and outputs for 68 lakes in the U.S.
+  states of Minnesota and Wisconsin (http://dx.doi.org/10.5066/P9AQPIVD).
 cross-cites:
   -
     authors: ['Matthew R. Hipsey', 'Louise C. Bruce', 'Casper Boon', 'Brendan Busch', 'Cayelan C. Carey', 'David P. Hamilton', 'Paul C. Hanson', 'Jordan S. Read', 'Eduardo de Sousa', 'Michael Weber', 'Luke A. Winslow']

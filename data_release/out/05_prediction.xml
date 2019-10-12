@@ -44,7 +44,7 @@
       </citeinfo>
     </citation>
     <descript>
-      <abstract>Climate change has been shown to influence lake temperatures in different ways. To better understand the diversity of lake responses to climate change and give managers tools to manage individual lakes, we focused on improving prediction accuracy for daily water temperature profiles in 68 lakes in Minnesota and Wisconsin during 1980-2018.</abstract>
+      <abstract>Multiple modeling frameworks were used to predict daily temperatures at 0.5m depth intervals for a set of diverse lakes in the U.S. states of Minnesota and Wisconsin. Process-Based (PB) models were configured and calibrated with training data to reduce root-mean squared error. Uncalibrated models used default configurations (PB0; see Winslow et al. 2016 for details) and no parameters were adjusted according to model fit with observations. Deep Learning (DL) models were Long Short-Term Memory artificial recurrent neural network models which used training data to adjust model structure and weights for temperature predictions (Jia et al. 2019). Process-Guided Deep Learning (PGDL) models were DL models with an added physical constraint for energy conservation as a loss term. These models were pre-trained with uncalibrated Process-Based model outputs (PB0) before training on actual temperature observations.</abstract>
       <purpose>Fisheries biology, limnological research, and climate science.</purpose>
     </descript>
     <timeperd>
@@ -72,7 +72,11 @@
     <keywords>
       <theme>
         <themekt>none</themekt>
+        <themekey>machine learning</themekey>
+        <themekey>deep learning</themekey>
+        <themekey>hybrid modeling</themekey>
         <themekey>water</themekey>
+        <themekey>temperature</themekey>
         <themekey>temperate lakes</themekey>
         <themekey>reservoirs</themekey>
         <themekey>modeling</themekey>
@@ -122,6 +126,48 @@
     </ptcontac>
     <datacred>This study was funded by the Department of the Interior Northeast Climate Adaptation Science Center, the United States Geological Survey National Climate This research used resources of the Core Science Analytics and Synthesis Advanced Research Computing program at the U.S. Geological Survey.</datacred>
     <native/>
+    <crossref>
+      <citeinfo>
+        <origin>Matthew R. Hipsey</origin>
+        <origin>Louise C. Bruce</origin>
+        <origin>Casper Boon</origin>
+        <origin>Brendan Busch</origin>
+        <origin>Cayelan C. Carey</origin>
+        <origin>David P. Hamilton</origin>
+        <origin>Paul C. Hanson</origin>
+        <origin>Jordan S. Read</origin>
+        <origin>Eduardo de Sousa</origin>
+        <origin>Michael Weber</origin>
+        <origin>Luke A. Winslow</origin>
+        <pubdate>2019</pubdate>
+        <title>A General Lake Model (GLM 3.0) for linking with high-frequency sensor data from the Global Lake Ecological Observatory Network (GLEON).</title>
+        <onlink>https://doi.org/10.5194/gmd-12-473-2019</onlink>
+      </citeinfo>
+    </crossref>
+    <crossref>
+      <citeinfo>
+        <origin>Luke A. Winslow</origin>
+        <origin>Gretchen J.A. Hansen</origin>
+        <origin>Jordan S. Read</origin>
+        <pubdate>2016</pubdate>
+        <title>Data release: A large-scale database of modeled contemporary and future water temperature data for 10,774 Michigan, Minnesota and Wisconsin Lakes</title>
+        <onlink>http://dx.doi.org/10.5066/F7DV1H10</onlink>
+      </citeinfo>
+    </crossref>
+    <crossref>
+      <citeinfo>
+        <origin>Xiaowei Jia</origin>
+        <origin>Jared Willard</origin>
+        <origin>Anuj Karpatne</origin>
+        <origin>Jordan S. Read</origin>
+        <origin>Jacob A. Zwart</origin>
+        <origin>Michael Steinbach</origin>
+        <origin>Vipin Kumar</origin>
+        <pubdate>2019</pubdate>
+        <title>Physics Guided RNNs for Modeling Dynamical Systems: A Case Study in Simulating Lake Temperature Profiles. Retrieved from https://arxiv.org/abs/1810.13075v2</title>
+        <onlink>https://arxiv.org/pdf/1810.02880.pdf</onlink>
+      </citeinfo>
+    </crossref>
   </idinfo>
   <dataqual>
     <attracc>
@@ -139,7 +185,7 @@
     </posacc>
     <lineage>
       <procstep>
-        <procdesc>At the core of the modeling framework is a lake hydrodynamic model that uses inputs of lake-specific properties and local meteorology to estimate water temperature. Our chosen model is the open source, General Lake Model (GLM) version 2.2.0. GLM is a one-dimensional dynamical model which simplifies lakes using a vertical approximation, where horizontal variability is ignored. GLM uses a Lagrangian approach to layer structure where layers can split and combine based on changing vertical gradients. GLM is a modern, implementation of other one-dimensional models. We used GLM to run individual lake simulations according to the processes described in Winslow et al. 2017. Outputs for water temperature were extracted at various depths and written or summarized to the files included in this set of data. The glmtools R package was used for this processing.</procdesc>
+        <procdesc>At the core of the modeling framework is a lake hydrodynamic model that uses inputs of lake-specific properties and local meteorology to estimate water temperature. Our chosen model is the open source, General Lake Model (GLM) version 2. GLM is a one-dimensional dynamical model which simplifies lakes using a vertical approximation, where horizontal variability is ignored. GLM uses a Lagrangian approach to layer structure where layers can split and combine based on changing vertical gradients. GLM is a modern, implementation of other one-dimensional models. We used GLM to run individual lake simulations according to the processes described in Winslow et al. 2017. Outputs for water temperature were extracted at various depths and written or summarized to the files included in this set of data. The glmtools R package was used for this processing.</procdesc>
         <procdate/>
       </procstep>
     </lineage>
@@ -210,7 +256,7 @@
     </stdorder>
   </distinfo>
   <metainfo>
-    <metd>20191011</metd>
+    <metd>20191012</metd>
     <metc>
       <cntinfo>
         <cntperp>

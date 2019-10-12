@@ -36,18 +36,17 @@ targets:
       - 01_spatial_sb_id
       - 02_config_sb_id
       - 03_inputs_sb_id
+      - 03a_inputs_sb_id
+      - 03b_inputs_sb_id
+      - 03c_inputs_sb_id
       - 04_training_sb_id
       - 04a_training_sb_id
       - 04b_training_sb_id
       - 04c_training_sb_id
-#      - 05_prediction_sp_sb_id
-#      - 05a_prediction_sp_sb_id
-#      - 05b_prediction_sp_sb_id
-#      - 05c_prediction_sp_sb_id
-      - 03a_inputs_sb_id
-      - 03b_inputs_sb_id
-      - 03c_inputs_sb_id
       - 05_prediction_sb_id
+      - 05a_prediction_sb_id
+      - 05b_prediction_sb_id
+      - 05c_prediction_sb_id
       - 06_evaluation_sb_id
       - 06a_evaluation_sb_id
       - 06b_evaluation_sb_id
@@ -85,91 +84,18 @@ targets:
       "in/text_01_spatial.yml",
       spatial_metadata)
 
-  out/03_inputs.xml:
-    command: render(filename = target_name,
-      "in/text_SHARED.yml",
-      "in/text_03_inputs.yml",
-      spatial_metadata)
-
   out/02_config.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
       "in/text_02_config.yml",
       spatial_metadata)
 
-  out/04_training.xml:
+  out/03_inputs.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
-      training_text,
+      "in/text_03_inputs.yml",
       spatial_metadata)
 
-  out/06_evaluation.xml:
-    command: render(filename = target_name,
-      "in/text_SHARED.yml",
-      "in/text_06_evaluation.yml",
-      spatial_metadata)
-
-  out/04a_training_me.xml:
-    command: render(filename = target_name,
-      "in/text_SHARED.yml",
-      "in/text_04a_training_me.yml",
-      me_spatial_metadata)
-
-  out/04b_training_sp.xml:
-    command: render(filename = target_name,
-      "in/text_SHARED.yml",
-      "in/text_04b_training_sp.yml",
-      sp_spatial_metadata)
-
-  out/04c_training_all.xml:
-    command: render(filename = target_name,
-      "in/text_SHARED.yml",
-      "in/text_04c_training_all.yml",
-      spatial_metadata)
-
-  out/06c_evaluation_all.xml:
-    command: render(filename = target_name,
-      "in/text_SHARED.yml",
-      "in/text_06c_evaluation_all.yml",
-      spatial_metadata)
-
-  out/06b_evaluation_sp.xml:
-    command: render(filename = target_name,
-      "in/text_SHARED.yml",
-      "in/text_06b_evaluation_sp.yml",
-      sp_spatial_metadata)
-
-  out/06a_evaluation_me.xml:
-    command: render(filename = target_name,
-      "in/text_SHARED.yml",
-      "in/text_06a_evaluation_me.yml",
-      me_spatial_metadata)
-
-  out/05_prediction.xml:
-    command: render(filename = target_name,
-      "in/text_SHARED.yml",
-      "in/text_05_prediction.yml",
-      spatial_metadata)
-
-  out/05b_prediction_sp.xml:
-    command: render(filename = target_name,
-      "in/text_SHARED.yml",
-      "in/text_05b_prediction_sp.yml",
-      sp_spatial_metadata)
-
-  out/05a_prediction_me.xml:
-    command: render(filename = target_name,
-      "in/text_SHARED.yml",
-      "in/text_05a_prediction_me.yml",
-      me_spatial_metadata)
-
-  out/05c_prediction_all.xml:
-    command: render(filename = target_name,
-      "in/text_SHARED.yml",
-      "in/text_05a_prediction_me.yml",
-      spatial_metadata)
-
-  # update to use specific inputs_text
   out/03c_inputs_all.xml:
     command: render(filename = target_name,
       "in/text_SHARED.yml",
@@ -192,6 +118,84 @@ targets:
       "in/text_03_inputs.yml",
       "in/text_03a_inputs_me.yml",
       me_spatial_metadata)
+
+  out/04_training.xml:
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      "in/text_04_training.yml",
+      spatial_metadata)
+
+  out/04a_training_me.xml:
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      "in/text_04_training.yml",
+      "in/text_04a_training_me.yml",
+      me_spatial_metadata)
+
+  out/04b_training_sp.xml:
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      "in/text_04_training.yml",
+      "in/text_04b_training_sp.yml",
+      sp_spatial_metadata)
+
+  out/04c_training_all.xml:
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      "in/text_04_training.yml",
+      "in/text_04c_training_all.yml",
+      spatial_metadata)
+
+  out/05_prediction.xml:
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      "in/text_05_prediction.yml",
+      spatial_metadata)
+
+  out/05a_prediction_me.xml:
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      "in/text_05_prediction.yml",
+      "in/text_05a_prediction_me.yml",
+      me_spatial_metadata)
+
+  out/05b_prediction_sp.xml:
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      "in/text_05_prediction.yml",
+      "in/text_05b_prediction_sp.yml",
+      sp_spatial_metadata)
+
+  out/05c_prediction_all.xml:
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      "in/text_05_prediction.yml",
+      "in/text_05c_prediction_all.yml",
+      spatial_metadata)
+
+  out/06_evaluation.xml:
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      "in/text_06_evaluation.yml",
+      spatial_metadata)
+
+  out/06a_evaluation_me.xml:
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      "in/text_06a_evaluation_me.yml",
+      me_spatial_metadata)
+
+  out/06b_evaluation_sp.xml:
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      "in/text_06b_evaluation_sp.yml",
+      sp_spatial_metadata)
+
+  out/06c_evaluation_all.xml:
+    command: render(filename = target_name,
+      "in/text_SHARED.yml",
+      "in/text_06c_evaluation_all.yml",
+      spatial_metadata)
 
   00_parent_sb_id:
     command: sb_replace_files(I('5d88ea50e4b0c4f70d0ab3c0'),

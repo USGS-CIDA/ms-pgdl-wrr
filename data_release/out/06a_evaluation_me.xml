@@ -72,7 +72,11 @@
     <keywords>
       <theme>
         <themekt>none</themekt>
+        <themekey>machine learning</themekey>
+        <themekey>deep learning</themekey>
+        <themekey>hybrid modeling</themekey>
         <themekey>water</themekey>
+        <themekey>temperature</themekey>
         <themekey>temperate lakes</themekey>
         <themekey>reservoirs</themekey>
         <themekey>modeling</themekey>
@@ -137,7 +141,7 @@
     </posacc>
     <lineage>
       <procstep>
-        <procdesc>At the core of the modeling framework is a lake hydrodynamic model that uses inputs of lake-specific properties and local meteorology to estimate water temperature. Our chosen model is the open source, General Lake Model (GLM) version 2.2.0. GLM is a one-dimensional dynamical model which simplifies lakes using a vertical approximation, where horizontal variability is ignored. GLM uses a Lagrangian approach to layer structure where layers can split and combine based on changing vertical gradients. GLM is a modern, implementation of other one-dimensional models. We used GLM to run individual lake simulations according to the processes described in Winslow et al. 2017. Outputs for water temperature were extracted at various depths and written or summarized to the files included in this set of data. The glmtools R package was used for this processing.</procdesc>
+        <procdesc>At the core of the modeling framework is a lake hydrodynamic model that uses inputs of lake-specific properties and local meteorology to estimate water temperature. Our chosen model is the open source, General Lake Model (GLM) version 2. GLM is a one-dimensional dynamical model which simplifies lakes using a vertical approximation, where horizontal variability is ignored. GLM uses a Lagrangian approach to layer structure where layers can split and combine based on changing vertical gradients. GLM is a modern, implementation of other one-dimensional models. We used GLM to run individual lake simulations according to the processes described in Winslow et al. 2017. Outputs for water temperature were extracted at various depths and written or summarized to the files included in this set of data. The glmtools R package was used for this processing.</procdesc>
         <procdate/>
       </procstep>
     </lineage>
@@ -385,7 +389,7 @@
     </stdorder>
   </distinfo>
   <metainfo>
-    <metd>20191011</metd>
+    <metd>20191012</metd>
     <metc>
       <cntinfo>
         <cntperp>

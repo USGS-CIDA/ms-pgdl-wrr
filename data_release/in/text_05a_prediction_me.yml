@@ -1,8 +1,309 @@
 title: >-
   Process-guided deep learning water temperature predictions: 5a Lake Mendota detailed prediction data
 
+entities:
+  -
+    data-name: me_similar_predict_pb.csv
+    data-description: Lake Mendota process-based model predictions during sparse conditions
+    attributes:
+    -
+      attr-label: date
+      attr-def: Calendar date
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: temp_z
+      attr-def: temperature at depth 'z' in meters
+      attr-defs: This data release; there are multiple columns that use this format to specify temperature at different depths
+      data-min: NA
+      data-max: NA
+      data-units: degrees C
+    -
+      attr-label: exper_n
+      attr-def: experiment number
+      attr-defs: This data release
+      data-min: 1
+      data-max: 5
+      data-units: NA
+    -
+      attr-label: exper_id
+      attr-def: >-
+        Type of experiment run and number of training profiles used: 'experiment_profiles'
+      attr-defs: This data release
+      data-min: NA
+      data-max: NA
+      data-units: NA
+  -
+    data-name: me_similar_predict_pgdl.csv
+    data-description: Lake Mendota process-guided model predictions during sparse conditions
+    attributes:
+    -
+      attr-label: date
+      attr-def: Calendar date
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: temp_z
+      attr-def: temperature at depth 'z' in meters
+      attr-defs: This data release; there are multiple columns that use this format to specify temperature at different depths
+      data-min: NA
+      data-max: NA
+      data-units: degrees C
+    -
+      attr-label: exper_n
+      attr-def: experiment number
+      attr-defs: This data release
+      data-min: 1
+      data-max: 5
+      data-units: NA
+    -
+      attr-label: exper_id
+      attr-def: >-
+        Type of experiment run and number of training profiles used: 'experiment_profiles'
+      attr-defs: This data release
+      data-min: NA
+      data-max: NA
+      data-units: NA
+  -
+    data-name: me_similar_predict_dl.csv
+    data-description: Lake Mendota deep learning model predictions during sparse conditions
+    attributes:
+    -
+      attr-label: date
+      attr-def: Calendar date
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: temp_z
+      attr-def: temperature at depth 'z' in meters
+      attr-defs: This data release; there are multiple columns that use this format to specify temperature at different depths
+      data-min: NA
+      data-max: NA
+      data-units: degrees C
+    -
+      attr-label: exper_n
+      attr-def: experiment number
+      attr-defs: This data release
+      data-min: 1
+      data-max: 5
+      data-units: NA
+    -
+      attr-label: exper_id
+      attr-def: >-
+        Type of experiment run and number of training profiles used: 'experiment_profiles'
+      attr-defs: This data release
+      data-min: NA
+      data-max: NA
+      data-units: NA
+  -
+    data-name: me_predict_pb0.csv
+    data-description: Lake Mendota default uncalibrated process-based model predictions
+    attributes:
+    -
+      attr-label: date
+      attr-def: Calendar date
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: temp_z
+      attr-def: temperature at depth 'z' in meters
+      attr-defs: This data release; there are multiple columns that use this format to specify temperature at different depths
+      data-min: NA
+      data-max: NA
+      data-units: degrees C
+  -
+    data-name: me_season_predict_pb.csv
+    data-description: Lake Mendota process-based model predictions during season out-of-bounds training conditions
+    attributes:
+    -
+      attr-label: date
+      attr-def: Calendar date
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: temp_z
+      attr-def: temperature at depth 'z' in meters
+      attr-defs: This data release; there are multiple columns that use this format to specify temperature at different depths
+      data-min: NA
+      data-max: NA
+      data-units: degrees C
+    -
+      attr-label: exper_n
+      attr-def: experiment number
+      attr-defs: This data release
+      data-min: 1
+      data-max: 5
+      data-units: NA
+    -
+      attr-label: exper_id
+      attr-def: >-
+        Type of experiment run and number of training profiles used: 'experiment_profiles'
+      attr-defs: This data release
+      data-min: NA
+      data-max: NA
+      data-units: NA
+  -
+    data-name: me_season_predict_pgdl.csv
+    data-description: Lake Mendota process-based deep learning model predictions during season out-of-bounds training conditions
+    attributes:
+    -
+      attr-label: date
+      attr-def: Calendar date
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: temp_z
+      attr-def: temperature at depth 'z' in meters
+      attr-defs: This data release; there are multiple columns that use this format to specify temperature at different depths
+      data-min: NA
+      data-max: NA
+      data-units: degrees C
+    -
+      attr-label: exper_n
+      attr-def: experiment number
+      attr-defs: This data release
+      data-min: 1
+      data-max: 5
+      data-units: NA
+    -
+      attr-label: exper_id
+      attr-def: >-
+        Type of experiment run and number of training profiles used: 'experiment_profiles'
+      attr-defs: This data release
+      data-min: NA
+      data-max: NA
+      data-units: NA
+  -
+    data-name: me_season_predict_dl.csv
+    data-description: Lake Mendota deep learning model predictions during season out-of-bounds training conditions
+    attributes:
+    -
+      attr-label: date
+      attr-def: Calendar date
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: temp_z
+      attr-def: temperature at depth 'z' in meters
+      attr-defs: This data release; there are multiple columns that use this format to specify temperature at different depths
+      data-min: NA
+      data-max: NA
+      data-units: degrees C
+    -
+      attr-label: exper_n
+      attr-def: experiment number
+      attr-defs: This data release
+      data-min: 1
+      data-max: 5
+      data-units: NA
+  -
+    data-name: me_year_predict_pb.csv
+    data-description: Lake Mendota process-based model predictions during year out-of-bounds training conditions
+    attributes:
+    -
+      attr-label: date
+      attr-def: Calendar date
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: temp_z
+      attr-def: temperature at depth 'z' in meters
+      attr-defs: This data release; there are multiple columns that use this format to specify temperature at different depths
+      data-min: NA
+      data-max: NA
+      data-units: degrees C
+    -
+      attr-label: exper_n
+      attr-def: experiment number
+      attr-defs: This data release
+      data-min: 1
+      data-max: 5
+      data-units: NA
+    -
+      attr-label: exper_id
+      attr-def: >-
+        Type of experiment run and number of training profiles used: 'experiment_profiles'
+      attr-defs: This data release
+      data-min: NA
+      data-max: NA
+      data-units: NA
+  -
+    data-name: me_year_predict_pgdl.csv
+    data-description: Lake Mendota process-based deep learning model predictions during year out-of-bounds training conditions
+    attributes:
+    -
+      attr-label: date
+      attr-def: Calendar date
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: temp_z
+      attr-def: temperature at depth 'z' in meters
+      attr-defs: This data release; there are multiple columns that use this format to specify temperature at different depths
+      data-min: NA
+      data-max: NA
+      data-units: degrees C
+    -
+      attr-label: exper_n
+      attr-def: experiment number
+      attr-defs: This data release
+      data-min: 1
+      data-max: 5
+      data-units: NA
+    -
+      attr-label: exper_id
+      attr-def: >-
+        Type of experiment run and number of training profiles used: 'experiment_profiles'
+      attr-defs: This data release
+      data-min: NA
+      data-max: NA
+      data-units: NA
+  -
+    data-name: me_year_predict_dl.csv
+    data-description: Lake Mendota deep learning model predictions during year out-of-bounds training conditions
+    attributes:
+    -
+      attr-label: date
+      attr-def: Calendar date
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: temp_z
+      attr-def: temperature at depth 'z' in meters
+      attr-defs: This data release; there are multiple columns that use this format to specify temperature at different depths
+      data-min: NA
+      data-max: NA
+      data-units: degrees C
+    -
+      attr-label: exper_n
+      attr-def: experiment number
+      attr-defs: This data release
+      data-min: 1
+      data-max: 5
+      data-units: NA
+
 build-environment: >-
-  PB; process-based predictions were generated with the following open source tools available in the R programming language (R version 3.5.0 (2018-04-23)).\n
+  PB and PB0; process-based predictions were generated with the following open source tools available in the R programming language (R version 3.5.0 (2018-04-23)).\n
   The computing platform for generating data and metadata was x86_64-redhat-linux-gnu. \n  R packages loaded into this environment: glmtools, version: 0.15.0; rLakeAnalyzer, version: 1.11.4; GLMr, version: 3.1.14.
   PGDL; process-guided deep learning predictions were generated with the following open source tools available in the Python install channels: pytorch, conda-forge, defaults. Python dependencies: _ipyw_jlab_nb_ext_conf=0.1.0=py27h08a7f0c_0,
   _tflow_190_select=0.0.1=gpu, _tflow_select=2.1.0=gpu, alabaster=0.7.10=py27he5a193a_0, anaconda-client=1.6.14=py27_0, anaconda-navigator=1.8.7=py27_0, anaconda-project=0.8.2=py27h236b58a_0, arrow-cpp=0.11.1=py27h3bd774a_0,

@@ -10,35 +10,48 @@ abstract: >-
   the North Temperate Lakes Long-Term Ecological Research Project, and digitized temperature
   records from the MN Department of Natural Resources.
 
+cross-cites:
+  -
+    authors: ['Luke A. Winslow','Gretchen J.A. Hansen','Jordan S. Read','Michael Notaro']
+    title: >-
+      Large-scale modeled contemporary and future water temperature estimates for 10,774 Midwestern U.S. Lakes
+    pubdate: 2017
+    link: http://dx.doi.org/10.1038/sdata.2017.53
 
-attributes:
+entities:
   -
-    attr-label: site_id
-    attr-def: identifier for lake
-    attr-defs: nhd_ID
-    data-min: NA
-    data-max: NA
-    data-units: NA
-  -
-    attr-label: DateTime
-    attr-def: Date of temperature measurement
-    attr-defs: NA
-    data-min: NA
-    data-max: NA
-    data-units: NA
-  -
-    attr-label: Depth
-    attr-def: Depth of temperature measurement below water surface
-    attr-defs: NA
-    data-min: 0
-    data-max: NA
-    data-units: meters
-  -
-    attr-label: temp
-    attr-def: Water temperature
-    attr-defs: NA
-    data-min: NA
-    data-max: NA
-    data-units: degrees C
+    data-name: all_lakes_historical_training.csv
+    data-description: Training data for all 68 lakes
+    attributes:
+    -
+      attr-label: site_id
+      attr-def: >-
+        Lake identification number for this dataset. Is the Prmnn_I prefixed with source, as "nhd_{Prmnn_I}"
+      attr-defs: >-
+        http://nhd.usgs.gov/; Winslow et al. 2016
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: date
+      attr-def: Date of temperature measurement
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: depth
+      attr-def: Depth of temperature measurement below water surface
+      attr-defs: NA
+      data-min: 0
+      data-max: NA
+      data-units: meters
+    -
+      attr-label: temp
+      attr-def: Water temperature
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: degrees C
 
-file-format: a single comma delimited file
+file-format: a single comma-delimited file

@@ -1,5 +1,9 @@
 title: >-
   Process-guided deep learning water temperature predictions: 3 Model inputs (meteorological inputs and ice flags)
+
+abstract: >-
+  This dataset includes model inputs (specifically, weather and flags for predicted ice-cover) and is part of a larger data release of lake temperature model inputs and outputs for 68 lakes in the U.S.
+  states of Minnesota and Wisconsin (http://dx.doi.org/10.5066/P9AQPIVD).
 cross-cites:
   -
     authors: ['Kenneth E. Mitchell','Dag Lohmann','Paul R. Houser','Eric F. Wood','John C. Schaake','Alan Robock','Brian A. Cosgrove','Justin Sheffield','Qingyun Duan','Lifeng Luo','R. Wayne Higgins','Rachel T. Pinker','J. Dan Tarpley','Dennis P. Lettenmaier','Curtis H. Marshall','Jared K. Entin','Ming Pan','Wei Shi','Victor Koren','Jesse Meng','Bruce H. Ramsay','Andrew A. Bailey']
@@ -14,78 +18,7 @@ cross-cites:
     pubdate: 2019
     link: https://doi.org/10.5194/gmd-12-473-2019
 
-attributes:
-  -
-    attr-label: time
-    attr-def: Calendar date
-    attr-defs: NA
-    data-min: NA
-    data-max: NA
-    data-units: NA
-  -
-    attr-label: date
-    attr-def: Calendar date (for ice flags file)
-    attr-defs: NA
-    data-min: NA
-    data-max: NA
-    data-units: NA
-  -
-    attr-label: ShortWave
-    attr-def: Daily average incoming shortwave radiation
-    attr-defs: NA
-    data-min: 0
-    data-max: NA
-    data-units: W m^-2
-  -
-    attr-label: LongWave
-    attr-def: Daily average incoming longwave radiation
-    attr-defs: NA
-    data-min: NA
-    data-max: NA
-    data-units: W m^-2
-  -
-    attr-label: AirTemp
-    attr-def: Daily average air temperature
-    attr-defs: NA
-    data-min: NA
-    data-max: NA
-    data-units: degrees C
-  -
-    attr-label: RelHum
-    attr-def: Daily average relative humidity
-    attr-defs: NA
-    data-min: 0
-    data-max: 100
-    data-units: >-
-      %
-  -
-    attr-label: WindSpeed
-    attr-def: Daily average windspeed
-    attr-defs: NA
-    data-min: 0
-    data-max: NA
-    data-units: m s^-1
-  -
-    attr-label: Rain
-    attr-def: Daily cumulative precipitation as rain
-    attr-defs: NA
-    data-min: 0
-    data-max: NA
-    data-units: m day^-1
-  -
-    attr-label: Snow
-    attr-def: Daily cumulative precipitation as snow
-    attr-defs: NA
-    data-min: 0
-    data-max: NA
-    data-units: m day^-1
-  -
-    attr-label: ice
-    attr-def: Flag for predicted ice cover from default GLM configuration
-    attr-defs: NA
-    data-min: 0
-    data-max: 1
-    data-units: NA
+
 
 build-environment: Multiple computer systems were used to generate these data, including linux, OSX. The open source language R was used on all systems, as well as the open-source model GLM.
 
@@ -93,9 +26,6 @@ process-date: !expr format(Sys.time(),'%Y%m%d')
 indirect-spatial: U.S.A.
 latitude-res: 0.1
 longitude-res: 0.1
-data-name: thermal metrics
-data-description: >-
-  Drivers indexed by lake used to drive lake models. NLDAS drivers are contemporary (1980-2018) meterology. Each folder contains a driver for each study lake,
-  and has identical attributes (described above). NLDAS drivers (NLDAS.zip) are described in
-  Mitchell et al. 2004.
-file-format: Separate comma separated text files zipped into a single file
+data-name: weather data and ice flags (model inputs)
+
+

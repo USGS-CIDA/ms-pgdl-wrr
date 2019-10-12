@@ -1,2 +1,30 @@
 title: >-
   Process-guided deep learning water temperature predictions: 5 Model prediction data
+
+abstract: >-
+  Multiple modeling frameworks were used to predict daily temperatures at 0.5m depth intervals for a set of diverse lakes in the U.S.
+  states of Minnesota and Wisconsin. Process-Based (PB) models were configured and calibrated with training data to reduce root-mean squared error.
+  Uncalibrated models used default configurations (PB0; see Winslow et al. 2016 for details) and no parameters were adjusted according to model fit with observations.
+  Deep Learning (DL) models were Long Short-Term Memory artificial recurrent neural network models which used training data to adjust model structure and weights for temperature predictions (Jia et al. 2019).
+  Process-Guided Deep Learning (PGDL) models were DL models with an added physical constraint for energy conservation as a loss term. These models were pre-trained with
+  uncalibrated Process-Based model outputs (PB0) before training on actual temperature observations.
+
+cross-cites:
+  -
+    authors: ['Matthew R. Hipsey', 'Louise C. Bruce', 'Casper Boon', 'Brendan Busch', 'Cayelan C. Carey', 'David P. Hamilton', 'Paul C. Hanson', 'Jordan S. Read', 'Eduardo de Sousa', 'Michael Weber', 'Luke A. Winslow']
+    title: >-
+      A General Lake Model (GLM 3.0) for linking with high-frequency sensor data from the Global Lake Ecological Observatory Network (GLEON).
+    pubdate: 2019
+    link: https://doi.org/10.5194/gmd-12-473-2019
+  -
+    authors: ['Luke A. Winslow','Gretchen J.A. Hansen','Jordan S. Read']
+    title: >-
+      Data release: A large-scale database of modeled contemporary and future water temperature data for 10,774 Michigan, Minnesota and Wisconsin Lakes
+    pubdate: 2016
+    link: http://dx.doi.org/10.5066/F7DV1H10
+  -
+    authors: ['Xiaowei Jia', 'Jared Willard', 'Anuj Karpatne', 'Jordan S. Read', 'Jacob A. Zwart', 'Michael Steinbach', 'Vipin Kumar']
+    title: >-
+       Physics Guided RNNs for Modeling Dynamical Systems: A Case Study in Simulating Lake Temperature Profiles. Retrieved from https://arxiv.org/abs/1810.13075v2
+    pubdate: 2019
+    link: https://arxiv.org/pdf/1810.02880.pdf

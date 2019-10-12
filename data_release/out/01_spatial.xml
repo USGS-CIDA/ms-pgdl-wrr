@@ -44,7 +44,7 @@
       </citeinfo>
     </citation>
     <descript>
-      <abstract>Climate change has been shown to influence lake temperatures in different ways. To better understand the diversity of lake responses to climate change and give managers tools to manage individual lakes, we focused on improving prediction accuracy for daily water temperature profiles in 68 lakes in Minnesota and Wisconsin during 1980-2018.</abstract>
+      <abstract>This dataset provides shapefile outlines of the 68 lakes that had temperature modeled as part of this study. The format is a shapefile for all lakes combined (.shp, .shx, .dbf, and .prj files). This dataset is part of a larger data release of lake temperature model inputs and outputs for 68 lakes in the U.S. states of Minnesota and Wisconsin (http://dx.doi.org/10.5066/P9AQPIVD).</abstract>
       <purpose>Fisheries biology, limnological research, and climate science.</purpose>
     </descript>
     <timeperd>
@@ -72,7 +72,11 @@
     <keywords>
       <theme>
         <themekt>none</themekt>
+        <themekey>machine learning</themekey>
+        <themekey>deep learning</themekey>
+        <themekey>hybrid modeling</themekey>
         <themekey>water</themekey>
+        <themekey>temperature</themekey>
         <themekey>temperate lakes</themekey>
         <themekey>reservoirs</themekey>
         <themekey>modeling</themekey>
@@ -129,7 +133,7 @@
         <origin>Jordan S. Read</origin>
         <origin>Michael Notaro</origin>
         <pubdate>2017</pubdate>
-        <title>Large-scale modeled contemporary and future water temperature estimates for 10774 Midwestern U.S. Lakes</title>
+        <title>Large-scale modeled contemporary and future water temperature estimates for 10,774 Midwestern U.S. Lakes</title>
         <onlink>http://dx.doi.org/10.1038/sdata.2017.53</onlink>
       </citeinfo>
     </crossref>
@@ -160,7 +164,7 @@
     </posacc>
     <lineage>
       <procstep>
-        <procdesc>At the core of the modeling framework is a lake hydrodynamic model that uses inputs of lake-specific properties and local meteorology to estimate water temperature. Our chosen model is the open source, General Lake Model (GLM) version 2.2.0. GLM is a one-dimensional dynamical model which simplifies lakes using a vertical approximation, where horizontal variability is ignored. GLM uses a Lagrangian approach to layer structure where layers can split and combine based on changing vertical gradients. GLM is a modern, implementation of other one-dimensional models. We used GLM to run individual lake simulations according to the processes described in Winslow et al. 2017. Outputs for water temperature were extracted at various depths and written or summarized to the files included in this set of data. The glmtools R package was used for this processing.</procdesc>
+        <procdesc>At the core of the modeling framework is a lake hydrodynamic model that uses inputs of lake-specific properties and local meteorology to estimate water temperature. Our chosen model is the open source, General Lake Model (GLM) version 2. GLM is a one-dimensional dynamical model which simplifies lakes using a vertical approximation, where horizontal variability is ignored. GLM uses a Lagrangian approach to layer structure where layers can split and combine based on changing vertical gradients. GLM is a modern, implementation of other one-dimensional models. We used GLM to run individual lake simulations according to the processes described in Winslow et al. 2017. Outputs for water temperature were extracted at various depths and written or summarized to the files included in this set of data. The glmtools R package was used for this processing.</procdesc>
         <procdate/>
       </procstep>
     </lineage>
@@ -250,7 +254,7 @@
     </stdorder>
   </distinfo>
   <metainfo>
-    <metd>20191011</metd>
+    <metd>20191012</metd>
     <metc>
       <cntinfo>
         <cntperp>

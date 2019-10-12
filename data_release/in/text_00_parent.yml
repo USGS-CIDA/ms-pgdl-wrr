@@ -19,7 +19,7 @@ abstract: >-
     <li>b. <a href="https://www.sciencebase.gov/catalog/item/5d8a4752e4b0c4f70d0ae61a">Sparkling Lake training data</a> - Tables with 1 row per date and depth, with the corresponding observed water temperature (3 comma-delimited files)</li>
     <li>c. <a href="https://www.sciencebase.gov/catalog/item/5d8a47bce4b0c4f70d0ae61f">Historical training data for 68 lakes</a> - Tables with 1 row per date, depth, and site_id, with the corresponding observed water temperature (1 comma-delimited file)</li>
   </ul>
-  <li><a href="https://www.sciencebase.gov/catalog/item/59eb9ba6e4b0026a55ffe37f">Prediction data</a> - Predictions from PGDL, DL, and PB models</li>
+  <li><a href="https://www.sciencebase.gov/catalog/item/5d915c5de4b0c4f70d0ce51e">Prediction data</a> - Predictions from PGDL, DL, and PB models</li>
   <ul>
     <li>a. <a href="https://www.sciencebase.gov/catalog/item/5d915cb2e4b0c4f70d0ce523">Lake Mendota predictions</a> - Tables with 1 row per date, a column for predicted temperature at each depth, and experiment metadata (10 comma-delimited files)</li>
     <li>b. <a href="https://www.sciencebase.gov/catalog/item/5d915cc6e4b0c4f70d0ce525">Sparkling Lake predictions</a> - Tables with 1 row per date, a column for predicted temperature at each depth, and experiment metadata (10 comma-delimited files)</li>
@@ -32,12 +32,16 @@ abstract: >-
     <li>c. <a href="https://www.sciencebase.gov/catalog/item/5d925048e4b0c4f70d0d0596">Historical evaluation for 68 lakes</a> - Tables with 1 row per date and depth, with the corresponding observed water temperature (4 comma-delimited files for each lake compressed into 68 zip files)</li>
   </ul>
   </ol>
-  <p>******* UPDATE THIS****** This work was funded by the USGS Powell Center (Working Group title: "Continental-scale overview of stream primary productivity, its links to water quality, and consequences for aquatic carbon biogeochemistry"). Additional financial support came from the USGS NAWQA program and Office of Water Information. NSF grants DEB-1146283 and EF1442501 partially supported ROH. The USGS Wisconsin Modeling Center provided access to the HTCondor cluster for generating metabolism estimates.</p>
+  <p>This research was funded by the Department of the Interior Northeast and North Central Climate Adaptation Science Centers,
+  a Midwest Glacial Lakes Fish Habitat Partnership grant through F&WS,
+  an NSF Expedition in Computing Grant 1029711 to the University of Minnesota,
+  a postdoctoral fellowship awarded to J Zwart under NSF EAR-PF-1725386, as well as
+  a seed grant from the Digital Technology Center at the University of Minnesota.
+  Access to computing facilities was provided by the University of Minnesota Supercomputing Institute
+  and USGS Advanced Research Computing, USGS Yeti Supercomputer (https://doi.org/10.5066/F7D798MJ).
+  We thank North Temperate Lakes Long-Term Ecological Research (NSF DEB-1440297) and Global Lake Ecological Observatory Network (NSF #1702991).</p>
 
-    <ul>
-
-  </ul>
-build-environment: Multiple computer systems were used to generate these data, including linux, OSX. The open source language R was used on all systems, as well as the open-source model GLM.
+build-environment: Multiple computer systems were used to generate these data, including linux, OSX. The open source languages R and Python were used on all systems.
 
 process-date: !expr format(Sys.time(),'%Y%m%d')
 indirect-spatial: U.S.A.
@@ -45,5 +49,5 @@ latitude-res: 0.1
 longitude-res: 0.1
 data-name: Full data release
 data-description: >-
-  This is the landing page for 4 other data release units, described in the attributes section
+  This is the landing page for 6 other data release units, described in the attributes section
 file-format: parent data item for released data products

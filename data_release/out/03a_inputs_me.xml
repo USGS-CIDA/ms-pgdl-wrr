@@ -17,7 +17,7 @@
         <origin>Vipin Kumar</origin>
         <pubdate>2019</pubdate>
         <title>Process-guided deep learning water temperature predictions: 3a Lake Mendota inputs</title>
-        <geoform>Separate comma separated text files zipped into a single file</geoform>
+        <geoform>two separate comma separated text files</geoform>
         <pubinfo>
           <pubplace>Online (digital release)</pubplace>
           <publish>U.S. Geological Survey</publish>
@@ -44,7 +44,7 @@
       </citeinfo>
     </citation>
     <descript>
-      <abstract>Climate change has been shown to influence lake temperatures in different ways. To better understand the diversity of lake responses to climate change and give managers tools to manage individual lakes, we focused on improving prediction accuracy for daily water temperature profiles in 68 lakes in Minnesota and Wisconsin during 1980-2018.</abstract>
+      <abstract>This dataset includes model inputs that describe local weather conditions for Lake Mendota, WI. Weather data comes from two sources: locally measured (2009-2017) and gridded estimates (all other time periods). There are two comma-delimited files, one for weather data (one row per model timestep) and one for ice-flags, which are used by the process-guided deep learning model to determine whether to apply the energy conservation constraint (the constraint is not applied when the lake is presumed to be ice-covered). The ice-cover flag is a modeled output and therefore not a true measurement (see "Predictions" and "pb0" model type for the source of this prediction). This dataset is part of a larger data release of lake temperature model inputs and outputs for 68 lakes in the U.S. states of Minnesota and Wisconsin (http://dx.doi.org/10.5066/P9AQPIVD).</abstract>
       <purpose>Fisheries biology, limnological research, and climate science.</purpose>
     </descript>
     <timeperd>
@@ -72,7 +72,11 @@
     <keywords>
       <theme>
         <themekt>none</themekt>
+        <themekey>machine learning</themekey>
+        <themekey>deep learning</themekey>
+        <themekey>hybrid modeling</themekey>
         <themekey>water</themekey>
+        <themekey>temperature</themekey>
         <themekey>temperate lakes</themekey>
         <themekey>reservoirs</themekey>
         <themekey>modeling</themekey>
@@ -184,8 +188,8 @@
     </posacc>
     <lineage>
       <procstep>
-        <procdesc>At the core of the modeling framework is a lake hydrodynamic model that uses inputs of lake-specific properties and local meteorology to estimate water temperature. Our chosen model is the open source, General Lake Model (GLM) version 2.2.0. GLM is a one-dimensional dynamical model which simplifies lakes using a vertical approximation, where horizontal variability is ignored. GLM uses a Lagrangian approach to layer structure where layers can split and combine based on changing vertical gradients. GLM is a modern, implementation of other one-dimensional models. We used GLM to run individual lake simulations according to the processes described in Winslow et al. 2017. Outputs for water temperature were extracted at various depths and written or summarized to the files included in this set of data. The glmtools R package was used for this processing.</procdesc>
-        <procdate>20191011</procdate>
+        <procdesc>At the core of the modeling framework is a lake hydrodynamic model that uses inputs of lake-specific properties and local meteorology to estimate water temperature. Our chosen model is the open source, General Lake Model (GLM) version 2. GLM is a one-dimensional dynamical model which simplifies lakes using a vertical approximation, where horizontal variability is ignored. GLM uses a Lagrangian approach to layer structure where layers can split and combine based on changing vertical gradients. GLM is a modern, implementation of other one-dimensional models. We used GLM to run individual lake simulations according to the processes described in Winslow et al. 2017. Outputs for water temperature were extracted at various depths and written or summarized to the files included in this set of data. The glmtools R package was used for this processing.</procdesc>
+        <procdate>20191012</procdate>
       </procstep>
     </lineage>
   </dataqual>
@@ -215,7 +219,141 @@
     </horizsys>
   </spref>
   <eainfo>
-      </eainfo>
+    <detailed>
+      <enttyp>
+        <enttypl>mendota_meteo.csv</enttypl>
+        <enttypd>driver/input data for models that includes daily weather/meterological data</enttypd>
+        <enttypds>Producer Defined</enttypds>
+      </enttyp>
+      <attr>
+        <attrlabl>time</attrlabl>
+        <attrdef>Calendar date</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>NA</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>NA</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>ShortWave</attrlabl>
+        <attrdef>Daily average incoming shortwave radiation</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>W m^-2</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>LongWave</attrlabl>
+        <attrdef>Daily average incoming longwave radiation</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>NA</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>W m^-2</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>AirTemp</attrlabl>
+        <attrdef>Daily average air temperature</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>NA</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>degrees C</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>RelHum</attrlabl>
+        <attrdef>Daily average relative humidity</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>100</rdommax>
+            <attrunit>%</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>WindSpeed</attrlabl>
+        <attrdef>Daily average windspeed</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>m s^-1</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Rain</attrlabl>
+        <attrdef>Daily cumulative precipitation as rain</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>m day^-1</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Snow</attrlabl>
+        <attrdef>Daily cumulative precipitation as snow</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>m day^-1</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+    </detailed>
+    <detailed>
+      <enttyp>
+        <enttypl>mendota_pretrainer_ice_flags.csv</enttypl>
+        <enttypd>driver/input data for models that includes daily weather/meterological data</enttypd>
+        <enttypds>Producer Defined</enttypds>
+      </enttyp>
+      <attr>
+        <attrlabl>date</attrlabl>
+        <attrdef>Calendar date (for ice flags file)</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>NA</rdommin>
+            <rdommax>NA</rdommax>
+            <attrunit>NA</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>ice</attrlabl>
+        <attrdef>Flag for predicted ice cover from default GLM configuration ("pb0")</attrdef>
+        <attrdefs>NA</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>1</rdommax>
+            <attrunit>logical</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+    </detailed>
+  </eainfo>
   <distinfo>
     <distrib>
       <cntinfo>
@@ -239,7 +377,7 @@
     <stdorder>
       <digform>
         <digtinfo>
-          <formname>Separate comma separated text files zipped into a single file</formname>
+          <formname>two separate comma separated text files</formname>
         </digtinfo>
         <digtopt>
           <onlinopt>
@@ -255,7 +393,7 @@
     </stdorder>
   </distinfo>
   <metainfo>
-    <metd>20191011</metd>
+    <metd>20191012</metd>
     <metc>
       <cntinfo>
         <cntperp>
