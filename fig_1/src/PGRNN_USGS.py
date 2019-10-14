@@ -17,6 +17,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--data_path', default='fig_1/tmp/mendota/train/inputs')
 parser.add_argument('--restore_path', default='fig_1/tmp/mendota/pretrain/model')
 parser.add_argument('--save_path', default='fig_1/tmp/mendota/train/model')
+parser.add_argument('--preds_path', default='fig_1/tmp/mendota/train/out')
 args = parser.parse_args()
 print(args)
 
@@ -30,7 +31,7 @@ input_size = 9
 phy_size = 10
 n_steps = 353
 n_classes = 1 
-N_sec = 17
+N_sec = 19
 elam = 0.005
 ec_threshold = 24
 
@@ -481,4 +482,13 @@ with tf.Session() as sess:
     
     if args.save_path != '':
         saver.save(sess, os.path.join(args.save_path, "trained_model.ckpt"))
+        
+    # predict on test data, reshape to output file format, and save
+    loss_te,prd = sess.run([r_cost,pred], feed_dict = {x: x_train, y: y_test, m: m_test})
+    prd_o = np.zeros([n_depths,n_steps+int((N_sec-1)*n_steps/2)])
+    prd_o[:,:n_steps] = prd[0:n_depths,:,0]
+    for j in range(N_sec-1):
+         st_idx = n_steps-(int((j+1)*n_steps/2)-int(j*n_steps/2))   # handle even or odd cases
+         prd_o[:, n_steps+int(j*n_steps/2):n_steps+int((j+1)*n_steps/2)] = prd[(j+1)*n_depths:(j+2)*n_depths,st_idx:,0]
+    np.savetxt(os.path.join(args.preds_path, "predictions.csv"), prd_o, delimiter=',')
 
