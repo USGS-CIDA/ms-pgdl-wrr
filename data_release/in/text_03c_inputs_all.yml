@@ -1,0 +1,109 @@
+title: >-
+  Process-guided deep learning water temperature predictions: 3c All lakes historical inputs
+
+abstract: >-
+  This dataset includes model inputs that describe weather conditions for the 68 lakes included in this study. Weather data comes from gridded estimates (Mitchell et al. 2004).
+  There are two comma-delimited files, one for weather data (one row per model timestep) and one for ice-flags, which are used by the process-guided deep learning model to
+  determine whether to apply the energy conservation constraint (the constraint is not applied when the lake is presumed to be ice-covered).
+  The ice-cover flag is a modeled output and therefore not a true measurement (see "Predictions" and "pb0" model type for the source of this prediction).
+  This dataset is part of a larger data release of lake temperature model inputs and outputs for 68 lakes in the U.S.
+  states of Minnesota and Wisconsin (http://dx.doi.org/10.5066/P9AQPIVD).
+
+build-environment: Multiple computer systems were used to generate these data, including linux, OSX. The open source language R was used on all systems, as well as the open-source model GLM.
+
+process-date: !expr format(Sys.time(),'%Y%m%d')
+indirect-spatial: U.S.A.
+latitude-res: 0.1
+longitude-res: 0.1
+data-name: weather data and ice flags (model inputs)
+
+data-description: >-
+  Drivers indexed by lake used to drive lake models. NLDAS drivers are contemporary (1980-2018) meterology. Each folder contains a driver for each study lake,
+  and has identical attributes (described above). NLDAS drivers (68_lakes_meteo.zip) are described in
+  Mitchell et al. 2004.
+file-format: Separate comma-delimeted text files for each lake zipped into two single files
+
+
+entities:
+  -
+    data-name: 68_lakes_meteo.zip
+    data-description: >-
+      driver/input data for models that includes daily weather/meterological data
+    attributes:
+    -
+      attr-label: time
+      attr-def: Calendar date
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: ShortWave
+      attr-def: Daily average incoming shortwave radiation
+      attr-defs: NA
+      data-min: 0
+      data-max: NA
+      data-units: W m^-2
+    -
+      attr-label: LongWave
+      attr-def: Daily average incoming longwave radiation
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: W m^-2
+    -
+      attr-label: AirTemp
+      attr-def: Daily average air temperature
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: degrees C
+    -
+      attr-label: RelHum
+      attr-def: Daily average relative humidity
+      attr-defs: NA
+      data-min: 0
+      data-max: 100
+      data-units: >-
+        %
+    -
+      attr-label: WindSpeed
+      attr-def: Daily average windspeed
+      attr-defs: NA
+      data-min: 0
+      data-max: NA
+      data-units: m s^-1
+    -
+      attr-label: Rain
+      attr-def: Daily cumulative precipitation as rain
+      attr-defs: NA
+      data-min: 0
+      data-max: NA
+      data-units: m day^-1
+    -
+      attr-label: Snow
+      attr-def: Daily cumulative precipitation as snow
+      attr-defs: NA
+      data-min: 0
+      data-max: NA
+      data-units: m day^-1
+  -
+    data-name: 68_pretrainer_ice_flags.zip
+    data-description: >-
+      driver/input data for models that includes daily weather/meterological data
+    attributes:
+    -
+      attr-label: date
+      attr-def: Calendar date (for ice flags file)
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: ice
+      attr-def: >-
+        Flag for predicted ice cover from default GLM configuration ("pb0")
+      attr-defs: NA
+      data-min: 0
+      data-max: 1
+      data-units: logical

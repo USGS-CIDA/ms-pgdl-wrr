@@ -1,0 +1,31 @@
+title: >-
+  Process-guided deep learning water temperature predictions: 3 Model inputs (meteorological inputs and ice flags)
+
+abstract: >-
+  This dataset includes model inputs (specifically, weather and flags for predicted ice-cover) and is part of a larger data release of lake temperature model inputs and outputs for 68 lakes in the U.S.
+  states of Minnesota and Wisconsin (http://dx.doi.org/10.5066/P9AQPIVD).
+cross-cites:
+  -
+    authors: ['Kenneth E. Mitchell','Dag Lohmann','Paul R. Houser','Eric F. Wood','John C. Schaake','Alan Robock','Brian A. Cosgrove','Justin Sheffield','Qingyun Duan','Lifeng Luo','R. Wayne Higgins','Rachel T. Pinker','J. Dan Tarpley','Dennis P. Lettenmaier','Curtis H. Marshall','Jared K. Entin','Ming Pan','Wei Shi','Victor Koren','Jesse Meng','Bruce H. Ramsay','Andrew A. Bailey']
+    title: >-
+      The multi-institution North American Land Data Assimilation System (NLDAS): Utilizing multiple GCIP products and partners in a continental distributed hydrological modeling system
+    pubdate: 2004
+    link: http://dx.doi.org/10.1029/2003JD003823
+  -
+    authors: ['Matthew R. Hipsey', 'Louise C. Bruce', 'Casper Boon', 'Brendan Busch', 'Cayelan C. Carey', 'David P. Hamilton', 'Paul C. Hanson', 'Jordan S. Read', 'Eduardo de Sousa', 'Michael Weber', 'Luke A. Winslow']
+    title: >-
+      A General Lake Model (GLM 3.0) for linking with high-frequency sensor data from the Global Lake Ecological Observatory Network (GLEON).
+    pubdate: 2019
+    link: https://doi.org/10.5194/gmd-12-473-2019
+
+
+
+build-environment: Multiple computer systems were used to generate these data, including linux, OSX. The open source language R was used on all systems, as well as the open-source model GLM.
+
+process-date: !expr format(Sys.time(),'%Y%m%d')
+indirect-spatial: U.S.A.
+latitude-res: 0.1
+longitude-res: 0.1
+data-name: weather data and ice flags (model inputs)
+
+

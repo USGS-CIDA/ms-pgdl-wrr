@@ -1,8 +1,20 @@
 
 plot_data_sparsity <- function(){
   library(dplyr)
-  data <- readr::read_csv('~/Downloads/revision_Figure_1_results - Sheet1 (3).csv')#Sparse training results (2_prof_GLM-uncal) - Sheet1.csv; 'fig_1/in/Sparse training results.csv')
+  library(readr)
+  library(stringr)
 
+  eval_data <- readr::read_csv('data_release/out/me_RMSE.csv', col_types = 'iccd') %>%
+    filter(str_detect(exper_id, 'similar_[0-9]+')) %>%
+    mutate(col = case_when(
+      exper_model == 'pb' ~ '#1b9e77',
+      exper_model == 'dl' ~'#d95f02',
+      exper_model == 'pgdl' ~ '#7570b3'
+    ), pch = case_when(
+      exper_model == 'pb' ~ 21,
+      exper_model == 'dl' ~ 22,
+      exper_model == 'pgdl' ~ 23
+    ), n_prof = as.numeric(str_extract(exper_id, '[0-9]+')))
 
   png(filename = 'figures/figure_1_wrr.png', width = 8, height = 10, units = 'in', res = 200)
   par(omi = c(0,0,0.05,0.05), mai = c(1,1,0,0), las = 1, mgp = c(2,.5,0), cex = 1.5)
@@ -10,75 +22,31 @@ plot_data_sparsity <- function(){
   plot(NA, NA, xlim = c(2, 1000), ylim = c(4.7, 0.75),
        ylab = "", xlab = "", log = 'x', axes = FALSE) #'Test RMSE (°C)' "Training temperature profiles (#)"
 
-  # axis(1, at = c(-100,2, 10, 50, 100, 500, 980, 1e10), labels = c("", 2, 10, 50, 100, 500, 980, ""), tck = -0.01)
-  # axis(2, at = seq(0,10), las = 1, tck = -0.01)
+  n_profs <- c(2, 10, 50, 100, 500, 980)
 
-  pgrnn_offsets <- c(0.15, 0.5, 3, 7, 20, 30)
-  rnn_offsets <- -pgrnn_offsets
+  axis(1, at = c(-100, n_profs, 1e10), labels = c("", n_profs, ""), tck = -0.01)
+  axis(2, at = seq(0,10), las = 1, tck = -0.01)
 
-  pg_mean <- list(x = c(), y = c(), train = c())
-  pgto_mean <- list(x = c(), y = c(), train = c())
-  rnn_mean <- list(x = c(), y = c(), train = c())
-  glm_mean <- list(x = c(), y = c(), train = c())
-
-  for (x in c(2, 10, 50, 100, 500, 980)){
-    this_mean <- filter(data, n_profiles == x, Model == "GLM") %>% pull(`Test RMSE`) %>% mean
-    this_train <- filter(data, n_profiles == x, Model == "GLM") %>% pull(`Train RMSE`) %>% mean
-    glm_mean$train <- c(glm_mean$train, this_train)
-    glm_mean$y <- c(glm_mean$y, this_mean)
-
-    glm_mean$x <- c(glm_mean$x, x)
-    lines(c(x, x), c(filter(data, n_profiles == x, Model == "GLM") %>% pull(`Test RMSE`) %>% max(),
-                     filter(data, n_profiles == x, Model == "GLM") %>% pull(`Test RMSE`) %>% min()), col = '#1b9e77', lwd = 2.5)
+  # slight horizontal offsets so the markers don't overlap:
+  offsets <- data.frame(pgdl = c(0.15, 0.5, 3, 7, 20, 30)) %>%
+    mutate(dl = -pgdl, pb = 0, n_prof = n_profs)
 
 
-    this_mean <- filter(data, n_profiles == x, Model == "RNN") %>% pull(`Test RMSE`) %>% mean
-    this_train <- filter(data, n_profiles == x, Model == "RNN") %>% pull(`Train RMSE`) %>% mean
-    rnn_mean$train <- c(rnn_mean$train, this_train)
-    rnn_mean$y <- c(rnn_mean$y, this_mean)
-    rnn_mean$x <- c(rnn_mean$x, x+rnn_offsets[1])
-    lines(c(x+rnn_offsets[1], x+rnn_offsets[1]), c(filter(data, n_profiles == x, Model == "RNN") %>% pull(`Test RMSE`) %>% max(),
-                                                   filter(data, n_profiles == x, Model == "RNN") %>% pull(`Test RMSE`) %>% min()), col = '#d95f02', lwd = 2.5)
+  for (mod in c('pb','dl','pgdl')){
+    mod_data <- filter(eval_data, exper_model == mod)
+    mod_profiles <- unique(mod_data$n_prof)
+    for (mod_profile in mod_profiles){
+      ._d <- filter(mod_data, n_prof == mod_profile) %>% summarize(y0 = min(rmse), y1 = max(rmse), col = unique(col))
+      x_pos <- offsets %>% filter(n_prof == mod_profile) %>% pull(!!mod) + mod_profile
+      lines(c(x_pos, x_pos), c(._d$y0, ._d$y1), col = ._d$col, lwd = 2.5)
+    }
+    ._d <- group_by(mod_data, n_prof) %>% summarize(y = mean(rmse), col = unique(col), pch = unique(pch)) %>%
+      rename(x = n_prof) %>% arrange(x)
 
-    this_mean <- filter(data, n_profiles == x, Model == "PGRNN_pretrained_prev_yrs") %>% pull(`Test RMSE`) %>% mean
-    this_train <- filter(data, n_profiles == x, Model == "PGRNN_pretrained_prev_yrs") %>% pull(`Train RMSE`) %>% mean
-    pg_mean$train <- c(pg_mean$train, this_train)
-    pg_mean$y <- c(pg_mean$y, this_mean)
-    pg_mean$x <- c(pg_mean$x, x+pgrnn_offsets[1])
-    lines(c(x+pgrnn_offsets[1], x+pgrnn_offsets[1]), c(filter(data, n_profiles == x, Model == "PGRNN_pretrained_prev_yrs") %>% pull(`Test RMSE`) %>% max(),
-                                                       filter(data, n_profiles == x, Model == "PGRNN_pretrained_prev_yrs") %>% pull(`Test RMSE`) %>% min()), col = '#7570b3', lwd = 2.5)
-#
-#     this_mean <- filter(data, n_profiles == x, Model == "PGRNN") %>% pull(`Test RMSE`) %>% mean
-#     this_train <- filter(data, n_profiles == x, Model == "PGRNN") %>% pull(`Train RMSE`) %>% mean
-#     pgto_mean$train <- c(pgto_mean$train, this_train)
-#     pgto_mean$y <- c(pgto_mean$y, this_mean)
-#     pgto_mean$x <- c(pgto_mean$x, x)
-#     lines(c(x, x), c(filter(data, n_profiles == x, Model == "PGRNN") %>% pull(`Test RMSE`) %>% max(),
-#                                                        filter(data, n_profiles == x, Model == "PGRNN") %>% pull(`Test RMSE`) %>% min()), col = '#7570b3', lwd = 2.5)
+    lines(._d$x + tail(offsets[[mod]], nrow(._d)), ._d$y, col = ._d$col[1], lty = 'dashed')
+    points(._d$x + tail(offsets[[mod]], nrow(._d)), ._d$y, pch = ._d$pch[1], col = ._d$col[1], bg = 'white', lwd = 2.5, cex = 1.5)
 
-    rnn_offsets <- tail(rnn_offsets, -1L)
-    pgrnn_offsets <- tail(pgrnn_offsets, -1L)
   }
-
-  lines(glm_mean$x, glm_mean$y, col = '#1b9e77', lty = 'dashed')
-  points(glm_mean$x, glm_mean$y, col = '#1b9e77', pch = 21, bg = 'white', lwd = 2.5, cex = 1.5)
-  lines(rnn_mean$x, rnn_mean$y, col = '#d95f02', lty = 'dashed')
-  points(rnn_mean$x, rnn_mean$y, col = '#d95f02', pch = 22, bg = 'white', lwd = 2.5, cex = 1.5)
-  # lines(pgto_mean$x, pgto_mean$y, col = '#7570b3', lty = 'dashed')
-  # points(pgto_mean$x, pgto_mean$y, col = '#7570b3', pch = 23, bg = 'grey65', lwd = 2.5, cex = 1.5)
-
-  lines(pg_mean$x, pg_mean$y, col = '#7570b3', lty = 'dashed')
-  points(pg_mean$x, pg_mean$y, col = '#7570b3', pch = 23, bg = 'white', lwd = 2.5, cex = 1.5)
-
-  #points(glm_mean$x[1], glm_mean$y[1], col = '#1b9e77', bg = 'grey65', lwd = 2.5, pch = 23, lwd = 2.5, cex = 0.6)
-
-  message('PRGNN:', round(tail(pg_mean$y,1),2), "\nRNN:", round(tail(rnn_mean$y,1),2), '\nGLM:', round(tail(glm_mean$y, 1), 2))
-  message('PRGNN:', round(tail(pg_mean$train,1),2), "\nRNN:", round(tail(rnn_mean$train,1),2), '\nGLM:', round(tail(glm_mean$train, 1), 2))
-
-  message('GLM_500: ', round(tail(glm_mean$y,2)[1], 2), ' RNN_500:', round(tail(rnn_mean$y,2)[1], 2))
-  message('GLM_100: ', round(tail(glm_mean$y,3)[1], 2), ' RNN_100:', round(tail(rnn_mean$y,3)[1], 2))
-
-  # message('GLM_2: ', round(head(glm_mean$y,1), 2), ' PGDL_2: ', round(head(pg_mean$y,1), 2))
 
   points(2.2, 0.79, col = '#7570b3', pch = 23, bg = 'white', lwd = 2.5, cex = 1.5)
   text(2.3, 0.80, 'Process-Guided Deep Learning', pos = 4, cex = 1.1)

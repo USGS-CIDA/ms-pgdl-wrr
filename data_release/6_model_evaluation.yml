@@ -27,15 +27,13 @@ sources:
 targets:
   6_model_evaluation:
     depends:
-      - out/sp_test.csv
       - out/sp_RMSE.csv
-      - out/me_test.csv
       - out/me_RMSE.csv
+      - out/all_RMSE.csv
+      - out/me_RMSE_limited_training.csv
 
   out/sp_test.csv:
     command: merge_single_lake_test_files(target_name, pattern = I('sp_[a-z]+_test'), dir = I("../fig_2/yeti_sync/"))
-
-  # are dates getting shifted late by a day when GLM output DateTime POSIX is coerced to date?
 
   out/sp_RMSE.csv:
     command: calculate_RMSE(target_name, test_file = "out/sp_test.csv",
@@ -64,3 +62,13 @@ targets:
       "out/me_similar_predict_pgdl.csv",
       "out/me_similar_predict_pb.csv") # need to add "similar" for pb for rest of YETI files
 
+  out/me_RMSE_limited_training.csv:
+    command: file.copy('../fig_4/in/me_RMSE_limited_training.csv', to = target_name)
+
+  out/all_test.csv:
+    command: merge_multi_lake_test_files(target_name,
+      pattern = I("nhd_[0-9]+_test_all_profiles.csv"), dir = I("../fig_3/yeti_sync/"))
+
+  out/all_RMSE.csv:
+    command: calculate_hist_RMSE(target_name, test_file = "out/all_test.csv",
+      pred_ind = "tmp/historical_predictions.ind")

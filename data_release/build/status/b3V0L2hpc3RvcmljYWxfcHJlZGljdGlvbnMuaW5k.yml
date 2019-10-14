@@ -1,0 +1,11 @@
+version: 0.3.0
+name: out/historical_predictions.ind
+type: file
+hash: da421095d5bddad3a5a78f9cbab54248
+time: 2019-10-04 13:24:29 UTC
+depends:
+  5_historical_predictions_tasks.yml: 0377bd5323f22177cce73c8189091c99
+fixed: d3e9c998f420908aa44cfb5311aac3d0
+code:
+  functions: {}
+

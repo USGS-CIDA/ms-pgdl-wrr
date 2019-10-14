@@ -9,9 +9,13 @@
 .spyproject
 *__pycache__
 .httr-oauth
+*yeti_in
+**tasks.yml
+*data_release/tmp
+*fig_1/yeti_sync
+*fig_2/yeti_sync
 *fig_3/yeti_sync
 *fig_3/VM_shared_cache
-*fig_2/yeti_sync
 .Rhistory
 *.remake
 *.RDS

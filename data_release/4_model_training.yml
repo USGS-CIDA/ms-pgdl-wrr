@@ -23,6 +23,12 @@ targets:
   4_model_training:
     depends:
       - out/all_lakes_historical_training.csv
+      - out/me_season_training.csv
+      - out/sp_season_training.csv
+      - out/me_year_training.csv
+      - out/sp_year_training.csv
+      - out/sp_similar_training.csv
+      - out/me_similar_training.csv
 
 
   out/all_lakes_historical_training.csv:
@@ -46,17 +52,6 @@ targets:
   out/me_similar_training.csv:
     command: merge_single_lake_obs_files(target_name, pattern = I('me_train_[0159]'), dir = I("../fig_1/yeti_sync/"))
 
-  me_training_text:
-    command: >
-      list(title = I('Lake Mendota detailed  training data: Process-guided deep learning predictions of lake water temperature'))
-
-  sp_training_text:
-    command: >
-      list(title = I('Sparkling Lake detailed training data: Process-guided deep learning predictions of lake water temperature'))
-
-  all_lakes_historical_training_text:
-    command: yaml.load_file('in/text_training_all_lakes.yml')
-
   training_text:
     command: >
-      list(title = I('Training data: Process-guided deep learning predictions of lake water temperature'))
+      list(title = I('Process-guided deep learning water temperature predictions: 4 Training data'))

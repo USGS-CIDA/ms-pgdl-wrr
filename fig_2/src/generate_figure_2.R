@@ -1,15 +1,38 @@
 plot_seasons_years_sparsity <- function(){
   library(dplyr)
+  library(readr)
+  library(stringr)
 
-  data <- readr::read_csv('~/Downloads/revision_Figure_2_results - Sheet1 (7).csv')#'Figure 2 seasonal_yearly results - Sheet1 (2).csvfig_2/in/Figure 2 seasonal_yearly results - Sheet1.csv')
-
+  eval_data <- readr::read_csv('data_release/out/me_RMSE.csv', col_types = 'iccd') %>%
+    mutate(lake_id = 'M') %>%
+    rbind(readr::read_csv('data_release/out/sp_RMSE.csv', col_types = 'iccd') %>% mutate(lake_id = 'S')) %>%
+    filter(str_detect(exper_id, '[a-z]+_500')) %>%
+    mutate(col = case_when(
+      exper_model == 'pb' ~ '#1b9e77',
+      exper_model == 'dl' ~'#d95f02',
+      exper_model == 'pgdl' ~ '#7570b3'
+    ), pch = case_when(
+      exper_model == 'pb' ~ 21,
+      exper_model == 'dl' ~ 22,
+      exper_model == 'pgdl' ~ 23
+    ), x_pos = case_when(
+      exper_model == 'pb' ~ 1,
+      exper_model == 'dl' ~ 2,
+      exper_model == 'pgdl' ~ 3
+    ), x_bmp = case_when(
+      lake_id == 'S' ~ 0.1,
+      lake_id == 'M' ~ -0.1
+    ), cex = case_when(
+      exper_model == 'dl' ~ 3.5,
+      TRUE ~ 3.2
+    ))
 
   png(filename = 'figures/figure_2_wrr.png', width = 8, height = 4.5, units = 'in', res = 200)
   par(omi = c(0,0.4,0.05,0.25), mai = c(0.5,0.2,0,0), las = 1, mgp = c(2.3,.5,0))
   layout(mat = matrix(c(1,2,3), nrow = 1))
 
   set_plot <- function(text, panel){
-    plot(NA, NA, xlim = c(0.7, 3.3), ylim = c(3.3, .8),
+    plot(NA, NA, xlim = c(0.7, 3.3), ylim = c(3.0, .8),
          ylab = '', xlab = "", axes = FALSE, xaxs = 'i', yaxs = 'i')
     if (panel == 'a)'){
       axis(2, at = seq(0,10, by = 0.5), las = 1, tck = -0.01, cex.axis = 1.4)
@@ -31,82 +54,33 @@ plot_seasons_years_sparsity <- function(){
 
   }
 
-  sp_bmp <- 0.1
-  me_bmp <- -0.1
-  RNN_x <- 2
-  PGRNN_x <- 3
-  GLM_x <- 1
-
-  set_plot("Train & test similar", "a)")
-
-  plot_data <- data %>% filter(substr(Experiment, 1, 7) == 'similar') %>% mutate(lake = substr(Experiment, 12, length(Experiment)))
 
   plot_all_models <- function(plot_data){
-    lines(c(RNN_x+me_bmp, RNN_x+me_bmp), c(filter(plot_data, lake == "mendota", Model == 'RNN') %>% pull(`Test RMSE`) %>% max(),
-                                           filter(plot_data, lake == "mendota", Model == 'RNN') %>% pull(`Test RMSE`) %>% min()), lwd = 1.5, col = '#d95f02')
-    points(RNN_x+me_bmp, filter(plot_data, lake == "mendota", Model == 'RNN') %>% pull(`Test RMSE`) %>% mean, pch = 22, lwd = 1.5, cex = 3.5, bg = 'white', col = '#d95f02', ljoin = 1)
-    text(RNN_x+me_bmp, filter(plot_data, lake == "mendota", Model == 'RNN') %>% pull(`Test RMSE`) %>% mean, "M", font = 2)
-    message("Mendota RNN:", filter(plot_data, lake == "mendota", Model == 'RNN') %>% pull(`Test RMSE`) %>% mean)
 
-    ME_mean <- filter(plot_data, lake == "mendota", Model == 'PGRNN_pretrained_prev_yrs') %>% pull(`Test RMSE`) %>% mean
-    message("Mendota PGRNN: ", round(ME_mean, 2))
-    lines(c(PGRNN_x+me_bmp, PGRNN_x+me_bmp), c(filter(plot_data, lake == "mendota", Model == 'PGRNN_pretrained_prev_yrs') %>% pull(`Test RMSE`) %>% max(),
-                                               filter(plot_data, lake == "mendota", Model == 'PGRNN_pretrained_prev_yrs') %>% pull(`Test RMSE`) %>% min()), lwd = 1.5, col = '#7570b3')
-    points(PGRNN_x+me_bmp, ME_mean, pch = 23, lwd = 1.5, cex = 3.2, bg = 'white', col = '#7570b3', ljoin = 1)
-    text(PGRNN_x+me_bmp, ME_mean, "M", font = 2)
+    for (mod in c('pb','dl','pgdl')){
+      mod_data <- filter(plot_data, exper_model == mod)
+      for (lake_id in c('S','M')){
 
-    # ME_mean <- filter(plot_data, lake == "mendota", Model == 'PGRNN_pretrained_prev_yrs') %>% pull(`Test RMSE`) %>% mean
-    # lines(c(PGRNN_x+me_bmp-0.05, PGRNN_x+me_bmp-0.05), c(filter(plot_data, lake == "mendota", Model == 'PGRNN_pretrained_prev_yrs') %>% pull(`Test RMSE`) %>% max(),
-    #                                            filter(plot_data, lake == "mendota", Model == 'PGRNN_pretrained_prev_yrs') %>% pull(`Test RMSE`) %>% min()), lwd = 1.5, col = '#FF007f')
-    # points(PGRNN_x+me_bmp-0.05, ME_mean, pch = 23, lwd = 1.5, cex = 3.2, bg = 'white', col = '#FF007f')
-    # text(PGRNN_x+me_bmp-0.05, ME_mean, "M", font = 2)
-
-
-
-    ME_mean <- filter(plot_data, lake == "mendota", Model == 'GLM') %>% pull(`Test RMSE`) %>% mean
-    lines(c(GLM_x+me_bmp, GLM_x+me_bmp), c(filter(plot_data, lake == "mendota", Model == 'GLM') %>% pull(`Test RMSE`) %>% max(),
-                                           filter(plot_data, lake == "mendota", Model == 'GLM') %>% pull(`Test RMSE`) %>% min()), lwd = 1.5, col = '#1b9e77')
-    points(GLM_x+me_bmp, ME_mean, pch = 21, lwd = 1.5, cex = 3.2, bg = 'white', col = '#1b9e77', ljoin = 1)
-    text(GLM_x+me_bmp, ME_mean, "M", font = 2)
-    message("Mendota GLM:", round(ME_mean,2))
-
-    SP_mean <- filter(plot_data, lake == "sparkling", Model == 'RNN') %>% pull(`Test RMSE`) %>% mean
-    lines(c(RNN_x+sp_bmp, RNN_x+sp_bmp), c(filter(plot_data, lake == "sparkling", Model == 'RNN') %>% pull(`Test RMSE`) %>% max(),
-                                           filter(plot_data, lake == "sparkling", Model == 'RNN') %>% pull(`Test RMSE`) %>% min()), lwd = 1.5, col = '#d95f02')
-    points(RNN_x+sp_bmp, SP_mean, pch = 22, lwd = 1.5, cex = 3.5, bg = 'white', col = '#d95f02', ljoin = 1)
-    text(RNN_x+sp_bmp, SP_mean, "S", font = 2)
-
-    SP_mean <- filter(plot_data, lake == "sparkling", Model == 'PGRNN_pretrained_prev_yrs') %>% pull(`Test RMSE`) %>% mean
-    lines(c(PGRNN_x+sp_bmp, PGRNN_x+sp_bmp), c(filter(plot_data, lake == "sparkling", Model == 'PGRNN_pretrained_prev_yrs') %>% pull(`Test RMSE`) %>% max(),
-                                               filter(plot_data, lake == "sparkling", Model == 'PGRNN_pretrained_prev_yrs') %>% pull(`Test RMSE`) %>% min()), lwd = 1.5, col = '#7570b3')
-    points(PGRNN_x+sp_bmp, SP_mean, pch = 23, lwd = 1.5, cex = 3.2, bg = 'white', col = '#7570b3', ljoin = 1)
-    text(PGRNN_x+sp_bmp, SP_mean, "S", font = 2)
-    message("Sparkling PGDL:", SP_mean)
-
-    SP_mean <- filter(plot_data, lake == "sparkling", Model == 'GLM') %>% pull(`Test RMSE`) %>% mean(na.rm = T)
-    lines(c(GLM_x+sp_bmp, GLM_x+sp_bmp), c(filter(plot_data, lake == "sparkling", Model == 'GLM') %>% pull(`Test RMSE`) %>% max(na.rm = T),
-                                           filter(plot_data, lake == "sparkling", Model == 'GLM') %>% pull(`Test RMSE`) %>% min(na.rm = T)), lwd = 1.5, col = '#1b9e77')
-    points(GLM_x+sp_bmp, SP_mean, pch = 21, lwd = 1.5, cex = 3.2, bg = 'white', col = '#1b9e77', ljoin = 1)
-    text(GLM_x+sp_bmp, SP_mean, "S", font = 2)
-
-
-    message("Sparkling GLM:", SP_mean)
+        ._d <- filter(mod_data, lake_id == !!lake_id) %>%
+          summarize(y0 = min(rmse), y1 = max(rmse), y = mean(rmse),
+                    x0 = mean(x_pos + x_bmp), x1 = mean(x_pos + x_bmp),
+                    col = head(col,1), pch = head(pch,1), cex = head(cex,1))
+        lines(c(._d[c('x0','x1')]), c(._d[c('y0','y1')]), col = ._d$col, lwd = 2.5)
+        points(._d$x0, ._d$y, pch = ._d$pch, lwd = 1.5, cex = ._d$cex, bg = 'white', col = ._d$col, ljoin = 1)
+        text(._d$x0, ._d$y, lake_id, font = 2)
+      }
+    }
   }
 
-  plot_all_models(plot_data)
+  set_plot("Train & test similar", "a)")
+  plot_all_models(filter(eval_data, str_detect(exper_id, 'similar_[0-9]+')))
 
   set_plot(c("Train: coldest years","Test: warmest years"), "b)")
+  plot_all_models(filter(eval_data, str_detect(exper_id, 'year_[0-9]+')))
 
-  plot_data <- data %>% filter(substr(Experiment, 1, 4) == 'year') %>% mutate(lake = substr(Experiment, 10, length(Experiment)))
-
-  plot_all_models(plot_data)
 
   set_plot(c("Train: spring, fall, winter","Test: summer"), "c)")
-  # seasons here...
-  plot_data <- data %>% filter(substr(Experiment, 1, 4) == 'seas') %>% mutate(lake = substr(Experiment, 12, length(Experiment)))
-
-  plot_all_models(plot_data)
-
+  plot_all_models(filter(eval_data, str_detect(exper_id, 'season_[0-9]+')))
   dev.off()
 
 }

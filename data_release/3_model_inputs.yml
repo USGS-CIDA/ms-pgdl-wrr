@@ -25,10 +25,40 @@ targets:
   3_model_inputs:
     depends:
       - out/meteo_inputs.zip
+      - out/mendota_meteo.csv
+      - out/68_pretrainer_ice_flags.zip
+      - out/sparkling_meteo.csv
+      - src/task_utils.R
 
 
-  out/meteo_inputs.zip:
+  out/mendota_meteo.csv:
+    command: rewrite_meteo('../fig_1/yeti_sync/me_meteo.csv', target_name)
+
+  out/mendota_pretrainer_ice_flags.csv:
+    command: ice_from_GLM_feather(target_name, min_date = I("1980-04-02"),
+      "in/Mendota_temperatures.feather")
+
+  out/sparkling_pretrainer_ice_flags.csv:
+    command: ice_from_GLM_feather(target_name, min_date = I("1980-04-02"),
+      "in/Sparkling_temperatures.feather")
+
+  out/sparkling_meteo.csv:
+    command: rewrite_meteo('../fig_2/yeti_sync/sp_meteo.csv', target_name)
+
+  out/68_lakes_meteo.zip:
     command: bundle_meteo_files(target_name, lake_ids, pattern = I('_meteo.csv'))
 
-  inputs_text:
-    command: yaml.load_file("in/text_drivers.yml")
+  historical_ice_plan:
+    command: create_ice_plan(lake_ids)
+
+  3_model_ice_tasks.yml:
+    command: create_ice_makefile(target_name, historical_ice_plan,
+      final_targets = I('out/68_pretrainer_ice_flags.zip'), finalize_funs = I('zip_ice'))
+
+  out/68_pretrainer_ice_flags.zip:
+    command: scmake(I('68_pretrainer_ice_flags.zip_promise'), remake_file = '3_model_ice_tasks.yml')
+
+
+
+
+
