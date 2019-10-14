@@ -139,7 +139,7 @@ load_npy_df <- function(filepath){
 }
 
 combine_XJ_npy_similar <- function(fileout, n_depths, ...){
-  npy_files <- c(...)
+  npy_files <- file.path(getwd(), c(...))
 
   dir_path <- dirname(npy_files) %>% unique()
   file_names <- basename(npy_files)

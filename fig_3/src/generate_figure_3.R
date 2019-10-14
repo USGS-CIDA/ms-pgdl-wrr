@@ -6,8 +6,12 @@ plot_calibrated_figure_3 <- function(){
   library(readr)
   library(tidyr)
   library(beanplot)
+  library(sbtools) # see https://github.com/USGS-R/sbtools
 
-  eval_data <- readr::read_csv('data_release/out/all_RMSE.csv', col_types = 'icccd')
+  all_68_file <- tempfile('68_', fileext = '.csv')
+  item_file_download('5d925048e4b0c4f70d0d0596', names = 'all_RMSE.csv', destinations = mendota_file)
+
+  eval_data <- readr::read_csv(all_68_file, col_types = 'icccd')
 
   png(filename = 'figures/figure_3_wrr.png', width = 7, height = 7, units = 'in', res = 200)
   par(omi = c(0.6,0,0.1,0.2), mai = c(0.2,0.8,0,0), las = 1, mgp = c(2.2,0.8,0))

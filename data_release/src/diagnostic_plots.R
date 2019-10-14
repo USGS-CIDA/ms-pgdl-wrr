@@ -74,7 +74,7 @@ fig_2_old_data <- readr::read_csv('~/Downloads/revision_Figure_1_results - Sheet
 
 
 fig_2 = read_csv('data_release/out/me_RMSE.csv') %>% rowwise() %>% mutate(n_profiles = {as.numeric(strsplit(exper_id, '[_]')[[1]][2])}) %>%
-  ungroup() %>% filter(substr(exper_id, start = 1, stop = 7) == 'similar') %>% select(-exper_id) %>% rename(new_rmse = rmse) %>%
+  ungroup() %>% filter(substr(exper_id, start = 1, stop = 7) == 'similar') %>% select(-exper_id) %>% rename(new_rmse = rmse, exper_model = model_type) %>%
   left_join(fig_2_old_data, by = c('exper_model','exper_n','n_profiles')) %>%
   mutate(col = case_when(
     n_profiles == 980 ~ '#e41a1c',
@@ -166,10 +166,10 @@ fig_3_old_data <- readr::read_csv('~/Downloads/revision_Figure_2_results - Sheet
     exper_type == 'similar' ~ 'similar'
   ), exper_n = {as.numeric(strsplit(exper_n, '[_]')[[1]][2])}) %>% ungroup() %>% select(exper_n, exper_model, old_rmse, exper_type, lake_id)
 
-fig_3 <- purrr::map(c('data_release/out/sp_RMSE.csv', 'out/me_RMSE.csv'), function(x) {
+fig_3 <- purrr::map(c('data_release/out/sp_RMSE.csv', 'data_release/out/me_RMSE.csv'), function(x) {
   lake_id <- strsplit(basename(x), '[_]')[[1]][1]
   read_csv(x) %>% filter(!exper_id %in% c('similar_2', 'similar_10', 'similar_50', 'similar_100', 'similar_980')) %>% rowwise() %>% mutate(exper_type = {strsplit(exper_id, '[_]')[[1]][1]}) %>%
-    ungroup() %>% select(-exper_id) %>% rename(new_rmse = rmse) %>% mutate(lake_id = lake_id)
+    ungroup() %>% select(-exper_id) %>% rename(new_rmse = rmse, exper_model = model_type) %>% mutate(lake_id = lake_id)
   }) %>% purrr::reduce(rbind) %>%
   left_join(fig_3_old_data, by = c('exper_n','exper_model','exper_type','lake_id')) %>%
   mutate(col = case_when(

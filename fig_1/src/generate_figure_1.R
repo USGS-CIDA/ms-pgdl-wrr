@@ -3,24 +3,27 @@ plot_data_sparsity <- function(){
   library(dplyr)
   library(readr)
   library(stringr)
+  library(sbtools) # see https://github.com/USGS-R/sbtools
 
-  eval_data <- readr::read_csv('data_release/out/me_RMSE.csv', col_types = 'iccd') %>%
+  mendota_file <- tempfile('me_', fileext = '.csv')
+  item_file_download('5d925066e4b0c4f70d0d0599', names = 'me_RMSE.csv', destinations = mendota_file)
+  eval_data <- readr::read_csv(mendota_file, col_types = 'iccd') %>%
     filter(str_detect(exper_id, 'similar_[0-9]+')) %>%
     mutate(col = case_when(
-      exper_model == 'pb' ~ '#1b9e77',
-      exper_model == 'dl' ~'#d95f02',
-      exper_model == 'pgdl' ~ '#7570b3'
+      model_type == 'pb' ~ '#1b9e77',
+      model_type == 'dl' ~'#d95f02',
+      model_type == 'pgdl' ~ '#7570b3'
     ), pch = case_when(
-      exper_model == 'pb' ~ 21,
-      exper_model == 'dl' ~ 22,
-      exper_model == 'pgdl' ~ 23
+      model_type == 'pb' ~ 21,
+      model_type == 'dl' ~ 22,
+      model_type == 'pgdl' ~ 23
     ), n_prof = as.numeric(str_extract(exper_id, '[0-9]+')))
 
   png(filename = 'figures/figure_1_wrr.png', width = 8, height = 10, units = 'in', res = 200)
   par(omi = c(0,0,0.05,0.05), mai = c(1,1,0,0), las = 1, mgp = c(2,.5,0), cex = 1.5)
 
   plot(NA, NA, xlim = c(2, 1000), ylim = c(4.7, 0.75),
-       ylab = "", xlab = "", log = 'x', axes = FALSE) #'Test RMSE (°C)' "Training temperature profiles (#)"
+       ylab = "Test RMSE (°C)", xlab = "Training temperature profiles (#)", log = 'x', axes = FALSE) #'Test RMSE (°C)' "Training temperature profiles (#)"
 
   n_profs <- c(2, 10, 50, 100, 500, 980)
 
@@ -33,7 +36,7 @@ plot_data_sparsity <- function(){
 
 
   for (mod in c('pb','dl','pgdl')){
-    mod_data <- filter(eval_data, exper_model == mod)
+    mod_data <- filter(eval_data, model_type == mod)
     mod_profiles <- unique(mod_data$n_prof)
     for (mod_profile in mod_profiles){
       ._d <- filter(mod_data, n_prof == mod_profile) %>% summarize(y0 = min(rmse), y1 = max(rmse), col = unique(col))
