@@ -22,7 +22,7 @@ tf.reset_default_graph()
 random.seed(9001)
 
 ''' Declare constant hyperparameters '''
-learning_rate = 0.006
+learning_rate = 0.005
 epochs = 2 #400
 state_size = 21
 input_size = 9

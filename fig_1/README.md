@@ -5,7 +5,7 @@ grandparent directory of this README.md file).
 
 ## Configure a python environment
 
-Install Anaconda Distribution (https://www.anaconda.com/distribution/) if needed.
+Install Anaconda Distribution for Python 2.7 (https://www.anaconda.com/distribution/) if needed.
 
 We created an Anaconda environment and saved it with this command:
 ```shell script
