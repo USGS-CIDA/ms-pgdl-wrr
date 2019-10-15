@@ -6,17 +6,17 @@ plot_figure_4 <- function(){
   library(sbtools) # see https://github.com/USGS-R/sbtools
 
   mendota_file <- tempfile('me_', fileext = '.csv')
-  sparkling_file <- tempfile('sp_', fileext = '.csv')
+  mendota_lim_file <- tempfile('me_lim_', fileext = '.csv')
   item_file_download('5d925066e4b0c4f70d0d0599', names = 'me_RMSE.csv', destinations = mendota_file)
-  item_file_download('5d92507be4b0c4f70d0d059b', names = 'sp_RMSE.csv', destinations = sparkling_file)
+  item_file_download('5d925066e4b0c4f70d0d0599', names = 'me_RMSE_limited_training.csv', destinations = mendota_lim_file)
 
   eval_data <- readr::read_csv(mendota_file, col_types = 'iccd') %>%
     filter(model_type == 'pgdl') %>%
-    rbind(readr::read_csv(sparkling_file, col_types = 'iccd'))
+    rbind(readr::read_csv(mendota_lim_file, col_types = 'iccd'))
 
 
-    png(filename = 'figures/figure_4_wrr.png', width = 8, height = 4.5, units = 'in', res = 200)
-    par(omi = c(0,0,0,0), mai = c(0.3,0.75,0.05,0.05), las = 1, mgp = c(2.5,.5,0), cex = 1)
+  png(filename = 'figures/figure_4_wrr.png', width = 8, height = 4.5, units = 'in', res = 200)
+  par(omi = c(0,0,0,0), mai = c(0.3,0.75,0.05,0.05), las = 1, mgp = c(2.5,.5,0), cex = 1)
 
 
 
