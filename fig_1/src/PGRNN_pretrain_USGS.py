@@ -16,20 +16,19 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--data_path', default='fig_1/tmp/mendota/pretrain/inputs/ready')
 parser.add_argument('--save_path', default='fig_1/tmp/mendota/pretrain/model')
 args = parser.parse_args()
-print(args)
 
 tf.reset_default_graph()
 random.seed(9001)
 
 ''' Declare constant hyperparameters '''
-learning_rate = 0.006
+learning_rate = 0.005
 epochs = 2 #400
 state_size = 21
 input_size = 9
 phy_size = 10
 n_steps = 353
 n_classes = 1 
-N_sec = 17
+N_sec = 19
 elam = 0.005
 ec_threshold = 24
 
@@ -82,7 +81,7 @@ m_s = tf.reshape(m,[-1,1])
 
 #cost = tf.sqrt(reduce_mean(tf.square(tf.substract())))
 r_cost = tf.sqrt(tf.reduce_sum(tf.square(tf.multiply((pred_s-y_s),m_s)))/tf.reduce_sum(m_s))
-
+print('finished defining r_cost')
 
 #plos = 0
 #pred_d = 1000*(1-(pred+288.9414)*((pred-3.9863)**2)/(508929.2*(pred+68.12963))) # density
@@ -206,7 +205,7 @@ def calculate_lake_energy(temps, densities, depth_areas):
     dz = 0.5 #thickness for each layer, hardcoded for now
     cw = 4186 #specific heat of water
 #    energy = torch.empty_like(temps[0,:])
-    n_depths = 50
+    #n_depths = 50
 #    depth_areas = depth_areas.view(n_depths,1).expand(n_depths, temps.size()[1])
 
 #    print(depth_areas)
@@ -431,27 +430,27 @@ m_tr_2 = mask[:,data_chunk_size:(data_chunk_size*2)]
 
 
 
-x_train_1 = np.zeros([50*N_sec,n_steps,input_size])
-y_train_1 = np.zeros([50*N_sec,n_steps])
-p_train_1 = np.zeros([50*N_sec,n_steps,phy_size])
-m_train_1 = np.zeros([50*N_sec,n_steps])
+x_train_1 = np.zeros([n_depths*N_sec,n_steps,input_size])
+y_train_1 = np.zeros([n_depths*N_sec,n_steps])
+p_train_1 = np.zeros([n_depths*N_sec,n_steps,phy_size])
+m_train_1 = np.zeros([n_depths*N_sec,n_steps])
 
-x_train_2 = np.zeros([50*N_sec,n_steps,input_size])
-y_train_2 = np.zeros([50*N_sec,n_steps])
-p_train_2 = np.zeros([50*N_sec,n_steps,phy_size])
-m_train_2 = np.zeros([50*N_sec,n_steps])
+x_train_2 = np.zeros([n_depths*N_sec,n_steps,input_size])
+y_train_2 = np.zeros([n_depths*N_sec,n_steps])
+p_train_2 = np.zeros([n_depths*N_sec,n_steps,phy_size])
+m_train_2 = np.zeros([n_depths*N_sec,n_steps])
 
 
 
 for i in range(1,N_sec+1):
-    x_train_1[(i-1)*50:i*50,:,:]=x_tr_1[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2),:]
-    y_train_1[(i-1)*50:i*50,:]=y_tr_1[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2)]
-    p_train_1[(i-1)*50:i*50,:,:]=p_tr_1[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2),:]
-    m_train_1[(i-1)*50:i*50,:]=m_tr_1[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2)]
-    x_train_2[(i-1)*50:i*50,:,:]=x_tr_2[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2),:]
-    y_train_2[(i-1)*50:i*50,:]=y_tr_2[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2)]
-    p_train_2[(i-1)*50:i*50,:,:]=p_tr_2[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2),:]
-    m_train_2[(i-1)*50:i*50,:]=m_tr_2[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2)]
+    x_train_1[(i-1)*n_depths:i*n_depths,:,:]=x_tr_1[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2),:]
+    y_train_1[(i-1)*n_depths:i*n_depths,:]=y_tr_1[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2)]
+    p_train_1[(i-1)*n_depths:i*n_depths,:,:]=p_tr_1[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2),:]
+    m_train_1[(i-1)*n_depths:i*n_depths,:]=m_tr_1[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2)]
+    x_train_2[(i-1)*n_depths:i*n_depths,:,:]=x_tr_2[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2),:]
+    y_train_2[(i-1)*n_depths:i*n_depths,:]=y_tr_2[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2)]
+    p_train_2[(i-1)*n_depths:i*n_depths,:,:]=p_tr_2[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2),:]
+    m_train_2[(i-1)*n_depths:i*n_depths,:]=m_tr_2[:,int((i-1)*n_steps/2):int((i+1)*n_steps/2)]
 
 
 x_f = np.concatenate((x_train_1,x_train_2),axis=0)
@@ -470,6 +469,7 @@ with tf.Session() as sess:
     
         
     for epoch in range(epochs):
+        print('epoch %s' % epoch)
 #        
 #        for i in range(total_batch - 1): # better code?
         _, loss,rc,ec,aa,bb,cc = sess.run(
@@ -480,7 +480,7 @@ with tf.Session() as sess:
                         m: m_train_1,
                         unsup_inputs: x_f,
                         unsup_phys_data: p_f,
-                        bt_sz: 50*N_sec
+                        bt_sz: n_depths*N_sec
             })
         
         if epoch%1==0:
@@ -497,7 +497,7 @@ with tf.Session() as sess:
                         m: m_train_2,
                         unsup_inputs: x_f,
                         unsup_phys_data: p_f,
-                        bt_sz: 50*N_sec
+                        bt_sz: n_depths*N_sec
             })
         
         if epoch%1==0:
