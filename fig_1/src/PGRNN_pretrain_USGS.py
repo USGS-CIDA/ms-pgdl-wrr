@@ -22,7 +22,7 @@ random.seed(9001)
 
 ''' Declare constant hyperparameters '''
 learning_rate = 0.005
-epochs = 2 #400
+epochs = 400
 state_size = 21
 input_size = 9
 phy_size = 10

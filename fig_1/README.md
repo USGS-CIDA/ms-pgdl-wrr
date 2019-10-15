@@ -5,29 +5,15 @@ grandparent directory of this README.md file).
 
 ## Configure a python environment
 
-Install Anaconda Distribution for Python 2.7 (https://www.anaconda.com/distribution/) if needed.
-
-We created and saved an Anaconda environment with these commands:
-```shell script
-## shell; no need to run these lines ##
-conda create -n pgdl_a python=2.7.15 
-conda install -n pgdl_a tensorflow=1.14.0 # to use GPUs use tensorflow-gpu=1.12.0
-conda install -n pgdl_a pandas=0.22.0 requests=2.18.4 scikit-learn=0.20.1
-conda install -n pgdl_a -c conda-forge feather-format=0.4.0
-conda activate pgdl_a
-pip install sciencebasepy
-conda deactivate
-conda env export -n pgdl_a | grep -v "^prefix: " > fig_1/env_pgdl_a.yml
-```
-
-You can now recreate and load that environment with these commands:
+Install Anaconda Distribution for Python 2.7 (https://www.anaconda.com/distribution/) if needed. Build and
+activate the saved Anaconda environment from fig_1/env_pgdl_a.yml<sup>1</sup> with these commands:
 ```shell script
 ## shell, working directory = ms-pgdl-wrr ##
 conda env create -f fig_1/env_pgdl_a.yml -n pgdl_a
 conda activate pgdl_a
 ```
 
-After these commands, we recommend starting up python in a separate window so that variables created in the following
+After these commands, we recommend starting up python in a second window so that variables created in the following
 code snippets can persist between snippets.
 ```shell script
 ## NEW shell, same working directory ##
@@ -166,3 +152,28 @@ python fig_1/src/PGRNN_USGS.py \
   --preds_path fig_1/tmp/mendota/train/out
 ```
 where `restore_path` in this training command equals `save_path` from the pretraining command.
+
+### Exit
+
+Now that training is complete, if you plan to use either of the open shells for other operations,
+you may want to deactivate the `pgdl_a` conda environment before proceeding:
+```shell script
+## shell ##
+conda deactivate
+```
+
+
+## Footnote
+
+<sup>1</sup>We created the Anaconda environment with these commands:
+```shell script
+## shell; no need to run these lines ##
+conda create -n pgdl_a python=2.7.15 
+conda install -n pgdl_a tensorflow=1.14.0 # to use GPUs use tensorflow-gpu=1.12.0
+conda install -n pgdl_a pandas=0.22.0 requests=2.18.4 scikit-learn=0.20.1
+conda install -n pgdl_a -c conda-forge feather-format=0.4.0
+conda activate pgdl_a
+pip install sciencebasepy
+conda deactivate
+conda env export -n pgdl_a | grep -v "^prefix: " > fig_1/env_pgdl_a.yml
+```
