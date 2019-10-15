@@ -1,3 +1,5 @@
+# https://github.com/jdwillard19/lake_modeling/blob/e024238617f00b0a34a18698bd1aff5484d87005/src/scripts/manylakes2/pgrnn_figure3.py
+
 """This script was run to create the data for Figure 3 in the Read et al 2019 WRR submission (Jared 09/2019)"""
 from __future__ import print_function
 import datetime
@@ -42,7 +44,7 @@ current_dt = datetime.datetime.now()
 print(str(current_dt))
 
 # trials to average at end
-n_trials = 3
+n_trials = 5
 err_per_trial = np.empty((n_trials))
 
 
@@ -73,7 +75,7 @@ data_dir = "../../data/processed/WRR_69Lake/"+lakename+"/"
 (trn_data, all_data, all_phys_data, all_dates,
  hypsography) = buildLakeDataForRNNPretrain(lakename, data_dir, seq_length, n_features,
                                             win_shift=win_shift, begin_loss_ind=begin_loss_ind,
-                                            excludeTest=True)
+                                            excludeTest=False)
 for trial in range(n_trials): #training loop
     print("trial ", trial)
 
@@ -323,17 +325,9 @@ for trial in range(n_trials): #training loop
             #zero the parameter gradients
             optimizer.zero_grad()
 
-        avg_loss = avg_loss / batches_done
-        if avg_loss < min_loss:  #save model if best
-            if save:
-                if verbose:
-                    print("saved at", save_path)
-                saveModel(lstm_net.state_dict(), optimizer.state_dict(), save_path)
-
-            min_loss = avg_loss
-            ep_min_mse = epoch +1
 
     print("pre-train finished")
+    saveModel(lstm_net.state_dict(), optimizer.state_dict(), save_path)
     from pytorch_data_operations import buildLakeDataForRNN_manylakes_finetune2, \
                                         parseMatricesFromSeqs
 
@@ -352,19 +346,19 @@ for trial in range(n_trials): #training loop
     win_shift = 176 #how much to slide the window on training set each time
     data_dir = "../../data/processed/WRR_69Lake/"+lakename+"/"
     pretrain_path = "../../../models/WRR_69Lake/"+lakename+"/pretrain_experiment_trial"+str(trial)
-    save_path = "../../../models/WRR_69Lake/"+lakename+"/finetune_trial"+str(trial)
+    save_path = "../../../models/WRR_69Lake/"+lakename+"/pgrnn_finetune_trial"+str(trial)
 
     ###############################
     # data preprocess
     ##################################
     #create train and test sets
-    (trn_data, trn_dates, tst_data, tst_dates, unique_tst_dates, all_data, all_phys_data, 
+    (trn_data, trn_dates, tst_data, tst_dates, unique_tst_dates, all_data, all_phys_data,
      all_dates, hypsography) = buildLakeDataForRNN_manylakes_finetune2(lakename, \
                                                             data_dir, \
                                                             seq_length, n_features, \
                                                             win_shift=win_shift, \
                                                             begin_loss_ind=begin_loss_ind, \
-                                                            correlation_check=True, \
+                                                            latter_third_test=True, \
                                                             outputFullTestMatrix=True, \
                                                             sparseTen=False, \
                                                             realization='none', \
@@ -597,4 +591,4 @@ for trial in range(n_trials): #training loop
 #print results
 print(err_per_trial)
 print(err_per_trial[:].mean())
-averageTrialsToFinalOutputFullData(lakename, trials=2, PGRNN=True)
+averageTrialsToFinalOutputFullData(lakename, trials=5, PGRNN=True)
