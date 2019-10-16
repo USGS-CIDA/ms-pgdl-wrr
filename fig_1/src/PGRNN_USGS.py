@@ -399,5 +399,5 @@ with tf.Session() as sess:
     for j in range(N_sec-1):
          st_idx = n_steps-(int((j+1)*n_steps/2)-int(j*n_steps/2))   # handle even or odd cases
          prd_o[:, n_steps+int(j*n_steps/2):n_steps+int((j+1)*n_steps/2)] = prd[(j+1)*n_depths:(j+2)*n_depths,st_idx:,0]
-    np.savetxt(os.path.join(args.preds_path, "predictions.csv"), prd_o, delimiter=',')
+    np.savetxt(os.path.join(args.preds_path, "predict_pgdl.csv"), prd_o, delimiter=',')
 
