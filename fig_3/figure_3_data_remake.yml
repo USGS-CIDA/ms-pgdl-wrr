@@ -8,6 +8,8 @@ packages:
   - scipiper
   - googlesheets
 
+# this file needs to be moved back a dir to properly function.
+# use "remake::make(fig_3_multilake_files, remake_file = 'figure_3_data_remake.yml')"
 
 target_default: fig_3_multilake_files
 
@@ -34,7 +36,7 @@ targets:
     command: I(100)
 
   skip_lakes:
-    command: c(I("nhd_1101642"), I("nhd_1101734"), I("nhd_120052238")) # these weren't in the orig models?
+    command: c(I("nhd_1101642"), I("nhd_1101734"), I("nhd_120052238"))
 
   refined_obs:
     command: filter_temperature_obs(daily_obs, min_dates = I(200), min_per_date = I(5), strat_threshold = I(0.7), min_date = I('1980-04-01'))
