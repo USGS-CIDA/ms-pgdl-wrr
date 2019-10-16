@@ -41,14 +41,14 @@ get_timeseries <- function(lake, type, exp){
  #model in c('PGRNN','RNN'))
 
   # get PGRNN (PGDL) output
-  pgdl_dat <- RcppCNPy::npyLoad(sprintf('/Users/jread/Downloads/outputs_6_20_2019/PGRNN_%s_%s_exp%s.npy', type, lake, exp)) %>%
+  pgdl_dat <- RcppCNPy::npyLoad(file.path(getwd(),sprintf('fig_1/in/PGRNN_%s_exp%s_%s.npy', lake, exp, n_profiles))) %>%
     t() %>%
     as.data.frame() %>% setNames(paste0('temp_',seq(0, length.out = ifelse(lake == "mendota", 50, 37), by = 0.5))) %>% #length.out = 50 for Mendota
     mutate(DateTime = seq(as.Date("2009-04-02"), length.out = 3185, by = 'days')) %>%
     gather(depth_code, temp, -DateTime) %>%
     mutate(Depth = as.numeric(substring(depth_code, 6))) %>%
     select(DateTime, Depth, temp) %>%
-    prep_pred_obs(sprintf('/Users/jread/Downloads/%s_%s_test.feather', lake, type), .) %>%
+    prep_pred_obs(sprintf("../lake_modeling/data_imports/mendota_sparse_experiments/experiment_0%s/mendota_sparse_test_experiment_0%s.feather", exp, exp), .) %>%
     rename(pgdl_pred = pred) %>%
     distinct()
 
@@ -73,7 +73,8 @@ get_timeseries <- function(lake, type, exp){
     rename(glm_pred = pred) %>%
     distinct()
 
-  all_dat <- left_join(pgdl_dat, dl_dat, by = c("DateTime", "Depth", "obs")) %>%
+  all_dat <- pgdl_dat %>%
+    left_join(dl_dat, by = c("DateTime", "Depth", "obs")) %>%
     left_join(glm_preds, by = c("DateTime", "Depth", "obs")) %>%
     filter(!is.na(obs)) %>% filter(!is.na(dl_pred), !is.na(pgdl_pred))
 

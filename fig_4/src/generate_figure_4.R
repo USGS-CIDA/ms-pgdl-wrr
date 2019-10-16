@@ -3,14 +3,20 @@ plot_figure_4 <- function(){
   library(dplyr)
   library(readr)
   library(stringr)
+  library(sbtools) # see https://github.com/USGS-R/sbtools
 
-  eval_data <- readr::read_csv('data_release/out/me_RMSE.csv', col_types = 'iccd') %>%
-    filter(exper_model == 'pgdl') %>%
-    rbind(readr::read_csv('data_release/out/me_RMSE_limited_training.csv', col_types = 'iccd'))
+  mendota_file <- tempfile('me_', fileext = '.csv')
+  mendota_lim_file <- tempfile('me_lim_', fileext = '.csv')
+  item_file_download('5d925066e4b0c4f70d0d0599', names = 'me_RMSE.csv', destinations = mendota_file)
+  item_file_download('5d925066e4b0c4f70d0d0599', names = 'me_RMSE_limited_training.csv', destinations = mendota_lim_file)
+
+  eval_data <- readr::read_csv(mendota_file, col_types = 'iccd') %>%
+    filter(model_type == 'pgdl') %>%
+    rbind(readr::read_csv(mendota_lim_file, col_types = 'iccd'))
 
 
-    png(filename = 'figures/figure_4_wrr.png', width = 8, height = 4.5, units = 'in', res = 200)
-    par(omi = c(0,0,0.05,0.05), mai = c(0.3,0.75,0,0), las = 1, mgp = c(2.5,.5,0), cex = 1)
+  png(filename = 'figures/figure_4_wrr.png', width = 8, height = 4.5, units = 'in', res = 200)
+  par(omi = c(0,0,0,0), mai = c(0.3,0.75,0.05,0.05), las = 1, mgp = c(2.5,.5,0), cex = 1)
 
 
 
@@ -24,8 +30,8 @@ plot_figure_4 <- function(){
   for (type in c(rep('similar',7), 'year','season')){
     this_eval_data <- filter(eval_data, exper_id == sprintf('%s_%s', type, n_prof[1]))
 
-    light_train <- filter(this_eval_data, exper_model == 'pgdl_lim') %>% pull(rmse)
-    libr_train <- filter(this_eval_data, exper_model == 'pgdl') %>% pull(rmse)
+    light_train <- filter(this_eval_data, model_type == 'pgdl_lim') %>% pull(rmse)
+    libr_train <- filter(this_eval_data, model_type == 'pgdl') %>% pull(rmse)
     lines(x = c(xs[c(1,1)]-gapper), y = range(light_train), col = '#7570b3', lwd = 2.5)
     lines(x = c(xs[c(1,1)]+gapper), y = range(libr_train), col = '#7570b3', lwd = 2.5)
 
@@ -46,10 +52,10 @@ plot_figure_4 <- function(){
   text(6.5, 3.1, 'Experiments from Figure 3', pos = 4, cex = 0.7)
   text(6.5, 3.1, 'Experiments from Figure 2', pos = 2, cex = 0.7)
 
-  points(0.8, 0.96, pch = 23, col = '#7570b3', bg = 'grey65', lwd = 2.5, cex = pt_cex, ljoin = 1)
-  text(0.9, .97, 'PGDL limited pre-training', pos = 4)
-  points(0.8, 0.8, pch = 23, col = '#7570b3', bg = 'white', lwd = 2.5, cex = pt_cex, ljoin = 1)
-  text(0.9, 0.81, 'PGDL extended pre-training', pos = 4)
+  points(0.8, 0.93, pch = 23, col = '#7570b3', bg = 'grey65', lwd = 2.5, cex = pt_cex, ljoin = 1)
+  text(0.9, .94, 'PGDL limited pre-training', pos = 4)
+  points(0.8, 0.78, pch = 23, col = '#7570b3', bg = 'white', lwd = 2.5, cex = pt_cex, ljoin = 1)
+  text(0.9, 0.79, 'PGDL extended pre-training', pos = 4)
 
 
 

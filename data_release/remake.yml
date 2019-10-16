@@ -304,6 +304,7 @@ targets:
     command: sb_replace_files(I('5d925048e4b0c4f70d0d0596'),
       'out/06c_evaluation_all.xml',
       'out/all_test.csv',
+      'out/all_sparse_RMSE.csv',
       'out/all_RMSE.csv')
 
   06b_evaluation_sb_id:
