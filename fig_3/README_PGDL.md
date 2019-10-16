@@ -28,23 +28,18 @@ Create local, temporary directories to hold model inputs and outputs.
 ```python
 ## python ##
 import os
-raw_data_path = 'fig_3/tmp/mendota/shared/raw_data'
-pretrain_inputs_path = 'fig_3/tmp/mendota/pretrain/inputs'
-pretrain_model_path = 'fig_3/tmp/mendota/pretrain/model'
-train_inputs_path = 'fig_3/tmp/mendota/train/similar_980_1/inputs'
-train_model_path = 'fig_3/tmp/mendota/train/similar_980_1/model'
-predictions_path = 'fig_3/tmp/mendota/train/similar_980_1/out'
-if not os.path.isdir(raw_data_path): os.makedirs(raw_data_path)
+lake_name = 'nhd_13393567'
+all_lakes_path = 'fig_3/tmp/shared'
+lake_inputs_path = 'fig_3/tmp/%s/inputs' % lake_name
+lake_model_path = 'fig_3/tmp/%s/model' % lake_name
+lake_predictions_path = 'fig_3/tmp/%s/out' % lake_name
+if not os.path.isdir(all_lakes_path): os.makedirs(all_lakes_path)
 
-if not os.path.isdir(pretrain_inputs_path): os.makedirs(pretrain_inputs_path)
+if not os.path.isdir(lake_inputs_path): os.makedirs(lake_inputs_path)
 
-if not os.path.isdir(pretrain_model_path): os.makedirs(pretrain_model_path)
+if not os.path.isdir(lake_model_path): os.makedirs(lake_model_path)
 
-if not os.path.isdir(train_inputs_path): os.makedirs(train_inputs_path)
-
-if not os.path.isdir(train_model_path): os.makedirs(train_model_path)
-
-if not os.path.isdir(predictions_path): os.makedirs(predictions_path)
+if not os.path.isdir(lake_predictions_path): os.makedirs(lake_predictions_path)
 
 ```
 
@@ -55,6 +50,7 @@ if not os.path.isdir(predictions_path): os.makedirs(predictions_path)
 ```python
 ## python ##
 import re
+from zipfile import ZipFile
 import sciencebasepy
 # Configure access to ScienceBase access
 sb = sciencebasepy.SbSession()
@@ -69,94 +65,57 @@ def download_from_sciencebase(item_id, search_text, to_folder):
 
 # Data release URLs can be browsed by adding one of the following IDs after "https://www.sciencebase.gov/catalog/item/",
 # e.g., https://www.sciencebase.gov/catalog/item/5d98e0c4e4b0c4f70d1186f1
-met_file = download_from_sciencebase('5d98e0c4e4b0c4f70d1186f1', 'meteo.csv', raw_data_path)
-ice_file = download_from_sciencebase('5d98e0c4e4b0c4f70d1186f1', 'pretrainer_ice_flags.csv', raw_data_path)
-glm_file = download_from_sciencebase('5d915cb2e4b0c4f70d0ce523', 'predict_pb0.csv', raw_data_path)
-train_obs_file = download_from_sciencebase('5d8a837fe4b0c4f70d0ae8ac', 'similar_training.csv', raw_data_path)
-test_obs_file = download_from_sciencebase('5d925066e4b0c4f70d0d0599', 'test.csv', raw_data_path)
+met_zip = download_from_sciencebase('5d98e0a3e4b0c4f70d1186ee', '68_lakes_meteo.zip', all_lakes_path)
+ice_zip = download_from_sciencebase('5d98e0a3e4b0c4f70d1186ee', '68_pretrainer_ice_flags.zip', all_lakes_path)
+glm_zip = download_from_sciencebase('5d915c8ee4b0c4f70d0ce520', '%s_predict.zip' % lake_name, lake_inputs_path)
+train_obs_file = download_from_sciencebase('5d8a47bce4b0c4f70d0ae61f', 'all_lakes_historical_training.csv', all_lakes_path)
+test_obs_file = download_from_sciencebase('5d925048e4b0c4f70d0d0596', 'all_test.csv', all_lakes_path)
+
+# Unzip
+met_file = ZipFile(met_zip, 'r').extract('%s_meteo.csv' % lake_name, lake_inputs_path)
+ice_file = ZipFile(ice_zip, 'r').extract('%s_ice_flag.csv' % lake_name, lake_inputs_path)
+glm_file = ZipFile(glm_zip, 'r').extract('%s_predict_pb0.csv' % lake_name, lake_inputs_path)
 ```
 
 ### Munge data for pretraining, training, and testing
 
-First generate prepared .npy files in the pretraining inputs folder. `lake_name` can be `mendota` or `sparkling`.
-The processing_USGS.py script also generates GLM predictions file labels_pretrain.npy, which are only used (1) to set
-the date range of the meteorological inputs and (2) as "observations" for pretraining.
-```shell script
-## shell ##
-python fig_1/src/processing_USGS.py \
-  --phase pretrain \
-  --lake_name mendota \
-  --met_file fig_1/tmp/mendota/shared/raw_data/mendota_meteo.csv \
-  --glm_file fig_1/tmp/mendota/shared/raw_data/me_predict_pb0.csv \
-  --ice_file fig_1/tmp/mendota/shared/raw_data/mendota_pretrainer_ice_flags.csv \
-  --processed_path fig_1/tmp/mendota/pretrain/inputs
-```
-
-Do the same processing for training, deleting labels_pretrain.npy because it's not needed after this processing step.
-Note that the different `phase` argument causes a different subset of data to be exported.
-```shell script
-## shell ##
-python fig_1/src/processing_USGS.py \
-  --phase train \
-  --lake_name mendota \
-  --met_file fig_1/tmp/mendota/shared/raw_data/mendota_meteo.csv \
-  --glm_file fig_1/tmp/mendota/shared/raw_data/me_predict_pb0.csv \
-  --ice_file fig_1/tmp/mendota/shared/raw_data/mendota_pretrainer_ice_flags.csv \
-  --processed_path fig_1/tmp/mendota/train/similar_980_1/inputs
-rm fig_1/tmp/mendota/train/similar_980_1/inputs/labels_pretrain.npy
-```
-
-Add training and test data to the training inputs folder. labels_train.feather and labels_test.feather are the only
-files that differ from model to model for the experiment represented by this figure.
+Add lake-specific training and test data to the lake-specific inputs folder.
 ```python
 ## python ##
 import pandas as pd
 
 # define the filenames again if already downloaded from ScienceBase in a previous python session
-train_obs_file=os.path.join(raw_data_path, 'me_similar_training.csv')
-test_obs_file=os.path.join(raw_data_path, 'me_test.csv')
+train_obs_file = os.path.join(all_lakes_path, 'all_lakes_historical_training.csv')
+test_obs_file = os.path.join(all_lakes_path, 'all_test.csv')
 
 # read, subset, and write the training data for a single experiment
 train_obs = pd.read_csv(train_obs_file)
-train_obs_subset = train_obs[(train_obs['exper_id'] == 'similar_980') & (train_obs['exper_n'] == 1)].reset_index()[['date','depth','temp']]
-train_obs_subset.to_feather(os.path.join(train_inputs_path, 'labels_train.feather'))
+train_obs_subset = train_obs[(train_obs['site_id'] == lake_name)].reset_index()[['date','depth','temp']]
+train_obs_subset.to_feather(os.path.join(lake_inputs_path, 'labels_train.feather'))
 
 # read, subset, and write the testing data for a single experiment
 test_obs = pd.read_csv(test_obs_file)
-test_obs_subset = test_obs[(test_obs['exper_type'] == 'similar') & (test_obs['exper_n'] == 1)].reset_index()[['date','depth','temp']]
-test_obs_subset.to_feather(os.path.join(train_inputs_path, 'labels_test.feather'))
+test_obs_subset = test_obs[(train_obs['site_id'] == lake_name)].reset_index()[['date','depth','temp']]
+test_obs_subset.to_feather(os.path.join(lake_inputs_path, 'labels_test.feather'))
 ```
+
+Next generate prepared .npy files in the inputs folder.
+Use `fig_3/src/preprocess_manylakes_newGLM-minusTestPeriod.py` for this step.
 
 ## Train and predict with PGDL
 
-The following commands execute the pretraining and training phases of preparing a PGDL model. 
-There are some deprecation warnings that you can safely ignore.
-
-### Pretrain
-
-```shell script
-## shell ##
-export KMP_DUPLICATE_LIB_OK=TRUE
-python fig_1/src/PGRNN_pretrain_USGS.py \
-  --data_path fig_1/tmp/mendota/pretrain/inputs \
-  --save_path fig_1/tmp/mendota/pretrain/model
+Run `pgrnn_figure3.py` to pretrain, train, and generate predictions 5 times for the lake. That file also uses functions
+from the following module files:
+```text
+io_operations.py
+phys_operations.py
+preprocess_functions.py
+pytorch_data_operations.py
+pytorch_model_operations.py
 ```
 
-### Train
-
-In addition to updating PGDL weights and parameters based on training observations, the following training script
-includes some code to generate predictions and compare them to test data. The test data are only used for this purpose.
-
-```shell script
-## shell ##
-python fig_1/src/PGRNN_USGS.py \
-  --data_path fig_1/tmp/mendota/train/similar_980_1/inputs \
-  --restore_path fig_1/tmp/mendota/pretrain/model \
-  --save_path fig_1/tmp/mendota/train/similar_980_1/model \
-  --preds_path fig_1/tmp/mendota/train/similar_980_1/out
-```
-where `restore_path` in this training command equals `save_path` from the pretraining command.
-
+Output includes model checkpoints after pretraining and then after training, plus a file of predictions for each
+of the 5 replicates per model.
 
 ## Exit
 

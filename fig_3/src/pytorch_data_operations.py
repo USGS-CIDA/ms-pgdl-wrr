@@ -481,7 +481,7 @@ def buildLakeDataForRNN_manylakes_finetunetest(lakename, data_dir, seq_length, n
     # assert X_trn.shape[0] - new_trn.shape[0] == tr_seq_removed
     # assert X_tst.shape[0] - new_tst.shape[0] == ts_seq_removed
 
-    hyps_dir = data_dir + "geometry"
+    hyps_dir = data_dir + "/geometry"
     hyps = getHypsographyManyLakes(hyps_dir, lakename, depth_values)
     # print(X_all[:,:,:-1])
     # print(del_all_seq)
@@ -738,7 +738,7 @@ def buildLakeDataForRNN_nearbylakes_finetune(lakename, data_dir, seq_length, n_f
     # assert X_trn.shape[0] - new_trn.shape[0] == tr_seq_removed
     # assert X_tst.shape[0] - new_tst.shape[0] == ts_seq_removed
 
-    hyps_dir = data_dir + "geometry"
+    hyps_dir = data_dir + "/geometry"
     hyps = getHypsographyManyLakes(hyps_dir, lakename, depth_values)
     # print(X_all[:,:,:-1])
     # print(del_all_seq)
@@ -920,7 +920,7 @@ def buildLakeDataForRNN_manylakes_finetune(lakename, data_dir, seq_length, n_fea
     X_trn_tmp = np.delete(X_trn, trn_del_ind, axis=0)
     X_trn = X_trn_tmp
 
-    hyps_dir = data_dir + "geometry"
+    hyps_dir = data_dir + "/geometry"
     hyps = getHypsographyManyLakes(hyps_dir, lakename, depth_values)
     # print(X_all[:,:,:-1])
     # print(del_all_seq)
@@ -1815,19 +1815,19 @@ def buildLakeDataForRNNPretrain(lakename, data_dir, seq_length, n_features, win_
     feat_mat = []
     Y_mat = []
     if excludeTest:
-        feat_mat_raw = np.load(os.path.join(my_path, data_dir + "features_pt.npy"))
-        feat_mat = np.load(os.path.join(my_path, data_dir + "processed_features_pt.npy"))
-        Y_mat = np.load(os.path.join(my_path, data_dir + "glm_noTest.npy"))
+        feat_mat_raw = np.load(os.path.join(my_path, data_dir + "/features_pt.npy"))
+        feat_mat = np.load(os.path.join(my_path, data_dir + "/processed_features_pt.npy"))
+        Y_mat = np.load(os.path.join(my_path, data_dir + "/glm_noTest.npy"))
     else:
-        feat_mat_raw = np.load(os.path.join(my_path, data_dir + "features.npy"))
-        feat_mat = np.load(os.path.join(my_path, data_dir + "processed_features.npy"))
-        Y_mat = np.load(os.path.join(my_path, data_dir + "glm.npy"))
+        feat_mat_raw = np.load(os.path.join(my_path, data_dir + "/features.npy"))
+        feat_mat = np.load(os.path.join(my_path, data_dir + "/processed_features.npy"))
+        Y_mat = np.load(os.path.join(my_path, data_dir + "/glm.npy"))
     if targetLake is not None:
-        feat_mat_raw = np.load(os.path.join(my_path, data_dir + "features_" + targetLake + ".npy"))
-        feat_mat = np.load(os.path.join(my_path, data_dir + "processed_features_" + targetLake + ".npy"))
+        feat_mat_raw = np.load(os.path.join(my_path, data_dir + "/features_" + targetLake + ".npy"))
+        feat_mat = np.load(os.path.join(my_path, data_dir + "/processed_features_" + targetLake + ".npy"))
 
     # diag = np.load(os.path.join(my_path, "../../data/processed/"+lakename+"/diag.npy"))
-    dates = np.load(os.path.join(my_path, data_dir + "dates.npy"))
+    dates = np.load(os.path.join(my_path, data_dir + "/dates.npy"))
     years = dates.astype('datetime64[Y]').astype(int) + 1970
 
     assert np.isfinite(feat_mat).all(), "feat_mat has nan at" + str(np.argwhere(np.isfinite(feat_mat)))
@@ -1901,7 +1901,7 @@ def buildLakeDataForRNNPretrain(lakename, data_dir, seq_length, n_features, win_
     # print("train set created")
 
     # depths = np.unique(tst_phys[:,:,1])
-    hyps_dir = data_dir + "geometry"
+    hyps_dir = data_dir + "/geometry"
     hyps = getHypsographyManyLakes(hyps_dir, lakename, depth_values)
 
     ## make train and val sparse by sparseness factor, build mask
@@ -1926,9 +1926,9 @@ def buildLakeDataForRNNPretrainSingleDepth(lakename, data_dir, seq_length, n_fea
     # load data created in preprocess.py based on lakename
     my_path = os.path.abspath(os.path.dirname(__file__))
 
-    feat_mat_raw = np.load(os.path.join(my_path, data_dir + "features.npy"))
-    feat_mat = np.load(os.path.join(my_path, data_dir + "processed_features.npy"))
-    Y_mat = np.load(os.path.join(my_path, data_dir + "glm.npy"))
+    feat_mat_raw = np.load(os.path.join(my_path, data_dir + "/features.npy"))
+    feat_mat = np.load(os.path.join(my_path, data_dir + "/processed_features.npy"))
+    Y_mat = np.load(os.path.join(my_path, data_dir + "/glm.npy"))
 
     # narrow down to single depth
     feat_mat_raw = feat_mat_raw[depth_ind, :, :]
@@ -1936,7 +1936,7 @@ def buildLakeDataForRNNPretrainSingleDepth(lakename, data_dir, seq_length, n_fea
     Y_mat = Y_mat[depth_ind, :]
 
     # diag = np.load(os.path.join(my_path, "../../data/processed/"+lakename+"/diag.npy"))
-    dates = np.load(os.path.join(my_path, data_dir + "dates.npy"))
+    dates = np.load(os.path.join(my_path, data_dir + "/dates.npy"))
 
     years = dates.astype('datetime64[Y]').astype(int) + 1970
 
@@ -2016,7 +2016,7 @@ def buildLakeDataForRNNPretrainSingleDepth(lakename, data_dir, seq_length, n_fea
     print("train set created")
 
     # depths = np.unique(tst_phys[:,:,1])
-    hyps_dir = data_dir + "geometry"
+    hyps_dir = data_dir + "/geometry"
     # hyps = getHypsographyManyLakes(hyps_dir, lakename, depth_values)
     ## make train and val sparse by sparseness factor, build mask
     assert np.isfinite(X_trn).any(), "X_trn has nan at" + str(np.argwhere(np.isfinite(X_trn)))

@@ -17,27 +17,25 @@ from torch.utils.data import Dataset, DataLoader
 from torch.nn.utils.clip_grad import clip_grad_norm_
 from torch.nn.init import xavier_normal_
 import pandas as pd
-sys.path.append('../../data')
-sys.path.append('../../models')
-sys.path.append('/home/invyz/workspace/Research/lake_monitoring/src/data')
+sys.path.append('fig_3/src')
 import pytorch_data_operations
 from pytorch_data_operations import buildLakeDataForRNNPretrain, \
                                     calculate_ec_loss_manylakes
 from pytorch_model_operations import saveModel
 from io_operations import averageTrialsToFinalOutputFullData, saveFeatherFullData
 
-
-####################################################3
-#  takes lakename as required command line argument
-###################################################33
+#read command-line arguments
+parser = argparse.ArgumentParser()
+parser.add_argument('--lake_name', default='nhd_13393567')
+parser.add_argument('--data_path', default='fig_3/tmp/nhd_13393567/inputs')
+parser.add_argument('--model_path', default='fig_3/tmp/nhd_13393567/model')
+parser.add_argument('--preds_path', default='fig_3/tmp/nhd_13393567/out')
+args = parser.parse_args()
 
 #enable/disable cuda
-use_gpu = True
-torch.backends.cudnn.benchmark = True #optimize cuda
+use_gpu = False
+torch.backends.cudnn.benchmark = False #optimize cuda
 torch.set_printoptions(precision=10) #set sig figs for printing
-
-#collect command line args
-lakename = sys.argv[1]
 
 #print time script ran
 current_dt = datetime.datetime.now()
@@ -52,20 +50,14 @@ err_per_trial = np.empty((n_trials))
 debug_train = False
 verbose = False
 
+#define hyperparameters
 n_hidden = 20 #fixed
-
-#####################3
-#params
-###########################33
 n_ep = 400  #number of epochs
-
-#parameters
 seq_length = 352 #how long of sequences to use in model
 begin_loss_ind = 50#index in sequence where we begin to calculate error or predict
 n_features = 8  #number of physical drivers
 win_shift = 176 #how much to slide the window on training set each time
 save = True
-data_dir = "../../data/processed/WRR_69Lake/"+lakename+"/"
 
 
 ###############################
@@ -73,9 +65,9 @@ data_dir = "../../data/processed/WRR_69Lake/"+lakename+"/"
 ##################################
 #create train and test sets
 (trn_data, all_data, all_phys_data, all_dates,
- hypsography) = buildLakeDataForRNNPretrain(lakename, data_dir, seq_length, n_features,
+ hypsography) = buildLakeDataForRNNPretrain(args.lake_name, args.data_path, seq_length, n_features,
                                             win_shift=win_shift, begin_loss_ind=begin_loss_ind,
-                                            excludeTest=False)
+                                            excludeTest=True)
 for trial in range(n_trials): #training loop
     print("trial ", trial)
 
@@ -206,7 +198,7 @@ for trial in range(n_trials): #training loop
     optimizer = optim.Adam(lstm_net.parameters(), lr=.005)#, weight_decay=0.01)
 
     #path to save pre-trained model
-    save_path = "../../../models/WRR_69Lake/"+lakename+"/pretrain_experiment_trial"+str(trial)
+    save_path = "../../../models/WRR_69Lake/"+args.lake_name+"/pretrain_experiment_trial"+str(trial)
 
     #training parameters
     min_loss = 99999
@@ -344,17 +336,16 @@ for trial in range(n_trials): #training loop
     ###########################33
     n_ep = 400  #number of epochs
     win_shift = 176 #how much to slide the window on training set each time
-    data_dir = "../../data/processed/WRR_69Lake/"+lakename+"/"
-    pretrain_path = "../../../models/WRR_69Lake/"+lakename+"/pretrain_experiment_trial"+str(trial)
-    save_path = "../../../models/WRR_69Lake/"+lakename+"/pgrnn_finetune_trial"+str(trial)
+    pretrain_path = "../../../models/WRR_69Lake/"+args.lake_name+"/pretrain_experiment_trial"+str(trial)
+    save_path = "../../../models/WRR_69Lake/"+args.lake_name+"/pgrnn_finetune_trial"+str(trial)
 
     ###############################
     # data preprocess
     ##################################
     #create train and test sets
     (trn_data, trn_dates, tst_data, tst_dates, unique_tst_dates, all_data, all_phys_data,
-     all_dates, hypsography) = buildLakeDataForRNN_manylakes_finetune2(lakename, \
-                                                            data_dir, \
+     all_dates, hypsography) = buildLakeDataForRNN_manylakes_finetune2(args.lake_name, \
+                                                            args.data_path, \
                                                             seq_length, n_features, \
                                                             win_shift=win_shift, \
                                                             begin_loss_ind=begin_loss_ind, \
@@ -583,7 +574,7 @@ for trial in range(n_trials): #training loop
             loss_label = label_npy[~np.isnan(label_npy)]
             mat_rmse = np.sqrt(((loss_output - loss_label) ** 2).mean())
             print("Total rmse=", mat_rmse)
-            saveFeatherFullData(output_npy, label_npy, unique_tst_dates, lakename, trial)
+            saveFeatherFullData(output_npy, label_npy, unique_tst_dates, args.lake_name, trial)
             err_per_trial[trial] = mat_rmse
 
 
@@ -591,4 +582,4 @@ for trial in range(n_trials): #training loop
 #print results
 print(err_per_trial)
 print(err_per_trial[:].mean())
-averageTrialsToFinalOutputFullData(lakename, trials=5, PGRNN=True)
+averageTrialsToFinalOutputFullData(args.lake_name, trials=5, PGRNN=True)
