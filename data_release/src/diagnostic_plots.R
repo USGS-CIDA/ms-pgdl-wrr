@@ -7,11 +7,11 @@ jared_pgdl <- readr::read_csv('~/Downloads/Comparing Stopping Conditions - Sheet
          nhd_id = paste0('nhd_', nhd_id)) %>% slice(1:68) %>%
   select(nhd_id, PGDL_old = PGDL_all, DL_old = DL_all)
 
-d = read_csv('out/all_RMSE.csv') %>% rename(nhd_id = site_id) %>%
+d = read_csv('data_release/out/all_RMSE.csv') %>% rename(nhd_id = site_id) %>%
   filter(model_type == 'dl') %>% group_by(nhd_id, exper_id) %>%
   summarize(DL_new = mean(rmse)) %>% left_join(jared_pgdl)
 
-d2 <- read_csv('out/all_RMSE.csv') %>% rename(nhd_id = site_id) %>%
+d2 <- read_csv('data_release/out/all_RMSE.csv') %>% rename(nhd_id = site_id) %>%
   filter(model_type == 'pgdl') %>% group_by(nhd_id, exper_id) %>%
   summarize(PGDL_new = mean(rmse), PGDL_new_max = max(rmse), PGDL_new_min = min(rmse), PGDL_range = PGDL_new_max-PGDL_new_min) %>%
   left_join(d) %>%
@@ -73,7 +73,7 @@ fig_2_old_data <- readr::read_csv('~/Downloads/revision_Figure_1_results - Sheet
   ))
 
 
-fig_2 = read_csv('data_release/out/me_RMSE.csv') %>% rowwise() %>% mutate(n_profiles = {as.numeric(strsplit(exper_id, '[_]')[[1]][2])}) %>%
+fig_2 = read_csv('data_release/data_release/out/me_RMSE.csv') %>% rowwise() %>% mutate(n_profiles = {as.numeric(strsplit(exper_id, '[_]')[[1]][2])}) %>%
   ungroup() %>% filter(substr(exper_id, start = 1, stop = 7) == 'similar') %>% select(-exper_id) %>% rename(new_rmse = rmse, exper_model = model_type) %>%
   left_join(fig_2_old_data, by = c('exper_model','exper_n','n_profiles')) %>%
   mutate(col = case_when(
@@ -166,7 +166,7 @@ fig_3_old_data <- readr::read_csv('~/Downloads/revision_Figure_2_results - Sheet
     exper_type == 'similar' ~ 'similar'
   ), exper_n = {as.numeric(strsplit(exper_n, '[_]')[[1]][2])}) %>% ungroup() %>% select(exper_n, exper_model, old_rmse, exper_type, lake_id)
 
-fig_3 <- purrr::map(c('data_release/out/sp_RMSE.csv', 'data_release/out/me_RMSE.csv'), function(x) {
+fig_3 <- purrr::map(c('data_release/data_release/out/sp_RMSE.csv', 'data_release/data_release/out/me_RMSE.csv'), function(x) {
   lake_id <- strsplit(basename(x), '[_]')[[1]][1]
   read_csv(x) %>% filter(!exper_id %in% c('similar_2', 'similar_10', 'similar_50', 'similar_100', 'similar_980')) %>% rowwise() %>% mutate(exper_type = {strsplit(exper_id, '[_]')[[1]][1]}) %>%
     ungroup() %>% select(-exper_id) %>% rename(new_rmse = rmse, exper_model = model_type) %>% mutate(lake_id = lake_id)

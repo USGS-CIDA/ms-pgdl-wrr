@@ -354,6 +354,27 @@ merge_multi_lake_test_files <- function(filename, pattern, dir){
   write_csv(data, path = filename)
 }
 
+merge_single_lake_train_files <- function(filename, pattern, dir){
+  files <- data.frame(filename = dir(dir), stringsAsFactors = FALSE) %>%
+    filter(stringr::str_detect(string = filename, pattern = pattern)) %>%
+    pull(filename)
+
+  data <- purrr::map(files, function(x) {
+    # me_train_980_profiles_experiment_01.csv":
+    file_splits <- strsplit(x, '[_]')[[1]]
+    # get "similar" from "sp_similar_test_experiment_03.csv"
+    test_exp <- "similar"
+    # get 5 from "05.csv":
+    exp_n <- tail(file_splits, 1) %>% strsplit('[.]') %>% .[[1]] %>% .[1] %>% as.numeric()
+
+    read_csv(file.path(dir, x), col_types = 'Ddd') %>%
+      rename(date = DateTime, depth = Depth) %>%
+      mutate(exper_n = exp_n, exper_type = test_exp) # add exper_n and exper_type
+  }) %>% purrr::reduce(rbind)
+
+  write_csv(data, path = filename)
+}
+
 merge_single_lake_test_files <- function(filename, pattern, dir){
   files <- data.frame(filename = dir(dir), stringsAsFactors = FALSE) %>%
     filter(stringr::str_detect(string = filename, pattern = pattern)) %>%
