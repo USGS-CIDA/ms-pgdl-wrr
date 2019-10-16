@@ -1,13 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Dec  6 10:45:53 2018
-
-@author: jiaxx
+Data preparation for PGDL model
+@author: xiaoweijia
 """
-
-# if needed, install sciencebasepy:
-# pip install sciencebasepy
-# conda install requests
 
 import pandas as pd
 import numpy as np
@@ -23,7 +18,7 @@ parser.add_argument('--ice_file')
 parser.add_argument('--processed_path')
 args = parser.parse_args()
 
-# hard code and save some depth-area relationship and other lake-specific tidbits
+# Define and save some depth-area relationship and other lake-specific tidbits
 if args.lake_name == 'mendota':
     depth_areas = np.array([
         39865825,38308175,38308175,35178625,35178625,33403850,31530150,31530150,30154150,30154150,29022000,
@@ -31,7 +26,7 @@ if args.lake_name == 'mendota':
         23789125,23789125,22829450,22829450,21563875,21563875,20081675,18989925,18989925,17240525,17240525,
         15659325,14100275,14100275,12271400,12271400,9962525,9962525,7777250,7777250,5956775,4039800,4039800,
         2560125,2560125,820925,820925,216125])
-    data_chunk_size = 5295 # size of half the dates in the training period
+    data_chunk_size = 5295 # size of half the dates in the pretraining period
 elif args.lake_name == 'sparkling':
     depth_areas = np.array([
         637641.569, 637641.569, 592095.7426, 592095.7426, 546549.9163, 546549.9163, 546549.9163, 501004.0899,
@@ -45,8 +40,8 @@ np.save(os.path.join(args.processed_path, 'depth_areas.npy'), depth_areas)
 np.save(os.path.join(args.processed_path, 'data_chunk_size.npy'), data_chunk_size)
 
 # Read data files
-feat = pd.read_csv(args.met_file)
-glm = pd.read_csv(args.glm_file)
+feat = pd.read_csv(args.met_file) # features (meteorological drivers)
+glm = pd.read_csv(args.glm_file) # GLM predictions
 
 # Truncate to the training or testing period
 if args.phase == 'pretrain':
@@ -63,7 +58,6 @@ x_raw_full = feat.drop('date', axis=1).values # ['ShortWave', 'LongWave', 'AirTe
 new_dates = feat[['date']].values[:,0]
 np.save(os.path.join(args.processed_path, 'dates.npy'), new_dates)
 
-
 n_steps = x_raw_full.shape[0]
 
 import datetime
@@ -74,8 +68,7 @@ for i in range(n_steps):
     dt = datetime.datetime.strptime(str(new_dates[i]), format)
     tt = dt.timetuple()
     doy[i,0] = tt.tm_yday
-    
-  
+
 x_raw_full = np.concatenate([doy,np.zeros([n_steps,1]),x_raw_full],axis=1) # ['DOY', 'depth', 'ShortWave', 'LongWave', 'AirTemp', 'RelHum', 'WindSpeed', 'Rain', 'Snow']
 x_raw_full = np.tile(x_raw_full,[n_depths,1,1]) # add depth replicates as prepended first dimension
 
@@ -111,7 +104,7 @@ for i in range(n_depths):
 np.save(os.path.join(args.processed_path, 'labels_pretrain.npy'), labels)
 
 
-# phy files ------------------------------------------------------------
+# Ice mask (so we don't penalize energy imbalance on days with ice)
 diag_all = pd.read_csv(args.ice_file)
 diag_merged = diag_all.merge(feat, how='right', on='date')[['ice']].values
 

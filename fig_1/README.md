@@ -5,29 +5,15 @@ grandparent directory of this README.md file).
 
 ## Configure a python environment
 
-Install Anaconda Distribution for Python 2.7 (https://www.anaconda.com/distribution/) if needed.
-
-We created and saved an Anaconda environment with these commands:
-```shell script
-## shell; no need to run these lines ##
-conda create -n pgdl_a python=2.7.15 
-conda install -n pgdl_a tensorflow=1.14.0 # to use GPUs use tensorflow-gpu=1.12.0
-conda install -n pgdl_a pandas=0.22.0 requests=2.18.4 scikit-learn=0.20.1
-conda install -n pgdl_a -c conda-forge feather-format=0.4.0
-conda activate pgdl_a
-pip install sciencebasepy
-conda deactivate
-conda env export -n pgdl_a | grep -v "^prefix: " > fig_1/env_pgdl_a.yml
-```
-
-You can now recreate and load that environment with these commands:
+Install Anaconda Distribution for Python 2.7 (https://www.anaconda.com/distribution/) if needed. Build and
+activate the saved Anaconda environment from fig_1/env_pgdl_a.yml<sup>1</sup> with these commands:
 ```shell script
 ## shell, working directory = ms-pgdl-wrr ##
 conda env create -f fig_1/env_pgdl_a.yml -n pgdl_a
 conda activate pgdl_a
 ```
 
-After these commands, we recommend starting up python in a separate window so that variables created in the following
+After these commands, we recommend starting up python in a second window so that variables created in the following
 code snippets can persist between snippets.
 ```shell script
 ## NEW shell, same working directory ##
@@ -45,9 +31,9 @@ import os
 raw_data_path = 'fig_1/tmp/mendota/shared/raw_data'
 pretrain_inputs_path = 'fig_1/tmp/mendota/pretrain/inputs'
 pretrain_model_path = 'fig_1/tmp/mendota/pretrain/model'
-train_inputs_path = 'fig_1/tmp/mendota/train/inputs'
-train_model_path = 'fig_1/tmp/mendota/train/model'
-predictions_path = 'fig_1/tmp/mendota/train/out'
+train_inputs_path = 'fig_1/tmp/mendota/train/similar_980_1/inputs'
+train_model_path = 'fig_1/tmp/mendota/train/similar_980_1/model'
+predictions_path = 'fig_1/tmp/mendota/train/similar_980_1/out'
 if not os.path.isdir(raw_data_path): os.makedirs(raw_data_path)
 
 if not os.path.isdir(pretrain_inputs_path): os.makedirs(pretrain_inputs_path)
@@ -116,34 +102,35 @@ python fig_1/src/processing_USGS.py \
   --met_file fig_1/tmp/mendota/shared/raw_data/mendota_meteo.csv \
   --glm_file fig_1/tmp/mendota/shared/raw_data/me_predict_pb0.csv \
   --ice_file fig_1/tmp/mendota/shared/raw_data/mendota_pretrainer_ice_flags.csv \
-  --processed_path fig_1/tmp/mendota/train/inputs
-rm fig_1/tmp/mendota/train/inputs/labels_pretrain.npy
+  --processed_path fig_1/tmp/mendota/train/similar_980_1/inputs
+rm fig_1/tmp/mendota/train/similar_980_1/inputs/labels_pretrain.npy
 ```
 
-Add training and test data to the training inputs folder.
+Add training and test data to the training inputs folder. labels_train.feather and labels_test.feather are the only
+files that differ from model to model for the experiment represented by this figure.
 ```python
 ## python ##
 import pandas as pd
 
 # define the filenames again if already downloaded from ScienceBase in a previous python session
-met_file=os.path.join(raw_data_path, 'mendota_meteo.csv')
-ice_file=os.path.join(raw_data_path, 'mendota_pretrainer_ice_flags.csv')
-glm_file=os.path.join(raw_data_path, 'me_predict_pb0.csv')
 train_obs_file=os.path.join(raw_data_path, 'me_similar_training.csv')
 test_obs_file=os.path.join(raw_data_path, 'me_test.csv')
 
 # read, subset, and write the training data for a single experiment
 train_obs = pd.read_csv(train_obs_file)
-train_obs_similar_980_1 = train_obs[(train_obs['exper_id'] == 'similar_980') & (train_obs['exper_n'] == 1)].reset_index()[['date','depth','temp']]
-train_obs_similar_980_1.to_feather(os.path.join(train_inputs_path, 'labels_train.feather'))
+train_obs_subset = train_obs[(train_obs['exper_id'] == 'similar_980') & (train_obs['exper_n'] == 1)].reset_index()[['date','depth','temp']]
+train_obs_subset.to_feather(os.path.join(train_inputs_path, 'labels_train.feather'))
 
 # read, subset, and write the testing data for a single experiment
 test_obs = pd.read_csv(test_obs_file)
-test_obs_similar_1 = test_obs[(test_obs['exper_type'] == 'similar') & (test_obs['exper_n'] == 1)].reset_index()[['date','depth','temp']]
-test_obs_similar_1.to_feather(os.path.join(train_inputs_path, 'labels_test.feather'))
+test_obs_subset = test_obs[(test_obs['exper_type'] == 'similar') & (test_obs['exper_n'] == 1)].reset_index()[['date','depth','temp']]
+test_obs_subset.to_feather(os.path.join(train_inputs_path, 'labels_test.feather'))
 ```
 
 ## Train and predict with PGDL
+
+The following commands execute the pretraining and training phases of preparing a PGDL model. 
+There are some deprecation warnings that you can safely ignore.
 
 ### Pretrain
 
@@ -157,12 +144,41 @@ python fig_1/src/PGRNN_pretrain_USGS.py \
 
 ### Train
 
+In addition to updating PGDL weights and parameters based on training observations, the following training script
+includes some code to generate predictions and compare them to test data. The test data are only used for this purpose.
+
 ```shell script
 ## shell ##
 python fig_1/src/PGRNN_USGS.py \
-  --data_path fig_1/tmp/mendota/train/inputs \
+  --data_path fig_1/tmp/mendota/train/similar_980_1/inputs \
   --restore_path fig_1/tmp/mendota/pretrain/model \
-  --save_path fig_1/tmp/mendota/train/model \
-  --preds_path fig_1/tmp/mendota/train/out
+  --save_path fig_1/tmp/mendota/train/similar_980_1/model \
+  --preds_path fig_1/tmp/mendota/train/similar_980_1/out
 ```
 where `restore_path` in this training command equals `save_path` from the pretraining command.
+
+
+## Exit
+
+Now that training is complete, if you plan to use either of the open shells for other operations,
+you may want to deactivate the `pgdl_a` conda environment before proceeding:
+```shell script
+## shell ##
+conda deactivate
+```
+
+
+## Footnote
+
+<sup>1</sup>We created the Anaconda environment with these commands:
+```shell script
+## shell; no need to run these lines ##
+conda create -n pgdl_a python=2.7.15 
+conda install -n pgdl_a tensorflow=1.14.0 # to use GPUs use tensorflow-gpu=1.12.0
+conda install -n pgdl_a pandas=0.22.0 requests=2.18.4 scikit-learn=0.20.1
+conda install -n pgdl_a -c conda-forge feather-format=0.4.0
+conda activate pgdl_a
+pip install sciencebasepy
+conda deactivate
+conda env export -n pgdl_a | grep -v "^prefix: " > fig_1/env_pgdl_a.yml
+```
