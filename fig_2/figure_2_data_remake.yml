@@ -8,6 +8,8 @@ packages:
 
 target_default: fig_2_files
 
+# this file needs to be moved back a dir to properly function.
+# use "remake::make(fig_2_files, remake_file = 'figure_2_data_remake.yml')"
 # see data remake in jread-usgs/lake-temperature-model-prep/7_PGML_experiments.yml@local_drivers
 
 sources:
