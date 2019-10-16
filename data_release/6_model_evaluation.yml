@@ -31,6 +31,7 @@ targets:
       - out/me_RMSE.csv
       - out/all_RMSE.csv
       - out/me_RMSE_limited_training.csv
+      - out/all_sparse_RMSE.csv
 
   out/sp_test.csv:
     command: merge_single_lake_test_files(target_name, pattern = I('sp_[a-z]+_test'), dir = I("../fig_2/yeti_sync/"))
@@ -72,3 +73,8 @@ targets:
   out/all_RMSE.csv:
     command: calculate_hist_RMSE(target_name, test_file = "out/all_test.csv",
       pred_ind = "tmp/historical_predictions.ind")
+
+  out/all_sparse_RMSE.csv:
+    command: merge_multilake_sparse_rmse(target_name, dir = I("../yeti_in/fig_3/"),
+      pattern = I('nhd_[0-9]+_010_profiles_experiment_0[1-3]_results.csv'),
+      pgdl_dl_file = 'in/fig3_sparse results.csv') # and sparse DL and PGDL

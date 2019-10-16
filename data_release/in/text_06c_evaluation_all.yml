@@ -11,7 +11,7 @@ entities:
       attr-def: experiment or trial number
       attr-defs: This data release
       data-min: 1
-      data-max: 3
+      data-max: 5
       data-units: NA
     -
       attr-label: exper_id
@@ -85,5 +85,45 @@ entities:
       data-min: NA
       data-max: NA
       data-units: NA
-
+  -
+    data-name: all_sparse_RMSE.csv
+    data-description: Temperature observations used for test data to evaluate model performance under sparse (10 profile) conditions
+    attributes:
+    -
+      attr-label: date
+      attr-def: Calendar date
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: depth
+      attr-def: depth from the water surface
+      attr-defs: NA
+      data-min: 0
+      data-max: NA
+      data-units: meters
+    -
+      attr-label: temp
+      attr-def: Water temperature
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: degrees C
+    -
+      attr-label: site_id
+      attr-def: >-
+        Lake identification number for this dataset. Is the Prmnn_I prefixed with source, as "nhd_{Prmnn_I}"
+      attr-defs: >-
+        http://nhd.usgs.gov/; Winslow et al. 2016
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: exper_type
+      attr-def: Type of experiment run
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: NA
 

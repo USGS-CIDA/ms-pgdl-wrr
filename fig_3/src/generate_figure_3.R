@@ -11,7 +11,8 @@ plot_calibrated_figure_3 <- function(){
   all_68_file <- tempfile('68_', fileext = '.csv')
   item_file_download('5d925048e4b0c4f70d0d0596', names = 'all_RMSE.csv', destinations = mendota_file)
 
-  eval_data <- readr::read_csv(all_68_file, col_types = 'icccd')
+  eval_data <- readr::read_csv(all_68_file, col_types = 'icccd') %>%
+    group_by(exper_id, site_id, model_type) %>% summarize(rmse = median(rmse))
 
   png(filename = 'figures/figure_3_wrr.png', width = 7, height = 7, units = 'in', res = 200)
   par(omi = c(0.6,0,0.1,0.2), mai = c(0.2,0.8,0,0), las = 1, mgp = c(2.2,0.8,0))
