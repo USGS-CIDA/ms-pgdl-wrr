@@ -9,17 +9,24 @@ target_default: supplemental_figs_tables
 # see way files were created in jread-usgs/lake-temperature-model-prep/6_drivers/src/local_meteo_utils.R@local_drivers
 
 sources:
-  - supplement/generate_bias_figures.R
+  - supplement/src/generate_bias_figures.R
+  - supplement/src/generate_rmse_plots.R
+
 
 targets:
   supplemental_figs_tables:
     depends:
-      - supplement/out/Fig_S14_ME_years_bias.png
+      - supplement/out/Fig_S14.png
+      - supplement/out/Fig_S15.png
+      - supplement/out/Fig_S16.png
+      - supplement/out/Fig_S17.png
+      - supplement/out/Fig_S18.png
 
   # get temperature observations from Mendota and Sparkling
   test_dat:
     command: get_test_dat()
 
+  # make bias figures
   supplement/out/Fig_S14.png:
     command: plot_bias_dat(out_file = target_name, observations = test_dat,
       lake = I('me'), experiment = I(1), type = I('year'))
@@ -40,3 +47,7 @@ targets:
   supplement/out/Fig_S17.png:
     command: plot_bias_dat(out_file = target_name, observations = test_dat,
       lake = I('sp'), experiment = I(1), type = I('season'))
+
+  # make figure that shows lake-specific RMSEs
+  supplement/out/Fig_S18.png:
+    command: plot_rmse_dat(file_out = target_name)

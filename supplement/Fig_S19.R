@@ -6,7 +6,11 @@ library(googledrive)
 ##############################
 # Experiment 3 supp fig
 ##############################
-# get RMSE data from Table S2
+
+get_data <- function() {
+  lake_names <- read.csv('supplement/in/lake_names_ids_crosswalk.csv')
+  rmse_sparse <-
+}
 summary68 <- read.csv('~/Downloads/temp_obs_summary_upload - temp_obs_summary.csv.csv', check.names = FALSE)
 
 rmse_order <- mutate(summary68, rmse_diff = `GLM (calibrated)` - `PGDL`) %>%
