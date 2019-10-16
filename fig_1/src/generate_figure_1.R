@@ -1,5 +1,5 @@
 
-plot_data_sparsity <- function(){
+plot_figure_1 <- function(){
   library(dplyr)
   library(readr)
   library(stringr)
@@ -61,5 +61,36 @@ plot_data_sparsity <- function(){
   text(2.3, 1.1, 'Process-Based', pos = 4, cex = 1.1)
 
   dev.off()
+  return(eval_data)
+}
+
+
+generate_text_fig_1 <- function(eval_data){
+
+  train_data <- read_csv('data_release/tmp/me_train_RMSE.csv') %>% filter(exper_id == 'similar_980')
+
+  render_data <- list(pgdl_980mean = filter(eval_data, model_type == 'pgdl', exper_id == "similar_980") %>% pull(rmse) %>% mean %>% round(2),
+                      dl_980mean = filter(eval_data, model_type == 'dl', exper_id == "similar_980") %>% pull(rmse) %>% mean %>% round(2),
+                      pb_980mean = filter(eval_data, model_type == 'pb', exper_id == "similar_980") %>% pull(rmse) %>% mean %>% round(2),
+                      dl_500mean = filter(eval_data, model_type == 'dl', exper_id == "similar_500") %>% pull(rmse) %>% mean %>% round(2),
+                      pb_500mean = filter(eval_data, model_type == 'pb', exper_id == "similar_500") %>% pull(rmse) %>% mean %>% round(2),
+                      dl_100mean = filter(eval_data, model_type == 'dl', exper_id == "similar_100") %>% pull(rmse) %>% mean %>% round(2),
+                      pb_100mean = filter(eval_data, model_type == 'pb', exper_id == "similar_100") %>% pull(rmse) %>% mean %>% round(2),
+                      pgdl_2mean = filter(eval_data, model_type == 'pgdl', exper_id == "similar_2") %>% pull(rmse) %>% mean %>% round(2),
+                      pb_2mean = filter(eval_data, model_type == 'pb', exper_id == "similar_2") %>% pull(rmse) %>% mean %>% round(2),
+                      pgdl_980train = filter(train_data, model_type == 'pgdl') %>% pull(rmse) %>% mean %>% round(2),
+                      dl_980train = filter(train_data, model_type == 'dl') %>% pull(rmse) %>% mean %>% round(2),
+                      pb_980train = filter(train_data, model_type == 'pb') %>% pull(rmse) %>% mean %>% round(2))
+
+  template_1 <- 'resulted in mean RMSEs (means calculated as average of RMSEs from the five dataset iterations) of {{pgdl_980mean}}, {{dl_980mean}}, and {{pb_980mean}}°C for the PGDL, DL, and PB models, respectively.
+  The differences between training and test errors was greatest for the DL model (average train RMSE: {{dl_980train}}°C; average test RMSE: {{dl_980mean}}°C), followed by PGDL ({{pgdl_980train}} vs {{pgdl_980mean}}°C),
+  with the smallest differences occurring for PB simulations ({{pb_980train}} vs {{pb_980mean}}°C). ******************* The relative performance of DL vs PB depended on the amount of training data.
+  The accuracy of Lake Mendota temperature predictions from the DL was better than PB when trained on 500 profiles ({{dl_500mean}} and {{pb_500mean}}°C, respectively)
+  or more, but worse than PB when training was reduced to 100 profiles ({{dl_100mean}} and {{pb_100mean}}°C respectively) or fewer.
+  The PGDL prediction accuracy was more robust compared to PB when only two profiles were provided for training ({{pgdl_2mean}} and {{pb_2mean}}°C, respectively). '
+
+  whisker::whisker.render(template_1 %>% str_remove_all('\n') %>% str_replace_all('  ', ' '), render_data ) %>% cat()
+
+
 
 }

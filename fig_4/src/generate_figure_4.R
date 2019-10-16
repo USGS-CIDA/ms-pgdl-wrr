@@ -60,47 +60,26 @@ plot_figure_4 <- function(){
 
 
   dev.off()
-
+  return(eval_data)
 }
 
-generate_fig_5_text <- function(){
+generate_text_fig_4 <- function(eval_data){
+  render_data <- list(prof_2_lim = filter(eval_data, exper_id  == 'similar_2', model_type == 'pgdl_lim') %>% pull(rmse) %>% mean() %>% round(2),
+                      prof_2_ext = filter(eval_data, exper_id  == 'similar_2', model_type == 'pgdl') %>% pull(rmse) %>% mean() %>% round(2),
+                      sea_lim = filter(eval_data, exper_id  == 'season_500', model_type == 'pgdl_lim') %>% pull(rmse) %>% mean() %>% round(2),
+                      sea_ext = filter(eval_data, exper_id  == 'season_500', model_type == 'pgdl') %>% pull(rmse) %>% mean() %>% round(2),
+                      yr_lim = filter(eval_data, exper_id  == 'year_500', model_type == 'pgdl_lim') %>% pull(rmse) %>% mean() %>% round(2),
+                      yr_ext = filter(eval_data, exper_id  == 'year_500', model_type == 'pgdl') %>% pull(rmse) %>% mean() %>% round(2),
+                      yr_dif = filter(eval_data, exper_id  == 'year_500') %>% group_by(model_type) %>% summarize(rmse = mean(rmse)) %>% pull(rmse) %>% diff() %>% round(2),
+                      yr_lim_dif = filter(eval_data, exper_id  %in% c('similar_500', 'year_500'), model_type == 'pgdl_lim') %>% group_by(exper_id) %>% summarize(rmse = mean(rmse)) %>% pull(rmse) %>% diff() %>% round(2),
+                      sim_ext = filter(eval_data, exper_id  == 'similar_500', model_type == 'pgdl') %>% pull(rmse) %>% mean() %>% round(2))
 
-  if (type == 'seasons'){
-    message("mendota seasons limited pre-train: ", light_train %>% mean %>% round(2))
-    message("mendota seasons extended pre-train: ", libr_train %>% mean %>% round(2))
-  }
-  if (type == 'years'){
-    message("mendota years limited pre-train: ", light_train %>% mean %>% round(2))
-    message("mendota years extended pre-train: ", libr_train %>% mean %>% round(2))
-  }
-  if (type == 'years'){
-    diff <- (light_train %>% mean %>% round(3)) - (libr_train %>% mean %>% round(3))
-    message("mendota years diff: ", diff)
-  }
-  if (type == 'similar' & n_prof[1] == 2){
-    message("mendota sparse limited pre-train: ", light_train %>% mean %>% round(2))
-    message("mendota sparse extended pre-train: ", libr_train %>% mean %>% round(2))
-  }
-  if (type == 'similar'){
-    diff <- (light_train %>% mean %>% round(2)) - (libr_train %>% mean %>% round(2))
-    message("sim diff: ", n_prof[1], " ", diff)
-  }
-
-
-  years_msg <- "extended pre-training dataset were likely responsible for the %s°C RMSE improvement over predictions from the limited case (%s vs %s; Figure 5 year500), and for reducing the difference in accuracy between similar and years prediction challenges for Lake Mendota from X"
-  light_train <- filter(data, n_profiles == 500, Model == "PGRNN", type == 'years') %>% pull(`Test RMSE`) %>% mean %>% round(2)
-  ext_train <- filter(data, n_profiles == 500, Model == "PGRNN_pretrained_prev_yrs", type == 'years') %>% pull(`Test RMSE`) %>% mean %>% round(2)
-  message(sprintf(years_msg, light_train-ext_train, ext_train, light_train))
-
-  yr_msg2 <- "and for reducing the difference in accuracy between similar and years prediction challenges for Lake Mendota from %s (grey markers in Figure 5; %s vs %s..) to a negligible difference of %s (Figure 5 sim500 vs year500)"
-  sim_light_train <- filter(data, n_profiles == 500, Model == "PGRNN", type == 'similar') %>% pull(`Test RMSE`) %>% mean %>% round(2)
-  sim_ext_train <- filter(data, n_profiles == 500, Model == "PGRNN_pretrained_prev_yrs", type == 'similar') %>% pull(`Test RMSE`) %>% mean %>% round(2)
-  message(sprintf(yr_msg2, light_train-sim_light_train, sim_light_train, light_train, ext_train - sim_ext_train))
-
-}
-
-plot_diamond <- function(x, y, width = 0.3, height = width, ...){
-  x = c(x-width/2, x, x+width/2, x, x-width/2)
-  y = c(y, y+height/2, y, y-height/2, y)
-  polygon(x, y, ...)
+  template <- 'The two largest differences in prediction accuracy between the extended and limited pre-training datasets were when only two profiles were used for training ({{prof_2_ext}} vs {{prof_2_lim}}°C RMSE; ****
+  and when models were trained using data from colder seasons and used to predict summer temperatures ({{sea_ext}} vs {{sea_lim}}°C RMSE; Figure 5 *****
+  Excluding summer data from pre-training decreased PGDL performance and resulted in worse temperature estimates than the calibrated PB model (as measured by RMSE; {{sea_lim}} vs 1.91°C, respectively; Figure 3c ******
+  When models were trained on colder years and used to predict warmer years, the additional complete years included in the
+  extended pre-training dataset were likely responsible for the {{yr_dif}}°C RMSE improvement over predictions from the limited case ({{yr_ext}} vs {{yr_lim}}°C, respectively; Figure 5 ******
+  and for reducing the difference in accuracy between similar and years prediction challenges for Lake Mendota from {{yr_lim_dif}}°C to
+  a negligible difference (difference between grey filled diamonds for similar___500 ({{sim_ext}}°C) and year___500 ({{yr_ext}}°C) '
+  whisker::whisker.render(template %>% str_remove_all('\n') %>% str_replace_all('  ', ' '), render_data ) %>% cat()
 }

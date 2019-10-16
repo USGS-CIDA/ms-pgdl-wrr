@@ -29,6 +29,7 @@ targets:
     depends:
       - out/sp_RMSE.csv
       - out/me_RMSE.csv
+      - tmp/me_train_RMSE.csv
       - out/all_RMSE.csv
       - out/me_RMSE_limited_training.csv
       - out/all_sparse_RMSE.csv
@@ -61,7 +62,17 @@ targets:
       "out/me_season_predict_pgdl.csv",
       "out/me_similar_predict_dl.csv",
       "out/me_similar_predict_pgdl.csv",
-      "out/me_similar_predict_pb.csv") # need to add "similar" for pb for rest of YETI files
+      "out/me_similar_predict_pb.csv")
+
+  tmp/me_train.csv:
+    command: merge_single_lake_train_files(target_name, pattern = I('me_train_980_profiles'), dir = I("../fig_1/yeti_sync/"))
+
+# not valid for calculating RMSE for any set of profiles other than 980. Ignore all others!
+  tmp/me_train_RMSE.csv:
+    command: calculate_RMSE(target_name, test_file = "tmp/me_train.csv",
+      "out/me_similar_predict_dl.csv",
+      "out/me_similar_predict_pgdl.csv",
+      "out/me_similar_predict_pb.csv")
 
   out/me_RMSE_limited_training.csv:
     command: file.copy('../fig_4/in/me_RMSE_limited_training.csv', to = target_name)
