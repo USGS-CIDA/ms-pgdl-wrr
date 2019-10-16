@@ -132,6 +132,40 @@ combine_glm_feather_similar <- function(fileout, min_date, ...){
 
 }
 
+merge_multilake_sparse_rmse <- function(fileout, dir, pattern, pgdl_dl_file){
+  files <- data.frame(filename = dir(dir), stringsAsFactors = FALSE) %>%
+    filter(stringr::str_detect(string = filename, pattern = pattern)) %>%
+    pull(filename)
+
+  # need exper_n, exper_id (historical_010), site_id, model_type, rmse
+  pb_data <- purrr::map(files, function(x) {
+
+    "nhd_{id}_010_profiles_experiment_{0n}_results.csv"
+    file_splits <- strsplit(x, '[_]')[[1]]
+    exper_n <- as.numeric(file_splits[6])
+    exper_id <- sprintf('historical_%s', file_splits[3])
+
+
+    read_csv(file.path(dir, x), col_types = 'cddddd') %>%
+      rename(rmse = test_rmse, site_id = nhd_id) %>%
+      mutate(exper_n = exper_n, exper_id = exper_id, model_type = 'pb') %>%
+      select(exper_n, exper_id, site_id, model_type, rmse)
+  }) %>% purrr::reduce(rbind)
+
+  pgdl_dl_data <- read_csv(pgdl_dl_file) %>%
+    mutate(site_id = paste0('nhd_', `lake nhd id`)) %>%
+    select(site_id, `PG 10 sparse 1`, `PG 10 sparse 2`, `PG 10 sparse 3`, `DL 10 sparse 1`, `DL 10 sparse 2`, `DL 10 sparse 3`) %>%
+    gather(trial, rmse, -site_id) %>% rowwise() %>%
+    mutate(exper_n = as.numeric(str_extract(trial, '[0-9]$')),
+           exper_id = paste0('historical_', {str_split(trial, '[ ]')[[1]][2]}),
+           model_abr = {str_split(trial, '[ ]')[[1]][1]},
+           model_type = case_when(
+             model_abr == 'PG' ~ 'pgdl',
+             model_abr == 'DL' ~ 'dl'
+           )) %>% ungroup() %>% select(exper_n, exper_id, site_id, model_type, rmse) %>%
+    rbind(pb_data, .) %>% write_csv(fileout)
+}
+
 load_npy_df <- function(filepath){
   npyLoad(filepath) %>% t() %>% as.data.frame() %>%
     mutate(date = seq(as.Date("2009-04-02"), length.out = 3185, by = 'days')) %>%
@@ -139,7 +173,7 @@ load_npy_df <- function(filepath){
 }
 
 combine_XJ_npy_similar <- function(fileout, n_depths, ...){
-  npy_files <- c(...)
+  npy_files <- file.path(getwd(), c(...))
 
   dir_path <- dirname(npy_files) %>% unique()
   file_names <- basename(npy_files)

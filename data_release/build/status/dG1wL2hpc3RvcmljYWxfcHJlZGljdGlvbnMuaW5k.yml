@@ -1,10 +1,10 @@
 version: 0.3.0
 name: tmp/historical_predictions.ind
 type: file
-hash: 080b2f00d2e226dd7bf1e078759d4de7
-time: 2019-10-09 15:04:55 UTC
+hash: 38e3010697a034dc557f23aece7c64fe
+time: 2019-10-16 13:36:57 UTC
 depends:
-  5_historical_predictions_tasks.yml: f2f4deeaa0f7546f50fee91ef52fd442
+  5_historical_predictions_tasks.yml: 6302b7216dfbf7b0a424e90d15cb731f
 fixed: d3e9c998f420908aa44cfb5311aac3d0
 code:
   functions: {}

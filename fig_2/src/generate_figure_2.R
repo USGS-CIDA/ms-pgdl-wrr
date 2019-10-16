@@ -3,27 +3,34 @@ plot_seasons_years_sparsity <- function(){
   library(readr)
   library(stringr)
 
-  eval_data <- readr::read_csv('data_release/out/me_RMSE.csv', col_types = 'iccd') %>%
+  library(sbtools) # see https://github.com/USGS-R/sbtools
+
+  mendota_file <- tempfile('me_', fileext = '.csv')
+  sparkling_file <- tempfile('sp_', fileext = '.csv')
+  item_file_download('5d925066e4b0c4f70d0d0599', names = 'me_RMSE.csv', destinations = mendota_file)
+  item_file_download('5d92507be4b0c4f70d0d059b', names = 'sp_RMSE.csv', destinations = sparkling_file)
+
+  eval_data <- readr::read_csv(mendota_file, col_types = 'iccd') %>%
     mutate(lake_id = 'M') %>%
-    rbind(readr::read_csv('data_release/out/sp_RMSE.csv', col_types = 'iccd') %>% mutate(lake_id = 'S')) %>%
+    rbind(readr::read_csv(sparkling_file, col_types = 'iccd') %>% mutate(lake_id = 'S')) %>%
     filter(str_detect(exper_id, '[a-z]+_500')) %>%
     mutate(col = case_when(
-      exper_model == 'pb' ~ '#1b9e77',
-      exper_model == 'dl' ~'#d95f02',
-      exper_model == 'pgdl' ~ '#7570b3'
+      model_type == 'pb' ~ '#1b9e77',
+      model_type == 'dl' ~'#d95f02',
+      model_type == 'pgdl' ~ '#7570b3'
     ), pch = case_when(
-      exper_model == 'pb' ~ 21,
-      exper_model == 'dl' ~ 22,
-      exper_model == 'pgdl' ~ 23
+      model_type == 'pb' ~ 21,
+      model_type == 'dl' ~ 22,
+      model_type == 'pgdl' ~ 23
     ), x_pos = case_when(
-      exper_model == 'pb' ~ 1,
-      exper_model == 'dl' ~ 2,
-      exper_model == 'pgdl' ~ 3
+      model_type == 'pb' ~ 1,
+      model_type == 'dl' ~ 2,
+      model_type == 'pgdl' ~ 3
     ), x_bmp = case_when(
       lake_id == 'S' ~ 0.1,
       lake_id == 'M' ~ -0.1
     ), cex = case_when(
-      exper_model == 'dl' ~ 3.5,
+      model_type == 'dl' ~ 3.5,
       TRUE ~ 3.2
     ))
 
@@ -58,7 +65,7 @@ plot_seasons_years_sparsity <- function(){
   plot_all_models <- function(plot_data){
 
     for (mod in c('pb','dl','pgdl')){
-      mod_data <- filter(plot_data, exper_model == mod)
+      mod_data <- filter(plot_data, model_type == mod)
       for (lake_id in c('S','M')){
 
         ._d <- filter(mod_data, lake_id == !!lake_id) %>%
