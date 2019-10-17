@@ -6,15 +6,24 @@ import re
 import math
 import shutil
 from datetime import datetime
+import argparse
 
 from scipy import interpolate
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--lake_name')
+parser.add_argument('--met_file')
+parser.add_argument('--glm_file')
+parser.add_argument('--ice_file')
+parser.add_argument('--raw_data_path')
+parser.add_argument('--processed_path')
+args = parser.parse_args()
+
 
 ###################################################################################
 # (Jared) Jan 2019 - Read/format data for many lakes sent by Jordan (69 lakes)
 ###################################################################################
 first_time = False
-directory = '../../data/raw/figure3'  # unprocessed data directory
-# tgt_directory = '../../data/processed/sixety_nine_lakes_Jan2019'
 lnames = set()
 n_features = 7
 n_lakes = 0
@@ -22,7 +31,7 @@ if first_time:
     os.mkdir("../../data/processed/WRR_69Lake")
     os.mkdir("../../models/WRR_69Lake")
 
-for filename in os.listdir(directory):
+for filename in os.listdir(args.raw_data_path):
     # parse lakename from file
     m = re.search(r'^nhd_(\d+)_test_train.*', filename)
     if m is None:
@@ -295,27 +304,15 @@ for filename in os.listdir(directory):
         print("training: ", first_train_date, "->", last_train_date, "(", n_trn, ")")
         print("testing: ", first_tst_date, "->", last_tst_date, "(", n_tst, ")")
         if first_time:
-            os.mkdir("../../data/processed/WRR_69Lake/" + name)
+            os.mkdir(os.path.join(args.processed_path, name))
             os.mkdir("../../models/WRR_69Lake/" + name)
-        feat_pt_path = "../../data/processed/WRR_69Lake/" + name + "/features_pt"
-        norm_feat_pt_path = "../../data/processed/WRR_69Lake/" + name + "/processed_features_pt"
-        glm_path = "../../data/processed/WRR_69Lake/" + name + "/glm_noTest"
-        trn_path = "../../data/processed/WRR_69Lake/" + name + "/train_b"
-        tst_path = "../../data/processed/WRR_69Lake/" + name + "/test_b"
-        dates_path = "../../data/processed/WRR_69Lake/" + name + "/dates"
+        feat_pt_path = os.path.join(args.processed_path, name, "features_pt")
+        norm_feat_pt_path = os.path.join(args.processed_path, name, "processed_features_pt")
+        glm_path = os.path.join(args.processed_path, name, "glm_noTest")
 
         # geometry
-        # shutil.copyfile('../../data/raw/figure3/nhd_'+name+'_geometry.csv', "../../data/processed/WRR_69Lake/"+name+"/geometry")
+        shutil.copyfile('../../data/raw/figure3/nhd_'+name+'_geometry.csv', "../../data/processed/WRR_69Lake/"+name+"/geometry")
 
-        # np.save(feat_path, feat_mat)
         np.save(feat_pt_path, feat_pt_mat)
-        # # # np.save(norm_feat_path, feat_norm_mat)
         np.save(norm_feat_pt_path, feat_norm_pt_mat)
         np.save(glm_path, glm_mat_pt)
-        # np.save(dates_path, meteo_dates)
-        # np.save(trn_path, obs_trn_mat)
-        # np.save(tst_path, obs_tst_mat)
-        # for t in range(n_dates):
-
-
-

@@ -33,7 +33,7 @@ elif args.lake_name == 'sparkling':
         501004.0899, 501004.0899, 455458.2636, 455458.2636, 409912.4372, 409912.4372, 409912.4372, 364366.6109,
         364366.6109, 318820.7845, 318820.7845, 318820.7845, 273274.9581, 273274.9581, 273274.9581, 227729.1318,
         227729.1318, 182183.3054, 182183.3054, 182183.3054, 136637.4791, 136637.4791, 136637.4791, 91091.65271,
-        91091.65271, 45545.82636, 45545.82636, 45545.82636, 0])
+        91091.65271, 45545.82636, 45545.82636, 45545.82636])
     data_chunk_size = 5478
 n_depths = depth_areas.size
 np.save(os.path.join(args.processed_path, 'depth_areas.npy'), depth_areas)
@@ -42,6 +42,10 @@ np.save(os.path.join(args.processed_path, 'data_chunk_size.npy'), data_chunk_siz
 # Read data files
 feat = pd.read_csv(args.met_file) # features (meteorological drivers)
 glm = pd.read_csv(args.glm_file) # GLM predictions
+
+# Truncate nan-containing bottom depth of GLM predictions for Sparkling lake
+if args.lake_name == 'sparkling':
+    glm = glm.drop(columns='temp_18')
 
 # Truncate to the training or testing period
 if args.phase == 'pretrain':

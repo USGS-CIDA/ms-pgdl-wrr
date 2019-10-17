@@ -1,4 +1,4 @@
-# Running experiments for Figure 4
+# Running experiments for manuscript Figure 4 (fig_3)
 
 To use the code files in this directory, start by opening a terminal with working directory set to `ms-pgdl-wrr` (the
 grandparent directory of this README.md file).
@@ -100,7 +100,8 @@ test_obs_subset.to_feather(os.path.join(lake_inputs_path, 'labels_test.feather')
 ```
 
 Next generate prepared .npy files in the inputs folder.
-Use `fig_3/src/preprocess_manylakes_newGLM-minusTestPeriod.py` for this step.
+Use `fig_3/src/preprocess_pretrain_data.py` and `fig_3/src/preprocess_train_test_data.py`
+for this step.
 
 ## Train and predict with PGDL
 
