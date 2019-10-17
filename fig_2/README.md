@@ -123,12 +123,12 @@ test_obs_file=os.path.join(raw_data_path, 'sp_test.csv')
 
 # read, subset, and write the training data for a single experiment
 train_obs = pd.read_csv(train_obs_file)
-train_obs_subset = train_obs[(train_obs['exper_id'] == 'year_500') & (train_obs['exper_n'] == 1)].reset_index()[['date','depth','temp']]
+train_obs_subset = train_obs[(train_obs['exper_id'] == 'year_500') & (train_obs['exper_n'] == 1) & (~np.isnan(train_obs['temp']))].reset_index()[['date','depth','temp']]
 train_obs_subset.to_feather(os.path.join(train_inputs_path, 'labels_train.feather'))
 
 # read, subset, and write the testing data for a single experiment
 test_obs = pd.read_csv(test_obs_file)
-test_obs_subset = test_obs[(test_obs['exper_type'] == 'year') & (test_obs['exper_n'] == 1)].reset_index()[['date','depth','temp']]
+test_obs_subset = test_obs[(test_obs['exper_type'] == 'year') & (test_obs['exper_n'] == 1) & (~np.isnan(test_obs['temp']))].reset_index()[['date','depth','temp']]
 test_obs_subset.to_feather(os.path.join(train_inputs_path, 'labels_test.feather'))
 ```
 
