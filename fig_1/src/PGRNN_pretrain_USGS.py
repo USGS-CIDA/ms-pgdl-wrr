@@ -249,7 +249,7 @@ pred_u = tf.stack(pred_u,axis=1)
 pred_u = tf.reshape(pred_u,[-1,n_steps])
 
 
-unsup_phys_data = tf.placeholder("float", [None, n_steps, phy_size]) #tf.float32
+unsup_phys_data = tf.placeholder("float", [None, n_steps, phy_size])
 depth_areas = np.load(os.path.join(args.data_path, 'depth_areas.npy'))
 n_depths = depth_areas.size
 
