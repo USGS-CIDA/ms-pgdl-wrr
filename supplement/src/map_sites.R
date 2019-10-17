@@ -2,14 +2,14 @@
 
 
 
-make_map <- function(file_out) {
+make_map <- function(file_out, metadata_file, shp_file) {
 
   # bring in great lakes for map
   # originally from "http://geo.glin.net/gis/shps/glin_gl_mainlakes.zip"
-  grlakes <- st_read('supplement/in/great_lakes_shapefiles', layer = "main_lakes")
+  grlakes <- st_read(shp_file)
 
   # study lake metdata
-  lake_metadata <- read.csv('supplement/in/lake_metadata_table.csv')
+  lake_metadata <- read.csv(metadata_file)
 
 
   # set map features
