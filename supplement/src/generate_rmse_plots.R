@@ -1,16 +1,54 @@
-plot_fig_s19 <- function(){
-  library(ggplot2)
 
-  # read in RMSE dat from fig 3
-  source('supplement/Fig_S19_data_prep.R')
-  rmse_long <- format_figS19_dat()
+get_rmse_data <- function() {
+  lake_names <- read.csv('supplement/in/lake_metadata_table.csv') %>%
+    select(site_id = nhd_id, lake_name)
 
-  mod_10 <- filter(rmse_long, model_10)
-  mod_10$model <- factor(mod_10$model, levels = c('PB_10', "DL_10", "PGDL_10"))
-  mod_other <- filter(rmse_long, !model_10)
-  mod_other$model <- factor(mod_other$model, levels = c("PB_0", "PB_all","DL_all","PGDL_all"))
+  temp_file_loc <- tempfile(fileext = '.csv')
+  item_file_download('5d925048e4b0c4f70d0d0596', names = 'all_sparse_RMSE.csv',
+                     destinations = temp_file_loc)
 
-  p1 <- ggplot(mod_other, aes(x = lake_name, y = RMSE)) +
+  temp_file_loc2 <- tempfile(fileext = '.csv')
+  item_file_download('5d925048e4b0c4f70d0d0596', names = 'all_RMSE.csv',
+                     destinations = temp_file_loc2)
+
+  sparse_rmse_dat <- readr::read_csv(temp_file_loc)
+  full_rmse_dat <- readr::read_csv(temp_file_loc2)
+
+  rmse_dat <- bind_rows(sparse_rmse_dat, full_rmse_dat) %>%
+    group_by(site_id, exper_id, model_type) %>%
+    summarize(mean_rmse = mean(rmse))
+
+  rmse_dat <- left_join(rmse_dat, lake_names)
+
+  # rmse_order <- filter(rmse_dat, exper_id == 'historical_all') %>%
+  #   filter(model_type %in% c('pb', 'pgdl')) %>%
+  #   tidyr::spread(model_type, mean_rmse) %>%
+  #   mutate(rmse_diff = pb - pgdl) %>%
+  #   arrange(rmse_diff)
+
+
+  rmse_order <- filter(rmse_dat, exper_id == 'historical_all') %>%
+    filter(model_type %in% c('pgdl')) %>%
+    arrange(mean_rmse)
+
+
+  rmse_dat$lake_name <- factor(rmse_dat$lake_name, levels = rmse_order$lake_name)
+
+  return(rmse_dat)
+
+}
+
+plot_rmse_dat <- function(file_out) {
+
+  rmse_dat <- get_rmse_data()
+
+
+  mod_10 <- filter(rmse_dat, exper_id %in% c('historical_010', 'historical_10'))
+  mod_10$model <- factor(mod_10$model_type, levels = c('pb', "dl", "pgdl"))
+  mod_other <- filter(rmse_dat, exper_id %in% c('historical_all'))
+  mod_other$model <- factor(mod_other$model_type, levels = c("pb0", "pb","dl","pgdl"))
+
+  p1 <- ggplot(mod_other, aes(x = lake_name, y = mean_rmse)) +
     geom_point(aes(color = model, shape = model, fill = model), size = 1.7, alpha = 0.8) +
     scale_shape_manual(values = c(1,21,22,23),
                        labels = c(bquote(PB[0]), bquote(PB[all]),bquote(DL[all]), bquote(PGDL[all])))+
@@ -26,18 +64,18 @@ plot_fig_s19 <- function(){
       #axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
       legend.position = c(0.055,0.17),
       panel.grid.minor.y = element_blank(),
-          panel.grid.minor.x = element_blank(),
-          legend.title = element_blank(),
-          legend.background = element_rect(colour = 'black',
-                                           fill = 'white', linetype='solid'),
-          legend.text = element_text(size = 8),
-          legend.key.height = unit(0.5, 'line'),
-          axis.text.x = element_blank(),
-          plot.margin = unit(c(0,0,0,0),'cm')) +
-    labs(x = '') +
+      panel.grid.minor.x = element_blank(),
+      legend.title = element_blank(),
+      legend.background = element_rect(colour = 'black',
+                                       fill = 'white', linetype='solid'),
+      legend.text = element_text(size = 8),
+      legend.key.height = unit(0.5, 'line'),
+      axis.text.x = element_blank(),
+      plot.margin = unit(c(0,0,0,0),'cm')) +
+    labs(x = '', y = 'RMSE') +
     scale_y_reverse()
 
-  p2 <- ggplot(mod_10, aes(x = lake_name, y = RMSE)) +
+  p2 <- ggplot(mod_10, aes(x = lake_name, y = mean_rmse)) +
     geom_point(aes(color = model, shape = model, fill = model), size = 1.7, alpha = 0.8) +
     scale_shape_manual(values = c(21,22,23),
                        labels = c(bquote(PB[10]), bquote(DL[10]), bquote(PGDL[10]))) +
@@ -59,17 +97,12 @@ plot_fig_s19 <- function(){
           legend.text = element_text(size = 8),
           legend.key.height = unit(0.5, 'line'),
           plot.margin = unit(c(0,0,0,0),'cm')) +
-    labs(x = '') +
+    labs(x = '', y = 'RMSE') +
     scale_y_reverse()
 
   p <- cowplot::plot_grid(p1, p2, ncol = 1, rel_heights = c(0.4, 0.56))
 
-  dir.create('supplement/out', showWarnings = FALSE)
-
-  ggsave('supplement/out/supplement_fig_S19.png', p,
-         height = 7, width = 10, units = 'in')
-
-  # upload to supplement folder
-  drive_update(file = as_id('1yCCcqfPeppdQM79adK5dWrUmMzIwBvQv'),
-               media = 'supplement/out/supplement_fig_S19.png')
+  ggsave(file_out, p, height = 7, width = 10, units = 'in')
 }
+
+

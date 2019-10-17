@@ -20,3 +20,4 @@
 .Rhistory
 *.remake
 *.RDS
+!lake_metadata_table.csv
