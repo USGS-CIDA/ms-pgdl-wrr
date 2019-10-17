@@ -1,6 +1,6 @@
 
-get_rmse_data <- function() {
-  lake_names <- read.csv('supplement/in/lake_metadata_table.csv') %>%
+get_rmse_data <- function(metadata_file) {
+  lake_names <- read.csv(metadata_file) %>%
     select(site_id = nhd_id, lake_name)
 
   temp_file_loc <- tempfile(fileext = '.csv')
@@ -38,9 +38,9 @@ get_rmse_data <- function() {
 
 }
 
-plot_rmse_dat <- function(file_out) {
+plot_rmse_dat <- function(file_out, metadata_file) {
 
-  rmse_dat <- get_rmse_data()
+  rmse_dat <- get_rmse_data(metadata_file = metadata_file)
 
 
   mod_10 <- filter(rmse_dat, exper_id %in% c('historical_010', 'historical_10'))
