@@ -12,3 +12,4 @@ Jordan S. Read1, Xiaowei Jia2, Jared Willard2, Alison P. Appling1, Jacob A. Zwar
 4Department of Fisheries, Wildlife, and Conservation Biology, University of Minnesota
 5University of Wisconsin-Madison, Center for Limnology
 
+folders and names corresponding to figure 1, 2, 3, and 4 are actually aligned with manuscript figure numbers 2, 3, 4, and 5 (the three "results" figures, as figure 1 in the manuscript is a model schematic). 
