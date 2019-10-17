@@ -1,3 +1,6 @@
+[![DOI](https://zenodo.org/badge/168197850.svg)](https://zenodo.org/badge/latestdoi/168197850)
+
+
 # ms-pgdl-wrr
 
 Code for the PGDL manuscript for the WRR Special Issue on "Big Data & Machine Learning in Water Sciences: Recent Progress and Their Use in Advancing Science" 
