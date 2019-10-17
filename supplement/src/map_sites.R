@@ -1,14 +1,8 @@
 
-library(httr)
-library(ggplot2)
-library(dplyr)
-library(sf)
-library(USAboundaries)
-library(maps)
-library(ggrepel)
 
 
-make_map <- function() {
+
+make_map <- function(file_out) {
 
   # bring in great lakes for map
   # originally from "http://geo.glin.net/gis/shps/glin_gl_mainlakes.zip"
@@ -81,7 +75,6 @@ make_map <- function() {
     labs(x = '', y = '')
 
   ggsave(file_out, p, height = 6, width = 6)
-
 
 }
 

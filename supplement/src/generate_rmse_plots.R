@@ -1,6 +1,7 @@
 
 get_rmse_data <- function() {
-  lake_names <- read.csv('supplement/in/lake_names_ids_crosswalk.csv')
+  lake_names <- read.csv('supplement/in/lake_metadata_table.csv') %>%
+    select(site_id = nhd_id, lake_name)
   temp_file_loc <- tempfile(fileext = '.csv')
   item_file_download('5d925048e4b0c4f70d0d0596', names = 'all_sparse_RMSE.csv',
                      destinations = temp_file_loc)
