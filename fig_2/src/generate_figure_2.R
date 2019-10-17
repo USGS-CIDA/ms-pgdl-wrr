@@ -34,7 +34,7 @@ plot_figure_2 <- function(){
       TRUE ~ 3.2
     ))
 
-  png(filename = 'figures/figure_2_wrr.png', width = 8, height = 4.5, units = 'in', res = 200)
+  pdf(file = 'figures/figure_2_wrr.pdf', width = 8, height = 4.5)
   par(omi = c(0,0.4,0.05,0.25), mai = c(0.5,0.2,0,0), las = 1, mgp = c(2.3,.5,0))
   layout(mat = matrix(c(1,2,3), nrow = 1))
 
@@ -73,7 +73,7 @@ plot_figure_2 <- function(){
                     x0 = mean(x_pos + x_bmp), x1 = mean(x_pos + x_bmp),
                     col = head(col,1), pch = head(pch,1), cex = head(cex,1))
         lines(c(._d[c('x0','x1')]), c(._d[c('y0','y1')]), col = ._d$col, lwd = 2.5)
-        points(._d$x0, ._d$y, pch = ._d$pch, lwd = 1.5, cex = ._d$cex, bg = 'white', col = ._d$col, ljoin = 1)
+        points(._d$x0, ._d$y, pch = ._d$pch, lwd = 2, cex = ._d$cex, bg = 'white', col = ._d$col, ljoin = 1)
         text(._d$x0, ._d$y, lake_id, font = 2)
       }
     }

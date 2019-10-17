@@ -15,7 +15,7 @@ plot_figure_4 <- function(){
     rbind(readr::read_csv(mendota_lim_file, col_types = 'iccd'))
 
 
-  png(filename = 'figures/figure_4_wrr.png', width = 8, height = 4.5, units = 'in', res = 200)
+  pdf(file = 'figures/figure_4_wrr.pdf', width = 8, height = 4.5)
   par(omi = c(0,0,0,0), mai = c(0.3,0.75,0.05,0.05), las = 1, mgp = c(2.5,.5,0), cex = 1)
 
 
