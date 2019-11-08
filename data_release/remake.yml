@@ -8,7 +8,7 @@ packages:
   - whisker
   - dplyr
   - tidyr
-  - meddle # at least v0.0.8
+  - meddle # at least v0.0.10
   - readr
   - feather
   - httr
