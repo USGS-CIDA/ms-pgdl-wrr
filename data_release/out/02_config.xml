@@ -39,6 +39,7 @@
             <origin>Vipin Kumar</origin>
             <pubdate>2019</pubdate>
             <title>Process-guided deep learning predictions of lake water temperature</title>
+            <onlink>http://dx.doi.org/10.1029/2019WR024922</onlink>
           </citeinfo>
         </lworkcit>
       </citeinfo>
@@ -54,14 +55,14 @@
           <enddate>20181231</enddate>
         </rngdates>
       </timeinfo>
-      <current>model estimates</current>
+      <current>See publication date</current>
     </timeperd>
     <status>
       <progress>Complete</progress>
       <update>none planned</update>
     </status>
     <spdom>
-      <descgeog>Lake polygons as defined by the national hydrography dataset medium resolution</descgeog>
+      <descgeog>Lake polygons as defined by the national hydrography dataset medium resolution for MN and WI</descgeog>
       <bounding>
         <westbc>-94.2609062307949</westbc>
         <eastbc>-87.9475441739278</eastbc>
@@ -104,7 +105,7 @@
       </place>
     </keywords>
     <accconst>none</accconst>
-    <useconst>These data are subject to change and are not citable until reviewed and approved for official publication by the USGS</useconst>
+    <useconst>These data are open access usable via creative commons as long as original data providers are acknowledged</useconst>
     <ptcontac>
       <cntinfo>
         <cntperp>
@@ -124,7 +125,7 @@
         <cntemail>jread@usgs.gov</cntemail>
       </cntinfo>
     </ptcontac>
-    <datacred>This study was funded by the Department of the Interior Northeast Climate Adaptation Science Center, the United States Geological Survey National Climate This research used resources of the Core Science Analytics and Synthesis Advanced Research Computing program at the U.S. Geological Survey.</datacred>
+    <datacred>This study was funded by the Department of the Interior Northeast Climate Adaptation Science Center, and the Department of the Interior North Central Climate Adaptation Science Center. This research used resources of the Core Science Analytics and Synthesis Advanced Research Computing program at the U.S. Geological Survey.</datacred>
     <native>This dataset was generated using open source tools available in the R programming language (R version 3.6.1 (2019-07-05)). The computing platform for generating data and metadata was x86_64-apple-darwin15.6.0. R packages loaded into this environment: purrr, version: 0.3.2; RcppCNPy, version: 0.2.10; sbtools, version: 1.1.7; RJSONIO, version: 1.3-1.2; glmtools, version: 0.16.0; rLakeAnalyzer, version: 1.11.4.1; GLMr, version: 3.1.16; stringr, version: 1.4.0; rgdal, version: 1.4-4; sp, version: 1.3-1; httr, version: 1.4.1; feather, version: 0.3.4; readr, version: 1.3.1; meddle, version: 0.0.8; mapdata, version: 2.3.0; maps, version: 3.3.0; tidyr, version: 0.8.0; dplyr, version: 0.8.3; whisker, version: 0.4; yaml, version: 2.2.0; scipiper, version: 0.0.16.</native>
     <crossref>
       <citeinfo>
@@ -178,7 +179,7 @@
   </dataqual>
   <spdoinfo>
     <indspref>U.S.A.</indspref>
-    <direct>Point</direct>
+    <direct>G-polygon</direct>
     <ptvctinf>
       <sdtsterm>
         <sdtstype>G-polygon</sdtstype>
@@ -194,8 +195,8 @@
         <geogunit>Decimal degrees</geogunit>
       </geograph>
       <geodetic>
-        <horizdn>North American Datum of 1983</horizdn>
-        <ellips>Geodetic Reference System 80</ellips>
+        <horizdn>WGS84</horizdn>
+        <ellips>WGS_1984</ellips>
         <semiaxis>6378137.0</semiaxis>
         <denflat>298.257</denflat>
       </geodetic>
@@ -206,7 +207,7 @@
       <enttyp>
         <enttypl>glm_config.json</enttypl>
         <enttypd>A JSON file containing parameters for each of 68 lakes in this study</enttypd>
-        <enttypds>Producer Defined</enttypds>
+        <enttypds>U.S. Geological Survey</enttypds>
       </enttyp>
       <attr>
         <attrlabl>glm_setup</attrlabl>
@@ -369,7 +370,7 @@
     </stdorder>
   </distinfo>
   <metainfo>
-    <metd>20191012</metd>
+    <metd>20191108</metd>
     <metc>
       <cntinfo>
         <cntperp>
@@ -390,7 +391,7 @@
         <cntemail>jread@usgs.gov</cntemail>
       </cntinfo>
     </metc>
-    <metstdn>FGDC Biological Data Profile of the Content Standard for Digital Geospatial Metadata</metstdn>
-    <metstdv>FGDC-STD-001.1-1999</metstdv>
+    <metstdn>FGDC Content Standard for Digital Geospatial Metadata</metstdn>
+    <metstdv>FGDC-STD-001-1998</metstdv>
   </metainfo>
 </metadata>
