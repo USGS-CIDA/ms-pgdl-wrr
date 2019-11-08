@@ -1,6 +1,12 @@
 title: >-
   Process-guided deep learning water temperature predictions: 3 Model inputs (meteorological inputs and ice flags)
 
+entities:
+  -
+    data-name: Metadata landing page
+    data-description: >-
+      This is the landing page for 3 other data release units, described in the attributes section
+
 abstract: >-
   This dataset includes model inputs (specifically, weather and flags for predicted ice-cover) and is part of a larger data release of lake temperature model inputs and outputs for 68 lakes in the U.S.
   states of Minnesota and Wisconsin (http://dx.doi.org/10.5066/P9AQPIVD).
@@ -18,7 +24,7 @@ cross-cites:
     pubdate: 2019
     link: https://doi.org/10.5194/gmd-12-473-2019
 
-
+file-format: This is the parent metadata file representing three sub-datasets
 
 build-environment: Multiple computer systems were used to generate these data, including linux, OSX. The open source language R was used on all systems, as well as the open-source model GLM.
 

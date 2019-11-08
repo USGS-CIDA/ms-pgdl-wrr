@@ -1,6 +1,8 @@
 title: >-
   Process-guided deep learning water temperature predictions: 6c All lakes historical evaluation data
 
+file-format: Three comma-separated files
+
 entities:
   -
     data-name: all_RMSE.csv

@@ -1,6 +1,12 @@
 title: >-
   Data release: Process-guided deep learning predictions of lake water temperature
 
+entities:
+  -
+    data-name: Parent metadata landing page
+    data-description: >-
+      This is the landing page for 6 other data release units, described in the attributes section
+
 abstract: >-
   <p>Climate change has been shown to influence lake temperatures in different ways. To better understand the diversity of lake responses to climate change and give managers tools to manage individual lakes,
   we focused on improving prediction accuracy for daily water temperature profiles in 68 lakes in Minnesota and Wisconsin during 1980-2018.
@@ -50,4 +56,4 @@ longitude-res: 0.1
 data-name: Full data release
 data-description: >-
   This is the landing page for 6 other data release units, described in the attributes section
-file-format: parent data item for released data products
+file-format: parent metadata record for this data release

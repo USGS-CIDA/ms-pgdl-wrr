@@ -54,4 +54,4 @@ entities:
       data-max: NA
       data-units: degrees C
 
-file-format: a single comma-delimited file
+file-format: a comma-separated file

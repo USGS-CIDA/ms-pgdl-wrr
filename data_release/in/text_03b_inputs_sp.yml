@@ -22,7 +22,7 @@ entities:
   -
     data-name: sparkling_meteo.csv
     data-description: >-
-      driver/input data for models that includes daily weather/meterological data
+      driver/input data for models that includes daily weather/meteorological data
     attributes:
     -
       attr-label: time
@@ -84,7 +84,7 @@ entities:
   -
     data-name: sparkling_pretrainer_ice_flags.csv
     data-description: >-
-      driver/input data for models that includes daily weather/meterological data
+      driver/input data for models that includes daily weather/meteorological data
     attributes:
     -
       attr-label: date

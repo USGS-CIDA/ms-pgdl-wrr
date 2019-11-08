@@ -15,13 +15,13 @@ data-description: >-
   in place of NLDAS for 2009-2017. Each folder contains a driver for each study lake,
   and has identical attributes (described above). NLDAS drivers (NLDAS.zip) are described in
   Mitchell et al. 2004.
-file-format: two separate comma separated text files
+file-format: two comma separated text files
 
 entities:
   -
     data-name: mendota_meteo.csv
     data-description: >-
-      driver/input data for models that includes daily weather/meterological data
+      driver/input data for models that includes daily weather/meteorological data
     attributes:
     -
       attr-label: time
@@ -83,7 +83,7 @@ entities:
   -
     data-name: mendota_pretrainer_ice_flags.csv
     data-description: >-
-      driver/input data for models that includes daily weather/meterological data
+      driver/input data for models that includes daily weather/meteorological data
     attributes:
     -
       attr-label: date
