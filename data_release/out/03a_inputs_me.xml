@@ -17,7 +17,7 @@
         <origin>Vipin Kumar</origin>
         <pubdate>2019</pubdate>
         <title>Process-guided deep learning water temperature predictions: 3a Lake Mendota inputs</title>
-        <geoform>two separate comma separated text files</geoform>
+        <geoform>two comma separated text files</geoform>
         <pubinfo>
           <pubplace>Online (digital release)</pubplace>
           <publish>U.S. Geological Survey</publish>
@@ -39,6 +39,7 @@
             <origin>Vipin Kumar</origin>
             <pubdate>2019</pubdate>
             <title>Process-guided deep learning predictions of lake water temperature</title>
+            <onlink>http://dx.doi.org/10.1029/2019WR024922</onlink>
           </citeinfo>
         </lworkcit>
       </citeinfo>
@@ -61,7 +62,7 @@
       <update>none planned</update>
     </status>
     <spdom>
-      <descgeog>Lake polygons as defined by the national hydrography dataset medium resolution</descgeog>
+      <descgeog>Lake polygons as defined by the national hydrography dataset medium resolution for MN and WI</descgeog>
       <bounding>
         <westbc>-89.4836545048768</westbc>
         <eastbc>-89.3674075050573</eastbc>
@@ -102,7 +103,7 @@
       </place>
     </keywords>
     <accconst>none</accconst>
-    <useconst>These data are subject to change and are not citable until reviewed and approved for official publication by the USGS</useconst>
+    <useconst>These data are open access usable via creative commons as long as original data providers are acknowledged</useconst>
     <ptcontac>
       <cntinfo>
         <cntperp>
@@ -122,7 +123,7 @@
         <cntemail>jread@usgs.gov</cntemail>
       </cntinfo>
     </ptcontac>
-    <datacred>This study was funded by the Department of the Interior Northeast Climate Adaptation Science Center, the United States Geological Survey National Climate This research used resources of the Core Science Analytics and Synthesis Advanced Research Computing program at the U.S. Geological Survey.</datacred>
+    <datacred>This study was funded by the Department of the Interior Northeast Climate Adaptation Science Center, and the Department of the Interior North Central Climate Adaptation Science Center. This research used resources of the Core Science Analytics and Synthesis Advanced Research Computing program at the U.S. Geological Survey.</datacred>
     <native>Multiple computer systems were used to generate these data, including linux, OSX. The open source language R was used on all systems, as well as the open-source model GLM.</native>
     <crossref>
       <citeinfo>
@@ -189,7 +190,7 @@
     <lineage>
       <procstep>
         <procdesc>At the core of the modeling framework is a lake hydrodynamic model that uses inputs of lake-specific properties and local meteorology to estimate water temperature. Our chosen model is the open source, General Lake Model (GLM) version 2. GLM is a one-dimensional dynamical model which simplifies lakes using a vertical approximation, where horizontal variability is ignored. GLM uses a Lagrangian approach to layer structure where layers can split and combine based on changing vertical gradients. GLM is a modern, implementation of other one-dimensional models. We used GLM to run individual lake simulations according to the processes described in Winslow et al. 2017. Outputs for water temperature were extracted at various depths and written or summarized to the files included in this set of data. The glmtools R package was used for this processing.</procdesc>
-        <procdate>20191012</procdate>
+        <procdate>20191108</procdate>
       </procstep>
     </lineage>
   </dataqual>
@@ -222,7 +223,7 @@
     <detailed>
       <enttyp>
         <enttypl>mendota_meteo.csv</enttypl>
-        <enttypd>driver/input data for models that includes daily weather/meterological data</enttypd>
+        <enttypd>driver/input data for models that includes daily weather/meteorological data</enttypd>
         <enttypds>Producer Defined</enttypds>
       </enttyp>
       <attr>
@@ -325,7 +326,7 @@
     <detailed>
       <enttyp>
         <enttypl>mendota_pretrainer_ice_flags.csv</enttypl>
-        <enttypd>driver/input data for models that includes daily weather/meterological data</enttypd>
+        <enttypd>driver/input data for models that includes daily weather/meteorological data</enttypd>
         <enttypds>Producer Defined</enttypds>
       </enttyp>
       <attr>
@@ -377,7 +378,7 @@
     <stdorder>
       <digform>
         <digtinfo>
-          <formname>two separate comma separated text files</formname>
+          <formname>two comma separated text files</formname>
         </digtinfo>
         <digtopt>
           <onlinopt>
@@ -393,7 +394,7 @@
     </stdorder>
   </distinfo>
   <metainfo>
-    <metd>20191012</metd>
+    <metd>20191108</metd>
     <metc>
       <cntinfo>
         <cntperp>

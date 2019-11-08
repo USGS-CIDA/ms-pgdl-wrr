@@ -1,6 +1,8 @@
 title: >-
   Process-guided deep learning water temperature predictions: 5a Lake Mendota detailed prediction data
 
+file-format: Ten comma-separated files
+
 entities:
   -
     data-name: me_similar_predict_pb.csv

@@ -11,6 +11,7 @@ abstract: >-
   uncalibrated Process-Based model outputs (PB0) before training on actual temperature observations. Zip files for each lake contain four files,
   one for each of PB, PB0, DL, and PGDL.
 
+file-format: Two hundred and seventy two comma-separated files
 
 entities:
   -

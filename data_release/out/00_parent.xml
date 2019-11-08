@@ -17,7 +17,7 @@
         <origin>Vipin Kumar</origin>
         <pubdate>2019</pubdate>
         <title>Data release: Process-guided deep learning predictions of lake water temperature</title>
-        <geoform>parent data item for released data products</geoform>
+        <geoform>parent metadata record for this data release</geoform>
         <pubinfo>
           <pubplace>Online (digital release)</pubplace>
           <publish>U.S. Geological Survey</publish>
@@ -39,6 +39,7 @@
             <origin>Vipin Kumar</origin>
             <pubdate>2019</pubdate>
             <title>Process-guided deep learning predictions of lake water temperature</title>
+            <onlink>http://dx.doi.org/10.1029/2019WR024922</onlink>
           </citeinfo>
         </lworkcit>
       </citeinfo>
@@ -70,14 +71,14 @@
           <enddate>20181231</enddate>
         </rngdates>
       </timeinfo>
-      <current>model estimates</current>
+      <current>See publication date</current>
     </timeperd>
     <status>
       <progress>Complete</progress>
       <update>none planned</update>
     </status>
     <spdom>
-      <descgeog>Lake polygons as defined by the national hydrography dataset medium resolution</descgeog>
+      <descgeog>Lake polygons as defined by the national hydrography dataset medium resolution for MN and WI</descgeog>
       <bounding>
         <westbc>-94.2609062307949</westbc>
         <eastbc>-87.9475441739278</eastbc>
@@ -120,7 +121,7 @@
       </place>
     </keywords>
     <accconst>none</accconst>
-    <useconst>These data are subject to change and are not citable until reviewed and approved for official publication by the USGS</useconst>
+    <useconst>These data are open access usable via creative commons as long as original data providers are acknowledged</useconst>
     <ptcontac>
       <cntinfo>
         <cntperp>
@@ -140,7 +141,7 @@
         <cntemail>jread@usgs.gov</cntemail>
       </cntinfo>
     </ptcontac>
-    <datacred>This study was funded by the Department of the Interior Northeast Climate Adaptation Science Center, the United States Geological Survey National Climate This research used resources of the Core Science Analytics and Synthesis Advanced Research Computing program at the U.S. Geological Survey.</datacred>
+    <datacred>This study was funded by the Department of the Interior Northeast Climate Adaptation Science Center, and the Department of the Interior North Central Climate Adaptation Science Center. This research used resources of the Core Science Analytics and Synthesis Advanced Research Computing program at the U.S. Geological Survey.</datacred>
     <native>Multiple computer systems were used to generate these data, including linux, OSX. The open source languages R and Python were used on all systems.</native>
   </idinfo>
   <dataqual>
@@ -160,13 +161,13 @@
     <lineage>
       <procstep>
         <procdesc>At the core of the modeling framework is a lake hydrodynamic model that uses inputs of lake-specific properties and local meteorology to estimate water temperature. Our chosen model is the open source, General Lake Model (GLM) version 2. GLM is a one-dimensional dynamical model which simplifies lakes using a vertical approximation, where horizontal variability is ignored. GLM uses a Lagrangian approach to layer structure where layers can split and combine based on changing vertical gradients. GLM is a modern, implementation of other one-dimensional models. We used GLM to run individual lake simulations according to the processes described in Winslow et al. 2017. Outputs for water temperature were extracted at various depths and written or summarized to the files included in this set of data. The glmtools R package was used for this processing.</procdesc>
-        <procdate>20191012</procdate>
+        <procdate>20191108</procdate>
       </procstep>
     </lineage>
   </dataqual>
   <spdoinfo>
     <indspref>U.S.A.</indspref>
-    <direct>Point</direct>
+    <direct>G-polygon</direct>
     <ptvctinf>
       <sdtsterm>
         <sdtstype>G-polygon</sdtstype>
@@ -182,15 +183,22 @@
         <geogunit>Decimal degrees</geogunit>
       </geograph>
       <geodetic>
-        <horizdn>North American Datum of 1983</horizdn>
-        <ellips>Geodetic Reference System 80</ellips>
+        <horizdn>WGS84</horizdn>
+        <ellips>WGS_1984</ellips>
         <semiaxis>6378137.0</semiaxis>
         <denflat>298.257</denflat>
       </geodetic>
     </horizsys>
   </spref>
   <eainfo>
-      </eainfo>
+    <detailed>
+      <enttyp>
+        <enttypl>Parent metadata landing page</enttypl>
+        <enttypd>This is the landing page for 6 other data release units, described in the attributes section</enttypd>
+        <enttypds>U.S. Geological Survey</enttypds>
+      </enttyp>
+    </detailed>
+  </eainfo>
   <distinfo>
     <distrib>
       <cntinfo>
@@ -214,7 +222,7 @@
     <stdorder>
       <digform>
         <digtinfo>
-          <formname>parent data item for released data products</formname>
+          <formname>parent metadata record for this data release</formname>
         </digtinfo>
         <digtopt>
           <onlinopt>
@@ -230,7 +238,7 @@
     </stdorder>
   </distinfo>
   <metainfo>
-    <metd>20191012</metd>
+    <metd>20191108</metd>
     <metc>
       <cntinfo>
         <cntperp>
@@ -251,7 +259,7 @@
         <cntemail>jread@usgs.gov</cntemail>
       </cntinfo>
     </metc>
-    <metstdn>FGDC Biological Data Profile of the Content Standard for Digital Geospatial Metadata</metstdn>
-    <metstdv>FGDC-STD-001.1-1999</metstdv>
+    <metstdn>FGDC Content Standard for Digital Geospatial Metadata</metstdn>
+    <metstdv>FGDC-STD-001-1998</metstdv>
   </metainfo>
 </metadata>

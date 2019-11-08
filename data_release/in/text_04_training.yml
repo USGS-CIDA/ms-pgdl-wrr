@@ -7,6 +7,12 @@ abstract: >-
   and the Global Lake Ecological Observatory Network (gleon.org). This dataset is part of a larger data release of lake temperature model inputs and outputs for 68 lakes in the U.S.
   states of Minnesota and Wisconsin (http://dx.doi.org/10.5066/P9AQPIVD).
 
+entities:
+  -
+    data-name: Metadata landing page
+    data-description: >-
+      This is the landing page for 3 other data release units, described in the attributes section
+
 cross-cites:
   -
     authors: ['Emily K. Read', 'Lindsay Carr', 'Laura De Cicco', 'Hilary A. Dugan', 'Paul C. Hanson', 'Julia A. Hart', 'James Kreft', 'Jordan S. Read','Luke A. Winslow']
@@ -15,7 +21,14 @@ cross-cites:
     pubdate: 2017
     link: https://doi.org/10.1002/2016WR019993
 
+file-format: This is the parent metadata file representing three sub-datasets
+
 build-environment: >-
   This dataset was generated using open source tools available in the R programming language (R version 3.6.1 (2019-07-05)).
   The computing platform for generating data and metadata was x86_64-apple-darwin15.6.0.
   R packages loaded into this environment: lakeattributes, version: 0.10.2; readr, version: 1.3.1; feather, version: 0.3.4; scipiper, version: 0.0.16; tidyr, version: 0.8.0; dplyr, version: 0.8.3.
+
+process-date: 20191004
+indirect-spatial: U.S.A.
+latitude-res: 0.1
+longitude-res: 0.1

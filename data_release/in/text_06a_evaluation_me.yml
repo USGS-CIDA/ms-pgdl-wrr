@@ -1,6 +1,8 @@
 title: >-
   Process-guided deep learning water temperature predictions: 6a Lake Mendota detailed evaluation data
 
+file-format: Three comma-separated files
+
 abstract: >-
   This dataset includes "test data" compiled water temperature data from an instrumented buoy on Lake Mendota, WI and
   discrete (manually sampled) water temperature records from North Temperate Lakes Long-TERM Ecological Research Program (NTL-LTER; https://lter.limnology.wisc.edu/).

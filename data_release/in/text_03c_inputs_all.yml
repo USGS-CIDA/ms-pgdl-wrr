@@ -3,7 +3,7 @@ title: >-
 
 abstract: >-
   This dataset includes model inputs that describe weather conditions for the 68 lakes included in this study. Weather data comes from gridded estimates (Mitchell et al. 2004).
-  There are two comma-delimited files, one for weather data (one row per model timestep) and one for ice-flags, which are used by the process-guided deep learning model to
+  There are two comma-separated files, one for weather data (one row per model timestep) and one for ice-flags, which are used by the process-guided deep learning model to
   determine whether to apply the energy conservation constraint (the constraint is not applied when the lake is presumed to be ice-covered).
   The ice-cover flag is a modeled output and therefore not a true measurement (see "Predictions" and "pb0" model type for the source of this prediction).
   This dataset is part of a larger data release of lake temperature model inputs and outputs for 68 lakes in the U.S.
@@ -21,7 +21,7 @@ data-description: >-
   Drivers indexed by lake used to drive lake models. NLDAS drivers are contemporary (1980-2018) meterology. Each folder contains a driver for each study lake,
   and has identical attributes (described above). NLDAS drivers (68_lakes_meteo.zip) are described in
   Mitchell et al. 2004.
-file-format: Separate comma-delimeted text files for each lake zipped into two single files
+file-format: Separate comma-delimeted text files for each lake zipped into two files
 
 
 entities:

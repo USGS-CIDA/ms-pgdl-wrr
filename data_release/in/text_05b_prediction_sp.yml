@@ -1,6 +1,8 @@
 title: >-
   Process-guided deep learning water temperature predictions: 5b Sparkling Lake detailed prediction data
 
+file-format: Ten comma-separated files
+
 entities:
   -
     data-name: sp_similar_predict_pb.csv

@@ -8,6 +8,8 @@ abstract: >-
   This dataset is part of a larger data release of lake temperature model inputs and outputs for 68 lakes in the U.S.
   states of Minnesota and Wisconsin (http://dx.doi.org/10.5066/P9AQPIVD).
 
+file-format: Three comma-separated files
+
 entities:
   -
     data-name: me_season_training.csv
