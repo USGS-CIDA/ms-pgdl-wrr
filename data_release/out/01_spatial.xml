@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <metadata>
   <idinfo>
     <citation>
@@ -63,6 +63,7 @@
       <update>none planned</update>
     </status>
     <spdom>
+      <descgeog>Lake polygons as defined by the national hydrography dataset medium resolution for MN and WI</descgeog>
       <bounding>
         <westbc>-94.2609062307949</westbc>
         <eastbc>-87.9475441739278</eastbc>
@@ -71,13 +72,6 @@
       </bounding>
     </spdom>
     <keywords>
-      <theme>
-        <themekt>ISO 19115 Topic Category</themekt>
-        <themekey>environment</themekey>
-        <themekey>inlandWaters</themekey>
-        <themekey>biota</themekey>
-        <themekey>biota</themekey>
-      </theme>
       <theme>
         <themekt>none</themekt>
         <themekey>machine learning</themekey>
@@ -90,6 +84,13 @@
         <themekey>modeling</themekey>
         <themekey>climate change</themekey>
         <themekey>thermal profiles</themekey>
+      </theme>
+      <theme>
+        <themekt>ISO 19115 Topic Category</themekt>
+        <themekey>environment</themekey>
+        <themekey>inlandWaters</themekey>
+        <themekey>007</themekey>
+        <themekey>012</themekey>
       </theme>
       <place>
         <placekt>Department of Commerce, 1995, Countries, Dependencies, Areas of Special Sovereignty, and Their Principal Administrative Divisions,  Federal Information Processing Standard (FIPS) 10-4, Washington, D.C., National Institute of Standards and Technology</placekt>
@@ -114,7 +115,7 @@
         </cntperp>
         <cntpos>Research Civil Engineer</cntpos>
         <cntaddr>
-          <addrtype>mailing and physical</addrtype>
+          <addrtype>Mailing and Physical</addrtype>
           <address>8505 Research Way</address>
           <city>Middleton</city>
           <state>WI</state>
@@ -135,7 +136,6 @@
         <origin>Michael Notaro</origin>
         <pubdate>2017</pubdate>
         <title>Large-scale modeled contemporary and future water temperature estimates for 10,774 Midwestern U.S. Lakes</title>
-        <geoform>raster digital data</geoform>
         <onlink>http://dx.doi.org/10.1038/sdata.2017.53</onlink>
       </citeinfo>
     </crossref>
@@ -146,7 +146,6 @@
         <origin>Jordan S. Read</origin>
         <pubdate>2016</pubdate>
         <title>Data release: A large-scale database of modeled contemporary and future water temperature data for 10,774 Michigan, Minnesota and Wisconsin Lakes</title>
-        <geoform>raster digital data</geoform>
         <onlink>http://dx.doi.org/10.5066/F7DV1H10</onlink>
       </citeinfo>
     </crossref>
@@ -174,7 +173,13 @@
   </dataqual>
   <spdoinfo>
     <indspref>U.S.A.</indspref>
-    <direct>Raster</direct>
+    <direct>G-polygon</direct>
+    <ptvctinf>
+      <sdtsterm>
+        <sdtstype>G-polygon</sdtstype>
+        <ptvctcnt>68</ptvctcnt>
+      </sdtsterm>
+    </ptvctinf>
   </spdoinfo>
   <spref>
     <horizsys>
@@ -233,15 +238,25 @@
     </distrib>
     <distliab>Unless otherwise stated, all data, metadata and related materials are considered to satisfy the quality standards relative to the purpose for which the data were collected. Although these data and associated metadata have been reviewed for accuracy and completeness and approved for release by the U.S. Geological Survey (USGS), no warranty expressed or implied is made regarding the display or utility of the data on any other system or for general or scientific purposes, nor shall the act of distribution constitute any such warranty.</distliab>
     <stdorder>
-      <digform><digtinfo>
+      <digform>
+        <digtinfo>
           <formname>Shapefile Data Set</formname>
         </digtinfo>
-        <digtopt><onlinopt><computer><networka><networkr>http://dx.doi.org/10.5066/P9AQPIVD</networkr></networka></computer></onlinopt></digtopt></digform>
+        <digtopt>
+          <onlinopt>
+            <computer>
+              <networka>
+                <networkr>http://dx.doi.org/10.5066/P9AQPIVD</networkr>
+              </networka>
+            </computer>
+          </onlinopt>
+        </digtopt>
+      </digform>
       <fees>None</fees>
     </stdorder>
   </distinfo>
   <metainfo>
-    <metd>20191108</metd>
+    <metd>20191113</metd>
     <metc>
       <cntinfo>
         <cntperp>
@@ -250,7 +265,7 @@
         </cntperp>
         <cntpos>Research Civil Engineer</cntpos>
         <cntaddr>
-          <addrtype>mailing and physical</addrtype>
+          <addrtype>Mailing and Physical</addrtype>
           <address>8505 Research Way</address>
           <city>Middleton</city>
           <state>WI</state>

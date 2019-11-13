@@ -39,6 +39,7 @@
             <origin>Vipin Kumar</origin>
             <pubdate>2019</pubdate>
             <title>Process-guided deep learning predictions of lake water temperature</title>
+            <geoform>publication</geoform>
             <onlink>http://dx.doi.org/10.1029/2019WR024922</onlink>
           </citeinfo>
         </lworkcit>
@@ -192,7 +193,7 @@
     <lineage>
       <procstep>
         <procdesc>At the core of the modeling framework is a lake hydrodynamic model that uses inputs of lake-specific properties and local meteorology to estimate water temperature. Our chosen model is the open source, General Lake Model (GLM) version 2. GLM is a one-dimensional dynamical model which simplifies lakes using a vertical approximation, where horizontal variability is ignored. GLM uses a Lagrangian approach to layer structure where layers can split and combine based on changing vertical gradients. GLM is a modern, implementation of other one-dimensional models. We used GLM to run individual lake simulations according to the processes described in Winslow et al. 2017. Outputs for water temperature were extracted at various depths and written or summarized to the files included in this set of data. The glmtools R package was used for this processing.</procdesc>
-        <procdate>20191108</procdate>
+        <procdate>20191113</procdate>
       </procstep>
     </lineage>
   </dataqual>
@@ -269,7 +270,7 @@
     </stdorder>
   </distinfo>
   <metainfo>
-    <metd>20191108</metd>
+    <metd>20191113</metd>
     <metc>
       <cntinfo>
         <cntperp>

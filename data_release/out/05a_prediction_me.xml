@@ -39,6 +39,7 @@
             <origin>Vipin Kumar</origin>
             <pubdate>2019</pubdate>
             <title>Process-guided deep learning predictions of lake water temperature</title>
+            <geoform>publication</geoform>
             <onlink>http://dx.doi.org/10.1029/2019WR024922</onlink>
           </citeinfo>
         </lworkcit>
@@ -765,7 +766,7 @@
     </stdorder>
   </distinfo>
   <metainfo>
-    <metd>20191108</metd>
+    <metd>20191112</metd>
     <metc>
       <cntinfo>
         <cntperp>
