@@ -16,12 +16,14 @@ cross-cites:
     title: >-
       The multi-institution North American Land Data Assimilation System (NLDAS): Utilizing multiple GCIP products and partners in a continental distributed hydrological modeling system
     pubdate: 2004
+    form: publication
     link: http://dx.doi.org/10.1029/2003JD003823
   -
     authors: ['Matthew R. Hipsey', 'Louise C. Bruce', 'Casper Boon', 'Brendan Busch', 'Cayelan C. Carey', 'David P. Hamilton', 'Paul C. Hanson', 'Jordan S. Read', 'Eduardo de Sousa', 'Michael Weber', 'Luke A. Winslow']
     title: >-
       A General Lake Model (GLM 3.0) for linking with high-frequency sensor data from the Global Lake Ecological Observatory Network (GLEON).
     pubdate: 2019
+    form: publication
     link: https://doi.org/10.5194/gmd-12-473-2019
 
 file-format: This is the parent metadata file representing three sub-datasets
