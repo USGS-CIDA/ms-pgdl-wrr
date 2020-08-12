@@ -19,7 +19,7 @@ plot_figure_1 <- function(){
       model_type == 'pgdl' ~ 23
     ), n_prof = as.numeric(str_extract(exper_id, '[0-9]+')))
 
-  pdf(file = 'figures/figure_1_wrr.pdf', width = 8, height = 10)
+  postscript(file = 'figures/figure_1_wrr.ps', width = 8, height = 10, horizontal = F)
   par(omi = c(0,0,0.05,0.05), mai = c(1,1,0,0), las = 1, mgp = c(2,.5,0), cex = 1.5)
 
   plot(NA, NA, xlim = c(2, 1000), ylim = c(4.7, 0.75),

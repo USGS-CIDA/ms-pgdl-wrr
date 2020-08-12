@@ -34,7 +34,7 @@ plot_figure_2 <- function(){
       TRUE ~ 3.2
     ))
 
-  pdf(file = 'figures/figure_2_wrr.pdf', width = 8, height = 4.5)
+  postscript(file = 'figures/figure_2_wrr.ps', width = 8, height = 4.5)
   par(omi = c(0,0.4,0.05,0.25), mai = c(0.5,0.2,0,0), las = 1, mgp = c(2.3,.5,0))
   layout(mat = matrix(c(1,2,3), nrow = 1))
 
