@@ -1,0 +1,35 @@
+packages:
+  - tidyverse
+  - sbtools
+
+target_default: preso_plots
+
+sources:
+  - src/sparsity_plot.R
+
+
+targets:
+  preso_plots:
+    depends:
+      - figures/sparsity_emphasize_PGDL.png
+      - figures/sparsity_emphasize_PB_DL.png
+
+  me_RMSE_data:
+    command: get_sb_csv_data(sb_id = I('5d925066e4b0c4f70d0d0599'),
+      file_name = I('me_RMSE.csv'))
+
+# adding 51 to the end of the color hex is "20% opacity" https://css-tricks.com/8-digit-hex-codes/
+  figures/sparsity_emphasize_PGDL.png:
+    command: plot_sparsity_WRR(target_name,
+      me_RMSE_data,
+      pb_col = I('#1b9e7751'),
+      dl_col = I('#d95f0251'),
+      pgdl_col = I('#7570b3'))
+
+# adding 0 to the end of the PGDL color hex is "0% opacity"
+  figures/sparsity_emphasize_PB_DL.png:
+    command: plot_sparsity_WRR(target_name,
+      me_RMSE_data,
+      pb_col = I('#1b9e77'),
+      dl_col = I('#d95f02'),
+      pgdl_col = I('#7570b300'))
