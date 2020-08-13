@@ -9,9 +9,8 @@ get_sb_csv_data <- function(sb_id, file_name){
 }
 
 
-plot_sparsity_WRR <- function(fileout, rmse_fl, pb_col, dl_col, pgdl_col, width = 8, height = 10, res = 250 ){
-  eval_data <- readr::read_csv(rmse_fl, col_types = 'iccd') %>%
-    filter(str_detect(exper_id, 'similar_[0-9]+')) %>%
+plot_sparsity_WRR <- function(fileout, rmse_data, pb_col, dl_col, pgdl_col, width = 7, height = 8, res = 250){
+  eval_data <- filter(rmse_data, str_detect(exper_id, 'similar_[0-9]+')) %>%
     mutate(col = case_when(
       model_type == 'pb' ~ pb_col,
       model_type == 'dl' ~ dl_col,
@@ -30,7 +29,7 @@ plot_sparsity_WRR <- function(fileout, rmse_fl, pb_col, dl_col, pgdl_col, width 
 
   n_profs <- c(2, 10, 50, 100, 500, 980)
 
-  axis(1, at = c(-100, n_profs, 1e10), labels = c("", n_profs, ""), tck = -0.01)
+  axis(1, at = c(-100, n_profs, 1e10), labels = c("", n_profs, ""), tck = -0.01, gap.axis = 0)
   axis(2, at = seq(0,10), las = 1, tck = -0.01)
 
   # slight horizontal offsets so the markers don't overlap:
