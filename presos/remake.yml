@@ -4,10 +4,6 @@ packages:
 
 target_default: preso_plots
 
-# this file needs to be moved back a dir to properly function.
-# use "remake::make(fig_1_files, remake_file = 'figure_1_data_remake.yml')"
-# see way files were created in jread-usgs/lake-temperature-model-prep/6_drivers/src/local_meteo_utils.R@local_drivers
-
 sources:
   - src/sparsity_plot.R
 
